@@ -10,9 +10,9 @@ return array(
 
 	//新的路径替换
 	'TMPL_PARSE_STRING' =>array(
-		'__IMAGE__' => '/Public/Images', // 增加新癿JS 类库路徂替换觃则
-		'__JS__' => '/Public/Js', // 增加新癿JS 类库路徂替换觃则
-		'__CSS__' => '/Public/Css', // 增加新癿JS 类库路徂替换觃则
+		'__IMAGE__' => '/Public/images', // 增加新癿JS 类库路徂替换觃则
+		'__JS__' => '/Public/javascripts', // 增加新癿JS 类库路徂替换觃则
+		'__CSS__' => '/Public/stylesheets', // 增加新癿JS 类库路徂替换觃则
 		'__UPLOAD__' => '/Uploads', // 增加新癿上传路徂替换觃则
 	),
 

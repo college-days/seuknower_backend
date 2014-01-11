@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>[title]</title>
+	<link rel="icon" href="__IMAGE__/index/favicon.ico" type="image/x-icon" charset="utf-8">
+	<link rel="shortcut icon" href="__IMAGE__/index/favicon.ico" type="image/x-icon">
+	<link href="__CSS__/style.css" rel="stylesheet" type="text/css" />
+	<link href="__CSS__/flexslider.css" rel="stylesheet" type="text/css"/>
+	<script src="__JS__/jquery-1.9.1.js"></script>
+	<script src="__JS__/style.js"></script>
+	<script src="__JS__/jquery.flexslider-min.js"></script>
+	<script>
+	// Can also be used with $(document).ready()
+	$(window).load(function() {
+		$('.flexslider').flexslider({
+			animation: "slide",
+			directionNav: false, 
+		});
+		$('.searchbtn').click(function(){
+			$('#search_form').submit();
+		});
+	});
+	</script>
+</head>
+
+<body>
+	<div class="navbar">
+		<div class="container">
+			<div class="logo"> <a href="__APP__/index"><img src="__IMAGE__/index/logo.png"/></a></div>
+			<div class="line"> <img src="__IMAGE__/index/line.png"/></div>
+			<div class="meau">
+				<ul>
+					<li><a  href="__APP__/event" >活动</a></li>
+					<li><a  href="__APP__/question" >问答</a></li>
+					<li><a  href="__APP__/market" >跳蚤市场</a></li>
+				</ul>
+			</div>
+
+			<div class="search">
+				<form action="/search" method="get" accept-charset="utf-8" id="search_form">
+					<input type="text" name="query" placeholder="问题，活动，商品" x-webkit-speech>
+				</form>
+			</div>
+			<div type="button" class="searchbtn">
+			</div>
+			
+			<div class="user">
+				<div class="message active">
+					<img src="__IMAGE__/index/message.png"/>
+					<img class="dot" src="__IMAGE__/index/dot.png"/>
+				</div>
+				<a href="#" class="name">Lemon</a>
+			</div>
+		</div>
+		<div class="color-line">
+			<img src="__IMAGE__/index/color_line.png"/>
+		</div>
+	</div>
