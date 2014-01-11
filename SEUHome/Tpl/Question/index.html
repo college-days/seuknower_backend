@@ -1,69 +1,162 @@
 <include file="Public:header" title="问答"/>	
-	<div class="question">
-		<div class="meau">
-			<div class="container">
-				<ul>
-					<li class="active"><a href="#">最新问答</a></li>
-					<li><a href="#">我的问答</a></li>
-				</ul>
-				<div class="new">
-					<a href="#">+我要提问</a>
-				</div>
-			</div>
-		</div>
+<div class="question">
+	<div class="meau">
 		<div class="container">
-			<div class="left">
-				<div class="category">
-					<img src="__IMAGE__/question/question_cate.png"/>
-					<a href="#"><div><img src="__IMAGE__/question/friend_grey.png"/></div><span>校园生活</span></a>
-					<a href="#" class="active"><div><img src="__IMAGE__/question/book_grey.png"/></div><span>学习考试</span></a>
-					<a href="#"><div><img src="__IMAGE__/question/computer_grey.png"/></div><span>电脑技术</span></a>
-					<a href="#"><div><img src="__IMAGE__/question/other_grey.png"/></div><span>其他</span></a>
-				</div>
-				<div class="divide">
-				</div>
-				<div class="hot">
-					<div class="title">
-						热门问题
-					</div>
-					<ul>
-						<li><a href="#">人生的意义是什么？</a></li>
-						<li><a href="#">华为的招聘流程如何？华为的招聘流程如何？</a></li>
-						<li><a href="#">学校的十佳歌手水平如何？</a></li>
-						<li><a href="#">每天这样学习效率好低？</a></li>
-					</ul>
-				</div>
-				<div class="divide">
-				</div>
-				<div class="hot">
-					<div class="title">
-						最新解决问题
-					</div>
-					<ul>
-						<li><a href="#">人生的意义是什么？</a></li>
-						<li><a href="#">华为的招聘流程如何？</a></li>
-						<li><a href="#">学校的十佳歌手水平如何？</a></li>
-						<li><a href="#">每天这样学习效率好低？</a></li>
-					</ul>
-				</div>
+			<ul>
+				<li class="active"><a href="#">最新问答</a></li>
+				<li><a href="#">我的问答</a></li>
+			</ul>
+			<div class="new">
+				<a href="#">+我要提问</a>
 			</div>
-			<div class="right">
-				<div class="divide">
-				</div>
-				<div class="content">
-					<ul>
-						<!--<li><div class="title"><a href="#">华为的招聘流程如何？华为的招聘流程如何？华为的招聘流程如何？华为的招聘流程如何？</a></div><span>2013-10-25 20:10:17</span><span>Leddddon</span><span>5个回答</span></li>
-						<li><div class="title"><a href="#">华为的招聘流程如何？</a></div><span>2013-10-25 20:10:17</span><span>Leon</span><span>115个回答</span></li>-->
-						<li><a href="#">华为的招聘流程如何？华为的招聘流程如何？华为的招聘流程如何？华为的招聘流程如何？</a><span class="count">115个回答</span><span class="user">Leonoooddddoo</span><span class="time">2013-12-25 20:10</span></li>
-					</ul>
-				</div>
-				<div class="pager">
-					<span class="total">共62条记录</span><ul class="pagination"><li><a href="#">首页</a></li><li><a href="#">«</a></li><li class="active"><a href="#">1</a></li><li><a href="/market/index/全部/page/2">2</a></li><li><a href="/market/index/全部/page/4">4</a></li><li><a href="/market/index/全部/page/2">»</a></li><li><a href="/market/index/全部/page/4">尾页</a></li><li><a href="#">首页</a></li></ul><span class="total">共6页</span>
-				</div>
-			</div>
-		</div>
-		<div class="clear">
 		</div>
 	</div>
-	
+	<div class="container">
+		<div class="left">
+			<div class="category">
+				<img src="__IMAGE__/question/question_cate.png"/>
+				<a href="#"><div><img src="__IMAGE__/question/friend_grey.png"/></div><span>校园生活</span></a>
+				<a href="#" class="active"><div><img src="__IMAGE__/question/book_grey.png"/></div><span>学习考试</span></a>
+				<a href="#"><div><img src="__IMAGE__/question/computer_grey.png"/></div><span>电脑技术</span></a>
+				<a href="#"><div><img src="__IMAGE__/question/other_grey.png"/></div><span>其他</span></a>
+			</div>
+			<div class="divide">
+			</div>
+			<div class="hot">
+				<div class="title">
+					热门问题
+				</div>
+				<ul>
+					<li><a href="#">人生的意义是什么？</a></li>
+					<li><a href="#">华为的招聘流程如何？华为的招聘流程如何？</a></li>
+					<li><a href="#">学校的十佳歌手水平如何？</a></li>
+					<li><a href="#">每天这样学习效率好低？</a></li>
+				</ul>
+			</div>
+			<div class="divide">
+			</div>
+			<div class="hot">
+				<div class="title">
+					最新解决问题
+				</div>
+				<ul>
+					<li><a href="#">人生的意义是什么？</a></li>
+					<li><a href="#">华为的招聘流程如何？</a></li>
+					<li><a href="#">学校的十佳歌手水平如何？</a></li>
+					<li><a href="#">每天这样学习效率好低？</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="right">
+			<div class="divide">
+			</div>
+			<div class="content">
+				<ul>
+					<volist name="questions" id="question">
+						<li>
+							<a href="#"> {$question.title} </a>
+							<span class="count"> {$question.answer_count} </span>
+							<span class="user"> cleantha </span>
+							<span class="time"> {$question.create_time|date='Y-m-d H:i',###} </span>
+						</li>
+					</volist>
+				</ul>
+			</div>
+			<div class="pager">
+				<span class="total">共 {$count} 条记录</span>
+				<ul class="pagination">
+					<li>
+						<a href="/Question/page/1">首页</a>
+					</li>
+					<li>
+						<eq name="curr_page" value="1">
+							<a href="#">«</a>
+							<else/>
+							<a href="/Question/page/{$curr_page-1}">«</a>
+						</eq>
+					</li>
+					<if condition="$page_count lt 6">
+						<for start="1" end="$page_count+1">
+							<eq name="i" value="$curr_page">
+								<li class="active">
+									<a href="#">
+										{$i}
+									</a>
+								</li>
+								<else/>
+								<li>
+									<a href="__URL__/page/{$i}">
+										{$i}
+									</a>
+								</li>
+							</eq>
+						</for>
+						<elseif condition="($curr_page lt 3)" />
+						<for start="1" end="6">
+							<eq name="i" value="$curr_page">
+								<li class="active">
+									<a href="#">
+										{$i}
+									</a>
+								</li>
+								<else/>
+								<li>
+									<a href="__URL__/page/{$i}">
+										{$i}
+									</a>
+								</li>
+							</eq>
+						</for>
+						<elseif condition="$curr_page gt $page_count-2" />
+						<for start="$page_count-4" end="$page_count+1">
+							<eq name="i" value="$curr_page">
+								<li class="active">
+									<a href="#">
+										{$i}
+									</a>
+								</li>
+								<else/>
+								<li>
+									<a href="__URL__/page/{$i}">
+										{$i}
+									</a>
+								</li>
+							</eq>
+						</for>
+						<else />
+						<for start="$curr_page-2" end="$curr_page+3">
+							<eq name="i" value="$curr_page">
+								<li class="active">
+									<a href="#">
+										{$i}
+									</a>
+								</li>
+								<else/>
+								<li>
+									<a href="__URL__/page/{$i}">
+										{$i}
+									</a>
+								</li>
+							</eq>
+						</for>
+					</if>
+					<li>
+						<eq name="curr_page" value="$page_count">
+                            <a href="#">»</a>
+                            <else/>
+                            <a href="/Question/page/{$curr_page+1}">»</a>
+                        </eq>
+					</li>
+					<li>
+						<a href="/Question/page/{$page_count}">尾页</a>
+					</li>
+				</ul>
+				<span class="total">共 {$page_count} 页</span>
+			</div>
+		</div>
+	</div>
+	<div class="clear">
+	</div>
+</div>
+
 <include file="Public:footer" />
