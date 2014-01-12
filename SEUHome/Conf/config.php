@@ -7,6 +7,7 @@ return array(
 	'URL_ROUTE_RULES'=>array(
 		'question/:id\d$' => 'Question/detail',
 		'question/page/:id\d$' => 'Question/index',
+		'user/:id\d$' => 'User/index',
 		'login' => 'Account/login',
 	),
 

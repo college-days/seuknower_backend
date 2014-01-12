@@ -4,19 +4,19 @@
         <div class="container">
             <div class="left">
                 <div class="title">
-                    <span> <%= @question.title %> </span>
-                    <a href="#" class="tag">校园生活</a>
+                    <span> {$question.title} </span>
+                    <a href="#" class="tag"> {$question.type} </a>
                 </div>
                 <div class="count">
-                    <span>浏览：5</span>
-                    <span>回答：4</span>
+                    <span>浏览：{$question.click_count}</span>
+                    <span>回答：{$question.answer_count}</span>
                 </div>
                 <div class="intro">
-                    <p> <%= @question.intro %> </p>
+                    <p> {$question.intro} </p>
                 </div>
                 <div class="adopt">
                     <span>被题主采纳答案</span>
-                    <img src="/assets/question_detail/adopt.png"/>
+                    <img src="__IMAGE__/question_detail/adopt.png"/>
                 </div>
                 <div class="answer">
                     <div class="divide">
@@ -31,7 +31,7 @@
                     </div>
                     <div class="content">
                         <div class="icon">
-                            <img src="/assets/question_detail/avat_02.jpg"/>
+                            <img src="__IMAGE__/question_detail/avat_02.jpg"/>
                         </div>
                         <div class="words">
                             <div class="n-t">
@@ -48,35 +48,42 @@
                         其他回答
                     </div>
                     <ul>
-                        <% @answers.each do |answer| %>
+                        <volist name="answers" id="answer">
                             <li>
                             <div class="divide">
                             </div>
                             <div class="attitude">
                                 <div class="agree">
-                                    6
+                                    {$answer.support_count}
                                 </div>
                                 <div class="object">
-                                    6
+                                    {$answer.nonsupport_count}
                                 </div>
                             </div>
                             <div class="content">
                                 <div class="icon">
-                                    <img src="/assets/question_detail/avat_02.jpg"/>
+                                    <img src="{$answer.icon}"/>
                                 </div>
                                 <div class="words">
                                     <div class="n-t">
-                                        <span><a href="#" class="name" >Leon</a></span>
-                                        <span class="time"> <%= answer.created_at.strftime("%Y-%m-%d %H:%M") %> </span>
+
+                                        <span>
+                                            <eq name="answer.anonymous" value="0">
+                                                <a href="/user/{$answer.u_id}" class="name" > {$answer.u_name} </a>
+                                            <else/>
+                                                <a href="#{$answer.id}" class=name name="{$answer.id}"> {$answer.u_name} </a>
+                                            </eq>
+                                        </span>
+                                        <span class="time"> {$answer.create_time|date='Y-m-d H:i',###} </span>
                                     </div>
-                                    <p> <%= answer.content %> </p>
+                                    <p> {$answer.content} </p>
                                     <div>
                                         <a href="#" class="reply">回复</a>
                                     </div>
                                 </div>
                             </div>
                             </li>
-                        <% end %>
+                        </volist>
                     </ul>
                 </div>
                 <div class="adopt">
@@ -94,15 +101,20 @@
                 </div>
                 <div class="seller">
                     <div class="icon">
-                        <img src="/assets/question_detail/avat_02.jpg"/>
+                        <img src="{$question.icon}"/>
                     </div>
                     <div class="name-tag">
                         <div class="name">
-                            <span class="female"></span>
-                            <a href="#">Lolly</a>
+                            <eq name="question.u_sex" value="male">
+                                <span class="male"></span>
+                            </eq>
+                            <eq name="question.u_sex" value="female">
+                                <span class="female"></span>
+                            </eq>
+                            <a href="/user/{$question.u_id}"> {$question.u_name} </a>
                         </div>
                         <div class="tag">
-                            好好学习。。。
+                            {$question.u_intro}
                         </div>
                     </div>
                 </div>
@@ -111,18 +123,11 @@
                 </div>
                 <div class="hot">
                     <ul>
-                        <li>
-                        <a href="#">什么是人生的意义？</a>
-                        </li>
-                        <li>
-                        <a href="#">什么是人生的意义？什么是人生的意义？</a>
-                        </li>
-                        <li>
-                        <a href="#">什么是人生的意义？</a>
-                        </li>
-                        <li>
-                        <a href="#">什么是人生的意义？</a>
-                        </li>
+                        <volist name="hots" id="hot">
+                            <li>
+                                <a href="/question/{$hot.id}"></a>
+                            </li>
+                        </volist>
                     </ul>
                 </div>
                 <div class="title">

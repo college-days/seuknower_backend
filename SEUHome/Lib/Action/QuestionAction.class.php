@@ -44,6 +44,13 @@ class QuestionAction extends Action {
 		$start = ($page-1)*23;
 		
 		$questions = $Question->order('create_time desc')->limit($start.',23')->select();
+
+		for($i=0; $i<count($questions); $i++){
+			$User = M('User');
+			$result = $User->find($questions[$i]['u_id']);
+			$questions[$i]['u_name'] = $result['name'];
+		}
+
 		$hotQuestions = $Question->order('click_count desc')->limit(10)->select();
 		$this->assign('hots',$hotQuestions);
 		$this->assign('questions',$questions);
@@ -57,13 +64,13 @@ class QuestionAction extends Action {
 
     public function detail(){
 		$id = I('param.id');
-		//$userId = session('userId');
-		$Question = M('Question');
+		$userId = session('userId');
+		//about notify message
 
 		//$deleteModel = new Model();
 		//$deleteResult = $deleteModel->execute('delete from seu_question_message where q_id='.$id.' and u_id='.$userId);
 	
-		$model = new Model();
+		/*$model = new Model();
 		$questionMessageResult = $model->query('select * from seu_question_message where u_id='.session('userId'));
 		$questionMessageCount = count($questionMessageResult);
 
@@ -79,26 +86,44 @@ class QuestionAction extends Action {
 
 		session('questionMessageResult', $questionMessageResult);
 		session('eventMessageResult', $eventMessageResult);
-		session('commodityMessageResult', $commodityMessageResult);
+		session('commodityMessageResult', $commodityMessageResult);*/
 
-		//获取问题编号，然后更新问题的浏览数
+		//获取问题编号，然后更新问题的浏览数，浏览数+1
+		
+		$Question = M('Question');
+		/*
 		$add['id'] = $id;
 		$add['click_count'] = array('exp','click_count+1');
 		$Question->save($add);
+		*/
 		
 		//获取问题编号之后获取问题信息，再获取问题的提问者编号
 		$questionInfo = $Question->find($id);
 		$User = M('User');
-		$result = $User->field('id')->find($questionInfo['u_id']);
-		$questionInfo['user_id'] = $result['id'];
+		$result = $User->find($questionInfo['u_id']);
+		$questionInfo['u_name'] = $result['name'];
+		$questionInfo['icon'] = $result['icon'];
+		$questionInfo['u_intro'] = $result['intro'];
+		if($result['sex'] == '男'){
+			$questionInfo['u_sex'] = "male";
+		}else if($result['sex'] == '女'){
+			$questionInfo['u_sex'] = "female";
+		}else{
+			$questionInfo['u_sex'] = "none";
+		}
 		$this->assign('question',$questionInfo);
+
 		$Model = M();
 		//多表查询
-		$AnswerInfo = $Model->table('seu_answer answer, seu_user user')->field('answer.*,user.name as u_name, user.icon as icon')->where("answer.q_id = $id AND answer.u_id = user.id")->order('answer.support_count desc')->select();
+		$AnswerInfo = $Model->table('seu_answer answer, seu_user user')->field('answer.*,user.name as u_name, user.icon as icon, user.sex as u_sex')->where("answer.q_id = $id AND answer.u_id = user.id")->order('answer.support_count desc')->select();
 		$AnonymousInfo = $Model->query('select * from seu_answer where q_id='.$id.' and anonymous=1;');
 
+		for($i=0; $i<count($AnonymousInfo); $i++){
+			$AnonymousInfo[$i]['u_name'] = "匿名用户";
+		}
+
 		for($i=0; $i<count($AnswerInfo); $i++){
-			$AnswerInfo[$i]['content'] = htmlspecialchars_decode($AnswerInfo[$i]['content']);//nl2br()
+			$AnswerInfo[$i]['content'] = htmlspecialchars_decode($AnswerInfo[$i]['content']);
 
 			$Support = M('SupportAnswer');
 			if($Support->where("u_id = $userId AND a_id =".$AnswerInfo[$i]['id'])->find()){
@@ -109,7 +134,7 @@ class QuestionAction extends Action {
 				$AnswerInfo[$i]['support'] = 0;
 			}
 
-			$Nonsupport = M('SupportAnswer');
+			$Nonsupport = M('NonsupportAnswer');
 			if($Nonsupport->where("u_id = $userId AND a_id =".$AnswerInfo[$i]['id'])->find()){
 				$AnswerInfo[$i]['nonsupport'] = 1;
 			}
@@ -128,7 +153,9 @@ class QuestionAction extends Action {
 			$UltimateInfo = array_merge($AnswerInfo, $AnonymousInfo);
 		}
 
-		$this->assign('answer', $UltimateInfo);
+		$this->assign('answers', $UltimateInfo);
+
+		//判断是否是当前用户关注的问题
 		$map['u_id'] = $userId;
 		$map['q_id'] = $id;
 		$Focus = M('FocusQuestion');
@@ -139,7 +166,10 @@ class QuestionAction extends Action {
 			$this->assign('focus',0);
 		}
 
-		$this->display('detail_b');
+		$hotQuestions = $Question->order('click_count desc')->limit(10)->select();
+		$this->assign('hots',$hotQuestions);
+
+		$this->display('detail');
 	}
 }
 ?>

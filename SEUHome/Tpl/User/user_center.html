@@ -8,10 +8,14 @@
 			<div class="info">
 				<div class="name-tag">
 					<div class="name">
-						<span>Leon</span>
+						<span> {$user.name} </span>
 					</div>
 					<div class="tag">
-						<span>人生苦短，必须性感</span>
+						<eq name="user.id" value="1">
+							<span> 官方帐号 </span>
+						<else/>
+							<span> {$user.intro} </span>
+						</eq>
 					</div>
 				</div>
 				<div class="ques-mark">

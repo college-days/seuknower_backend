@@ -57,7 +57,7 @@
 						<li>
 							<a href="/question/{$question.id}"> {$question.title} </a>
 							<span class="count"> {$question.answer_count} </span>
-							<span class="user"> cleantha </span>
+							<span class="user"> {$question.u_name} </span>
 							<span class="time"> {$question.create_time|date='Y-m-d H:i',###} </span>
 						</li>
 					</volist>
