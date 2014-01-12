@@ -5,7 +5,9 @@ return array(
 	'URL_ROUTER_ON'   => true, 						//开启路由
 
 	'URL_ROUTE_RULES'=>array(
+		'question/:id\d$' => 'Question/detail',
 		'question/page/:id\d$' => 'Question/index',
+		'login' => 'Account/login',
 	),
 
 	//新的路径替换

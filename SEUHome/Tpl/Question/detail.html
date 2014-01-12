@@ -1,0 +1,154 @@
+<include file="Public:header" title="问答"/>  
+<div class="back-color">
+    <div class="question-detail">
+        <div class="container">
+            <div class="left">
+                <div class="title">
+                    <span> <%= @question.title %> </span>
+                    <a href="#" class="tag">校园生活</a>
+                </div>
+                <div class="count">
+                    <span>浏览：5</span>
+                    <span>回答：4</span>
+                </div>
+                <div class="intro">
+                    <p> <%= @question.intro %> </p>
+                </div>
+                <div class="adopt">
+                    <span>被题主采纳答案</span>
+                    <img src="/assets/question_detail/adopt.png"/>
+                </div>
+                <div class="answer">
+                    <div class="divide">
+                    </div>
+                    <div class="attitude">
+                        <div class="agree">
+                            6
+                        </div>
+                        <div class="object">
+                            6
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="icon">
+                            <img src="/assets/question_detail/avat_02.jpg"/>
+                        </div>
+                        <div class="words">
+                            <div class="n-t">
+                                <span><a href="#" class="name" >Leon</a></span>
+                                <span class="time">2013-10-23 22:22:22</span>
+                            </div>
+                            <p>好好学习天天向上,好好学习天天向上,好好学习天天向上,好好学习天天向上,好好学习天天向上,好好学习天天向上好好学习天天向上,好好学习天天向上,好好学习天天向上</p>
+                            <div>
+                                <a href="#" class="reply">回复</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adopt">
+                        其他回答
+                    </div>
+                    <ul>
+                        <% @answers.each do |answer| %>
+                            <li>
+                            <div class="divide">
+                            </div>
+                            <div class="attitude">
+                                <div class="agree">
+                                    6
+                                </div>
+                                <div class="object">
+                                    6
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="icon">
+                                    <img src="/assets/question_detail/avat_02.jpg"/>
+                                </div>
+                                <div class="words">
+                                    <div class="n-t">
+                                        <span><a href="#" class="name" >Leon</a></span>
+                                        <span class="time"> <%= answer.created_at.strftime("%Y-%m-%d %H:%M") %> </span>
+                                    </div>
+                                    <p> <%= answer.content %> </p>
+                                    <div>
+                                        <a href="#" class="reply">回复</a>
+                                    </div>
+                                </div>
+                            </div>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+                <div class="adopt">
+                    我的回答
+                </div>
+                <div class="speak">
+                    <textarea>
+                    </textarea>
+                    <input type="button" value="提交">
+                </div>
+            </div>
+            <div class="right">
+                <div class="title">
+                    提问者
+                </div>
+                <div class="seller">
+                    <div class="icon">
+                        <img src="/assets/question_detail/avat_02.jpg"/>
+                    </div>
+                    <div class="name-tag">
+                        <div class="name">
+                            <span class="female"></span>
+                            <a href="#">Lolly</a>
+                        </div>
+                        <div class="tag">
+                            好好学习。。。
+                        </div>
+                    </div>
+                </div>
+                <div class="title">
+                    热门问题
+                </div>
+                <div class="hot">
+                    <ul>
+                        <li>
+                        <a href="#">什么是人生的意义？</a>
+                        </li>
+                        <li>
+                        <a href="#">什么是人生的意义？什么是人生的意义？</a>
+                        </li>
+                        <li>
+                        <a href="#">什么是人生的意义？</a>
+                        </li>
+                        <li>
+                        <a href="#">什么是人生的意义？</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="title">
+                    最新解决问题
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                        <a href="#">什么是人生的意义？</a>
+                        </li>
+                        <li>
+                        <a href="#">什么是人生的意义？</a>
+                        </li>
+                        <li>
+                        <a href="#">什么是人生的意义？</a>
+                        </li>
+                        <li>
+                        <a href="#">什么是人生的意义？什么是人生的意义？</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+<include file="Public:footer" />

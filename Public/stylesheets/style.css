@@ -11,7 +11,7 @@ img{border:0;-ms-interpolation-mode:bicubic;}
 body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 /*导航栏*/
 .navbar{width:100%;height:78px;/*border-bottom: solid 2px grey;*/}
-.container{width:944px;margin-left:auto;margin-right:auto;}
+.container{width:965px;margin-left:auto;margin-right:auto;}
 .navbar .logo{float:left;margin-top:10px;}
 .navbar .line{float:left;margin-left:24px;}
 .navbar .meau{float:left;font-size:14px;width:433px;height:74px;border-right:solid 1px #d0d4d4;}
@@ -26,6 +26,12 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .navbar .user .active .dot{display:block;float:left;margin-top:-3px;margin-left:-4px;}
 .navbar .user .name{margin-left:16px;}
 .navbar .color-line  img{width:100%;}
+/*update*/
+.navbar .container .meau a:hover{color:#2ead91;}
+.navbar .container .user a:hover{color:#2ead91;}
+.navbar .user .login{margin-left:8px;}
+.navbar .user .submit{margin-left:16px;}
+.navbar .user .logout{margin-left:9px;}
 
 .clear{clear:both;}
 .back-color{background:#f3f7fa;}
