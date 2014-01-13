@@ -9,6 +9,9 @@ return array(
 		'question/page/:id\d$' => 'Question/index',
 		'user/:id\d$' => 'User/index',
 		'login' => 'Account/login',
+		'event/page/:id\d$' => 'Event/index',
+		'event/:tag/:time$'	=> 'Event/index',
+		'event/:tag/:time/page/:id\d$' => 'Event/index',
 	),
 
 	//新的路径替换

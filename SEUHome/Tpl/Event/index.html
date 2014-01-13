@@ -1,7 +1,6 @@
 <include file="Public:header" title="活动"/>
 	<div class="activity">
 		<div class="slide">
-			<!-- Place somewhere in the <body> of your page -->
 			<div class="flexslider">
 				<ul class="slides">
 					<li><img src="__IMAGE__/index/banner_1.jpg" /></li>
@@ -14,20 +13,64 @@
 			<div class="left">
 				<div class="time">
 					<h3>时间</h3>
-					<a href="#">全部</a>
-					<a href="#" class="active">今天</a>
-					<a href="#">明天</a>
-					<a href="#">本周</a>
+					<eq name="time" value="全部">
+						<a class="active">全部</a>
+					<else/>
+						<a>全部</a>
+					</eq>
+					<eq name="time" value="今天">
+						<a class="active">今天</a>
+					<else/>
+						<a>今天</a>
+					</eq>
+					<eq name="time" value="明天">
+						<a class="active">明天</a>
+					<else/>
+						<a>明天</a>
+					</eq>
+					<eq name="time" value="本周">
+						<a class="active">本周</a>
+					<else/>
+						<a>本周</a>
+					</eq>
 				</div>
 				<div class="category">
 					<h3>类型</h3>
-					<a href="#">全部</a>
-					<a href="#" class="active">讲座</a>
-					<a href="#">比赛</a>
-					<a href="#">娱乐交友</a>
-					<a href="#">招聘</a>
-					<a href="#">公益</a>
-					<a href="#">其他</a>
+					<eq name="tag" value="全部">
+						<a class="active">全部</a>
+					<else/>
+						<a>全部</a>
+					</eq>
+					<eq name="tag" value="讲座">
+						<a class="active">讲座</a>
+					<else/>
+						<a>讲座</a>
+					</eq>
+					<eq name="tag" value="比赛">
+						<a class="active">比赛</a>
+					<else/>
+						<a>比赛</a>
+					</eq>
+					<eq name="tag" value="娱乐交友">
+						<a class="active">娱乐交友</a>
+					<else/>
+						<a>娱乐交友</a>
+					</eq>
+					<eq name="tag" value="招聘">
+						<a class="active">招聘</a>
+					<else/>
+						<a>招聘</a>
+					</eq>
+					<eq name="tag" value="公益">
+						<a class="active">公益</a>
+					<else/>
+						<a>公益</a>
+					</eq>
+					<eq name="tag" value="其他">
+						<a class="active">其他</a>
+					<else/>
+						<a>其他</a>
+					</eq>
 				</div>
 			</div>
 			<div class="middle">
@@ -39,59 +82,100 @@
 				</div>
 				<div class="divide">
 				</div>
+				<eq name="eventscount" value="0">
+					<div class="content">没有找到任何活动</div>
+				<else/>
 				<div class="content">
 					<ul>
-						<li>
-							<img src="__IMAGE__/event/act5.jpg"/>
-							<div class="info">
-								<dl>
-									<dt><a href="#">“光阴的故事”东南大学 土木工程学科创立暨土木工程学院成立活动</a></dt>
-									<dd>时间：10月20日 09:00-11:00</dd>
-									<dd>地点：四牌楼校区大礼堂</dd>
-									<dd>费用：免费</dd>
-									<dd>发起人：官方账号</dd>
-									<dd>0人参加 | 0人感兴趣</dd>
-								</dl>
-							</div>
-						</li>
-						<li>
-							<img src="__IMAGE__/event/act5.jpg"/>
-							<div class="info">
-								<dl>
-									<dt><a href="#">“光阴的故事”东南大学 土木工程学科创立暨土木工程学院成立活动</a></dt>
-									<dd>时间：10月20日 09:00-11:00</dd>
-									<dd>地点：四牌楼校区大礼堂</dd>
-									<dd>费用：免费</dd>
-									<dd>发起人：官方账号</dd>
-									<dd>0人参加 | 0人感兴趣</dd>
-								</dl>
-							</div>
-						</li>
-						<li>
-							<img src="__IMAGE__/event/act5.jpg"/>
-							<div class="info">
-								<dl>
-									<dt><a href="#">“光阴的故事”东南大学 土木工程学科创立暨土木工程学院成立活动</a></dt>
-									<dd>时间：10月20日 09:00-11:00</dd>
-									<dd>地点：四牌楼校区大礼堂</dd>
-									<dd>费用：免费</dd>
-									<dd>发起人：官方账号</dd>
-									<dd>0人参加 | 0人感兴趣</dd>
-								</dl>
-							</div>
-						</li>
+						<volist name="events" id="event">
+							<li>
+								<img src="{$event.poster}">
+								<div class="info">
+									<dl>
+										<dt>
+											<a href="#"> {$event.title} </a>
+										</dt>
+										<dd>时间：{$event.time}</dd>
+										<dd>地点：{$event.location}</dd>
+										<dd>费用：{$event.cost}</dd>
+										<dd>发起人：{$event.organizer}</dd>
+										<dd>{$event.join_count}人参加 | {$event.interest_count}人感兴趣</dd>
+									</dl>
+								</div>
+							</li>
+						</volist>
 					</ul>
 				</div>
 				<div class="page">
-					<a href="#">首页</a>
-					<a href="#" class="arrow"> &laquo;</a>
-					<a href="#" class="active">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#">4</a>
-					<a href="#" class="arrow">&raquo;</a>
-					<a href="#">尾页</a>
+					<a href="__URL__/{$tag}/{$time}/page/1">首页</a>
+					<eq name="curr_page" value="1">
+						<a href="#" class="arrow"> &laquo;</a>
+					<else/>
+						<a href="__URL__/{$tag}/{$time}/page/{$curr_page-1}" class="arrow"> &laquo;</a>
+					</eq>
+
+  					<if condition="$page_count lt 6">
+                        <for start="1" end="$page_count+1">
+                            <eq name="i" value="$curr_page">
+                                <a href="#" class="active">
+                                    {$i}
+                                </a>
+                            <else/>
+                                <a href="__URL__/{$tag}/{$time}/page/{$i}">
+                                    {$i}
+                                </a>
+	                        </eq>
+                        </for>
+                        <elseif condition="($curr_page lt 3)" />
+                        <for start="1" end="6">
+                            <eq name="i" value="$curr_page">
+                                <a href="#" class="active">
+                                    {$i}
+                                </a>
+                            <else/>
+                                <a href="__URL__/{$tag}/{$time}/page/{$i}">
+                                    {$i}
+                                </a>
+                            </eq>
+                        </for>
+                        <elseif condition="$curr_page gt $page_count-2" />
+                        <for start="$page_count-4" end="$page_count+1">
+                            <eq name="i" value="$curr_page">
+                                <a href="#" class="active">
+                                    {$i}
+                                </a>
+                            <else/>
+                                <a href="__URL__/{$tag}/{$time}/page/{$i}">
+                                    {$i}
+                                </a>
+                            </eq>
+                        </for>
+                        <else />
+                        <for start="$curr_page-2" end="$curr_page+3">
+                            <eq name="i" value="$curr_page">
+                                <a href="#" class="active">
+                                    {$i}
+                                </a>
+                            <else/>
+                                <a href="__URL__/{$tag}/{$time}/page/{$i}">
+                                    {$i}
+                                </a>
+                            </eq>
+                        </for>
+                    </if>
+					
+					<eq name="curr_page" value="$page_count">
+                        <a href="#" class="arrow">
+                            &raquo;
+                        </a>
+                        <else/>
+                        <a href="__URL__/{$tag}/{$time}/page/{$curr_page+1}" class="arrow">
+                            &raquo;
+                        </a>
+                    </eq>
+					<a href="__URL__/{$tag}/{$time}/page/{$page_count}">尾页</a>
 				</div>
+				</eq>
 			</div>
 			<div class="right">
 				<div class="title">
@@ -100,16 +184,12 @@
 				</div>
 				<div class="top10">
 					<ul>
-						<li><span>1</span><a href="#">爵士舞班火热招生中～～</a></li>
-						<li><span>2</span><a href="#">爵士舞班火热招生中～～</a></li>
-						<li><span>3</span><a href="#">爵士舞班火热招生中～～</a></li>
-						<li><span>4</span><a href="#">爵士舞班火热招生中～～</a></li>
-						<li><span>5</span><a href="#">爵士舞班火热招生中～～</a></li>
-						<li><span>6</span><a href="#">爵士舞班火热招生中～～</a></li>
-						<li><span>7</span><a href="#">爵士舞班火热招生中～～</a></li>
-						<li><span>8</span><a href="#">爵士舞班火热招生中～～</a></li>
-						<li><span>9</span><a href="#">爵士舞班火热招生中～～</a></li>
-						<li><span>10</span><a href="#">爵士舞班火热招生中～～</a></li>
+						<volist name="hots" id="hot" key="iter">
+							<li>
+								<span>{$iter}</span>
+								<a href="#">{$hot.title}</a>
+							</li>
+						</volist>
 					</ul>
 				</div>
 			</div>
@@ -117,4 +197,5 @@
 		<!--<div class="clear">
 		</div>-->
 	</div>
+	<script src="__JS__/event_index.js"></script>
 <include file="Public:footer" />

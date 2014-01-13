@@ -91,11 +91,9 @@ class QuestionAction extends Action {
 		//获取问题编号，然后更新问题的浏览数，浏览数+1
 		
 		$Question = M('Question');
-		/*
 		$add['id'] = $id;
 		$add['click_count'] = array('exp','click_count+1');
 		$Question->save($add);
-		*/
 		
 		//获取问题编号之后获取问题信息，再获取问题的提问者编号
 		$questionInfo = $Question->find($id);
