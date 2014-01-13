@@ -65,7 +65,7 @@ class MarketAction extends Action {
 				if(!file_exists($dest)){
 					$commodityInfo[$i]["picture"] = "__IMAGE__/market/goods_01.jpg";
 				}
-				$result = $User->find($commodityInfo['u_id']);
+				$result = $User->find($commodityInfo[$i]['u_id']);
 				if($result['sex'] == '男'){
 					$commodityInfo[$i]['u_sex'] = "male";
 				}else if($result['sex'] == '女'){
@@ -105,6 +105,78 @@ class MarketAction extends Action {
 		$this->assign('category',$category);
 		
     	$this->display('index');
+    }
+
+    public function detail(){
+		$id = I('param.id');
+		$Commodity = M('Commodity');
+
+		//for message notify part
+		/*$deleteModel = new Model();
+		$deleteResult = $deleteModel->execute('delete from seu_commodity_message where c_id='.$id.' and u_id='.session('userId'));
+
+		$model = new Model();
+		$questionMessageResult = $model->query('select * from seu_question_message where u_id='.session('userId'));
+		$questionMessageCount = count($questionMessageResult);
+
+		$eventMessageResult = $model->query('select * from seu_event_message where u_id='.session('userId'));
+		$eventMessageCount = count($eventMessageResult);
+
+		$commodityMessageResult = $model->query('select * from seu_commodity_message where u_id='.session('userId'));
+		$commodityMessageCount = count($commodityMessageResult);
+
+		$messageCount = $questionMessageCount + $eventMessageCount + $commodityMessageCount;
+
+		session('messageCount', $messageCount);
+
+		session('questionMessageResult', $questionMessageResult);
+		session('eventMessageResult', $eventMessageResult);
+		session('commodityMessageResult', $commodityMessageResult);*/
+
+		/*$add['id'] = $id;
+		$add['click_count'] = array('exp','click_count+1');
+		$Commodity->save($add);*/
+		
+		$result = $Commodity->find($id);
+		$User = M('User');
+		$info = $User->find($result['u_id']);
+		//$result['u_name'] = substr($info['name'],0,3)."同学";
+		$result['u_name'] = $info['name'];
+		$result['u_intro'] = $info['intro'];
+		$result['u_icon'] = $info['icon'];
+		if($info['sex'] == '男'){
+			$result['u_sex'] = "male";
+		}else if($info['sex'] == '女'){
+			$result['u_sex'] = "female";
+		}else{
+			$result['u_sex'] = "none";
+		}
+
+		$filename = $result["picture"];
+		//必须得是绝对路径
+		$path = "E:/wamp/www";
+		$dest = $path.$filename;
+		if(!file_exists($dest)){
+			$result["picture"] = "__IMAGE__/market/goods_01.jpg";
+		}
+
+		if(!$result['phone']){
+			$result['phone'] = $info['phone'];
+		}
+		$Picture = M('CommodityPicture');
+		$picture = $Picture->field('picture')->where("c_id = $id")->select();
+		$this->assign('commodity',$result);
+		$this->assign('picture',$picture);
+		$this->assign('picture_count',count($picture));
+		
+		$Model = M();
+		$count = $Model->table('seu_commodity_comment')->where("c_id = $id")->count();
+		$comments = $Model->table('seu_commodity_comment comment,seu_user user')->field('comment.id,comment.u_id as user_id,comment.content,comment.create_time,user.name as user_name,user.icon as icon')->where("comment.c_id = $id AND comment.u_id = user.id")->order('comment.create_time')->limit(10)->select();
+		
+		$this->assign('comments',$comments);
+		$this->assign('comment_count',$count);
+
+    	$this->display('detail');
     }
 }
 ?>

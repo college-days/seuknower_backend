@@ -1,4 +1,4 @@
-<include file="Public:header" title="问答"/>	
+<include file="Public:header" title="跳蚤市场"/>
 	
 	<div class="back-color">
 		<div class="market">
@@ -80,7 +80,7 @@
 						<ul>
 							<volist name="commoditys" id="commodity">
 								<li>
-									<a href="#">
+									<a href="/market/commodity/{$commodity.id}">
 										<img class="picture" src="{$commodity.picture}" class="img-responsive" style="width:192px;height:146px;"/>
 									</a>
 									<div class="info">
@@ -92,17 +92,17 @@
 										</div>
 									</div>
 									<div class="title">
-										<a href="#"> {$commodity.title} </a>
+										<a href="/market/commodity/{$commodity.id}"> {$commodity.title} </a>
 									</div>
 									<div class="intro">
 										<span> {$commodity.intro} </span>
 									</div>
 									<div class="divide"></div>
 									<div class="seller">
-										<a href="#">
+										<a href="/user/{$commodity.u_id}">
 											<img src="{$commodity.u_icon}" class="img-responsive" style="width:21px;height:21px;"/>
 										</a>
-										<a href="#" class="name"> {$commodity.u_name} </a>
+										<a href="/user/{$commodity.u_id}" class="name"> {$commodity.u_name} </a>
 										<eq name="commodity.u_sex" value="male">
 											<span class="male"></span>
 										<else/>

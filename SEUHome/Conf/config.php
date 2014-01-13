@@ -15,6 +15,7 @@ return array(
 		'market/index/:cate$' => 'Market/index',
 		'market/page/:id\d$' => 'Market/index',
 		'market/index/:cate/page/:id\d$' => 'Market/index',
+		'market/commodity/:id\d$' => 'Market/detail',
 	),
 
 	//新的路径替换

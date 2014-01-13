@@ -167,5 +167,6 @@ class EventAction extends Action {
 
     	$this->display('index');
     }
+
 }
 ?>

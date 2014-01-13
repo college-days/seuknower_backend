@@ -1,0 +1,129 @@
+<include file="Public:header" title="跳蚤市场"/>	
+	
+	<div class="back-color">
+		<div class="commodity">
+			<div class="container">
+				<div class="left">
+					<div class="info">
+						<div class="title">
+							<span> {$commodity.title} </span>
+							<a href="#" class="tag"> {$commodity.category} </a>
+						</div>
+						<div class="picture">
+							<img src="{$commodity.picture}" class="img-responsive" style="width:710px;height:505px;"/>
+						</div>
+						<div class="intro">
+							<span>商品描述</span>
+							<p> {$commodity.intro} </p>
+						</div>
+						<div class="count">
+							<div class="count-left">
+								<span class="like">喜欢</span>
+							</div>
+							<div class="count-right">
+								<span class="love">-3个喜欢</span>
+								<span class="click">-3个浏览</span>
+								<span class="share">分享</span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="comment">
+						<div class="title">
+							七嘴八舌<span>(</span><span class="num"> {$comment_count} </span><span>)</span>
+						</div>
+						<div class="divide">
+						</div>
+						<div class="list">
+							<ul>
+								<volist name="comments" id="comment">
+									<li>
+										<div class="icon">
+											<img src="{$comment.icon}">
+										</div>
+										<div class="words">
+											<div class="n-t">
+												<span> <a href="/user/{$comment.user_id}" class="name"> {$comment.user_name} </a> </span>
+												<span class="time">{$comment.create_time|date='Y-m-d H:i:s',###}</span>
+											</div>
+											<p>{$comment.content}</p>
+											<div>
+												<a href="#" class="reply">回复</a>
+											</div>
+										</div>
+									</li>
+								</volist>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="speak">
+						<div class="title">
+							我来评论
+						</div>
+						<textarea>
+						</textarea>
+						<input type="button" value="提交">
+					</div>
+				</div>
+				<div class="right">
+					<div class="title">
+							卖家
+					</div>
+					<div class="seller">
+						<div class="icon">
+							<img src="{$commodity.u_icon}"/>
+						</div>
+						<div class="name-tag">
+							<div class="name">
+								<eq name="commodity.u_sex" value="male">
+									<span class="male"></span>
+								<else/>
+									<span class="female"></span>
+								</eq>
+								<a href="/user/{$commodity.u_id}"> {$commodity.u_name} </a>
+							</div>
+							<div class="tag">
+								<empty name="commodity.u_intro">
+									<eq name="commodity.u_sex" value="male">
+										他还没有写简介
+									<else/>
+										她还没有写简介
+									</eq>
+								<else/>
+									{$commodity.u_intro}
+								</empty>
+							</div>
+						</div>
+					</div>
+					<div class="title">
+						商品信息
+					</div>
+					<div class="info">
+						<dl>
+							<dd>价格：{$commodity.cost}元</dd>
+							<dd>成色：不详</dd>
+							<dd>入手时间：{$commodity.create_time|date='Y-m-d',###}</dd>
+							<dd>校区：{$commodity.location}</dd>
+							<dd>联系方式：{$commodity.phone}</dd>
+						</dl>
+					</div>
+					<div class="title">
+						卖家过往的商品<span class="num">(2)</span>
+					</div>
+					<div class="sell">
+						<ul>
+							<li>
+								<a href="#">32G ipad4 全新...</a>
+							</li>
+							<li>
+								<a href="#">32G ipad4 全新...</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="clear">
+			</div>
+		</div>
+<include file="Public:footer" />	
