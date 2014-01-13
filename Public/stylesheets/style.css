@@ -33,6 +33,8 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .navbar .user .submit{margin-left:16px;}
 .navbar .user .logout{margin-left:9px;}
 
+.img-responsive {display:block;height:auto;max-width:100%;}
+
 .clear{clear:both;}
 .back-color{background:#f3f7fa;}
 

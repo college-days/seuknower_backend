@@ -5,17 +5,61 @@
 			<div class="container">
 				<div class="category">
 					<ul>
-						<li><a href="#">全部</a></li>
-						<li class="active"><a href="#">代步</a></li>
-						<li><a href="#">电脑</a></li>
-						<li><a href="#">数码</a></li>
-						<li><a href="#">电器</a></li>
-						<li><a href="#">图书</a></li>
-						<li><a href="#">运动</a></li>
-						<li><a href="#">日用</a></li>
-						<li><a href="#">娱乐</a></li>
-						<li><a href="#">租赁</a></li>
-						<li><a href="#">其他</a></li>
+						<eq name="category" value="全部">
+							<li class="active"> <a href="__URL__/index/全部">全部</a> </li>
+						<else/>
+							<li> <a href="__URL__/index/全部">全部</a> </li>
+						</eq>
+						<eq name="category" value="代步">
+							<li class="active"> <a href="__URL__/index/代步">代步</a> </li>
+						<else/>
+							<li> <a href="__URL__/index/代步">代步</a> </li>
+						</eq>
+						<eq name="category" value="电脑">
+							<li class="active"> <a href="__URL__/index/电脑">电脑</a> </li>
+						<else/>
+							<li> <a href="__URL__/index/电脑">电脑</a> </li>
+						</eq>
+						<eq name="category" value="数码">
+							<li class="active"> <a href="__URL__/index/数码">数码</a> </li>
+						<else/>
+							<li> <a href="__URL__/index/数码">数码</a> </li>
+						</eq>
+						<eq name="category" value="电器">
+							<li class="active"> <a href="__URL__/index/电器">电器</a> </li>
+						<else/>
+							<li> <a href="__URL__/index/电器">电器</a> </li>
+						</eq>
+						<eq name="category" value="图书">
+							<li class="active"> <a href="__URL__/index/图书">图书</a> </li>
+						<else/>
+							<li> <a href="__URL__/index/图书">图书</a> </li>
+						</eq>
+						<eq name="category" value="运动">
+							<li class="active"> <a href="__URL__/index/运动">运动</a> </li>
+						<else/>
+							<li> <a href="__URL__/index/运动">运动</a> </li>
+						</eq>
+						<eq name="category" value="日用">
+							<li class="active"> <a href="__URL__/index/日用">日用</a> </li>
+						<else/>
+							<li> <a href="__URL__/index/日用">日用</a> </li>
+						</eq>
+						<eq name="category" value="娱乐">
+							<li class="active"> <a href="__URL__/index/娱乐">娱乐</a> </li>
+						<else/>
+							<li> <a href="__URL__/index/娱乐">娱乐</a> </li>
+						</eq>
+						<eq name="category" value="租赁">
+							<li class="active"> <a href="__URL__/index/租赁">租赁</a> </li>
+						<else/>
+							<li> <a href="__URL__/index/租赁">租赁</a> </li>
+						</eq>
+						<eq name="category" value="其他">
+							<li class="active"> <a href="__URL__/index/其他">其他</a> </li>
+						<else/>
+							<li> <a href="__URL__/index/其他">其他</a> </li>
+						</eq>
 					</ul>
 					<div class="my">
 						<a href="#">我的商品</a>
@@ -24,69 +68,143 @@
 					</div>
 				</div>
 				<div class="new">
-					<span>东大通已经帮助</span><span class="total">213</span><span>件物品找到新主人</span>
+					<span>东大通已经帮助</span><span class="total">-3</span><span>件物品找到新主人</span>
 					<div>
 						<a href="#">+发布商品</a>
 					</div>
 				</div>
-				<div class="content">
-					<ul>
-						<li>
-							<a href="#"><img class="picture" src="__IMAGE__/market/goods_01.jpg"/></a>
-							<div class="info">
-								<span class="money">￥2500</span>
-								<div class="num">
-									<span class="click">250</span>
-									<span class="comment">15</span>
-									<span class="love">25</span>
-								</div>	
-							</div>
-							<div class="title">
-								<a href="#">联想Thinkpad</a>
-							</div>
-							<div class="intro">
-								<span>全新的 优哈 可单肩，可手提包...</span>
-							</div>
-							<div class="divide">
-							</div>
-							<div class="seller">
-								<a href="#"><img src="__IMAGE__/market/avat_01.jpg"/></a>
-								<a href="#" class="name">Lolly</a>
-								<span class="male"></span>
-							</div>
-						</li>
-						<li>
-							<a href="#"><img class="picture" src="__IMAGE__/market/goods_01.jpg"/></a>
-							<div class="info">
-								<span class="money">￥2500</span>
-								<div class="num">
-									<span class="click">250</span>
-									<span class="comment">15</span>
-									<span class="love">25</span>
-								</div>	
-							</div>
-							<div class="title">
-								<a href="#">联想Thinkpad</a>
-							</div>
-							<div class="intro">
-								<span>全新的 优哈 可单肩，可手提包...</span>
-							</div>
-							<div class="divide">
-							</div>
-							<div class="seller">
-								<a href="#"><img src="__IMAGE__/market/avat_01.jpg"/></a>
-								<a href="#" class="name">Lolly</a>
-								<span class="female"></span>
-							</div>
-						</li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						
-						
-					</ul>
-				</div>
+				<empty name="commoditys">
+					<div class="content"> 暂无结果 </div>
+				<else/>
+					<div class="content">
+						<ul>
+							<volist name="commoditys" id="commodity">
+								<li>
+									<a href="#">
+										<img class="picture" src="{$commodity.picture}" class="img-responsive" style="width:192px;height:146px;"/>
+									</a>
+									<div class="info">
+										<span class="money"> ￥{$commodity.cost} </span>
+										<div class="num">
+											<span class="click">-3</span>
+											<span class="comment">-3</span>
+											<span class="love">-3</span>
+										</div>
+									</div>
+									<div class="title">
+										<a href="#"> {$commodity.title} </a>
+									</div>
+									<div class="intro">
+										<span> {$commodity.intro} </span>
+									</div>
+									<div class="divide"></div>
+									<div class="seller">
+										<a href="#">
+											<img src="{$commodity.u_icon}" class="img-responsive" style="width:21px;height:21px;"/>
+										</a>
+										<a href="#" class="name"> {$commodity.u_name} </a>
+										<eq name="commodity.u_sex" value="male">
+											<span class="male"></span>
+										<else/>
+											<span class="female"></span>
+										</eq>
+									</div>
+								</li>
+							</volist>
+						</ul>
+					</div>
+					<div class="pager">
+						<span class="total">共 {$count} 条记录</span>
+						<ul class="pagination">
+							<li>
+								<a href="/market/index/{$category}/page/1">首页</a>
+							</li>
+							<li>
+								<eq name="curr_page" value="1">
+									<a href="#">«</a>
+									<else/>
+									<a href="/market/index/{$category}/page/{$curr_page-1}">«</a>
+								</eq>
+							</li>
+							<if condition="$page_count lt 6">
+								<for start="1" end="$page_count+1">
+									<eq name="i" value="$curr_page">
+										<li class="active">
+											<a href="#">
+												{$i}
+											</a>
+										</li>
+										<else/>
+										<li>
+											<a href="__URL__/index/{$category}/page/{$i}">
+												{$i}
+											</a>
+										</li>
+									</eq>
+								</for>
+								<elseif condition="($curr_page lt 3)" />
+								<for start="1" end="6">
+									<eq name="i" value="$curr_page">
+										<li class="active">
+											<a href="#">
+												{$i}
+											</a>
+										</li>
+										<else/>
+										<li>
+											<a href="__URL__/index/{$category}/page/{$i}">
+												{$i}
+											</a>
+										</li>
+									</eq>
+								</for>
+								<elseif condition="$curr_page gt $page_count-2" />
+								<for start="$page_count-4" end="$page_count+1">
+									<eq name="i" value="$curr_page">
+										<li class="active">
+											<a href="#">
+												{$i}
+											</a>
+										</li>
+										<else/>
+										<li>
+											<a href="__URL__/index/{$category}/page/{$i}">
+												{$i}
+											</a>
+										</li>
+									</eq>
+								</for>
+								<else />
+								<for start="$curr_page-2" end="$curr_page+3">
+									<eq name="i" value="$curr_page">
+										<li class="active">
+											<a href="#">
+												{$i}
+											</a>
+										</li>
+										<else/>
+										<li>
+											<a href="__URL__/index/{$category}/page/{$i}">
+												{$i}
+											</a>
+										</li>
+									</eq>
+								</for>
+							</if>
+							<li>
+								<eq name="curr_page" value="$page_count">
+		                            <a href="#">»</a>
+		                            <else/>
+		                            <a href="/market/index/{$category}/page/{$curr_page+1}">»</a>
+		                        </eq>
+							</li>
+							<li>
+								<a href="/market/index/{$category}/page/{$page_count}">尾页</a>
+							</li>
+						</ul>
+						<span class="total">共 {$page_count} 页</span>
+					</div>
+				</empty>
 			</div>
 			<div class="clear">
 			</div>

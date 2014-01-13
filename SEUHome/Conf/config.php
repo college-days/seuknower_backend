@@ -11,7 +11,10 @@ return array(
 		'login' => 'Account/login',
 		'event/page/:id\d$' => 'Event/index',
 		'event/:tag/:time$'	=> 'Event/index',
-		'event/:tag/:time/page/:id\d$' => 'Event/index',
+		'event/:tag/:time/page/:id\d$' => 'Event/index',	
+		'market/index/:cate$' => 'Market/index',
+		'market/page/:id\d$' => 'Market/index',
+		'market/index/:cate/page/:id\d$' => 'Market/index',
 	),
 
 	//新的路径替换
