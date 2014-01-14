@@ -1,0 +1,75 @@
+<include file="Public:header" title="商品"/> 
+	<include file="User:user_header"/>
+		<div class="person">
+		<div class="person-sell">
+			<div class="info">
+				<div class="title">
+					<span>我的出售</span>
+					<span class="num">( 全部 )</span>
+				</div>
+				<div class="tag">
+					<a href="#">衣服鞋帽</a>
+					<a href="#">数码电子</a>
+					<a href="#">生活日用</a>
+					<a href="#">书籍杂志</a>
+					<a href="#">其他</a>
+					<a href="/market" class="act-index">>去跳蚤市场首页</a>
+				</div>
+				<div class="join">
+					<a href="/user/sellon/{$u_id}">出售({$selloncount})</a>
+					<a href="#" class="active">完成({$selldonecount})</a>
+				</div>
+				<div class="content">
+					<ul>
+						<volist name="selldones" id="commodity">
+							<li>
+								<div class="time-price">
+									<span>发布了商品</span>
+									<a href="/market/commodity/{$commodity.id}">{$commodity.title}</a>
+									<span class="price">{$commodity.cost}元</span>
+									<span class="time">{$commodity.create_time|date='Y-m-d',###}</span>
+								</div>
+								<div>
+									<div class="picture">
+										<img src="{$commodity.picture}"/>
+										<div class="num">
+											<span class="click">-3</span>
+											<span class="comment">-3</span>
+											<span class="love">-3</span>
+										</div>	
+									</div>
+									<div class="intro">
+										<div class="quot-left"></div>
+										<p>{$commodity.intro}</p>
+										<div class="quot-right"></div>
+									</div>
+								</div>
+							</li>
+						</volist>
+					</ul>
+				</div>
+			</div>				
+		</div>
+		
+		</div>
+		<div class="trace">
+			<div class="title">
+				<span>脚印</span>
+			</div>
+			<div class="detail">
+				<ul>
+					<li>
+						<div ><a href="#">评论了活动【东南大学第三届研究生十佳歌手大赛】</a></div>
+						<div class="delete">删除</div>
+					</li>
+					<li>
+						<div ><a href="#">发布了新商品【thinkpad】</a></div>
+						<div class="delete">删除</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="clear">
+		</div>
+	</div>
+<include file="Public:footer" />

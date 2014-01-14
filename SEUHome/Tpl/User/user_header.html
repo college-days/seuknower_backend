@@ -1,0 +1,80 @@
+<div class="back-color">
+	<div class="person-image">
+		<div class="brief">
+			<div class="icon">
+				<img src="{$user.icon}" class="img-responsive" style="width:120px;height:120px;border-radius:50%;"/>
+			</div>
+			<div class="info">
+				<div class="name-tag">
+					<div class="name">
+						<span> {$user.name} </span>
+					</div>
+					<div class="tag">
+						<eq name="user.id" value="1">
+							<span> 官方帐号 </span>
+						<else/>
+							<span> {$user.intro} </span>
+						</eq>
+					</div>
+				</div>
+				<div class="ques-mark">
+					<ul>
+						<li>
+							<div><span> {$askcount} </span></div>
+							<div><a href="#">发表问题</a></div>
+						</li>
+						<li>
+							<div><span> {$answercount} </span></div>
+							<div><a href="#">回答问题</a></div>
+						</li>
+						<li>
+							<div><span> {$sellcommoditycount} </span></div>
+							<div><a href="#">出售商品</a></div>
+						</li>
+						<li>
+							<div><span>-3</span></div>
+							<div><a href="#">求购商品</a></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="profile-note">
+			<ul>
+				<eq name="isprofile" value="1">
+					<li class="active">
+					<eq name="me" value="1">
+						<div class="pro-title">
+							<a href="#">个人资料</a>
+						</div>
+						<img src="__IMAGE__/user_center/wave.png"/
+						>
+					</eq>
+					</li>
+					<li>
+						<div class="note-title">
+							<a href="/user/{$u_id}">动态</a>
+						</div>
+						<img src="__IMAGE__/user_center/wave.png"/>
+					</li>
+				<else/>
+					<li>
+						<eq name="me" value="1">
+							<div class="pro-title">
+								<a href="/user/profile/{$u_id}">个人资料</a>
+							</div>
+							<img src="__IMAGE__/user_center/wave.png"/
+							>
+						</eq>
+					</li>
+					<li class="active">
+						<div class="note-title">
+							<a href="#">动态</a>
+						</div>
+						<img src="__IMAGE__/user_center/wave.png"/>
+					</li>
+				</eq>
+			</ul>
+		</div>
