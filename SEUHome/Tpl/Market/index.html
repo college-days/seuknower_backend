@@ -105,8 +105,12 @@
 										<a href="/user/{$commodity.u_id}" class="name"> {$commodity.u_name} </a>
 										<eq name="commodity.u_sex" value="male">
 											<span class="male"></span>
-										<else/>
+										</eq>
+										<eq name="commodity.u_sex" value="female">
 											<span class="female"></span>
+										</eq>
+										<eq name="commodity.u_sex" value="none">
+											不详
 										</eq>
 									</div>
 								</li>

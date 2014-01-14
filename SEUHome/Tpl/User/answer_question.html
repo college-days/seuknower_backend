@@ -1,0 +1,120 @@
+<include file="Public:header" title="回答"/>
+	
+	<div class="back-color">
+		<div class="person-image">
+			<div class="brief">
+				<div class="icon">
+					<img src="{$user.icon}" class="img-responsive" style="width:120px;height:120px;border-radius:50%;"/>
+				</div>
+				<div class="info">
+					<div class="name-tag">
+						<div class="name">
+							<span> {$user.name} </span>
+						</div>
+						<div class="tag">
+							<eq name="user.id" value="1">
+								<span> 官方帐号 </span>
+							<else/>
+								<span> {$user.intro} </span>
+							</eq>
+						</div>
+					</div>
+					<div class="ques-mark">
+						<ul>
+							<li>
+								<div><span>5</span></div>
+								<div><a href="#">发表问题</a></div>
+							</li>
+							<li>
+								<div><span>11</span></div>
+								<div><a href="#">回答问题</a></div>
+							</li>
+							<li>
+								<div><span>5</span></div>
+								<div><a href="#">出售商品</a></div>
+							</li>
+							<li>
+								<div><span>5</span></div>
+								<div><a href="#">求购商品</a></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="profile-note">
+				<ul>
+					<li >
+						<div class="pro-title">
+							<a href="#" class="">个人资料</a>
+						</div>
+						<img src="__IMAGE__/user_question/wave.png"/>
+					</li>
+					<li class="active">
+						<div class="note-title">
+							<a href="#">动态</a>
+						</div>
+						<img src="__IMAGE__/user_question/wave.png"/>
+					</li>
+				</ul>
+			</div>
+			<div class="person">
+			<div class="person-question">
+				<div class="info">
+					<div class="title">
+						<span>我的问答</span>
+						<span class="num">( 全部 )</span>
+					</div>
+					<div class="tag">
+						<a href="#">讲座</a>
+						<a href="#">比赛</a>
+						<a href="#">娱乐交友</a>
+						<a href="#">招聘</a>
+						<a href="#">公益</a>
+						<a href="#">其他</a>
+						<a href="#" class="act-index">>去提问</a>
+					</div>
+					<div class="join">
+						<a href="/user/ask/{$u_id}">提问(6)</a>
+						<a href="#" class="active">回答(12)</a>
+					</div>
+					<div class="content">
+						<ul>
+							<li>
+								<a href="#">华为的招聘流程是怎样的？</a><span class="count">5个回答</span><span class="user">LeonLeon</span><span class="time">2013-10-25</span>
+							</li>
+							<li>
+								<a href="#">华为的招聘流程是怎样的？</a><span class="count">5个回答</span><span class="user">Leon</span><span class="time">2013-10-25</span>
+							</li>
+							<li>
+								<a href="#">华为的招聘流程是怎样的？</a><span class="count">5个回答</span><span class="user">Leon</span><span class="time">2013-10-25</span>
+							</li>
+						</ul>
+					</div>
+				</div>				
+			</div>
+			
+		</div>
+		<div class="trace">
+				<div class="title">
+					<span>脚印</span>
+				</div>
+				<div class="detail">
+					<ul>
+						<li>
+							<div ><a href="#">评论了活动【东南大学第三届研究生十佳歌手大赛】</a></div>
+							<div class="delete">删除</div>
+						</li>
+						<li>
+							<div ><a href="#">发布了新商品【thinkpad】</a></div>
+							<div class="delete">删除</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="clear">
+			</div>
+		</div>
+		
+<include file="Public:footer" />

@@ -1,14 +1,18 @@
 <?php
 return array(
-	'URL_MODEL'       =>2,                         //URL重写模式
-	'URL_CASE_INSENSITIVE' =>true,					//大小写不敏感
-	'URL_ROUTER_ON'   => true, 						//开启路由
+	'SHOW_PAGE_TRACE' => true,
+	'URL_MODEL' => 2,                         //URL重写模式
+	'URL_CASE_INSENSITIVE' => true,					//大小写不敏感
+	'URL_ROUTER_ON' => true, 						//开启路由
 
 	'URL_ROUTE_RULES'=>array(
 		'question/:id\d$' => 'Question/detail',
 		'question/page/:id\d$' => 'Question/index',
 		'user/:id\d$' => 'User/index',
+		'user/ask/:id\d$' => 'User/ask_question',
+		'user/answer/:id\d$' => 'User/answer_question',
 		'login' => 'Account/login',
+		'logout' => 'Account/logout',
 		'event/page/:id\d$' => 'Event/index',
 		'event/:tag/:time$'	=> 'Event/index',
 		'event/:tag/:time/page/:id\d$' => 'Event/index',	

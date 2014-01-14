@@ -111,11 +111,30 @@
                             <eq name="question.u_sex" value="female">
                                 <span class="female"></span>
                             </eq>
+                            <eq name="question.u_sex" value="none">
+                                不详
+                            </eq>
                             <a href="/user/{$question.u_id}"> {$question.u_name} </a>
                         </div>
-                        <div class="tag">
-                            {$question.u_intro}
-                        </div>
+                        <empty name="question.u_intro">
+                            <eq name="question.u_sex" value="male">
+                                他还没有写简介
+                            </eq>
+                            <eq name="question.u_sex" value="female">
+                                她还没有写简介
+                            </eq>
+                            <eq name="question.u_sex" value="none">
+                                还没有写简介
+                            </eq>
+                        <else/>
+                            <eq name="question.u_id" value="1">
+                                <div class="tag">官方帐号</div>
+                            <else/>
+                                <div class="tag">
+                                    {$question.u_intro}
+                                </div>
+                            </eq>
+                        </empty>
                     </div>
                 </div>
                 <div class="title">

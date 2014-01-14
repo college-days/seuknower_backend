@@ -1,5 +1,6 @@
 <?php
 // 本类由系统自动生成，仅供测试用途
+import("@.Action.CommonUtil");
 class MarketAction extends Action {
 	public function _initialize(){
 		if(isset($_SESSION['userId'])){	
@@ -55,38 +56,23 @@ class MarketAction extends Action {
 		
 		$commodityInfo = $Commodity->where($map)->order('create_time desc')->limit($start.',16')->select();
 
+		$util = new CommonUtil();
+
 		if(count($commodityInfo) > 0){
 			$User = M('User');
 			for($i=0; $i<count($commodityInfo); $i++){
-				$filename = $commodityInfo[$i]["picture"];
-				//必须得是绝对路径
-				$path = "E:/wamp/www";
-				$dest = $path.$filename;
-				if(!file_exists($dest)){
+				if(!$util->exists_file($commodityInfo[$i]["picture"])){
 					$commodityInfo[$i]["picture"] = "__IMAGE__/market/goods_01.jpg";
-				}
+				}	
+
 				$result = $User->find($commodityInfo[$i]['u_id']);
-				if($result['sex'] == '男'){
-					$commodityInfo[$i]['u_sex'] = "male";
-				}else if($result['sex'] == '女'){
-					$commodityInfo[$i]['u_sex'] = "female";
-				}else{
-					$commodityInfo[$i]['u_sex'] = "none";
-				}
+				$commodityInfo[$i]["u_sex"] = $util->filter_sex($result["sex"]);
+
 				$commodityInfo[$i]["u_name"] = $result["name"];
 				$commodityInfo[$i]["u_icon"] = $result["icon"];
-				$commodityTitle = $commodityInfo[$i]["title"];
-				if(mb_strlen($commodityTitle, 'utf-8') > 10){
-					//$commodityInfo[$i]["title"] = 
-					$commodityTitle = mb_substr($commodityTitle, 0, 15, 'utf-8');
-					$commodityInfo[$i]["title"] = $commodityTitle."...";
-				}
-				$commodityIntro = $commodityInfo[$i]["intro"];
-				if(mb_strlen($commodityIntro, 'utf-8') > 10){
-					//$commodityInfo[$i]["title"] = 
-					$commodityIntro = mb_substr($commodityIntro, 0, 15, 'utf-8');
-					$commodityInfo[$i]["intro"] = $commodityIntro."...";
-				}	
+				$commodityInfo[$i]["title"] = $util->sub_string($commodityInfo[$i]["title"], 16);
+				$commodityInfo[$i]["intro"] = $util->sub_string($commodityInfo[$i]["intro"], 16);
+
 			}
 		}
 
@@ -140,23 +126,16 @@ class MarketAction extends Action {
 		$result = $Commodity->find($id);
 		$User = M('User');
 		$info = $User->find($result['u_id']);
-		//$result['u_name'] = substr($info['name'],0,3)."同学";
 		$result['u_name'] = $info['name'];
 		$result['u_intro'] = $info['intro'];
 		$result['u_icon'] = $info['icon'];
-		if($info['sex'] == '男'){
-			$result['u_sex'] = "male";
-		}else if($info['sex'] == '女'){
-			$result['u_sex'] = "female";
-		}else{
-			$result['u_sex'] = "none";
-		}
+		
+		$util = new CommonUtil();
+		$result["u_sex"] = $util->filter_sex($info["sex"]);
 
 		$filename = $result["picture"];
-		//必须得是绝对路径
-		$path = "E:/wamp/www";
-		$dest = $path.$filename;
-		if(!file_exists($dest)){
+		
+		if(!$util->exists_file($result["picture"])){
 			$result["picture"] = "__IMAGE__/market/goods_01.jpg";
 		}
 

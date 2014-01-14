@@ -94,5 +94,18 @@ class AccountAction extends Action{
 			$this ->ajaxReturn('', '', 1);
 		}
 	}
+
+	public function logout()
+    {
+		$id = session('userId');
+        if(isset($id)) {
+			unset($_SESSION);
+			session(null);
+			session_destroy();
+			cookie('account',null);
+			cookie('password',null);
+			$this -> redirect('/index');
+        }
+    }
 }
 ?>

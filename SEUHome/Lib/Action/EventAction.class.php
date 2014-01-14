@@ -1,5 +1,6 @@
 <?php
 // 本类由系统自动生成，仅供测试用途
+import("@.Action.CommonUtil");
 class EventAction extends Action {
 	public function _initialize(){
 		if(isset($_SESSION['userId'])){	
@@ -117,12 +118,10 @@ class EventAction extends Action {
 		$Question = M('Question');
 		$qRecentList = $Question->order('create_time desc')->limit($qListNum)->select();
 		
+		$util = new CommonUtil();
+
 		for($i=0; $i<count($events); $i++){
-			$filename = $events[$i]["poster"];
-			//必须得是绝对路径
-			$path = "E:/wamp/www";
-			$dest = $path.$filename;
-			if(!file_exists($dest)){
+			if(!$util->exists_file($events[$i]["poster"])){
 				$events[$i]["poster"] = "__IMAGE__/event/act5.jpg";
 			}
 		}

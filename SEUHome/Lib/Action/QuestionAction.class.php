@@ -1,5 +1,6 @@
 <?php
 // 本类由系统自动生成，仅供测试用途
+import("@.Action.CommonUtil");
 class QuestionAction extends Action {
 	public function _initialize(){
 		if(isset($_SESSION['userId'])){	
@@ -102,13 +103,10 @@ class QuestionAction extends Action {
 		$questionInfo['u_name'] = $result['name'];
 		$questionInfo['icon'] = $result['icon'];
 		$questionInfo['u_intro'] = $result['intro'];
-		if($result['sex'] == '男'){
-			$questionInfo['u_sex'] = "male";
-		}else if($result['sex'] == '女'){
-			$questionInfo['u_sex'] = "female";
-		}else{
-			$questionInfo['u_sex'] = "none";
-		}
+
+		$util = new CommonUtil();
+		$questionInfo["u_sex"] = $util->filter_sex($result["sex"]);
+
 		$this->assign('question',$questionInfo);
 
 		$Model = M();

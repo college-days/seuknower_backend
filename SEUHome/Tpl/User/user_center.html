@@ -3,7 +3,7 @@
 	<div class="person-image">
 		<div class="brief">
 			<div class="icon">
-				<img src="__IMAGE__/user_center/touxiang_03.png"/>
+				<img src="{$user.icon}" class="img-responsive" style="width:120px;height:120px;border-radius:50%;"/>
 			</div>
 			<div class="info">
 				<div class="name-tag">
@@ -21,19 +21,19 @@
 				<div class="ques-mark">
 					<ul>
 						<li>
-							<div><span>5</span></div>
+							<div><span> {$askcount} </span></div>
 							<div><a href="#">发表问题</a></div>
 						</li>
 						<li>
-							<div><span>11</span></div>
+							<div><span> {$answercount} </span></div>
 							<div><a href="#">回答问题</a></div>
 						</li>
 						<li>
-							<div><span>5</span></div>
+							<div><span> {$sellcommoditycount} </span></div>
 							<div><a href="#">出售商品</a></div>
 						</li>
 						<li>
-							<div><span>5</span></div>
+							<div><span>-3</span></div>
 							<div><a href="#">求购商品</a></div>
 						</li>
 					</ul>
@@ -45,10 +45,13 @@
 		<div class="profile-note">
 			<ul>
 				<li >
-					<div class="pro-title">
-						<a href="#" class="">个人资料</a>
-					</div>
-					<img src="__IMAGE__/user_center/wave.png"/>
+					<eq name="me" value="1">
+						<div class="pro-title">
+							<a href="#" class="">个人资料</a>
+						</div>
+						<img src="__IMAGE__/user_center/wave.png"/
+						>
+					</eq>
 				</li>
 				<li class="active">
 					<div class="note-title">
@@ -62,63 +65,77 @@
 			<div class="info">
 				<div class="title">
 					<span>活动</span>
-					<span class="num">( <a href="#">6个参加</a><span class="dot"></span><a href="#">3个感兴趣</a> )</span>
+					<span class="num">( <a href="#">{$joineventcount}个参加</a><span class="dot"></span><a href="#">{$interesteventcount}个感兴趣</a> )</span>
 				</div>
 				<div class="activity">
 					<ul>
-						<li>
-							<a href="#"><img src="__IMAGE__/user_center/act1.jpg"/></a>
-							<div>
-								<a href="#">小提琴小提琴</a>
-							</div>
-						</li>
-						<li>
-							<a href="#"><img src="__IMAGE__/user_center/act1.jpg"/></a>
-							<div>
-								<a href="#">小提琴小提琴</a>
-							</div>
-						</li>
-						<li>
-							<img src="__IMAGE__/user_center/act1.jpg"/>
-							<div>
-								<a href="#">小提琴小提琴</a>
-							</div>
-						</li>
-						<li>
-							<img src="__IMAGE__/user_center/act1.jpg"/>
-							<div>
-								<a href="#">小提琴小提琴</a>
-							</div>
-						</li>
+						<volist name="interestevents" id="interest">
+							<li>
+								<a href="#">
+									<img src="{$interest.poster}" class="img-responsive" style="width:70px;height:90px;"/>
+								</a>
+								<div>
+									<a href="#">{$interest.title}</a>
+								</div>
+							</li>
+						</volist>
+						<volist name="joinevents" id="join">
+							<li>
+								<a href="#">
+									<img src="{$join.poster}"class="img-responsive" style="width:70px;height:90px;"/>
+								</a>
+								<div>
+									<a href="#">{$join.title}</a>
+								</div>
+							</li>
+						</volist>
 					</ul>
 				</div>
 				<div class="title">
 					<span>问答</span>
-					<span class="num">( <a href="#">12个提问</a><span class="dot"></span><a href="#">20个回答</a> )</span>
+					<span class="num">( <a href="/user/ask/{$u_id}">{$askcount}个提问</a><span class="dot"></span><a href="/user/answer/{$u_id}">{$answercount}个回答</a> )</span>
 					<a href="#">去提问</a>
 				</div>
 				<div class="question">
 					<ul>
-						<li>
-							<span class="ask">【问】</span><a href="#">华为的招聘流程是怎样的？</a><span class="count">5个回答</span><span class="user">Leon</span><span class="time">2013-10-25</span>
-						</li>
-						<li>
-							<span class="ask">【问】</span><a href="#">华为的招聘流程是怎样的？</a><span class="count">5个回答</span><span class="user">Leon</span><span class="time">2013-10-25</span>
-						</li>
-						<li>
-							<span class="answer">【答】</span><a href="#">华为的招聘流程是怎样的？</a><span class="count">5个回答</span><span class="user">Leon</span><span class="time">2013-10-25</span>
-						</li>
+						<volist name="asks" id="ask">
+							<li>
+								<span class="ask">【问】</span>
+								<a href="/question/{$ask.id}">{$ask.title}</a>
+								<span class="count">{$ask.answer_count}个回答</span>
+								<span class="user">{$user.name}</span>
+								<span class="time">{$ask.create_time|date='Y-m-d',###}</span>
+							</li>
+						</volist>
+						<volist name="answers" id="answer">
+							<li>
+								<span class="answer">【答】</span>
+								<a href="/question/{$answer.id}">{$answer.title}</a>
+								<span class="count">{$answer.answer_count}</span>
+								<span class="user">{$answer.ask_name}</span>
+								<span class="time">{$answer.create_time|date='Y-m-d',###}</span>
+							</li>
+						</volist>
 					</ul>
 				</div>
 				<div class="title">
 					<span>出售</span>
-					<span class="num"><a href="#">( 2 )</a></span>
+					<span class="num"><a href="#">( {$sellcommoditycount} )</a></span>
 					<a href="#">发布商品</a>
 				</div>
 				<div class="sell">
 					<ul>
-						<li><a href="#"><img src="__IMAGE__/user_center/goods_01.jpg"/></a><div><a href="#">Thinkpad</a></div></li>
-						<li><a href="#"><img src="__IMAGE__/user_center/goods_01.jpg"/></a><div><a href="#">Thinkpad</a></div></li>
+						<volist name="sellcommodities" id="commodity">
+							<li>
+								<a href="/market/commodity/{$commodity.id}">
+									<img src="{$commodity.picture}" class="img-responsive" style="width:192px;height:146px;"/>
+								</a>
+								
+								<div>
+									<a href="/market/commodity/{$commodity.id}">{$commodity.title}</a>
+								</div>
+							</li>
+						</volist>
 					</ul>
 				</div>
 				<div class="title">
