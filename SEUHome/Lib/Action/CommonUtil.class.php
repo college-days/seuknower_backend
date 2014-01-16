@@ -1,5 +1,35 @@
 <?php
 class CommonUtil{
+	public function autologin(){
+		//var_dump($_SESSION);
+		//var_dump($_COOKIE);
+		if(isset($_SESSION['userId'])){	
+		}
+		else{
+			$account = cookie('account');
+			$password = cookie('password');
+			//每登入一次再延长cookie的有效时间
+			if(!empty($account) && !empty($password)){
+				$User = M('User');
+				$map['account'] = $account;
+				$map['password'] = $password;
+				$result = $User->where($map)->find();
+				cookie('account',$result['account'],864000);
+				cookie('password',$result['pwd'],864000);
+				session('userId',$result['id']);
+				session('account',$result['account']);
+				session('userName',$result['name']);
+				session('icon',$result['icon']);
+				if($result['is_group']){
+					session('isGroup',1);
+				}
+				else{
+					session('isGroup',0);
+				}
+			}
+		}
+	}
+
 	public function exists_file($filepath){
 		$path = "E:/wamp/www";
 		$dest = $path.$filepath;

@@ -2,13 +2,13 @@
 	<div class="person-image">
 		<div class="brief">
 			<div class="icon">
-				<img src="{$user.icon}" class="img-responsive" style="width:120px;height:120px;border-radius:50%;"/>
+				<a href="/user/{$user.id}"><img src="{$user.icon}" class="img-responsive" style="width:120px;height:120px;border-radius:50%;"/></a>
 			</div>
 			<div class="info">
 				<div class="name-tag">
-					<div class="name">
+					<a href="/user/{$user.id}"><div class="name">
 						<span> {$user.name} </span>
-					</div>
+					</div></a>
 					<div class="tag">
 						<eq name="user.id" value="1">
 							<span> 官方帐号 </span>
@@ -21,15 +21,15 @@
 					<ul>
 						<li>
 							<div><span> {$askcount} </span></div>
-							<div><a href="#">发表问题</a></div>
+							<div><a href="/user/ask/{$user.id}">发表问题</a></div>
 						</li>
 						<li>
 							<div><span> {$answercount} </span></div>
-							<div><a href="#">回答问题</a></div>
+							<div><a href="/user/answer/{$user.id}">回答问题</a></div>
 						</li>
 						<li>
 							<div><span> {$sellcommoditycount} </span></div>
-							<div><a href="#">出售商品</a></div>
+							<div><a href="/user/sellon/{$user.id}">出售商品</a></div>
 						</li>
 						<li>
 							<div><span>-3</span></div>

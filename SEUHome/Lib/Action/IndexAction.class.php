@@ -1,6 +1,11 @@
 <?php
-// 本类由系统自动生成，仅供测试用途
+import("@.Action.CommonUtil");
 class IndexAction extends Action {
+	public function _initialize(){
+		$util = new CommonUtil();
+		$util->autologin();
+	}
+
     public function index(){
     	$this->display('index');
     }
