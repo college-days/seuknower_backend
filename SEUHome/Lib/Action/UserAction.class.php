@@ -345,19 +345,32 @@ class UserAction extends Action {
     	$User = M('User');
     	$userInfo = $User->find($u_id);
     	
-    	if($_SESSION['userId'] == $u_id){
-    		$this->assign('me', '1');
-    	}else{
-    		$this->assign('me', '0');
-    	}
+        $util = new CommonUtil();
 
-    	$this->assign('answercount', $_SESSION['answercount']);
-    	$this->assign('askcount', $_SESSION['askcount']);
-    	$this->assign('sellcommoditycount', $_SESSION['sellcommoditycount']);
-    	$this->assign('user', $userInfo);
-    	$this->assign('u_id', $u_id);
-    	$this->assign('isprofile', 1);
-    	$this->display('user_profile');
+        $userInfo["sex"] = $util->filter_sex($userInfo["sex"]);
+
+        //无权访问别人的个人资料
+    	if($_SESSION['userId'] == $u_id){
+            $this->assign('me', '1');
+            $this->assign('answercount', $_SESSION['answercount']);
+            $this->assign('askcount', $_SESSION['askcount']);
+            $this->assign('sellcommoditycount', $_SESSION['sellcommoditycount']);
+            $this->assign('user', $userInfo);
+            $this->assign('u_id', $u_id);
+            $this->assign('isprofile', 1);
+            $this->display('user_profile');
+    	}else{
+            $this->assign('me', '0');
+            $this->redirect("/index");
+    	}
+    }
+
+    public function updateprofile(){
+        $u_id = I('param.id');
+        $User = M('User');
+        $userInfo = $User->find($u_id);
+
+        $this->redirect("/user/profile/".$u_id);
     }
 }
 

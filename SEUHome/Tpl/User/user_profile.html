@@ -5,41 +5,41 @@
 				<div class="title">
 					<div class="text"><span>基本信息</span></div>
 					<div class="line"><span></span></div>
-					<div class="button">编辑资料</div>
+					<a href="/user/updateprofile/{$user.id}" class="button">编辑资料</a>
 				</div>
 				<div class="detail">
 					<ul>
 						<li>
 							<div class="key">性别</div>
-							<div class="value">男</div>
+							<div class="value" id="sex">{$user.sex}</div>
 						</li>
 						<li>
 							<div class="key">学院</div>
-							<div class="value">信息科学与工程学院</div>
+							<div class="value" id="dept">{$user.dept}</div>
 						</li>
 						<li>
 							<div class="key">年级</div>
-							<div class="value">研一</div>
+							<div class="value" id="grade">{$user.grade}</div>
 						</li>
 						<li>
 							<div class="key">校区</div>
-							<div class="value">九龙湖</div>
+							<div class="value" id="campus">{$user.campus}</div>
 						</li>
 						<li>
 							<div class="key">个性签名</div>
-							<div class="value">人生苦短，必须性感</div>
+							<div class="value" id="intro">{$user.intro}</div>
 						</li>
 						<li>
 							<div class="key">QQ</div>
-							<div class="value">1044482218</div>
+							<div class="value" id="qq">{$user.qq}</div>
 						</li>
 						<li>
 							<div class="key">邮箱</div>
-							<div class="value">1044482218@qq.com</div>
+							<div class="value" id="email">{$user.email}</div>
 						</li>
 						<li>
 							<div class="key">微博</div>
-							<div class="value">Leon</div>
+							<div class="value" id="weibo">{$user.weibo}</div>
 						</li>
 					</ul>
 				</div>
@@ -49,7 +49,7 @@
 						<li>
 							<div class="key">性别</div>
 							<div class="value">
-								<select name="feeling" tabindex="3" id="feeling" >
+								<select name="feeling" tabindex="3" id="usersex" >
 									<option value="" >未知</option>
 									<option value="男" >男</option>
 									<option value="女" >女</option>
@@ -60,7 +60,7 @@
 						<li>
 							<div class="key">学院</div>
 							<div class="value">
-								<select id='dept' name='dept' class='select' tabindex='6' >
+								<select id='userdept' name='dept' class='select' tabindex='6' >
 									<option value=''>院系</option>
 									<option value='建筑学院'>建筑学院</option>
 									<option value='机械工程学院'>机械工程学院</option>
@@ -97,10 +97,15 @@
 						<li>
 							<div class="key">年级</div>
 							<div class="value">
-								<select name="feeling" tabindex="3" id="feeling" >
-									<option value=""   >研一</option>
-									<option value="男" >研二</option>
-									<option value="女" >女研三</option>										
+								<select name="feeling" tabindex="3" id="usergrade" >
+									<option value="">年级</option>
+									<option value="本科一年级">本科一年级</option>
+									<option value="本科二年级">本科二年级</option>
+									<option value="本科三年级">本科三年级</option>
+									<option value="本科四年级">本科四年级</option>
+									<option value="研究生一年级">研究生一年级</option>
+									<option value="研究生二年级">研究生二年级</option>
+									<option value="研究生三年级">研究生三年级</option>
 								</select>
 							</div>
 						</li>
@@ -108,27 +113,28 @@
 							<div class="key">校区</div>
 							<div class="value">
 								<select name="feeling" tabindex="3" id="feeling" >
-									<option value=""   >九龙湖</option>
-									<option value="男" >四牌楼</option>
-									<option value="女" >丁家桥</option>										
+									<option value="">校区</option>
+									<option value="九龙湖">九龙湖</option>
+									<option value="四牌楼">四牌楼</option>
+									<option value="丁家桥">丁家桥</option>			
 								</select>
 							</div>
 						</li>
 						<li>
 							<div class="key">个性签名</div>
-							<div class="value"><input type="text"/></div>
+							<div class="value"><input id="userintro" type="text"/></div>
 						</li>
 						<li>
 							<div class="key">QQ</div>
-							<div class="value"><input type="text"/></div>
+							<div class="value"><input id="userqq" type="text"/></div>
 						</li>
 						<li>
 							<div class="key">邮箱</div>
-							<div class="value"><input type="text"/></div>
+							<div class="value"><input id="useremail" type="text"/></div>
 						</li>
 						<li>
 							<div class="key">微博</div>
-							<div class="value"><input type="text"/></div>
+							<div class="value"><input id="userweibo" type="text"/></div>
 						</li>
 					</ul>
 					</div>
@@ -181,4 +187,5 @@
 		<div class="clear">
 		</div>
 	</div>
+	<script src="__JS__/user_profile.js"></script>
 <include file="Public:footer" />

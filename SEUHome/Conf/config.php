@@ -14,6 +14,7 @@ return array(
 		'user/join/:id\d$' => 'User/join_event',
 		'user/interest/:id\d$' => 'User/interest_event',
 		'user/profile/:id\d$' => 'User/profile',
+		'user/updateprofile/:id\d$' => 'User/updateprofile',
 		'user/sellon/:id\d$' => 'User/sell_commodity_on',
 		'user/selldone/:id\d$' => 'User/sell_commodity_done',
 		'user/buy/:id\d$' => 'User/buy_commodity',
