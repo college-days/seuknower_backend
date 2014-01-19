@@ -1,13 +1,117 @@
 <include file="Public:header" title="资料"/> 
+	<script>
+		$(function(){
+			$("#updateprofile").click(function(){
+				$.post("__URL__/updateprofile/", {
+					"id": $("#userid").text().replace(/[ ]/g,""),
+					"sex": $('#usersex').find("option:selected").text().replace(/[ ]/g,""), 
+					"dept": $('#userdept').find("option:selected").text().replace(/[ ]/g,""),
+					"grade": $('#usergrade').find("option:selected").text().replace(/[ ]/g,""),
+					"campus": $('#usercampus').find("option:selected").text().replace(/[ ]/g,""),
+					"intro": $('#userintro').val().replace(/[ ]/g,""),
+					"qq": $('#userqq').val().replace(/[ ]/g,""),
+					"email": $('#useremail').val().replace(/[ ]/g,""),
+					"weibo": $('#userweibo').val().replace(/[ ]/g,"")
+				}, function(data){
+					if(data.status){
+						//window.location.reload();
+						alert('success');
+						alert(data.data);
+						window.location.reload();
+					}else{
+						// alert(data.info);
+						alert('error');
+						//$('#loginwrongmsg').html(data.info);	
+						//$('#loginmsg').show();	
+					} 
+				}, "json");
+			});
+		});
+	</script>
 	<include file="User:user_header"/>
 		<div class="person-profile">
 			<div class="info">
 				<div class="title">
 					<div class="text"><span>基本信息</span></div>
 					<div class="line"><span></span></div>
-					<a href="/user/updateprofile/{$user.id}" class="button">编辑资料</a>
+					<eq name="me" value="1">
+						<div class="button" id="updateprofile">编辑资料</div>
+						<div id="userid" style="display:none;">{$user.id}</div>
+					</eq>
 				</div>
+				<eq name="me" value="0">
 				<div class="detail">
+					<ul>
+						<li>
+							<div class="key">性别</div>
+							<if condition="$user.sex eq male">
+								<div class="value" id="sex">男</div>
+							<elseif condition="$user.sex eq female">
+								<div class="value" id="sex">女</div>
+							<else/>
+								<div class="value" id="sex">未知</div>
+							</if>
+						</li>
+						<li>
+							<div class="key">学院</div>
+							<empty name="$user.dept">
+								<div class="value" id="dept">未知</div>
+							<else/>
+								<div class="value" id="dept">{$user.dept}</div>
+							</empty>
+						</li>
+						<li>
+							<div class="key">年级</div>
+							<empty name="$user.grade">
+								<div class="value" id="grade">未知</div>
+							<else/>
+								<div class="value" id="grade">{$user.grade}</div>
+							</empty>
+						</li>
+						<li>
+							<div class="key">校区</div>
+							<empty name="$user.campus">
+								<div class="value" id="campus">未知</div>
+							<else/>
+								<div class="value" id="campus">{$user.campus}</div>
+							</empty>
+						</li>
+						<li>
+							<div class="key">个性签名</div>
+							<empty name="$user.intro">
+								<div class="value" id="intro">还没有填写个人签名</div>
+							<else/>
+								<div class="value" id="intro">{$user.intro}</div>
+							</empty>
+						</li>
+						<li>
+							<div class="key">QQ</div>
+							<empty name="$user.qq">
+								<div class="value" id="qq">还没有填写qq号</div>
+							<else/>
+								<div class="value" id="qq">{$user.qq}</div>
+							</empty>
+						</li>
+						<li>
+							<div class="key">邮箱</div>
+							<empty name="$user.email">
+								<div class="value" id="email">还没有填写邮箱地址</div>
+							<else/>
+								<div class="value" id="email">{$user.email}</div>
+							</empty>
+						</li>
+						<li>
+							<div class="key">微博</div>
+							<empty name="$user.weibo">
+								<div class="value" id="weibo">还没有填写微博昵称</div>
+							<else/>
+								<div class="value" id="weibo">{$user.weibo}</div>
+							</empty>
+						</li>
+					</ul>
+				</div>
+				<else/>
+				<div class="detail" style="display:none;">
 					<ul>
 						<li>
 							<div class="key">性别</div>
@@ -112,7 +216,7 @@
 						<li>
 							<div class="key">校区</div>
 							<div class="value">
-								<select name="feeling" tabindex="3" id="feeling" >
+								<select name="feeling" tabindex="3" id="usercampus" >
 									<option value="">校区</option>
 									<option value="九龙湖">九龙湖</option>
 									<option value="四牌楼">四牌楼</option>
@@ -156,7 +260,7 @@
 						</div>
 					</div>
 				</div>
-			
+				</eq>
 			</div>
 			<div class="tag">
 				<div class="title">

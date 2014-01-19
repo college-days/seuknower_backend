@@ -14,7 +14,7 @@ return array(
 		'user/join/:id\d$' => 'User/join_event',
 		'user/interest/:id\d$' => 'User/interest_event',
 		'user/profile/:id\d$' => 'User/profile',
-		'user/updateprofile/:id\d$' => 'User/updateprofile',
+		'user/updateprofile/' => 'User/updateprofile',
 		'user/sellon/:id\d$' => 'User/sell_commodity_on',
 		'user/selldone/:id\d$' => 'User/sell_commodity_done',
 		'user/buy/:id\d$' => 'User/buy_commodity',
@@ -45,5 +45,15 @@ return array(
 	'DB_PWD'  => '',                 //密码
 	'DB_PORT' => 3306,					   //端口
 	'DB_PREFIX' => 'seu_',                    //数据库表前缀
+
+	//自动加载类库
+	'APP_AUTOLOAD_PATH'=>'@.TagLib,@.ORG',
+
+	'SESSION_AUTO_START'		=>true,				//会话自启动
+	'USER_AUTH_ON'              =>true,				//自动验证
+	'USER_AUTH_TYPE'			=>1,				// 默认认证类型 1 登录认证 2 实时认证
+	'USER_AUTH_KEY'             =>'authId',			// 用户认证SESSION标记
+	'USER_AUTH_MODEL'           =>'User',			// 默认验证数据表模型
+
 );
 ?>

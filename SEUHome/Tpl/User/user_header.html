@@ -45,13 +45,11 @@
 			<ul>
 				<eq name="isprofile" value="1">
 					<li class="active">
-					<eq name="me" value="1">
 						<div class="pro-title">
 							<a href="#">个人资料</a>
 						</div>
 						<img src="__IMAGE__/user_center/wave.png"/
 						>
-					</eq>
 					</li>
 					<li>
 						<div class="note-title">
@@ -61,13 +59,11 @@
 					</li>
 				<else/>
 					<li>
-						<eq name="me" value="1">
-							<div class="pro-title">
-								<a href="/user/profile/{$u_id}">个人资料</a>
-							</div>
-							<img src="__IMAGE__/user_center/wave.png"/
-							>
-						</eq>
+						<div class="pro-title">
+							<a href="/user/profile/{$u_id}">个人资料</a>
+						</div>
+						<img src="__IMAGE__/user_center/wave.png"/
+						>
 					</li>
 					<li class="active">
 						<div class="note-title">

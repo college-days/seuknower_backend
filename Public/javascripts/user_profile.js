@@ -96,6 +96,14 @@ $(function(){
 		$("#usergrade").find("option[value='']").attr("selected", true);
 	}
 
+	if(campus == "九龙湖"){
+		$("#usercampus").find("option[value='九龙湖']").attr("selected", true);
+	}else if(campus == "四牌楼"){
+		$("#usercampus").find("option[value='四牌楼']").attr("selected", true);
+	}else if(campus == "丁家桥"){
+		$("#usercampus").find("option[value='丁家桥']").attr("selected", true);
+	}
+
 	if(intro != ""){
 		$("#userintro").attr("placeholder", intro);
 	}else{
@@ -119,4 +127,5 @@ $(function(){
 	}else{
 		$("#userweibo").attr("placeholder", "还没有填写微博昵称");
 	}
+
 });

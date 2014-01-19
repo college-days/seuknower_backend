@@ -349,29 +349,64 @@ class UserAction extends Action {
 
         $userInfo["sex"] = $util->filter_sex($userInfo["sex"]);
 
-        //无权访问别人的个人资料
     	if($_SESSION['userId'] == $u_id){
             $this->assign('me', '1');
-            $this->assign('answercount', $_SESSION['answercount']);
-            $this->assign('askcount', $_SESSION['askcount']);
-            $this->assign('sellcommoditycount', $_SESSION['sellcommoditycount']);
-            $this->assign('user', $userInfo);
-            $this->assign('u_id', $u_id);
-            $this->assign('isprofile', 1);
-            $this->display('user_profile');
     	}else{
-            $this->assign('me', '0');
-            $this->redirect("/index");
+            $this->assign('me', '0'); 
     	}
+
+        $this->assign('answercount', $_SESSION['answercount']);
+        $this->assign('askcount', $_SESSION['askcount']);
+        $this->assign('sellcommoditycount', $_SESSION['sellcommoditycount']);
+        $this->assign('user', $userInfo);
+        $this->assign('u_id', $u_id);
+        $this->assign('isprofile', 1);
+        $this->display('user_profile');
     }
 
     public function updateprofile(){
         $u_id = I('param.id');
-        $User = M('User');
-        $userInfo = $User->find($u_id);
 
-        $this->redirect("/user/profile/".$u_id);
+        //无权修改他人的信息
+        if($_SESSION['userId'] == $u_id){
+            $sex = $_POST['sex'];
+            $dept = $_POST['dept'];
+            $grade = $_POST['grade'];
+            $campus = $_POST['campus'];
+            $intro = $_POST['intro'];
+            $qq = $_POST['qq'];
+            $email = $_POST['email'];
+            $weibo = $_POST['weibo'];
+
+            //thinkphp 框架如果update的时候发现字段根本没有更新那么就会默认直接返回一个false，就算是用execute执行原生的sql语句貌似也是类似的情况
+            $User = M('User');
+
+            $userInfo = $User->find($u_id);
+            if($userInfo['sex'] == $sex && $userInfo['dept'] == $dept && $userInfo['grade'] == $grade && $userInfo['campus'] == $campus && $userInfo['intro'] == $intro && $userInfo['qq'] == $qq && $userInfo['email'] == $email && $userInfo['weibo'] == $weibo){
+                $this->ajaxReturn('啥也没更新', '', 1);
+            }
+
+            $data['sex'] = $sex;
+            $data['dept'] = $dept;
+            $data['grade'] = $grade;
+            $data['campus'] = $campus;
+            $data['intro'] = $intro;
+            $data['qq'] = $qq;
+            $data['email'] = $email;
+            $data['weibo'] = $weibo;
+
+            $result = $User->where('id='.$u_id)->save($data);
+            $this->ajaxReturn('', '', $result);
+
+            //$User = M();
+            //$result = $User->execute("update seu_user set sex='".$sex."', dept='".$dept."', grade='".$grade."', campus='".$campus."', intro='".$intro."', qq='".$qq."', email='".$email."', weibo='".$weibo."' where id=".$u_id.";");
+
+        }else{
+            $this->ajaxReturn($u_id, '', 0);
+        }
+        
     }
+
 }
 
 ?>
