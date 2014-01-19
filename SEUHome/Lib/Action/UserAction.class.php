@@ -382,21 +382,38 @@ class UserAction extends Action {
             $User = M('User');
 
             $userInfo = $User->find($u_id);
-            if($userInfo['sex'] == $sex && $userInfo['dept'] == $dept && $userInfo['grade'] == $grade && $userInfo['campus'] == $campus && $userInfo['intro'] == $intro && $userInfo['qq'] == $qq && $userInfo['email'] == $email && $userInfo['weibo'] == $weibo){
-                $this->ajaxReturn('啥也没更新', '', 1);
-            }
 
             $data['sex'] = $sex;
             $data['dept'] = $dept;
             $data['grade'] = $grade;
             $data['campus'] = $campus;
-            $data['intro'] = $intro;
-            $data['qq'] = $qq;
-            $data['email'] = $email;
-            $data['weibo'] = $weibo;
+            if(empty($intro)){
+                $data['intro'] = $userInfo['intro'];
+            }else{
+                $data['intro'] = $intro;
+            }
+            if(empty($qq)){
+                $data['qq'] = '';
+            }else{
+                $data['qq'] = $qq;
+            }
+            if(empty($email)){
+                $data['email'] = '';
+            }else{
+                $data['email'] = $email;
+            }
+            if(empty($weibo)){
+                $data['weibo'] = '';
+            }else{
+                $data['weibo'] = $weibo;
+            }
+
+            if($userInfo['sex'] == $data['sex'] && $userInfo['dept'] == $data['dept'] && $userInfo['grade'] == $data['grade'] && $userInfo['campus'] == $data['campus'] && $userInfo['intro'] == $data['intro'] && $userInfo['qq'] == $data['qq'] && $userInfo['email'] == $data['email'] && $userInfo['weibo'] == $data['weibo']){
+                $this->ajaxReturn('啥也没更新', '', 1);
+            }
 
             $result = $User->where('id='.$u_id)->save($data);
-            $this->ajaxReturn('', '', $result);
+            $this->ajaxReturn('123', '', $result);
 
             //$User = M();
             //$result = $User->execute("update seu_user set sex='".$sex."', dept='".$dept."', grade='".$grade."', campus='".$campus."', intro='".$intro."', qq='".$qq."', email='".$email."', weibo='".$weibo."' where id=".$u_id.";");

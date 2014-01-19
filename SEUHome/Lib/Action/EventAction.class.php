@@ -20,7 +20,8 @@ class EventAction extends Action {
 
 		if($tag != "全部"){
 			//$sql .= " AND event.tag LIKE '%".$tag."%' ";
-			$sql = "event.tag = '".$tag."'";
+			// $sql = "event.tag = '".$tag."'";
+			$sql = "event.category = '".$tag."'";
 		}else{
 			$sql = "";
 		}
