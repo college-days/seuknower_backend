@@ -14,7 +14,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .container{width:965px;margin-left:auto;margin-right:auto;}
 .navbar .logo{float:left;margin-top:10px;}
 .navbar .line{float:left;margin-left:24px;}
-.navbar .meau{float:left;font-size:14px;width:433px;height:74px;border-right:solid 1px #d0d4d4;}
+.navbar .meau{float:left;font-size:14px;width:433px;height:75px;border-right:solid 1px #d0d4d4;}
 .navbar .meau li{float:left;margin-left:74px;margin-top:30px;}
 .navbar .search{width:141px;height:22px;background:url(images/search_back.png) no-repeat;float:left;margin-top:26px;margin-left:20px;cursor:pointer;}
 .navbar .search input{margin-left:10px;margin-top:1px;height:19px;border:0;outline:none;}
