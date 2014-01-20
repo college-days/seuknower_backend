@@ -16,7 +16,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .navbar .line{float:left;margin-left:24px;}
 .navbar .meau{float:left;font-size:14px;width:433px;height:75px;border-right:solid 1px #d0d4d4;}
 .navbar .meau li{float:left;margin-left:74px;margin-top:30px;}
-.navbar .search{width:141px;height:22px;background:url(images/search_back.png) no-repeat;float:left;margin-top:26px;margin-left:20px;cursor:pointer;}
+.navbar .search{width:141px;height:22px;background:url(images/search_back.png) no-repeat;float:left;margin-top:26px;margin-left:30px;cursor:pointer;}
 .navbar .search input{margin-left:10px;margin-top:1px;height:19px;border:0;outline:none;}
 .searchbtn{width:31px;height:22px;background:url(images/search_submit.png) no-repeat;float:left;margin-top:26px;margin-left:0px;cursor:pointer;}
 .navbar .user{float:left;margin-left:42px;margin-top:30px;}
@@ -29,8 +29,8 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 /*update*/
 .navbar .container .meau a:hover{color:#2ead91;}
 .navbar .container .user a:hover{color:#2ead91;}
-.navbar .user .login{margin-left:16px;}
-.navbar .user .submit{margin-left:16px;}
+.navbar .user .login{margin-left:28px;}
+.navbar .user .submit{margin-left:28px;}
 .navbar .user .logout{margin-left:9px;}
 
 .img-responsive {display:block;height:auto;max-width:100%;}
