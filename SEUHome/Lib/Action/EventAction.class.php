@@ -5,7 +5,7 @@ class EventAction extends Action {
 		$util = new CommonUtil();
 		$util->autologin();
 	}
-
+	
     public function index(){
     	$tag = I("param.tag");
 		$time = I("param.time");

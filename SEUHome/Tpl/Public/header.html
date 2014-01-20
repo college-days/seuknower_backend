@@ -7,11 +7,35 @@
 	<link rel="shortcut icon" href="__IMAGE__/index/favicon.ico" type="image/x-icon">
 	<link href="__CSS__/style.css" rel="stylesheet" type="text/css" />
 	<link href="__CSS__/flexslider.css" rel="stylesheet" type="text/css"/>
+
+	<style type="text/css">
+		#nav.fixed {
+			background:#FFFFFF;
+		    position: fixed;
+		    top: -1px;
+		    width:100%;
+		    text-align:center;
+		    z-index: 9999;
+		}
+	</style>
+
 	<script src="__JS__/jquery-1.9.1.js"></script>
 	<script src="__JS__/style.js"></script>
 	<script src="__JS__/jquery.flexslider-min.js"></script>
-	<script>
-	// Can also be used with $(document).ready()
+	<script type="text/javascript">
+
+	jQuery(document).ready(function() {
+	    var f1 = $(window).scrollTop(),f2 = $("#nav").offset().top;
+	    $(window).scroll(function() {
+	        var q = $(window).scrollTop();
+	        if (q > f2) {
+	            $("#nav").addClass("fixed")
+	        } else {
+	            $("#nav").removeClass("fixed")  //因为menu上方还有文字，当到达页面顶端时需要去除fixed
+	        }
+	    });
+	});
+
 	$(window).load(function() {
 		$('.flexslider').flexslider({
 			animation: "slide",
@@ -20,12 +44,12 @@
 		$('.searchbtn').click(function(){
 			$('#search_form').submit();
 		});
-	});
+    });
 	</script>
 </head>
 
 <body>
-	<div class="navbar">
+	<div class="navbar" id="nav">
 		<div class="container">
 			<div class="logo"> <a href="__APP__/index"><img src="__IMAGE__/index/logo.png"/></a></div>
 			<div class="line"> <img src="__IMAGE__/index/line.png"/></div>

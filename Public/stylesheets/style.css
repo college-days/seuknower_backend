@@ -29,9 +29,10 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 /*update*/
 .navbar .container .meau a:hover{color:#2ead91;}
 .navbar .container .user a:hover{color:#2ead91;}
-.navbar .user .login{margin-left:8px;}
+.navbar .user .login{margin-left:16px;}
 .navbar .user .submit{margin-left:16px;}
 .navbar .user .logout{margin-left:9px;}
+/*#nav.fixed {background:#FFFFFF;position: fixed;top: -1px;width:100%;text-align:center;z-index: 9999;}*/
 
 .img-responsive {display:block;height:auto;max-width:100%;}
 
@@ -44,13 +45,13 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .index-hot{margin-top:28px;padding-bottom:70px;border-bottom: solid 1px #d0d4d4;}
 .index-hot .tag{margin-top:10px;font-size:13px;line-height:32px;text-align:center;}
 .index-hot .tag ul{margin-left:-16px;}
-.index-hot .tag li{width:103px;height:32px;float:left;border:solid 1px #d0d4d4;margin-left:15px;}
+.index-hot .tag li{width:105.5px;height:32px;float:left;border:solid 1px #d0d4d4;margin-left:15px;}
 .index-hot .tag .active{background:#eceef1;}
 
 /*活动*/
 .index-activity{margin-top:33px;}
 .index-activity .left{margin-top:20px;float:left;}
-.index-activity .right{margin-top:-12px;margin-left:14px;width:600px;float:left;}
+.index-activity .right{margin-top:-12px;margin-left:36px;width:600px;float:left;}
 .index-activity .right li{margin-left:53px;width:247px;float:left;margin-top:32px;}
 .index-activity .right .act img{float:left;}
 .index-activity .right .act .info{float:left;width:158px;margin-left:18px;}
@@ -218,7 +219,7 @@ cursor:default;background-color:#428bca;border-color:#428bca;}
 .market .new div>a{line-height:21px;color:white;}
 
 .market .content ul{margin-left:-29px;}
-.market .content li{float:left;width:212px;height:284px;border:1px solid #e5e5e5;border-radius:5px;margin-left:29px;margin-top:20px;margin-bottom:16px;background:white;}
+.market .content li{float:left;width:217px;height:284px;border:1px solid #e5e5e5;border-radius:5px;margin-left:29.5px;margin-top:20px;margin-bottom:16px;background:white;}
 .market .content li .picture{margin:10px;}
 .market .content li .info{color:#b7b7b9;}
 .market .content li .money{margin-left:10px;}
