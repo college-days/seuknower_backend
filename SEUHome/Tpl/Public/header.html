@@ -9,12 +9,13 @@
 	<link href="__CSS__/flexslider.css" rel="stylesheet" type="text/css"/>
 
 	<style type="text/css">
-		#nav.fixed {
-			background:#FFFFFF;
+		.fixed {
+			background: #FFFFFF;
 		    position: fixed;
 		    top: 0px;
-		    width:100%;
-		    z-index: 99999;
+		    width: 100%;
+		    height: 78px;
+		    z-index: 1999;
 		}
 	</style>
 
@@ -27,12 +28,23 @@
 	    $(window).scroll(function() {
 	        var f1 = $(window).scrollTop();
 	        var f2 = $("#nav").offset().top;
-	        if (f1 >= f2) {
-	            $("#nav").addClass("fixed");
-	        } else {
-	            $("#nav").removeClass("fixed");
+	        console.log("f1: %d, f2: %d", f1, f2);
+	        /*if(f2 == 0){
+	        	$("#nav").removeClass("fixed");
+	        }else{
+	        	if (f1 >= f2) {
+	            	$("#nav").addClass("fixed");
+		        } else {
+		            $("#nav").removeClass("fixed");
+		        }
+	        }*/
+	        if(f1 > 0){
+	        	$("#nav").addClass("fixed", 1000);
+	        }else{
+	        	$("#nav").removeClass("fixed", 1000);
 	        }
 	    });
+		  
 	});
 
 	$(window).load(function() {

@@ -180,7 +180,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .question .left .hot ul{margin-top:20px;}
 .question .left .hot li{margin-top:10px;}
 .question .left .hot li>a{font-size:14px;color:#80827f;}
-.question .right {float:left;margin-top:33px;margin-left:53px;width:723px;}
+.question .right {float:left;margin-top:33px;margin-left:77px;width:723px;}
 .question .right .content li{font-size:14px;line-height:18px;padding-top:8px;padding-bottom:8px;border-bottom:1px solid #ededed;overflow:hidden;}
 .question .right .content li a{float:left;width:399px;overflow:hidden;}
 .question .right .content li span{float:left;margin-left:20px;color:#a5a7a5;}
