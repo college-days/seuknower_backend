@@ -32,7 +32,6 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .navbar .user .login{margin-left:16px;}
 .navbar .user .submit{margin-left:16px;}
 .navbar .user .logout{margin-left:9px;}
-/*#nav.fixed {background:#FFFFFF;position: fixed;top: -1px;width:100%;text-align:center;z-index: 9999;}*/
 
 .img-responsive {display:block;height:auto;max-width:100%;}
 
