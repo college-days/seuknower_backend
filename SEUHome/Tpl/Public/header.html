@@ -12,10 +12,9 @@
 		#nav.fixed {
 			background:#FFFFFF;
 		    position: fixed;
-		    top: -1px;
+		    top: 0px;
 		    width:100%;
-		    text-align:center;
-		    z-index: 9999;
+		    z-index: 99999;
 		}
 	</style>
 
@@ -25,13 +24,13 @@
 	<script type="text/javascript">
 
 	jQuery(document).ready(function() {
-	    var f1 = $(window).scrollTop(),f2 = $("#nav").offset().top;
 	    $(window).scroll(function() {
-	        var q = $(window).scrollTop();
-	        if (q > f2) {
-	            $("#nav").addClass("fixed")
+	        var f1 = $(window).scrollTop();
+	        var f2 = $("#nav").offset().top;
+	        if (f1 >= f2) {
+	            $("#nav").addClass("fixed");
 	        } else {
-	            $("#nav").removeClass("fixed")  //因为menu上方还有文字，当到达页面顶端时需要去除fixed
+	            $("#nav").removeClass("fixed");
 	        }
 	    });
 	});
