@@ -1,16 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>登陆</title>
-	<link rel="icon" href="__IMAGE__/index/favicon.ico" type="image/x-icon" charset="utf-8">
-	<link rel="shortcut icon" href="__IMAGE__/index/favicon.ico" type="image/x-icon">
-	<link href="__CSS__/style.css" rel="stylesheet" type="text/css" />
-	<link href="__CSS__/flexslider.css" rel="stylesheet" type="text/css"/>
-	<script src="__JS__/jquery-1.9.1.js"></script>
-	<script src="__JS__/style.js"></script>
-	<script src="__JS__/jquery.flexslider-min.js"></script>
-	<script>
+<include file="Public:header" title="登录"/>
+		<script>
 	// Can also be used with $(document).ready()
 	$(window).load(function() {
 		$('.flexslider').flexslider({
@@ -103,77 +92,21 @@
 		
 	});
 	</script>
-</head>
+	<form id="login" action="">
+		<div id="emtip" class="tip"></div>
+		<label for="account">用户名</label>
+		<input type="text" name="account"  id="account" value="" />
+		<br />
+		<div id="pwdtip" class="tip"></div>
+		<label for="password">密码</label>
+		<input type="password" name="password" id="password" onKeyDown="keydown(event)" />
+		<br />
 
-<body>
-	<div class="navbar">
-		<div class="container">
-			<div class="logo"> <a href="__APP__/index"><img src="__IMAGE__/index/logo.png"/></a></div>
-			<div class="line"> <img src="__IMAGE__/index/line.png"/></div>
-			<div class="meau">
-				<ul>
-					<li><a href="__APP__/event">活动</a></li>
-					<li><a href="__APP__/question">问答</a></li>
-					<li><a href="__APP__/market">跳蚤市场</a></li>
-				</ul>
-			</div>
+		<label for="rememberme">记住登录状态</label></div>
+		<input type="checkbox" checked="checked" id="rememberme" name="rememberme">
 
-			<div class="search">
-				<form action="/search" method="get" accept-charset="utf-8" id="search_form">
-					<input type="text" name="query" placeholder="问题，活动，商品" x-webkit-speech>
-				</form>
-			</div>
-			<div type="button" class="searchbtn">
-			</div>
-			
-			<!--<div class="user">
-				<div class="message active">
-					<img src="__IMAGE__/index/message.png"/>
-					<img class="dot" src="__IMAGE__/index/dot.png"/>
-				</div>
-				<a href="#" class="name">Lemon</a>
-			</div>-->
-			<div class="user">
-				<a href="/login" class="login">登陆</a>
-				<a href="#" class="submit">注册</a>
-			</div>
+		<input type="button" value="登录" id="submit" name="loginsub">
+		<a target="_blank" href="#">忘记密码？</a>
+	</form>
 
-		</div>
-		<div class="color-line">
-			<img src="__IMAGE__/index/color_line.png"/>
-		</div>
-	</div>
-	
-		<form id="login" action="">
-			<div id="emtip" class="tip"></div>
-			<label for="account">用户名</label>
-			<input type="text" name="account"  id="account" value="" />
-			<br />
-			<div id="pwdtip" class="tip"></div>
-			<label for="password">密码</label>
-			<input type="password" name="password" id="password" onKeyDown="keydown(event)" />
-			<br />
-
-			<label for="rememberme">记住登录状态</label></div>
-			<input type="checkbox" checked="checked" id="rememberme" name="rememberme">
-
-			<input type="button" value="登录" id="submit" name="loginsub">
-			<a target="_blank" href="#">忘记密码？</a>
-		</form>
-
-	<div class="footer">
-		<div class="container">
-			<div class="divide"></div>
-			<div class="contact">
-				<a href="#">意见反馈</a><span>|</span> 
-				<a href="#">社团注册</a><span>|</span>
-				<a href="#">加入我们</a>
-			</div>
-			<div class="copyright">
-				<span> Copyright &copy 火星蚁工作室 版权所有 All Right Reserevd</span>
-			</div>
-		</div>
-	</div>
-	
-</body>
-</html>
+<include file="Public:footer" />
