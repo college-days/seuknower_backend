@@ -41,7 +41,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .index-title{font-size:18px;color:#7a6c59;}
 
 /*热门*/
-.index-hot{margin-top:28px;padding-bottom:70px;border-bottom: solid 1px #d0d4d4;}
+.index-hot{margin-top:15px;padding-bottom:70px;border-bottom: solid 1px #d0d4d4;}
 .index-hot .tag{margin-top:10px;font-size:13px;line-height:32px;text-align:center;}
 .index-hot .tag ul{margin-left:-16px;}
 .index-hot .tag li{width:105.5px;height:32px;float:left;border:solid 1px #d0d4d4;margin-left:15px;}
@@ -115,7 +115,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 
 
 /*活动页*/
-.activity{overflow:hidden;}/*由于float带来的不占空间的影响 与平时的div不同 利用overflow可以消除这种影响 使的下一个div另起一行*/
+.activity{overflow:hidden;margin-top:15px;}/*由于float带来的不占空间的影响 与平时的div不同 利用overflow可以消除这种影响 使的下一个div另起一行*/
 .activity .color-line  img{width:100%;}
 .activity .divide{width:100%;border-bottom: solid 1px #d0d4d4;clear:both;}
 .activity .title{font-size:16px;color:#7a6c59;}
@@ -130,7 +130,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 
 .activity .middle{float:left;margin-left:48px;width:542px;}
 
-.activity .middle .new{float:right;margin-top:-23px;background:url(images/new.png);width:77px;height:21px;color:white;font-size:12px;line-height:21px;margin-bottom:10px;}
+.activity .middle .new{float:right;margin-top:-18px;background:url(images/new.png);width:77px;height:21px;color:white;font-size:12px;line-height:21px;margin-bottom:5px;}
 .activity .middle .new span{margin-left:10px;}
 .activity .middle .content li{float:left;margin-top:20px;padding-bottom:20px;border-bottom:1px solid #e1e7e7;}
 .activity .middle .content li>img{float:left;}
