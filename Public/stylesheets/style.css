@@ -14,12 +14,12 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .container{width:965px;margin-left:auto;margin-right:auto;}
 .navbar .logo{float:left;margin-top:6.7px;}
 .navbar .line{float:left;margin-left:24px;}
-.navbar .meau{float:left;font-size:14px;width:433px;height:50px;border-right:solid 1px #d0d4d4;}
+.navbar .meau{float:left;font-size:14px;width:433px;height:50px;border-right:solid 1px #e5e5e5;}
 .navbar .meau li{float:left;margin-left:74px;margin-top:20px;}
-.navbar .search{width:141px;height:22px;background:url(images/search_back.png) no-repeat;float:left;margin-top:17.7px;margin-left:30px;cursor:pointer;}
+.navbar .search{width:141px;height:22px;background:url(images/search_back.png) no-repeat;float:left;margin-top:15px;margin-left:60px;cursor:pointer;}
 .navbar .search input{margin-left:10px;margin-top:1px;height:19px;border:0;outline:none;}
-.searchbtn{width:31px;height:22px;background:url(images/search_submit.png) no-repeat;float:left;margin-top:17.7px;margin-left:0px;cursor:pointer;}
-.navbar .user{float:left;margin-left:85px;margin-top:20px;}
+.searchbtn{width:31px;height:22px;background:url(images/search_submit.png) no-repeat;float:left;margin-top:15px;margin-left:0px;cursor:pointer;}
+.navbar .user{float:left;margin-left:55px;margin-top:20px;}
 .navbar .user .message{float:left;cursor:pointer;}
 .navbar .user .message img{float:left;}
 .navbar .user .message .dot{display:none;}
@@ -200,7 +200,7 @@ padding:6px 12px;margin-left:-1px;line-height:1.428571429;text-decoration:none;b
 .pagination li:first-child a,.pagination li:first-child span {margin-left:0;border-bottom-left-radius:4px;border-top-left-radius:4px;}
 .pagination li:last-child a, .pagination li:last-child span {border-top-right-radius:4px;border-bottom-right-radius:4px;}
 .pagination .active a,.pagination .active span,.pagination .active a:hover,.pagination .active span:hover, .pagination .active a:focus,.pagination .active span:focus{z-index:2;color:#ffffff;
-cursor:default;background-color:#428bca;border-color:#428bca;}
+cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .pagination li a:hover,.pagination li span:hover,.pagination li a:focus, .pagination li span:focus{background-color:#eeeeee;}
 
 /*跳蚤市场*/
