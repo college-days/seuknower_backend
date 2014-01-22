@@ -40,7 +40,6 @@ class IndexAction extends Action {
 		}
 		$this->assign('hotquestions', $hotQuestions);
 		$this->assign('hotevents', $hotEvents);
-		var_dump($hotEvents);
     	$this->display('index');
     }
 }
