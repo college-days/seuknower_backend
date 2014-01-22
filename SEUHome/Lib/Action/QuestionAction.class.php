@@ -7,35 +7,51 @@ class QuestionAction extends Action {
 	}
 					
     public function index(){
-    	$Question = M('Question');
-		$count = $Question->count();// 查询满足要求的总记录数 $map表示查询条件
-		$pageCount = ceil($count/23);
-		if(I('param.id')){
-			$page = I('param.id');
-			if($page > $pageCount) $page = $pageCount;
-		}
-		else{
-			$page = 1;
-		}
-		$start = ($page-1)*23;
-		
-		$questions = $Question->order('create_time desc')->limit($start.',23')->select();
+    	$type = I("param.type");
+    	if(!$type){
+    		$type = "全部";
+    	}
 
-		for($i=0; $i<count($questions); $i++){
-			$User = M('User');
-			$result = $User->find($questions[$i]['u_id']);
-			$questions[$i]['u_name'] = $result['name'];
-		}
+    	if($type != "全部"){
+    		$sql = "question.type = '".$type."'";
+    	}else{
+    		$sql = "";
+    	}
+    	
+    	$Model = M();
+		$count = $Model->table('seu_question as question')->where($sql)->count();
+		if($count){
+			$eachPageShowCount = 25;
+			$pageCount = ceil($count/$eachPageShowCount);
+			if(I('param.id')){
+				$page = I('param.id');
+				if($page > $pageCount) $page = $pageCount;
+			}
+			else{
+				$page = 1;
+			}
+			$start = ($page-1)*$eachPageShowCount;
+			
+			$questions = $Model->table('seu_question as question')->order('create_time desc')->limit($start.','.$eachPageShowCount)->where($sql)->select();
 
+			for($i=0; $i<count($questions); $i++){
+				$User = M('User');
+				$result = $User->find($questions[$i]['u_id']);
+				$questions[$i]['u_name'] = $result['name'];
+			}			
+		}
+		$Question = M('Question');
 		$hotQuestions = $Question->order('click_count desc')->limit(10)->select();
 		$this->assign('hots',$hotQuestions);
 		$this->assign('questions',$questions);
+		$this->assign('questionscount', count($questions));
 		$this->assign('count',$count);
-		
+		$this->assign('type', $type);
 		$this->assign('curr_page',$page);
 		$this->assign('page_count',$pageCount);
 
 		$this->display('index');
+		
     }
 
     public function detail(){

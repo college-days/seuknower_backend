@@ -15,10 +15,36 @@
 		<div class="left">
 			<div class="category">
 				<img src="__IMAGE__/question/question_cate.png"/>
-				<a href="#"><div><img src="__IMAGE__/question/friend_grey.png"/></div><span>校园生活</span></a>
-				<a href="#" class="active"><div><img src="__IMAGE__/question/book_grey.png"/></div><span>学习考试</span></a>
-				<a href="#"><div><img src="__IMAGE__/question/computer_grey.png"/></div><span>电脑技术</span></a>
-				<a href="#"><div><img src="__IMAGE__/question/other_grey.png"/></div><span>其他</span></a>
+				<eq name="type" value="全部">
+					<a href="/question/全部" class="active"><div><img src="__IMAGE__/question/friend_grey.png"/></div><span>所有问题</span></a>
+				<else/>
+					<a href="/question/全部"><div><img src="__IMAGE__/question/friend_grey.png"/></div><span>所有问题</span></a>
+				</eq>
+				<eq name="type" value="生活娱乐">
+					<a href="/question/生活娱乐" class="active"><div><img src="__IMAGE__/question/friend_grey.png"/></div><span>生活娱乐</span></a>
+				<else/>
+					<a href="/question/生活娱乐" ><div><img src="__IMAGE__/question/friend_grey.png"/></div><span>生活娱乐</span></a>
+				</eq>
+				<eq name="type" value="学习考试">
+					<a href="/question/学习考试" class="active"><div><img src="__IMAGE__/question/book_grey.png"/></div><span>学习考试</span></a>
+				<else/>
+					<a href="/question/学习考试"><div><img src="__IMAGE__/question/book_grey.png"/></div><span>学习考试</span></a>
+				</eq>
+				<eq name="type" value="规章制度">
+					<a href="/question/规章制度" class="active"><div><img src="__IMAGE__/question/computer_grey.png"/></div><span>规章制度</span></a>
+				<else/>
+					<a href="/question/规章制度"><div><img src="__IMAGE__/question/computer_grey.png"/></div><span>规章制度</span></a>
+				</eq>
+				<eq name="type" value="技术专业">
+					<a href="/question/技术专业" class="active"><div><img src="__IMAGE__/question/computer_grey.png"/></div><span>技术专业</span></a>
+				<else/>
+					<a href="/question/技术专业"><div><img src="__IMAGE__/question/computer_grey.png"/></div><span>技术专业</span></a>
+				</eq>
+				<eq name="type" value="其他">
+					<a href="/question/其他" class="active"><div><img src="__IMAGE__/question/other_grey.png"/></div><span>其他</span></a>
+				<else/>
+					<a href="/question/其他"><div><img src="__IMAGE__/question/other_grey.png"/></div><span>其他</span></a>
+				</eq>
 			</div>
 			<div class="divide">
 			</div>
@@ -51,6 +77,9 @@
 		<div class="right">
 			<div class="divide">
 			</div>
+			<eq name="questionscount" value="0">
+				<div>没有找到任何问题</div>
+			</eq>
 			<div class="content">
 				<ul>
 					<volist name="questions" id="question">
@@ -67,13 +96,13 @@
 				<span class="total">共 {$count} 条记录</span>
 				<ul class="pagination">
 					<li>
-						<a href="/question/page/1">首页</a>
+						<a href="/question/{$type}/page/1">首页</a>
 					</li>
 					<li>
 						<eq name="curr_page" value="1">
 							<a href="#">«</a>
 							<else/>
-							<a href="/question/page/{$curr_page-1}">«</a>
+							<a href="/question/{$type}/page/{$curr_page-1}">«</a>
 						</eq>
 					</li>
 					<if condition="$page_count lt 6">
@@ -86,7 +115,7 @@
 								</li>
 								<else/>
 								<li>
-									<a href="__URL__/page/{$i}">
+									<a href="__URL__/{$type}/page/{$i}">
 										{$i}
 									</a>
 								</li>
@@ -102,7 +131,7 @@
 								</li>
 								<else/>
 								<li>
-									<a href="__URL__/page/{$i}">
+									<a href="__URL__/{$type}/page/{$i}">
 										{$i}
 									</a>
 								</li>
@@ -118,7 +147,7 @@
 								</li>
 								<else/>
 								<li>
-									<a href="__URL__/page/{$i}">
+									<a href="__URL__/{$type}/page/{$i}">
 										{$i}
 									</a>
 								</li>
@@ -134,7 +163,7 @@
 								</li>
 								<else/>
 								<li>
-									<a href="__URL__/page/{$i}">
+									<a href="__URL__/{$type}/page/{$i}">
 										{$i}
 									</a>
 								</li>
@@ -145,11 +174,11 @@
 						<eq name="curr_page" value="$page_count">
                             <a href="#">»</a>
                             <else/>
-                            <a href="/question/page/{$curr_page+1}">»</a>
+                            <a href="/question/{$type}/page/{$curr_page+1}">»</a>
                         </eq>
 					</li>
 					<li>
-						<a href="/question/page/{$page_count}">尾页</a>
+						<a href="/question/{$type}/page/{$page_count}">尾页</a>
 					</li>
 				</ul>
 				<span class="total">共 {$page_count} 页</span>

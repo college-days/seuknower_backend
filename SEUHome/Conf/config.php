@@ -8,6 +8,8 @@ return array(
 	'URL_ROUTE_RULES'=>array(
 		'question/:id\d$' => 'Question/detail',
 		'question/page/:id\d$' => 'Question/index',
+		'question/:type$' => 'Question/index',
+		'question/:type/page/:id\d$' => 'Question/index',
 		'user/:id\d$' => 'User/index',
 		'user/ask/:id\d$' => 'User/ask_question',
 		'user/answer/:id\d$' => 'User/answer_question',
@@ -27,6 +29,8 @@ return array(
 		'market/page/:id\d$' => 'Market/index',
 		'market/index/:cate/page/:id\d$' => 'Market/index',
 		'market/commodity/:id\d$' => 'Market/detail',
+		'market/:category$' => 'Market/index',
+		'market/:category/page/:id\d$' => 'Market/index',
 	),
 
 	//新的路径替换
