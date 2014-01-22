@@ -245,9 +245,9 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .commodity .left .info .title .tag{display:inline-block;color:#f49f21;font-size:12px;line-height:24px;background:#fef8ed;padding:0px 10px;margin-left:15px;}
 .commodity .left .info .picture{margin-top:15px;}
 .commodity .left .info .picture img{max-width:630px;max-height:445px;}
-.commodity .left .info .intro{margin-top:25px;}
+.commodity .left .info .intro{margin-top:25px;color:#7a6c59;}
 .commodity .left .info .intro span{font-size:16px;}
-.commodity .left .info .intro p{font-size:14px;color:#80827f;margin-top:12px;line-height:18px;}
+.commodity .left .info .intro p{font-size:14px;color:#000000;margin-top:12px;line-height:18px;}
 .commodity .left .info .count{margin-top:40px;color:#80827f;overflow:hidden;}
 .commodity .left .info .count  .count-left{float:left;}
 .commodity .left .info .count  .count-right{float:right;}
