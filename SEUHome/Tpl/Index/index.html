@@ -29,7 +29,23 @@
 			</div>
 			<div class="right">
 				<ul>
-					<li>
+					<volist name="hotevents" id="event">
+						<li>
+							<div class="act">
+								<img src="{$event.poster}" style="width:70px;height:90px;">
+								<div class="info">
+									<dl>
+										<dt><a href="#">{$event.title}</a></dt>
+										<dd>时间：{$event.time}</dd>
+										<dd>地点：{$event.location}</dd>
+										<dd>费用：{$event.cost}</dd>
+										<dd>发起人：{$event.organizer}</dd>
+									</dl>
+								</div>
+							</div>
+						</li>
+					</volist>
+					<!--<li>
 						<div class="act">
 							<img src="__IMAGE__/index/act1.jpg"/>
 							<div class="info">
@@ -84,7 +100,7 @@
 								</dl>
 							</div>
 						</div>
-					</li>
+					</li>-->
 				</ul>
 			</div>
 			<div class="go">
@@ -102,10 +118,12 @@
 				<p class="slogan">外事问百度，内事问“东大通”</p>
 				<p style="font-size:12px;font-weight:bold;color:#000000;">| 推荐问答</p>
 				<ul>
-					<li><a href="#" class="title">1 四六级考试准考证遗失如何补办？</a><span class="answer-count">62个回答</span> </li>
-					<li><a href="#" class="title">2 如何在宿舍使用ipv6？</a><span class="answer-count">93个回答</span> </li>
-					<li><a href="#" class="title">3 大家觉得九龙湖的饭菜如何？</a><span class="answer-count">101个回答</span> </li>
-					<li><a href="#" class="title">1 四六级考试准考证遗失如何补办？</a><span class="answer-count">62个回答</span> </li>
+					<volist name="hotquestions" id="question">
+						<li>
+							<a href="/question/{$question.id}" class="title">{$question.title}</a>
+							<span class="answer-count">{$question.click_count}次浏览</span>
+						</li>
+					</volist>
 				</ul>
 				<div class="go">
 					<a href="#"><img src="__IMAGE__/index/go_normal.png"/></a>
@@ -130,11 +148,11 @@
 			</div>
 			<div class="meau">
 				<ul>
-					<li><a href="#"><div class="go"><img src="__IMAGE__/index/clothes_normal.png"/></div></a><br /><br /><span>衣物鞋帽</span></li>
-					<li style="margin-left:99px;"><a href="#"><div class="go"><img src="__IMAGE__/index/computer_normal.png"/></div></a><br /><br /><span>数码电子</span></li>
-					<li style="margin-left:99px;"><a href="#"><div class="go"><img src="__IMAGE__/index/bike_normal.png"/></div></a><br /><br /><span>生活日用</span></li>
-					<li style="margin-left:99px;"><a href="#"><div class="go"><img src="__IMAGE__/index/book_normal.png"/></div></a><br /><br /><span>书籍杂志</span></li>
-					<li style="margin-left:99px;"><a href="#"><div class="go"><img src="__IMAGE__/index/love_normal.png"/></div></a><br /><br /><span>0元转让</span></li>
+					<li><a href="/market/衣物鞋帽"><div class="go"><img src="__IMAGE__/index/clothes_normal.png"/></div></a><br /><br /><span>衣物鞋帽</span></li>
+					<li style="margin-left:99px;"><a href="/market/数码电子"><div class="go"><img src="__IMAGE__/index/computer_normal.png"/></div></a><br /><br /><span>数码电子</span></li>
+					<li style="margin-left:99px;"><a href="/market/生活日用"><div class="go"><img src="__IMAGE__/index/bike_normal.png"/></div></a><br /><br /><span>生活日用</span></li>
+					<li style="margin-left:99px;"><a href="/market/书籍杂志"><div class="go"><img src="__IMAGE__/index/book_normal.png"/></div></a><br /><br /><span>书籍杂志</span></li>
+					<li style="margin-left:99px;"><a href="/market/0元转让"><div class="go"><img src="__IMAGE__/index/love_normal.png"/></div></a><br /><br /><span>0元转让</span></li>
 				</ul>
 			</div>
 			<div class="divide">
