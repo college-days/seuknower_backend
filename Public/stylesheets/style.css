@@ -62,7 +62,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 /*问答*/
 .index-question {margin-top:18px;width:944px;}
 .index-question .left{margin-top:20px;width:266px;float:left;}
-.index-question .slogan{font-size:18px;margin-bottom:25px;}
+.index-question .slogan{font-size:18px;margin-bottom:25px;color:#2ead91;}
 .index-question .left .title{font-size:12px;color:black;}
 .index-question .left .answer-count{float:right;color:#80827f;}
 .index-question .left li{margin-top:13px;}
