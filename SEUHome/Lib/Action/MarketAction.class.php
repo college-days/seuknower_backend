@@ -7,7 +7,7 @@ class MarketAction extends Action {
 	}
 
     public function index(){
-    	$category = I('param.cate');
+    	$category = I('param.category');
 
 		if(!$category){
 			$category = "全部";
@@ -61,6 +61,7 @@ class MarketAction extends Action {
 		} 
 		
 		$this->assign('commoditys',$commodityInfo);
+		$this->assign('commodityscount', count($commodityInfo));
 		$this->assign('count',$count);
 		$this->assign('is_full',$isFull);
 		$this->assign('curr_page',$page);

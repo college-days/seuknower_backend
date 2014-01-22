@@ -6,59 +6,39 @@
 				<div class="category">
 					<ul>
 						<eq name="category" value="全部">
-							<li class="active"> <a href="__URL__/index/全部">全部</a> </li>
+							<li class="active"> <a href="__URL__/全部">全部</a> </li>
 						<else/>
-							<li> <a href="__URL__/index/全部">全部</a> </li>
+							<li> <a href="__URL__/全部">全部</a> </li>
 						</eq>
-						<eq name="category" value="代步">
-							<li class="active"> <a href="__URL__/index/代步">代步</a> </li>
+						<eq name="category" value="衣物鞋帽">
+							<li class="active"> <a href="__URL__/衣物鞋帽">衣物鞋帽</a> </li>
 						<else/>
-							<li> <a href="__URL__/index/代步">代步</a> </li>
+							<li> <a href="__URL__/衣物鞋帽">衣物鞋帽</a> </li>
 						</eq>
-						<eq name="category" value="电脑">
-							<li class="active"> <a href="__URL__/index/电脑">电脑</a> </li>
+						<eq name="category" value="数码电子">
+							<li class="active"> <a href="__URL__/数码电子">数码电子</a> </li>
 						<else/>
-							<li> <a href="__URL__/index/电脑">电脑</a> </li>
+							<li> <a href="__URL__/数码电子">数码电子</a> </li>
 						</eq>
-						<eq name="category" value="数码">
-							<li class="active"> <a href="__URL__/index/数码">数码</a> </li>
+						<eq name="category" value="生活日用">
+							<li class="active"> <a href="__URL__/生活日用">生活日用</a> </li>
 						<else/>
-							<li> <a href="__URL__/index/数码">数码</a> </li>
+							<li> <a href="__URL__/生活日用">生活日用</a> </li>
 						</eq>
-						<eq name="category" value="电器">
-							<li class="active"> <a href="__URL__/index/电器">电器</a> </li>
+						<eq name="category" value="书籍杂志">
+							<li class="active"> <a href="__URL__/书籍杂志">书籍杂志</a> </li>
 						<else/>
-							<li> <a href="__URL__/index/电器">电器</a> </li>
+							<li> <a href="__URL__/书籍杂志">书籍杂志</a> </li>
 						</eq>
-						<eq name="category" value="图书">
-							<li class="active"> <a href="__URL__/index/图书">图书</a> </li>
+						<eq name="category" value="0元转让">
+							<li class="active"> <a href="__URL__/0元转让">0元转让</a> </li>
 						<else/>
-							<li> <a href="__URL__/index/图书">图书</a> </li>
-						</eq>
-						<eq name="category" value="运动">
-							<li class="active"> <a href="__URL__/index/运动">运动</a> </li>
-						<else/>
-							<li> <a href="__URL__/index/运动">运动</a> </li>
-						</eq>
-						<eq name="category" value="日用">
-							<li class="active"> <a href="__URL__/index/日用">日用</a> </li>
-						<else/>
-							<li> <a href="__URL__/index/日用">日用</a> </li>
-						</eq>
-						<eq name="category" value="娱乐">
-							<li class="active"> <a href="__URL__/index/娱乐">娱乐</a> </li>
-						<else/>
-							<li> <a href="__URL__/index/娱乐">娱乐</a> </li>
-						</eq>
-						<eq name="category" value="租赁">
-							<li class="active"> <a href="__URL__/index/租赁">租赁</a> </li>
-						<else/>
-							<li> <a href="__URL__/index/租赁">租赁</a> </li>
+							<li> <a href="__URL__/0元转让">0元转让</a> </li>
 						</eq>
 						<eq name="category" value="其他">
-							<li class="active"> <a href="__URL__/index/其他">其他</a> </li>
+							<li class="active"> <a href="__URL__/其他">其他</a> </li>
 						<else/>
-							<li> <a href="__URL__/index/其他">其他</a> </li>
+							<li> <a href="__URL__/其他">其他</a> </li>
 						</eq>
 					</ul>
 					<div class="my">
@@ -121,13 +101,13 @@
 						<span class="total">共 {$count} 条记录</span>
 						<ul class="pagination">
 							<li>
-								<a href="/market/index/{$category}/page/1">首页</a>
+								<a href="/market/{$category}/page/1">首页</a>
 							</li>
 							<li>
 								<eq name="curr_page" value="1">
 									<a href="#">«</a>
 									<else/>
-									<a href="/market/index/{$category}/page/{$curr_page-1}">«</a>
+									<a href="/market/{$category}/page/{$curr_page-1}">«</a>
 								</eq>
 							</li>
 							<if condition="$page_count lt 6">
@@ -140,7 +120,7 @@
 										</li>
 										<else/>
 										<li>
-											<a href="__URL__/index/{$category}/page/{$i}">
+											<a href="__URL__/{$category}/page/{$i}">
 												{$i}
 											</a>
 										</li>
@@ -156,7 +136,7 @@
 										</li>
 										<else/>
 										<li>
-											<a href="__URL__/index/{$category}/page/{$i}">
+											<a href="__URL__/{$category}/page/{$i}">
 												{$i}
 											</a>
 										</li>
@@ -172,7 +152,7 @@
 										</li>
 										<else/>
 										<li>
-											<a href="__URL__/index/{$category}/page/{$i}">
+											<a href="__URL__/{$category}/page/{$i}">
 												{$i}
 											</a>
 										</li>
@@ -188,7 +168,7 @@
 										</li>
 										<else/>
 										<li>
-											<a href="__URL__/index/{$category}/page/{$i}">
+											<a href="__URL__/{$category}/page/{$i}">
 												{$i}
 											</a>
 										</li>
@@ -199,11 +179,11 @@
 								<eq name="curr_page" value="$page_count">
 		                            <a href="#">»</a>
 		                            <else/>
-		                            <a href="/market/index/{$category}/page/{$curr_page+1}">»</a>
+		                            <a href="/market/{$category}/page/{$curr_page+1}">»</a>
 		                        </eq>
 							</li>
 							<li>
-								<a href="/market/index/{$category}/page/{$page_count}">尾页</a>
+								<a href="/market/{$category}/page/{$page_count}">尾页</a>
 							</li>
 						</ul>
 						<span class="total">共 {$page_count} 页</span>
