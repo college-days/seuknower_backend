@@ -164,7 +164,7 @@ class QuestionAction extends Action {
 		$hotQuestions = $Question->order('click_count desc')->limit(10)->select();
 		$this->assign('hots',$hotQuestions);
 		$this->assign('lsquestions', $this->getLatestSolvedQuestion());
-		
+
 		$this->display('detail');
 	}
 }

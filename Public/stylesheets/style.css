@@ -323,7 +323,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 
 .question-detail .left .answer .words p{font-size:14px;}
 .question-detail .left .answer li{margin-bottom:10px;}
-.question-detail .left .speak textarea{width:100%;height:130px;border-radius:5px;border:1px solid #dcdcdc;outline-color:#4e9f74;}
+/*.question-detail .left .speak textarea{width:100%;height:130px;border-radius:5px;border:1px solid #dcdcdc;outline-color:#4e9f74;}*/
 .question-detail .left .speak input{padding:0 26px 0 25px;line-height:36px;background:#eee;border:0;display:inline-block;border-radius:3px;height:36px;font-size:16px;font-family:"Microsoft Yahei";color:#80827f;outline:none;float:right;margin-top:25px;}
 .question-detail .left .speak input:hover{background:#f49f21;cursor:pointer;color:white;}
 

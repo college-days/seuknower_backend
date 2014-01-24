@@ -78,7 +78,7 @@
                                     </div>
                                     <p> {$answer.content} </p>
                                     <div>
-                                        <a href="#" class="reply">回复</a>
+                                        <a href="#replyanchor" class="reply">回复</a>
                                     </div>
                                 </div>
                             </div>
@@ -86,12 +86,12 @@
                         </volist>
                     </ul>
                 </div>
+                <a id="replyanchor"></a>
                 <div class="adopt">
                     我的回答
                 </div>
                 <div class="speak">
-                    <textarea>
-                    </textarea>
+                    <textarea id="editor_id" name="content" style="width:100%;height:300px"></textarea>
                     <input type="button" value="提交">
                 </div>
             </div>
@@ -144,7 +144,7 @@
                     <ul>
                         <volist name="hots" id="hot">
                             <li>
-                                <a href="/question/{$hot.id}"></a>
+                                <a href="/question/{$hot.id}">{$hot.title}</a>
                             </li>
                         </volist>
                     </ul>
@@ -168,5 +168,23 @@
         </div>
     </div>
 </div>
-<script src="__JS__/question_detail.js"></script>
+<script src="__JS__/question/question_detail.js"></script>
+<link href="__CSS__/editor/default.css" rel="stylesheet" />
+<script src="__JS__/editor/kindeditor-all-min.js"></script>
+<script>
+    KindEditor.ready(function(K) {
+        window.editor = K.create('#editor_id');
+    });
+
+    $(function(){
+        $(".reply").click(function(){
+            var href = $(this).attr("href");
+            var pos = $(href).offset().top;
+            var adjustpos = pos-100;
+            $("html,body").animate({scrollTop: adjustpos}, 1000);
+            window.editor.focus();
+            window.editor.text("<a href='/index'><strong>@</strong>首页</a>");
+        });
+    });
+</script>
 <include file="Public:footer" />
