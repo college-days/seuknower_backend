@@ -31,7 +31,7 @@ class CommonUtil{
 	}
 
 	public function exists_file($filepath){
-		$path = "E:/wamp/www";
+		$path = "C:/wamp/www";
 		$dest = $path.$filepath;
 		return file_exists($dest);
 	}
