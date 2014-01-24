@@ -154,18 +154,11 @@
                 </div>
                 <div>
                     <ul>
-                        <li>
-                        <a href="#">什么是人生的意义？</a>
-                        </li>
-                        <li>
-                        <a href="#">什么是人生的意义？</a>
-                        </li>
-                        <li>
-                        <a href="#">什么是人生的意义？</a>
-                        </li>
-                        <li>
-                        <a href="#">什么是人生的意义？什么是人生的意义？</a>
-                        </li>
+                        <volist name="lsquestions" id="question">
+                            <li>
+                                <a href="/question/{$question.id}">{$question.title}</a>
+                            </li>
+                        </volist>
                     </ul>
                 </div>
             </div>

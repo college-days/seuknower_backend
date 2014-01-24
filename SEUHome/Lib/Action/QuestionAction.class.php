@@ -6,6 +6,13 @@ class QuestionAction extends Action {
 		$util->autologin();
 	}
 					
+	//获得最新解决的问题
+	public function getLatestSolvedQuestion(){
+		$Question = M('Question');
+		$lsQuestions = $Question->order('create_time desc')->where('answer_count > 0')->limit(5)->select();
+		return $lsQuestions;
+	}
+
     public function index(){
     	$type = I("param.type");
     	if(!$type){
@@ -49,6 +56,7 @@ class QuestionAction extends Action {
 		$this->assign('type', $type);
 		$this->assign('curr_page',$page);
 		$this->assign('page_count',$pageCount);
+		$this->assign('lsquestions', $this->getLatestSolvedQuestion());
 
 		$this->display('index');
 		
@@ -155,7 +163,8 @@ class QuestionAction extends Action {
 
 		$hotQuestions = $Question->order('click_count desc')->limit(10)->select();
 		$this->assign('hots',$hotQuestions);
-
+		$this->assign('lsquestions', $this->getLatestSolvedQuestion());
+		
 		$this->display('detail');
 	}
 }
