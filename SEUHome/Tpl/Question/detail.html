@@ -49,7 +49,7 @@
                     </div>
                     <ul>
                         <volist name="answers" id="answer">
-                            <li>
+                            <li uid="{$answer.u_id}" aid="{$answer.id}" >
                             <div class="divide">
                             </div>
                             <div class="attitude">
@@ -175,4 +175,5 @@
         </div>
     </div>
 </div>
+<script src="__JS__/question_detail.js"></script>
 <include file="Public:footer" />
