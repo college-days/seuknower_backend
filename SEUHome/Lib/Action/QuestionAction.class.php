@@ -138,6 +138,10 @@ class QuestionAction extends Action {
 			}
 		}
 
+		for($i=0; $i<count($AnonymousInfo); $i++){
+			$AnonymousInfo[$i]['content'] = htmlspecialchars_decode($AnonymousInfo[$i]['content']);
+		}
+
 		if($AnswerInfo == null && $AnonymousInfo != null){
 			$UltimateInfo = $AnonymousInfo;
 		}

@@ -12,6 +12,7 @@ return array(
 		'question/:type/page/:id\d$' => 'Question/index',
 		'answer/add_agree' => 'Answer/addAgree',
 		'answer/add_object'	=> 'Answer/addObject',
+		'answer/add_answer' => 'Answer/addAnswer',
 		'user/:id\d$' => 'User/index',
 		'user/ask/:id\d$' => 'User/ask_question',
 		'user/answer/:id\d$' => 'User/answer_question',

@@ -3,6 +3,7 @@
     <div class="question-detail">
         <div class="container">
             <div class="left">
+                <div id="question" qid={$question.id} style="display:none;"></div>
                 <div class="title">
                     <span> {$question.title} </span>
                     <a href="/question/{$question.type}" class="tag"> {$question.type} </a>
@@ -49,7 +50,7 @@
                     </div>
                     <ul>
                         <volist name="answers" id="answer">
-                            <li uid="{$answer.u_id}" aid="{$answer.id}" >
+                            <li uid="{$answer.u_id}" aid="{$answer.id}" uname="{$answer.u_name}">
                             <div class="divide">
                             </div>
                             <div class="attitude">
@@ -78,7 +79,9 @@
                                     </div>
                                     <p> {$answer.content} </p>
                                     <div>
-                                        <a href="#replyanchor" class="reply">回复</a>
+                                        <eq name="answer.anonymous" value="0">
+                                            <a href="#replyanchor" class="reply">回复</a>
+                                        </eq>
                                     </div>
                                 </div>
                             </div>
@@ -90,9 +93,26 @@
                 <div class="adopt">
                     我的回答
                 </div>
+                <div class="alert alert-success" id="successmsg">
+                    <a class="close" data-dismiss="alert" href="#replyanchor" id="successcancle">X</a>
+                    回复成功。
+                </div>
+                <div class="alert alert-fail" id='failmsg'>
+                    <a class="close" data-dismiss="alert" href="#replyanchor" id="failcancle">X</a>
+                    回复失败。
+                </div>
+                <div class="alert alert-fail" id="answermsg">
+                    <a class="close" data-dismiss="alert" href="#replyanchor" id="answercancle">X</a>
+                    回答的内容不能为空。
+                </div>
+                <div class="alert alert-fail" id="limitmsg">
+                    <a class="close" data-dismiss="alert" href="#replyanchor" id="limitcancle">X</a>
+                    你已经回答过这个问题啦，如果有什么要补充的请修改回答。
+                </div>
                 <div class="speak">
                     <textarea id="editor_id" name="content" style="width:100%;height:300px"></textarea>
-                    <input type="button" value="提交">
+                    <input type="button" value="匿名回答" id="anonymous_submit"> 
+                    <input type="button" value="实名回答" id="submit">
                 </div>
             </div>
             <div class="right">
@@ -168,7 +188,6 @@
         </div>
     </div>
 </div>
-<script src="__JS__/question/question_detail.js"></script>
 <link href="__CSS__/editor/default.css" rel="stylesheet" />
 <script src="__JS__/editor/kindeditor-all-min.js"></script>
 <script>
@@ -177,14 +196,20 @@
     });
 
     $(function(){
+        var atUserId = 0;
         $(".reply").click(function(){
             var href = $(this).attr("href");
             var pos = $(href).offset().top;
-            var adjustpos = pos-100;
-            $("html,body").animate({scrollTop: adjustpos}, 1000);
+            var adjustPos = pos-100;
+            $("html,body").animate({scrollTop: adjustPos}, 1000);
+            
+            var atUserName = $(this).parents("li").find("a.name").text().replace(/[ ]/g,"");
+            atUserId = $(this).parents("li").attr("uid");
             window.editor.focus();
-            window.editor.text("<a href='/index'><strong>@</strong>首页</a>");
+            window.editor.appendHtml('<strong>@'+atUserName+'\t'+'</strong>');
         });
+
     });
 </script>
+<script src="__JS__/question/question_detail.js"></script>
 <include file="Public:footer" />

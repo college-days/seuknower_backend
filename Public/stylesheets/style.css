@@ -494,6 +494,38 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .footer .contact span{margin:0px 2px;color:#717171;}
 .footer .copyright{float:right;margin-top:20px;color:#717171;}
 
+.alert {
+padding: 8px 35px 8px 14px;
+margin-bottom: 18px;
+text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+background-color: #fcf8e3;
+border: 1px solid #fbeed5;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+color: #c09853;
+display: none;
+}
 
+.alert-success {
+background-color: #dff0d8;
+border-color: #d6e9c6;
+color: #468847;
+}
 
+.alert-fail {
+background-color: #f0dfd8;
+border-color: #e9d6c6;
+color: #884647;
+}
 
+.close {
+float: right;
+font-size: 20px;
+font-weight: bold;
+line-height: 18px;
+color: #000000;
+text-shadow: 0 1px 0 #ffffff;
+opacity: 0.2;
+filter: alpha(opacity=20);
+}
