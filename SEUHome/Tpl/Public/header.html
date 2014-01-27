@@ -8,21 +8,6 @@
 	<link href="__CSS__/style.css" rel="stylesheet" type="text/css" />
 	<link href="__CSS__/flexslider.css" rel="stylesheet" type="text/css"/>
 
-	<style type="text/css">
-		.fixed {
-			background: #FFFFFF;
-		    position: fixed;
-		    top: 0px;
-		    width: 100%;
-		    height: 53px;
-		    z-index: 1999;
-			-webkit-backface-visibility:hidden;	/* Chrome 和 Safari */
-			-moz-backface-visibility:hidden; 	/* Firefox */
-			-ms-backface-visibility:hidden; 	/* Internet Explorer */
-			backface-visibility:hidden;
-		}
-	</style>
-
 	<script src="__JS__/jquery-1.9.1.js"></script>
 	<script src="__JS__/style.js"></script>
 	<script src="__JS__/jquery.flexslider-min.js"></script>
@@ -33,15 +18,7 @@
 	        var f1 = $(window).scrollTop();
 	        var f2 = $("#nav").offset().top;
 	        console.log("f1: %d, f2: %d", f1, f2);
-	        /*if(f2 == 0){
-	        	$("#nav").removeClass("fixed");
-	        }else{
-	        	if (f1 >= f2) {
-	            	$("#nav").addClass("fixed");
-		        } else {
-		            $("#nav").removeClass("fixed");
-		        }
-	        }*/
+
 	        if(f1 > 0){
 	        	$("#nav").addClass("fixed", 1000);
 	        }else{
@@ -90,14 +67,40 @@
 					<a href="#" class="submit">注册</a>
 				</div>
 			<else/>
-				<div class="user">
+				<!--<div class="user">
 					<div class="message active">
 						<img src="__IMAGE__/index/message.png"/>
 						<img class="dot" src="__IMAGE__/index/dot.png"/>
 					</div>
 					<a href="/user/{$Think.session.userId}" class="name">{$Think.session.userName}</a>
 					<a href="/logout" class="logout">登出</a>
-				</div>
+				</div>-->
+				<nav>
+				<ul>
+					<li>
+						<a href="#">消息</a>
+						<ul>
+							<li><a href="#">暂时没有消息</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">发布</a>
+						<ul>
+							<li><a href="#">发布问题</a></li>
+							<li><a href="#">发布商品</a></li>
+							<li><a href="#">发布活动</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">个人</a>
+						<ul>
+							<li><a href="/logout">登出</a></li>
+							<li><a href="/user/{$Think.session.userId}" class="name">个人中心</a></li>
+							<li><a href="/user/profile/{$Think.session.userId}">个人设置</a></li>
+						</ul>
+					</li>
+				</ul>
+				</nav>
 			</empty>
 		</div>
 		<div class="color-line">
