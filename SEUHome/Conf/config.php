@@ -36,6 +36,7 @@ return array(
 
 	//新的路径替换
 	'TMPL_PARSE_STRING' =>array(
+		'__EDITOR__' => '/Public/kindeditor',
 		'__IMAGE__' => '/Public/images', // 增加新癿JS 类库路徂替换觃则
 		'__JS__' => '/Public/javascripts', // 增加新癿JS 类库路徂替换觃则
 		'__CSS__' => '/Public/stylesheets', // 增加新癿JS 类库路徂替换觃则
@@ -54,11 +55,11 @@ return array(
 	//自动加载类库
 	'APP_AUTOLOAD_PATH'=>'@.TagLib,@.ORG',
 
-	'SESSION_AUTO_START'		=>true,				//会话自启动
-	'USER_AUTH_ON'              =>true,				//自动验证
-	'USER_AUTH_TYPE'			=>1,				// 默认认证类型 1 登录认证 2 实时认证
-	'USER_AUTH_KEY'             =>'authId',			// 用户认证SESSION标记
-	'USER_AUTH_MODEL'           =>'User',			// 默认验证数据表模型
+	'SESSION_AUTO_START' => true,				//会话自启动
+	'USER_AUTH_ON' => true,				//自动验证
+	'USER_AUTH_TYPE' => 1,				// 默认认证类型 1 登录认证 2 实时认证
+	'USER_AUTH_KEY' => 'authId',			// 用户认证SESSION标记
+	'USER_AUTH_MODEL' => 'User',			// 默认验证数据表模型
 
 );
 ?>
