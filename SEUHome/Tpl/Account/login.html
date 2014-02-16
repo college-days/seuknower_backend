@@ -49,11 +49,11 @@
 					$("#emtip").text('帐户不能为空');
 					isa = false;
 				}
-				else if($(this).val().match("@") == null){
+				/*else if($(this).val().match("@") == null){
 					$("#emtip").show();
 					$("#emtip").text('帐户格式不正确');
 					isa = false;
-				}
+				}*/
 				else{
 					$("#emtip").hide();
 					isa = true;
@@ -73,9 +73,13 @@
 			
 			//ajax
 			$('#submit').click(function(){
+				alert('cleantha');
+				alert(isa);
+				alert(isp);
+				alert($('#account').val()+"@seu.edu.cn");
 				if(isa && isp){
 					$.post('__URL__/checkLogin',{
-						account:$('#account').val(), 
+						account:$('#account').val()+"@seu.edu.cn", 
 						password:$('#password').val(), 
 						rememberme:document.getElementById('rememberme').checked},
 						function(data){
@@ -92,7 +96,7 @@
 		
 	});
 	</script>
-	<form id="login" action="">
+	<!--<form id="login" action="">
 		<div id="emtip" class="tip"></div>
 		<label for="account">用户名</label>
 		<input type="text" name="account"  id="account" value="" />
@@ -107,6 +111,27 @@
 
 		<input type="button" value="登录" id="submit" name="loginsub">
 		<a target="_blank" href="#">忘记密码？</a>
-	</form>
+	</form>-->
+	<div class="register">
+		<div class="blank">
+		    <div class="white">
+				<div class="title"><span>登录</span></div>
+				<div class="info"> 
+					<div class="row">
+						<div id="emtip" class="tip"></div>
+						<span class="key">邮箱</span><input class="value  num" type="text" id="account"/><span class="text">@seu.edu.cn</span>
+					</div>
+					<div class="row">
+						<div id="pwdtip" class="tip"></div>
+						<span class="key">密码</span><input class="value" type="text" id="password"/>
+					</div>
+
+				</div>
+				<input type="button" value="确定" class="btn" id="submit"/>
+				<label for="rememberme">记住登录状态</label></div>
+				<input type="checkbox" checked="checked" id="rememberme" name="rememberme">
+			</div>
+		</div>
+	</div>
 
 <include file="Public:footer" />

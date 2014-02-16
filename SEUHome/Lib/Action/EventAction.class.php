@@ -50,7 +50,8 @@ class EventAction extends Action {
 			}
 			
 			//$pageCount = ceil($count/10);
-			$pageCount = ceil($count/5);
+			// $pageCount = ceil($count/5);
+			$pageCount = ceil($count/6);
 			if(I('param.id')){
 				$page = I('param.id');
 				if($page > $pageCount) $page = $pageCount;
@@ -59,11 +60,11 @@ class EventAction extends Action {
 				$page = 1;
 			}
 			//$start = ($page-1)*10;	
-			$start = ($page-1)*5;
+			$start = ($page-1)*6;
 			
 			//$events = $Model->table('seu_event event, seu_user user')->field('event.id,event.u_id, event.title, event.start_time, event.end_time, event.cost, event.location, event.join_count, event.interest_count, event.poster, user.is_group, user.name as organizer')->order('event.create_time desc')->limit($start.',10')->where($sql)->select();
 
-			$events = $Model->table('seu_event event, seu_user user')->field('event.id,event.u_id, event.title, event.start_time, event.end_time, event.cost, event.location, event.join_count, event.interest_count, event.poster, user.is_group, user.name as organizer')->order('event.create_time desc')->limit($start.',5')->where($sql)->select();
+			$events = $Model->table('seu_event event, seu_user user')->field('event.id,event.u_id, event.title, event.start_time, event.end_time, event.cost, event.location, event.join_count, event.interest_count, event.poster, user.is_group, user.name as organizer')->order('event.create_time desc')->limit($start.',6')->where($sql)->select();
 			for($i=0; $i<count($events); $i++){
 				$startTime = explode(" ",date("Y年m月d日 H:i:s",$events[$i]['start_time']));	
 				$endTime = explode(" ",date("Y年m月d日 H:i:s",$events[$i]['end_time']));
@@ -98,7 +99,7 @@ class EventAction extends Action {
 
 		for($i=0; $i<count($events); $i++){
 			if(!$util->exists_file($events[$i]["poster"])){
-				$events[$i]["poster"] = "__IMAGE__/event/act5.jpg";
+				$events[$i]["poster"] = "notexists";
 			}
 		}
 
@@ -116,6 +117,42 @@ class EventAction extends Action {
 		$this->assign('type', $type);
 		$this->assign('tag', $tag);
 		$this->assign('time', $time);
+
+		switch (count($events)) {
+			case 6:
+				$this->assign('leftevents', array($events[0], $events[1]));
+				$this->assign('middleevents', array($events[2], $events[3]));
+				$this->assign('rightevents', array($events[4], $events[5]));
+				break;
+			case 5:
+				$this->assign('leftevents', array($events[0], $events[1]));
+				$this->assign('middleevents', array($events[2], $events[3]));
+				$this->assign('rightevents', array($events[4]));
+				break;
+			case 4:
+				$this->assign('leftevents', array($events[0], $events[1]));
+				$this->assign('middleevents', array($events[2], $events[3]));
+				$this->assign('rightevents', array());
+				break;
+			case 3:
+				$this->assign('leftevents', array($events[0], $events[1]));
+				$this->assign('middleevents', array($events[2]));
+				$this->assign('rightevents', array());
+				break;
+			case 2:
+				$this->assign('leftevents', array($events[0], $events[1]));
+				$this->assign('middleevents', array());
+				$this->assign('rightevents', array());
+				break;
+			case 1:
+				$this->assign('leftevents', array($events[0]));
+				$this->assign('middleevents', array());
+				$this->assign('rightevents', array());
+				break;
+			default:
+				# code...
+				break;
+		}
 
 		//for notify message
 		//有时候会出现奇怪的bug，所以先把这两个session中的变量清空，其实之前不是奇怪的bug，是查询语句写错了，反正下面两个写着也不碍事就放着吧
@@ -140,7 +177,8 @@ class EventAction extends Action {
 		session('eventMessageResult', $eventMessageResult);
 		session('commodityMessageResult', $commodityMessageResult);*/
 
-    	$this->display('index');
+    	//$this->display('index');
+    	$this->display('index_waterflow');
     }
 
 }

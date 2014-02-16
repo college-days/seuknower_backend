@@ -40,6 +40,20 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 
 .index-title{font-size:18px;color:#7a6c59;}
 
+/*注册*/
+.register{background:url(images/hall.png) no-repeat;background-size:100% auto;width:100%;height:723px;}
+.register .blank{padding-top:130px;}
+.register .white{background:url(images/tran_register.png) no-repeat;width:612px;height:396px;margin-left:auto;margin-right:auto;padding-top:45px;}
+.register .white .title{font-size:30px;color:#7a6c59;margin-left:38px;padding:0px;padding-left:15px;border-left:5px solid #7a6c59;line-height:30px;}
+.register .white .info{margin-top:50px;}
+.register .white .info .row{margin-bottom:10px;}
+.register .white .info .key{display:inline-block;width:190px;text-align:right;font-size:16px;color:#7a6c59;}
+.register .white .info .value{margin-left:25px;width:250px;line-height:30px;border:1px solid #7a6c59;font-size:14px;}
+.register .white .info .num{width:140px;}
+.register .white .info .text{font-size:16px;color:#7a6c59;margin-left:10px;}
+.register .white .btn{width:112px;height:40px;margin-left:245px;margin-top:22px;font-size:21px;line-height:40px;color:white;background:#7a6c59;border:0px;border-radius:3px;cursor:pointer;}
+
+
 /*热门*/
 .index-hot{margin-top:15px;padding-bottom:70px;border-bottom: solid 1px #d0d4d4;}
 .index-hot .tag{margin-top:10px;font-size:13px;line-height:32px;text-align:center;}
@@ -115,8 +129,8 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 
 
 /*活动页*/
-.activity{overflow:hidden;margin-top:15px;}/*由于float带来的不占空间的影响 与平时的div不同 利用overflow可以消除这种影响 使的下一个div另起一行*/
-.activity .color-line  img{width:100%;}
+/*.activity{overflow:hidden;margin-top:15px;}*//*由于float带来的不占空间的影响 与平时的div不同 利用overflow可以消除这种影响 使的下一个div另起一行*/
+/*.activity .color-line  img{width:100%;}
 .activity .divide{width:100%;border-bottom: solid 1px #d0d4d4;clear:both;}
 .activity .title{font-size:16px;color:#7a6c59;}
 .activity .left{float:left;width:90px;}
@@ -153,9 +167,92 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .activity .right .top10 ul{margin-top:20px;}
 .activity .right .top10 li{margin-top:15px;}
 .activity .right .top10 li>span{font-size:14px;color:#a3bcc4;}
-.activity .right .top10 li>a{font-size:14px;color:#80827f;margin-left:8px;}
+.activity .right .top10 li>a{font-size:14px;color:#80827f;margin-left:8px;}*/
 
+.activity{overflow:hidden;}/*由于float带来的不占空间的影响 与平时的div不同 利用overflow可以消除这种影响 使的下一个div另起一行*/
+.activity .left{margin-top:15px;width:217px;float:left;}
+.activity .left .divide{margin-top:20px;border-bottom:solid 1px #e5e5e5;margin-bottom:20px;}
+.activity .left .title-line{font-size:16px;color:#7a6c59;border-left:solid 2px #7a6c59;margin-left:-21px;padding-left:19px;}
+.activity .left .title{font-size:16px;color:#7a6c59;}
+.activity .user-recommend{padding:20px;border:solid 1px #e5e5e5;background:white;}
+.activity .user-recommend .user{margin-top:20px;margin-left:10px;}
+.activity .user-recommend .icon{float:left;margin-right:12px;}
+.activity .user-recommend .icon img{width:40px;height:40px;border-radius:50%;}
+.activity .user-recommend .user .male{display:inline-block;background:url(images/icon.gif) no-repeat 0 -88px;width:11px;height:11px;}
+.activity .user-recommend .user .female{display:inline-block;background:url(images/icon.gif) no-repeat 0 -107px;width:11px;height:12px;}
+.activity .user-recommend .name a{color:#77c4b0;font-size:14px;}
+.activity .user-recommend .tag {color:#b0c5cc;font-size:14px;line-height:28px;}
+.activity .user-recommend .interest{margin-top:20px;}
+.activity .user-recommend .interest span{margin-left:10px;font-size:14px;color:#80827f;}
+.activity .user-recommend .interest .line{padding:0px 10px;}
+.activity .user-recommend ul{margin-top:15px;}
+.activity .user-recommend li{margin-top:10px;}
+.activity .user-recommend li a{font-size:14px;color:#80827f;line-height:18px;}
 
+.activity .page{float:left;margin-top:65px;margin-left: 300px;}
+/*.activity .page{margin: 0 auto;}*/
+/*.activity .page{display: block;}*/
+.activity .page a{float:left;display:block;min-width:18px;min-height:16px;padding:1px 1px;margin-left:14px;text-align:center;line-height:16px;}
+.activity .page .active {background:#4a9e72;color:white;}
+.activity .page a:hover{background:#4a9e72;color:white;}
+
+.activity .time-category{padding:20px;border:solid 1px #e5e5e5;background:white;margin-top:20px;}
+
+.activity .time-category .time, .activity .time-category .category{margin-top:16px;margin-left:-18px;}
+.activity .time-category .time a ,.activity .time-category .category a{margin-left:18px;font-size:14px;color:#a3bcc4;line-height:20px;}
+.activity .time-category a:hover{color:black;}
+.activity .time-category .active{color:black;}
+
+.activity .column{margin-top:15px;width:217px;float:left;margin-left:20px;}
+.activity .column .content{border:solid 1px #e5e5e5;background:white;margin-bottom:20px;}
+.activity .column .content   img{width:215px;}
+.activity .column .content .info{padding:20px;}
+.activity .column .content .info a{font-size:16px;line-height:20px;text-align:center;}
+.activity .column .content .info a:hover{color:#2ead91;}
+.activity .column .content .info dt{margin-bottom:30px;}
+.activity .column .content .info dd{text-align:center;line-height:18px;color:#808280;}
+.activity .column .content .info dd span{margin:0px 12px;}
+.activity .column .content .info .interest{margin-top:20px;}
+
+/*活动详情页*/
+.activity-detail{padding-top:38px;padding-bottom:58px;}
+.activity-detail .left{width:688px;}
+.activity-detail .left .info{border:1px solid #e5e5e5;padding:20px;background:white;overflow:hidden;}
+.activity-detail .left .intro{overflow:hidden;}
+.activity-detail .left .intro img{margin-right:20px;float:left;}
+.activity-detail .left .intro dl{float:left;}
+.activity-detail .left .intro dt{font-size:18px;margin-bottom:40px;margin-top:10px;}
+.activity-detail .left .intro dd{font-size:14px;line-height:18px;color:#808280;}
+.activity-detail .left .intro .join{margin-top:22px;margin-left:-20px;}
+.activity-detail .left .intro .join span{margin-left:20px;}
+.activity-detail .left .intro input{font-size:12px;color:#2ead91;margin-top:22px;width:68px;height:25px;margin-right:10px;border:1px solid #2ead91;background:#dbf7ed;border-radius:2px;cursor:pointer;}
+.activity-detail .left .detail{margin-top:25px;font-size:14px;line-height:22px;}
+.activity-detail .left .detail p{color:#80827f;}
+.activity-detail .left .click-time{margin-top:30px;font-size:12px;color:#a3bcc4;}
+.activity-detail .left .click{float:left;}
+.activity-detail .left .time{float:right;}
+
+/*新建活动*/
+.activity-new{padding-top:38px;overflow:hidden;}
+.activity-new .left{width:590px;float:left;}
+.activity-new .left .title{font-size:24px;margin-bottom:38px;}
+.activity-new .row{margin-bottom:20px;}
+.activity-new .row .key{display:inline-block;width:100px;text-align:right;margin-right:20px;font-size:14px;line-height:28px;vertical-align:top;/*元素在父元素顶部*/}
+.activity-new .row .value{border:1px solid #4e9f74;height:28px;border-radius:3px;}
+.activity-new .row .long{width:400px;}
+.activity-new .row select{margin-left:-3px;padding:3px 5px;height:30px;/*无法覆盖value中的height*/border:1px solid #4e9f74;border-radius:3px;}
+.activity-new .row .time{width:110px;margin-left:20px;}
+.activity-new .row .short{width:110px;}
+.activity-new .row textarea{width:400px;max-width:400px;height:173px;border:1px solid #4e9f74;border-radius:3px;}
+.activity-new .row label{line-height:28px;font-size:12px;margin-right:20px;display:inline-block;}
+.activity-new .row .cost{vertical-align:middle;}
+.activity-new .row .div-image{margin-left:120px;width:400px;}
+.activity-new .row .target{max-width:250px;max-height:250px;}
+.activity-new .row .preview {width:48px;height:48px;overflow:hidden;margin-left:5px;}
+.activity-new .row .btn{border:1px solid #4e9f74;border-radius:3px;padding:5px 10px;cursor:pointer;}
+.activity-new .right{float:right;width:290px;}
+.activity-new .right .title{font-size:18px;margin-bottom:20px;}
+.activity-new .right .word{font-size:14px;line-height:24px;margin-bottom:10px;}
 
 
 /*问答页*/

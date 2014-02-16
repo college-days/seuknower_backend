@@ -1,0 +1,253 @@
+<include file="Public:header" title="活动"/>
+<div class="back-color">
+	<div class="activity">
+
+		<div class="container">
+			<div class="left">
+			<div class="user-recommend">
+				<div class="title-line">
+					用户
+				</div>
+				<div class="user">
+					<div class="icon">
+						<img src="images/avat_02.jpg"/>
+					</div>
+					<div >
+						<div class="name">
+							<span class="female"></span>
+							<a href="#">Lolly</a>
+						</div>
+						<div class="tag">
+								好好学习。。。
+						</div>
+					</div>
+				</div>
+				<div class="interest">
+					<span>感兴趣</span><span>5</span><span class="line">|</span><span>参加</span><span>4</span>
+				</div>
+				<div class="divide">
+				</div>
+				<div class="title">
+					推荐活动
+				</div>
+				<ul>
+					<volist name="hots" id="hot" key="iter">
+							<li>
+								<span>{$iter}</span>
+								<a href="#">{$hot.title}</a>
+							</li>
+						</volist>
+				</ul>
+			</div>
+			<div class="time-category">
+				<div class="title-line">
+					时间
+				</div>
+				<div class="time">
+					<eq name="time" value="全部">
+						<a class="active">全部</a>
+					<else/>
+						<a>全部</a>
+					</eq>
+					<eq name="time" value="今天">
+						<a class="active">今天</a>
+					<else/>
+						<a>今天</a>
+					</eq>
+					<eq name="time" value="明天">
+						<a class="active">明天</a>
+					<else/>
+						<a>明天</a>
+					</eq>
+					<eq name="time" value="本周">
+						<a class="active">本周</a>
+					<else/>
+						<a>本周</a>
+					</eq>
+				</div>
+				<div class="divide">
+				</div>
+				<div class="title">
+					类型
+				</div>
+				<div class="category">
+					<eq name="tag" value="全部">
+						<a class="active">全部</a>
+					<else/>
+						<a>全部</a>
+					</eq>
+					<eq name="tag" value="讲座">
+						<a class="active">讲座</a>
+					<else/>
+						<a>讲座</a>
+					</eq>
+					<eq name="tag" value="比赛">
+						<a class="active">比赛</a>
+					<else/>
+						<a>比赛</a>
+					</eq>
+					<eq name="tag" value="招聘">
+						<a class="active">招聘</a>
+					<else/>
+						<a>招聘</a>
+					</eq>
+					<eq name="tag" value="娱乐交友">
+						<a class="active">娱乐交友</a>
+					<else/>
+						<a>娱乐交友</a>
+					</eq>
+					<eq name="tag" value="公益">
+						<a class="active">公益</a>
+					<else/>
+						<a>公益</a>
+					</eq>
+					<eq name="tag" value="其他">
+						<a class="active">其他</a>
+					<else/>
+						<a>其他</a>
+					</eq>
+				</div>
+			</div>
+			</div>
+
+			<notempty name="leftevents">
+			<div class="column">
+				<volist name="leftevents" id="event">
+					<div class="content">
+						<eq name="event.poster" value="notexists">
+						<else/>
+							<img src="{$event.poster}"/>
+						</eq>
+						<div class="info">
+							<dl>
+								<dt><a href="#">{$event.title}</a></dt>
+								<dd>时间：{$event.time}</dd>
+								<dd>地点：{$event.location}</dd>
+								<dd>费用：{$event.cost}</dd>
+								<dd>发起人：{$event.organizer}</dd>
+								<dd class="interest">{$event.join_count}人参加<span>|</span>{$event.interest_count}人感兴趣</dd>
+							</dl>
+						</div>
+					</div>
+				</volist>
+			</div>
+			</notempty>
+			<notempty name="middleevents">
+			<div class="column">
+				<volist name="middleevents" id="event">
+					<div class="content">
+						<eq name="event.poster" value="notexists">
+						<else/>
+							<img src="{$event.poster}"/>
+						</eq>
+						<div class="info">
+							<dl>
+								<dt><a href="#">{$event.title}</a></dt>
+								<dd>时间：{$event.time}</dd>
+								<dd>地点：{$event.location}</dd>
+								<dd>费用：{$event.cost}</dd>
+								<dd>发起人：{$event.organizer}</dd>
+								<dd class="interest">{$event.join_count}人参加<span>|</span>{$event.interest_count}人感兴趣</dd>
+							</dl>
+						</div>
+					</div>
+				</volist>
+			</div>
+			</notempty>
+			<notempty name="rightevents">
+			<div class="column">
+				<volist name="rightevents" id="event">
+					<div class="content">
+						<eq name="event.poster" value="notexists">
+						<else/>
+							<img src="{$event.poster}"/>
+						</eq>
+						<div class="info">
+							<dl>
+								<dt><a href="#">{$event.title}</a></dt>
+								<dd>时间：{$event.time}</dd>
+								<dd>地点：{$event.location}</dd>
+								<dd>费用：{$event.cost}</dd>
+								<dd>发起人：{$event.organizer}</dd>
+								<dd class="interest">{$event.join_count}人参加<span>|</span>{$event.interest_count}人感兴趣</dd>
+							</dl>
+						</div>
+					</div>
+				</volist>
+			</div>
+			</notempty>
+
+			<div class="page">
+				<a href="__URL__/{$tag}/{$time}/page/1">首页</a>
+				<eq name="curr_page" value="1">
+					<a href="#" class="arrow"> &laquo;</a>
+				<else/>
+					<a href="__URL__/{$tag}/{$time}/page/{$curr_page-1}" class="arrow"> &laquo;</a>
+				</eq>
+
+					<if condition="$page_count lt 6">
+		            <for start="1" end="$page_count+1">
+		                <eq name="i" value="$curr_page">
+		                    <a href="#" class="active">
+		                        {$i}
+		                    </a>
+		                <else/>
+		                    <a href="__URL__/{$tag}/{$time}/page/{$i}">
+		                        {$i}
+		                    </a>
+		                </eq>
+		            </for>
+		            <elseif condition="($curr_page lt 3)" />
+		            <for start="1" end="6">
+		                <eq name="i" value="$curr_page">
+		                    <a href="#" class="active">
+		                        {$i}
+		                    </a>
+		                <else/>
+		                    <a href="__URL__/{$tag}/{$time}/page/{$i}">
+		                        {$i}
+		                    </a>
+		                </eq>
+		            </for>
+		            <elseif condition="$curr_page gt $page_count-2" />
+		            <for start="$page_count-4" end="$page_count+1">
+		                <eq name="i" value="$curr_page">
+		                    <a href="#" class="active">
+		                        {$i}
+		                    </a>
+		                <else/>
+		                    <a href="__URL__/{$tag}/{$time}/page/{$i}">
+		                        {$i}
+		                    </a>
+		                </eq>
+		            </for>
+		            <else />
+		            <for start="$curr_page-2" end="$curr_page+3">
+		                <eq name="i" value="$curr_page">
+		                    <a href="#" class="active">
+		                        {$i}
+		                    </a>
+		                <else/>
+		                    <a href="__URL__/{$tag}/{$time}/page/{$i}">
+		                        {$i}
+		                    </a>
+		                </eq>
+		            </for>
+		        </if>
+				
+				<eq name="curr_page" value="$page_count">
+		            <a href="#" class="arrow">
+		                &raquo;
+		            </a>
+		            <else/>
+		            <a href="__URL__/{$tag}/{$time}/page/{$curr_page+1}" class="arrow">
+		                &raquo;
+		            </a>
+		        </eq>
+				<a href="__URL__/{$tag}/{$time}/page/{$page_count}">尾页</a>
+			</div>
+		</div>
+
+	</div>
+	<script src="__JS__/event/event_index.js"></script>
+<include file="Public:footer" />
