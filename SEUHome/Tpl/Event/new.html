@@ -1,0 +1,71 @@
+<include file="Public:header" title="新活动"/>
+<div class="back-color">
+    <div class="activity-new">
+		<div class="container">
+			<div class="left">
+			<div class="title">发布新活动</div>
+			<form>
+				<div class="row">
+					<span class="key">活动名称</span><input class="value long" type="text"/>
+				</div>
+				<div class="row">
+					<span class="key">活动类型</span>
+					<select class="short">
+						<option value="讲座">讲座</option>
+						<option value="比赛">比赛</option>
+						<option value="招聘">招聘</option>
+						<option value="娱乐交友">娱乐交友</option>
+						<option value="公益">公益</option>
+						<option value="其他">其他</option>
+					</select>
+				</div>
+				<div class="row">
+					<span class="key">开始时间</span><input class="value short" type="text"/><select class="time"></select>
+				</div>
+				<div class="row">
+					<span class="key">结束时间</span><input class="value short" type="text"/><select class="time"></select>
+				</div>
+				<div class="row">
+					<span class="key">活动地点</span><input class="value long" type="text"/>
+				</div>
+				<div class="row">
+					<span class="key">活动详情</span><textarea ></textarea>
+				</div>
+				<div class="row">
+					<span class="key">费用</span>
+					<input type="radio" class="cost" name="cost"/><label>免费</label>
+					<input type="radio" class="cost" name="cost"/><label>收费</label>
+				</div>
+				<div class="row">
+					<span class="key"></span><input type="text" class="value short"/>
+				</div>
+				<div class="row">
+					<span class="key">发起人</span><input class="value short" type="text"/>
+				</div>
+				<div class="row">
+					<span class="key">活动海报</span><input class="value" type="file"/>
+				</div>
+				<div class="row">
+					<div class="div-image">
+						<img class="target" src="images/act1.jpg"/>
+						<img class="preview" src="images/act1.jpg"/>
+					</div>
+				</div>
+				<div class="row">
+					<span class="key">感兴趣人数</span><input class="value short" type="text"/>
+				</div>
+				<div class="row">
+					<span class="key"></span><input class="btn" type="button" value="确认提交"/>
+				</div>
+			</form>
+			</div>
+			<div class="right">
+				<p class="title">创建活动须知···</p>
+				<p class="word">1、活动标题简单明了，时间地点准确；</p>
+				<p class="word">2、活动内容和特点介绍详细；</p>
+				<p class="word">3、记得上传一张活动海报，分辨率大于500x500，如没有海报，可以上传相关的照片、图片；</p>
+				<p class="word">4、遇到任何问题可以邮件联系我们获得帮助。</p>
+			</div>
+		</div>
+	</div>
+<include file="Public:footer" />

@@ -135,5 +135,9 @@ class MarketAction extends Action {
 
     	$this->display('detail');
     }
+
+    public function newCommodity(){
+    	$this->display('new');
+    }
 }
 ?>

@@ -282,5 +282,9 @@ class EventAction extends Action {
 
     	$this->display('detail');
     }
+
+    public function newEvent(){
+    	$this->display('new');
+    }
 }
 ?>
