@@ -154,6 +154,40 @@ class EventAction extends Action {
 				break;
 		}
 
+    	$userId = session('userId');
+    	$User = M('User');
+    	$userInfo = $User->find($userId);
+
+    	$util = new CommonUtil();
+		$userInfo["sex"] = $util->filter_sex($userInfo["sex"]);
+
+    	$this->assign('currentUser', $userInfo);
+
+    	$map['u_id'] = $userId;
+    	$Event = M('Event');
+		$EventInterest = M('InterestEvent');
+    	$interestEventIds = $EventInterest->field('e_id')->where($map)->select();
+    	$interestEvents = array();
+    	for($i=0; $i<count($interestEventIds); $i++){
+    		$interestEvent = $Event->where('id='.$interestEventIds[$i]['e_id'])->find();
+    		if(!empty($interestEvent)){
+    			array_push($interestEvents, $interestEvent);
+    		}
+    	}
+
+    	$EventJoin = M('JoinEvent');
+    	$joinEventIds = $EventJoin->field('e_id')->where($map)->select();
+    	$joinEvents = array();
+    	for($i=0; $i<count($joinEventIds); $i++){
+    		$joinEvent = $Event->where('id='.$joinEventIds[$i]['e_id'])->find();
+    		if(!empty($joinEvent)){
+    			array_push($joinEvents, $joinEvent);
+    		}
+    	}
+
+		$this->assign('interestCount', count($interestEvents));
+		$this->assign('joinCount', count($joinEvents));
+
 		//for notify message
 		//有时候会出现奇怪的bug，所以先把这两个session中的变量清空，其实之前不是奇怪的bug，是查询语句写错了，反正下面两个写着也不碍事就放着吧
 		/*session('messageResult', null);
@@ -181,5 +215,72 @@ class EventAction extends Action {
     	$this->display('index_waterflow');
     }
 
+    public function detail(){
+    	$id = I('param.id');
+    	$Event = M('Event');
+    	$User = M('User');
+
+    	//活动的点击数增加
+    	$add['id'] = $id;
+		$add['click_count'] = array('exp','click_count+1');
+		$Event->save($add);
+
+		$currentEvent = $Event->find($id);
+		$user = $User->find($currentEvent['u_id']);
+		$currentEvent['organizer'] = $user['name'];
+
+		$startTime = explode(" ",date("Y年m月d日 H:i:s",$currentEvent['start_time']));	
+		$endTime = explode(" ",date("Y年m月d日 H:i:s",$currentEvent['end_time']));
+		//unset撤销对象之后就会将其置为null
+		unset($currentEvent['start_time']);
+		unset($currentEvent['end_time']);
+		if($startTime[0] == $endTime[0]){
+			$currentEvent['time'] = substr($startTime[0],7)." ".substr($startTime[1],0,5)."-".substr($endTime[1],0,5);
+		}
+		else{
+			$currentEvent['time'] = substr($startTime[0],7)."~".substr($endTime[0],7);
+		}
+
+		//prevent xss
+		$currentEvent['intro'] = htmlspecialchars_decode($currentEvent['intro']);
+
+		$Model = M();
+		$count = $Model->table('seu_event_comment')->where("e_id = ".$id)->count();
+		//表联结
+		$comments = $Model->table('seu_event_comment comment,seu_user user')->field('comment.id,comment.u_id as user_id,comment.content,comment.create_time,user.name as user_name,user.icon as icon')->where("comment.e_id = $id AND comment.u_id = user.id")->order('comment.create_time')->select();
+		
+		$util = new CommonUtil();
+
+		if(!$util->exists_file($currentEvent["poster"])){
+			$currentEvent["poster"] = "__IMAGE__/event/act5.jpg";
+		}
+
+		$this->assign('event', $currentEvent);
+		$this->assign('comments', $comments);
+		$this->assign('comment_count', $count);
+
+		//u_id是当前登录用户的id
+		$map['u_id'] = session('userId');
+		//e_id是活动的id
+		$map['e_id'] = $id;
+		$JoinEvent = M('JoinEvent');
+		//判断当前登录用户是否参与了该活动
+		if($JoinEvent->where($map)->find()){
+			$this->assign('join',1);
+		}
+		else{
+			$this->assign('join',0);
+		}
+		//判断当前登录用户是否关注了该活动
+		$InterestEvent = M('InterestEvent');
+		if($InterestEvent->where($map)->find()){
+			$this->assign('interest',1);
+		}
+		else{
+			$this->assign('interest',0);
+		}
+
+    	$this->display('detail');
+    }
 }
 ?>

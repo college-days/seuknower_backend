@@ -10,20 +10,32 @@
 				</div>
 				<div class="user">
 					<div class="icon">
-						<img src="images/avat_02.jpg"/>
+						<img src="{$currentUser.icon}"/>
 					</div>
 					<div >
 						<div class="name">
-							<span class="female"></span>
-							<a href="#">Lolly</a>
+							<eq name="currentUser.sex" value="male">
+                                <span class="male"></span>
+                            </eq>
+                            <eq name="currentUser.sex" value="female">
+                                <span class="female"></span>
+                            </eq>
+                            <eq name="currentUser.sex" value="none">
+                                不详
+                            </eq>
+							<a href="#">{$currentUser.name}</a>
 						</div>
 						<div class="tag">
-								好好学习。。。
+							<eq name="currentUser.id" value="1">
+								<span> 官方帐号 </span>
+							<else/>
+								<span> {$currentUser.intro} </span>
+							</eq>
 						</div>
 					</div>
 				</div>
 				<div class="interest">
-					<span>感兴趣</span><span>5</span><span class="line">|</span><span>参加</span><span>4</span>
+					<span>感兴趣</span><span>{$interestCount}</span><span class="line">|</span><span>参加</span><span>{$joinCount}</span>
 				</div>
 				<div class="divide">
 				</div>
@@ -34,7 +46,7 @@
 					<volist name="hots" id="hot" key="iter">
 							<li>
 								<span>{$iter}</span>
-								<a href="#">{$hot.title}</a>
+								<a href="/event/{$hot.id}">{$hot.title}</a>
 							</li>
 						</volist>
 				</ul>
@@ -120,7 +132,7 @@
 						</eq>
 						<div class="info">
 							<dl>
-								<dt><a href="#">{$event.title}</a></dt>
+								<dt><a href="/event/{$event.id}">{$event.title}</a></dt>
 								<dd>时间：{$event.time}</dd>
 								<dd>地点：{$event.location}</dd>
 								<dd>费用：{$event.cost}</dd>
@@ -142,7 +154,7 @@
 						</eq>
 						<div class="info">
 							<dl>
-								<dt><a href="#">{$event.title}</a></dt>
+								<dt><a href="/event/{$event.id}">{$event.title}</a></dt>
 								<dd>时间：{$event.time}</dd>
 								<dd>地点：{$event.location}</dd>
 								<dd>费用：{$event.cost}</dd>
@@ -164,7 +176,7 @@
 						</eq>
 						<div class="info">
 							<dl>
-								<dt><a href="#">{$event.title}</a></dt>
+								<dt><a href="/event/{$event.id}">{$event.title}</a></dt>
 								<dd>时间：{$event.time}</dd>
 								<dd>地点：{$event.location}</dd>
 								<dd>费用：{$event.cost}</dd>

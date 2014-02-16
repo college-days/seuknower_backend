@@ -1,0 +1,70 @@
+<include file="Public:header" title="活动"/>
+<div class="back-color">
+	<div class="activity-detail">
+		<div class="container">
+			<div class="left">
+				<div class="info">
+				<div class="intro">
+					<img src="{$event.poster}" class="img-responsive" style="width:171px;height:252px;"/>
+					<dl>
+						<dt>{$event.title}</dt>
+						<dd>时间：{$event.time}</dd>
+						<dd>地点：{$event.location}</dd>
+						<dd>费用：{$event.cost}</dd>
+						<dd>类型：{$event.category}</dd>
+						<dd>发起人：{$event.organizer}</dd>
+						<dd class="join"><span>{$event.join_count}</span>人参加  <span>{$event.interest_count}</span>人感兴趣</dd>
+						<dd class="btn"><input type="button" value="我感兴趣"/><input type="button" value="我要参加"/></dd>
+					</dl>
+				</div>
+				<div class="detail">
+					<span>活动详情</span>
+					<p>{$event.intro}</p>
+				</div>
+				<div class="click-time">
+					<span class="click">已阅读：{$event.click_count}</span><span class="time">发布时间：{$event.create_time|date='Y-m-d',###}</span>
+				</div>
+				</div>
+				<div class="comment">
+					<div class="title">
+						七嘴八舌<span>(</span><span class="num">{$comment_count}</span><span>)</span>
+					</div>
+					<div class="divide">
+					</div>
+					<div class="list">
+						<ul>
+							<volist name="comments" id="comment">
+								<li>
+									<div class="icon">
+										<img src="{$comment.icon}" class="img-responsive" style="width:40px;height:40px;"/>
+									</div>
+									<div class="words">
+										<div class="n-t">
+											<span><a href="/user/{$comment.user_id}" class="name" >{$comment.user_name}</a></span>
+											<span class="time">{$comment.create_time|date='Y-m-d H:i:s',###}</span>
+										</div>
+										<p>{$comment.content}</p>
+										<div>
+											<a href="#" class="reply">回复</a>
+										</div>
+									</div>
+								</li>
+							</volist>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="speak">
+					<div class="title">
+						我来评论
+					</div>
+					<textarea>
+					</textarea>
+					<input type="button" value="提交">
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<include file="Public:footer" />

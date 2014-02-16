@@ -254,6 +254,25 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .activity-new .right .title{font-size:18px;margin-bottom:20px;}
 .activity-new .right .word{font-size:14px;line-height:24px;margin-bottom:10px;}
 
+.comment .title{font-size:16px;color:#7a6c59;margin-top:35px;margin-bottom:15px;}
+.comment .title span{font-size:12px;}
+.left .comment .num{color:#76c2b1;}
+
+.comment .divide{width:100%;border-bottom: solid 1px #b5b5b5;}
+.comment li{margin-top:10px;border-bottom:1px solid #e7e9eb;padding-bottom:10px;}
+.comment .n-t{height:24px;}
+.comment .icon{float:left;width:40px;margin-right:15px;}/*两个div 一个float 另一个占据剩余的部分 如果两个都float则可能占据不满*/
+.comment .words{line-height:18px;overflow:hidden;}/**/
+.comment .name{font-size:14px;color:#4e9f74;float:left;}
+.comment .time{float:right;color:#80827f;}
+.comment .reply{float:right;background:url(images/icon.gif) no-repeat 0 -144px;padding-left:22px;color:#80827f;}
+.comment .reply:hover{background:url(images/reply_orange.png) no-repeat;color:#f49f21;display:inline-block;}
+.comment .words p{font-size:14px;}
+
+.speak .title{font-size:16px;color:#7a6c59;margin-top:35px;margin-bottom:15px;}
+.speak textarea{width:100%;height:130px;border-radius:5px;border:1px solid #dcdcdc;outline-color:#4e9f74;}
+.speak input{padding:0 26px 0 25px;line-height:36px;background:#eee;border:0;display:inline-block;border-radius:3px;height:36px;font-size:16px;font-family:"Microsoft Yahei";color:#80827f;outline:none;float:right;margin-top:25px;}
+.speak input:hover{background:#f49f21;cursor:pointer;color:white;}
 
 /*问答页*/
 .question .meau{width:100%;height:68px;background:#f3f7fa;border-bottom:1px solid #dcdcdc;}
