@@ -8,35 +8,39 @@
 				<div class="title-line">
 					用户
 				</div>
-				<div class="user">
-					<div class="icon">
-						<img src="{$currentUser.icon}"/>
-					</div>
-					<div >
-						<div class="name">
-							<eq name="currentUser.sex" value="male">
-                                <span class="male"></span>
-                            </eq>
-                            <eq name="currentUser.sex" value="female">
-                                <span class="female"></span>
-                            </eq>
-                            <eq name="currentUser.sex" value="none">
-                                不详
-                            </eq>
-							<a href="#">{$currentUser.name}</a>
+				<notempty name="Think.session.userName">
+					<div class="user">
+						<div class="icon">
+							<img src="{$currentUser.icon}"/>
 						</div>
-						<div class="tag">
-							<eq name="currentUser.id" value="1">
-								<span> 官方帐号 </span>
-							<else/>
-								<span> {$currentUser.intro} </span>
-							</eq>
+						<div >
+							<div class="name">
+								<eq name="currentUser.sex" value="male">
+	                                <span class="male"></span>
+	                            </eq>
+	                            <eq name="currentUser.sex" value="female">
+	                                <span class="female"></span>
+	                            </eq>
+	                            <eq name="currentUser.sex" value="none">
+	                                不详
+	                            </eq>
+								<a href="#">{$currentUser.name}</a>
+							</div>
+							<div class="tag">
+								<eq name="currentUser.id" value="1">
+									<span> 官方帐号 </span>
+								<else/>
+									<span> {$currentUser.intro} </span>
+								</eq>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="interest">
-					<span>感兴趣</span><span>{$interestCount}</span><span class="line">|</span><span>参加</span><span>{$joinCount}</span>
-				</div>
+					<div class="interest">
+						<span>感兴趣</span><span>{$interestCount}</span><span class="line">|</span><span>参加</span><span>{$joinCount}</span>
+					</div>
+				<else/>
+					你还没有登陆
+				</notempty>
 				<div class="divide">
 				</div>
 				<div class="title">

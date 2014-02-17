@@ -255,6 +255,10 @@ class EventAction extends Action {
 			$currentEvent["poster"] = "__IMAGE__/event/act5.jpg";
 		}
 
+		for($i=0; $i<count($comments); $i++){
+			$comments[$i]['content'] = htmlspecialchars_decode($comments[$i]['content']);
+		}
+
 		$this->assign('event', $currentEvent);
 		$this->assign('comments', $comments);
 		$this->assign('comment_count', $count);
@@ -279,12 +283,134 @@ class EventAction extends Action {
 		else{
 			$this->assign('interest',0);
 		}
-
     	$this->display('detail');
     }
 
     public function newEvent(){
     	$this->display('new');
     }
+
+    public function addJoin(){
+		$userId=session('userId');
+		//判断是否登陆
+		if(isset($userId)){
+			$data['u_id'] = $userId;
+			$data['e_id'] = I('param.e_id');
+			$data['create_time'] = time();
+			$JoinEvent = M('JoinEvent');
+			$JoinEvent->add($data);
+			$Event = M('Event');
+			$add['id'] = I('param.e_id');
+			$add['join_count'] = array('exp','join_count+1');
+			$Event->save($add);
+			$this->ajaxReturn('', '', 1);
+		}
+		else{
+			$this->ajaxReturn('', '', 0);
+		}
+	}
+	
+	public function cancelJoin(){
+		$userId=session('userId');
+		if(isset($userId)){
+			$map['u_id'] = $userId;
+			$map['e_id'] = I('param.e_id');
+			
+			$JoinEvent = M('JoinEvent');
+			$JoinEvent->where($map)->delete();
+			$Event = M('Event');
+			$data['id'] = I('param.e_id');
+			$data['join_count'] = array('exp','join_count-1');
+			$Event->save($data);
+			$this->ajaxReturn('', '', 1);
+		}
+		else{
+			$this->ajaxReturn('', '', 0);
+		}
+	}
+	
+	public function addInterest(){
+		$userId=session('userId');
+		if(isset($userId)){
+			$data['u_id'] = $userId;
+			$data['e_id'] = I('param.e_id');
+			$data['create_time'] = time();
+			$InterestEvent = M('InterestEvent');
+			$InterestEvent->add($data);
+			$Event = M('Event');
+			$add['id'] = I('param.e_id');
+			$add['interest_count'] = array('exp','interest_count+1');
+			$Event->save($add);
+			$this->ajaxReturn('', '', 1);
+		}
+		else{
+			$this->ajaxReturn('', '', 0);
+		}
+	}
+	
+	public function cancelInterest(){
+		$userId=session('userId');
+		if(isset($userId)){
+			$map['u_id'] = $userId;
+			$map['e_id'] = I('param.e_id');
+			
+			$InterestEvent = M('InterestEvent');
+			$InterestEvent->where($map)->delete();
+			$Event = M('Event');
+			$data['id'] = I('param.e_id');
+			$data['interest_count'] = array('exp','interest_count-1');
+			$Event->save($data);
+			$this->ajaxReturn('', '', 1);
+		}
+		else{
+			$this->ajaxReturn('', '', 0);
+		}
+	}
+
+	public function addComment(){
+		if(isset($_SESSION['userId'])){
+			$Comment = M('EventComment');
+			$data['e_id'] = I('param.e_id');
+			//此处的u_id是目前登录用户的u_id并非活动发起人的u_id
+			$data['u_id'] = session('userId');
+			$data['content'] = I('param.content');
+			$data['create_time'] = time();
+
+			$eventModel = new Model();
+			$eventResult = $eventModel->query('select u_id, title from seu_event where id='.I('param.e_id'));
+			//发布活动的u_id，因为要做消息机制，需要提示活动发布者
+			$eventuid = $eventResult[0]['u_id'];
+			$eventTitle = $eventResult[0]['title'];
+			$eventMsgModel = new Model('EventMessage');
+			$messageResult = $eventModel->query('select * from seu_event_message where e_id='.I('param.e_id').' and u_id='.$eventuid);
+			if($messageResult == null){
+				//不存在就insert
+				$messageData['e_id'] = I('param.e_id');
+				$messageData['u_id'] = $eventuid;
+				$messageData['title'] = $eventTitle;
+				// $messageData['comment_count'] = array('exp', 'comment_count+1');
+				$messageData['comment_count'] = 1;
+				$eventMsgModel->add($messageData);
+			}else{
+				//如果已经存在就update
+				$messageData['comment_count'] = array('exp', 'comment_count+1');
+				$eventMsgModel->where('e_id='.I('param.e_id').' and u_id='.$eventuid)->save($messageData);
+			}
+			
+			$result = $Comment->add($data);
+			if ($result < 1) {
+				$this->ajaxReturn('', '', 0);
+			}
+			$result['user_id'] = session('userId');
+			$result['user_name'] = session('userName');
+			$result['icon'] = session('icon');
+			$result['content'] = I('param.content');
+			$this->ajaxReturn($result, 'success', 1);
+		}
+		else{
+			$this->ajaxReturn('', '请登录', -1);
+		}
+		
+	}
 }
 ?>
