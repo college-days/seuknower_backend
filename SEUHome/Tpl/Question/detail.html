@@ -54,12 +54,24 @@
                             <div class="divide">
                             </div>
                             <div class="attitude">
-                                <div class="agree">
-                                    {$answer.support_count}
-                                </div>
-                                <div class="object">
-                                    {$answer.nonsupport_count}
-                                </div>
+                                <eq name="answer.currentUserAgree" value="0">
+                                    <div class="addagree">
+                                        {$answer.support_count}
+                                    </div>
+                                <else/>
+                                    <div class="cancelagree">
+                                        {$answer.support_count}
+                                    </div>
+                                </eq>
+                                <eq name="answer.currentUserObject" value="0">
+                                    <div class="addobject">
+                                        {$answer.nonsupport_count}
+                                    </div>
+                                <else/>
+                                    <div class="cancelobject">
+                                        {$answer.nonsupport_count}
+                                    </div>
+                                </eq>
                             </div>
                             <div class="content">
                                 <div class="icon">

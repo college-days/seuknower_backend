@@ -89,7 +89,6 @@ class QuestionAction extends Action {
 		session('commodityMessageResult', $commodityMessageResult);*/
 
 		//获取问题编号，然后更新问题的浏览数，浏览数+1
-		
 		$Question = M('Question');
 		$add['id'] = $id;
 		$add['click_count'] = array('exp','click_count+1');
@@ -115,9 +114,45 @@ class QuestionAction extends Action {
 
 		for($i=0; $i<count($AnonymousInfo); $i++){
 			$AnonymousInfo[$i]['u_name'] = "匿名用户";
+			//判断当前用户是不是已经点过赞了
+			$map['a_id'] = $AnonymousInfo[$i]['id'];
+			$map['u_id'] = $userId;
+			$EventAgree = M('SupportAnswer');
+			if($EventAgree->where($map)->find()){
+				$AnonymousInfo[$i]['currentUserAgree'] = 1;
+			}
+			else{
+				$AnonymousInfo[$i]['currentUserAgree'] = 0;
+			}
+			//判断当前用户是不是已经点过差评了
+			$EventObject = M('NonsupportAnswer');
+			if($EventObject->where($map)->find()){
+				$AnonymousInfo[$i]['currentUserObject'] = 1;
+			}else{
+				$AnonymousInfo[$i]['currentUserObject'] = 0;
+			}
 		}
 
 		for($i=0; $i<count($AnswerInfo); $i++){
+			//判断当前用户是不是已经点过赞了
+			$map['a_id'] = $AnswerInfo[$i]['id'];
+			$map['u_id'] = $userId;
+			$EventAgree = M('SupportAnswer');
+			if($EventAgree->where($map)->find()){
+				$AnswerInfo[$i]['currentUserAgree'] = 1;
+			}
+			else{
+				$AnswerInfo[$i]['currentUserAgree'] = 0;
+			}
+
+			//判断当前用户是不是已经点过差评了
+			$EventObject = M('NonsupportAnswer');
+			if($EventObject->where($map)->find()){
+				$AnswerInfo[$i]['currentUserObject'] = 1;
+			}else{
+				$AnswerInfo[$i]['currentUserObject'] = 0;
+			}
+
 			$AnswerInfo[$i]['content'] = htmlspecialchars_decode($AnswerInfo[$i]['content']);
 
 			$Support = M('SupportAnswer');
