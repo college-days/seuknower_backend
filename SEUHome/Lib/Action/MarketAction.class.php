@@ -60,6 +60,10 @@ class MarketAction extends Action {
 			$isFull = 0;	
 		} 
 		
+		$selledmap['onsale'] = 0;
+		$selledcount = $Commodity->where($selledmap)->count();
+
+		$this->assign('selledcount', $selledcount);
 		$this->assign('commoditys',$commodityInfo);
 		$this->assign('commodityscount', count($commodityInfo));
 		$this->assign('count',$count);
@@ -225,6 +229,11 @@ class MarketAction extends Action {
 				$messageData['comment_count'] = array('exp', 'comment_count+1');
 				$commodityMsgModel->where('c_id='.I('param.commodity_id').' and u_id='.$commodityuid)->save($messageData);
 			}
+
+			$Commodity = M('Commodity');
+			$addCommentData['id'] = I('param.commodity_id');
+			$addCommentData['comment_count'] = array('exp','comment_count+1');
+			$Commodity->save($addCommentData);
 
 			$result = $Comment->add($data);
 			if ($result < 1) {

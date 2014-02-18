@@ -3,9 +3,7 @@ $(function(){
 		var id = $("#likeinfo").attr("cid");
 		var like = $(this);
 		var likeCount = $("#likecount");
-		alert('addlike');
 		if(like.attr("class") == "addlike"){
-			alert('addlike');
 			$.post('/market/add_like', {'id': id}, function(data){
 				if(data.status) {
 					likeCount.text(parseInt(likeCount.text())+1);
@@ -15,7 +13,6 @@ $(function(){
 				}
 			}, "json");
 		}else{
-			alert('cancellike');
 			$.post('/market/cancel_like', {'id': id}, function(data){
 				if(data.status){
 					likeCount.text(parseInt(likeCount.text())-1);
