@@ -150,6 +150,10 @@ class MarketAction extends Action {
 		$count = $Model->table('seu_commodity_comment')->where("c_id = $id")->count();
 		$comments = $Model->table('seu_commodity_comment comment,seu_user user')->field('comment.id,comment.u_id as user_id,comment.content,comment.create_time,user.name as user_name,user.icon as icon')->where("comment.c_id = $id AND comment.u_id = user.id")->order('comment.create_time')->limit(10)->select();
 		
+		for($i=0; $i<count($comments); $i++){
+			$comments[$i]['content'] = htmlspecialchars_decode($comments[$i]['content']);
+		}
+
 		$this->assign('comments',$comments);
 		$this->assign('comment_count',$count);
 
@@ -194,6 +198,49 @@ class MarketAction extends Action {
 		else{
 			$this->ajaxReturn('', '', 0);
 		}
+	}
+
+	public function addComment(){
+		if(isset($_SESSION['userId'])){
+			$Comment = M('CommodityComment');
+			$data['c_id'] = I('param.commodity_id');
+			$data['u_id'] = session('userId');
+			$data['content'] = I('param.content');
+			$data['create_time'] = time();
+
+			$commodityModel = new Model();
+			$commodityResult = $commodityModel->query('select u_id, title from seu_commodity where id='.I('param.commodity_id'));
+			$commodityuid = $commodityResult[0]['u_id'];
+			$commodityTitle = $commodityResult[0]['title'];
+			$commodityMsgModel = new Model('CommodityMessage');
+			$messageResult = $commodityModel->query('select * from seu_commodity_comment where c_id='.I('param.commodity_id').' and u_id='.session('userId'));
+
+			if($messageResult == null){
+				$messageData['c_id'] = I('param.commodity_id');
+				$messageData['u_id'] = $commodityuid;
+				$messageData['title'] = $commodityTitle;
+				$messageData['comment_count'] = array('exp', 'comment_count+1');
+				$commodityMsgModel->add($messageData);
+			}else{
+				$messageData['comment_count'] = array('exp', 'comment_count+1');
+				$commodityMsgModel->where('c_id='.I('param.commodity_id').' and u_id='.$commodityuid)->save($messageData);
+			}
+
+			$result = $Comment->add($data);
+			if ($result < 1) {
+				$this->ajaxReturn('', '', 0);
+			}
+
+			$result['user_id'] = session('userId');
+			$result['user_name'] = session('userName');
+			$result['icon'] = session('icon');
+			$result['content'] = I('param.content');
+			$this -> ajaxReturn($result, 'success', 1);
+		}
+		else{
+			$this -> ajaxReturn('', '请登录', -1);
+		}
+		
 	}
 
     public function newCommodity(){

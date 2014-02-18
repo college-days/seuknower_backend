@@ -5,6 +5,7 @@
 			<div class="container">
 				<div class="left">
 					<div class="info">
+						<div style="display:none;" id="commodity_id">{$commodity.id}</div>
 						<div class="title">
 							<span> {$commodity.title} </span>
 							<a href="/market/{$commodity.category}" class="tag"> {$commodity.category} </a>
@@ -53,7 +54,7 @@
 											</div>
 											<p>{$comment.content}</p>
 											<div>
-												<a href="#" class="reply">回复</a>
+												<a href="#replyanchor" class="reply">回复</a>
 											</div>
 										</div>
 									</li>
@@ -61,15 +62,30 @@
 							</ul>
 						</div>
 					</div>
-					
+					<a id="replyanchor"></a>
+					<div class="alert alert-success" id="successmsg">
+	                    <a class="close" data-dismiss="alert" href="#replyanchor" id="successcancle">X</a>
+	                    回复成功。
+	                </div>
+	                <div class="alert alert-fail" id='failmsg'>
+	                    <a class="close" data-dismiss="alert" href="#replyanchor" id="failcancle">X</a>
+	                    回复失败。
+	                </div>
+	                <div class="alert alert-fail" id="answermsg">
+	                    <a class="close" data-dismiss="alert" href="#replyanchor" id="answercancle">X</a>
+	                    回答的内容不能为空。
+	                </div>
 					<div class="speak">
 						<div class="title">
 							我来评论
 						</div>
-						<textarea>
-						</textarea>
-						<input type="button" value="提交">
-					</div>
+						<textarea id="editor_id" name="content" style="width:100%;height:300px"></textarea>
+						<notempty name="Think.session.userName">
+							<input type="button" id="submit" value="评论">
+						<else/>
+							<a href="/login">要评论请先登陆</a>
+						</notempty>
+						</div>
 				</div>
 				<div class="right">
 					<div class="title">
@@ -143,5 +159,30 @@
 			<div class="clear">
 			</div>
 		</div>
+	<link rel="stylesheet" href="__EDITOR__/themes/default/default.css" />
+	<script charset="utf-8" src="__EDITOR__/kindeditor-all-min.js"></script>
+	<script charset="utf-8" src="__EDITOR__/lang/zh_CN.js"></script>
+
+	<script>
+	    KindEditor.ready(function(K) {
+	        window.editor = K.create('#editor_id');
+	    });
+
+	    $(function(){
+	        var atUserId = 0;
+	        $(".reply").click(function(){
+	            var href = $(this).attr("href");
+	            var pos = $(href).offset().top;
+	            var adjustPos = pos-100;
+	            $("html,body").animate({scrollTop: adjustPos}, 1000);
+	            
+	            var atUserName = $(this).parents("li").find("a.name").text().replace(/[ ]/g,"");
+	            atUserId = $(this).parents("li").attr("uid");
+	            window.editor.focus();
+	            window.editor.appendHtml('<strong>@'+atUserName+'\t'+'</strong>');
+	        });
+
+	    });
+	</script>
 	<script src="__JS__/market/market_detail.js"></script>	
 <include file="Public:footer" />	
