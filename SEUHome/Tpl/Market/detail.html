@@ -7,7 +7,7 @@
 					<div class="info">
 						<div class="title">
 							<span> {$commodity.title} </span>
-							<a href="#" class="tag"> {$commodity.category} </a>
+							<a href="/market/{$commodity.category}" class="tag"> {$commodity.category} </a>
 						</div>
 						<div class="picture">
 							<img src="{$commodity.picture}" class="img-responsive" style="width:710px;height:505px;"/>
@@ -16,13 +16,18 @@
 							<span>商品描述</span>
 							<p> {$commodity.intro} </p>
 						</div>
+						<div id="likeinfo" uid="{$Think.session.userId}" cid="{$commodity.id}"></div>
 						<div class="count">
 							<div class="count-left">
-								<span class="like">喜欢</span>
+								<eq name="commodity.currentUserLike" value="0">
+									<span class="addlike">喜欢</span>
+								<else/>
+									<span class="cancellike">喜欢</span>
+								</eq>
 							</div>
 							<div class="count-right">
-								<span class="love">-3个喜欢</span>
-								<span class="click">-3个浏览</span>
+								<span class="love"><div id="likecount" style="display:inline;">{$commodity.like_count}</div>个喜欢</span>
+								<span class="click">{$commodity.click_count}个浏览</span>
 								<span class="share">分享</span>
 							</div>
 						</div>
@@ -139,4 +144,5 @@
 			<div class="clear">
 			</div>
 		</div>
+	<script src="__JS__/market/market_detail.js"></script>	
 <include file="Public:footer" />	

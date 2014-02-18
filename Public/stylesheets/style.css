@@ -372,6 +372,12 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .commodity .left .info .count  .count-right span{margin-left:30px;line-height:14px;display:inline-block;height:25px;}
 .commodity .left .info .count .like{background:url(images/like_grey.png) no-repeat ;padding-left:30px;height:25px;display:inline-block;}
 .commodity .left .info .count .like .active,.commodity .left .info .count .like:hover{background:url(images/like_orange.png) no-repeat;color:#f49f21;cursor:pointer;}
+
+.commodity .left .info .count .addlike{background:url(images/like_grey.png) no-repeat;padding-left:30px;height:25px;display:inline-block;}
+.commodity .left .info .count .cancellike{background:url(images/like_orange.png) no-repeat;color:#f49f21;cursor:pointer;padding-left:30px;height:25px;display:inline-block;}
+.commodity .left .info .count .addlike:hover{background:url(images/like_orange.png) no-repeat;color:#f49f21;cursor:pointer;padding-left:30px;height:25px;display:inline-block;}
+.commodity .left .info .count .cancellike:hover{background:url(images/like_grey.png) no-repeat;color:#80827f;padding-left:30px;height:25px;display:inline-block;}
+
 .commodity .left .info .count .love{background:url(images/love_grey.png) no-repeat;padding-left:20px;}
 .commodity .left .info .count .click{background:url(images/click_grey.png) no-repeat;padding-left:25px;}
 .commodity .left .info .count .share{background:url(images/share_grey.png) no-repeat;padding-left:20px;}

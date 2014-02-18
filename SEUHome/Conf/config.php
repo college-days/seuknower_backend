@@ -40,6 +40,8 @@ return array(
 		'market/page/:id\d$' => 'Market/index',
 		'market/commodity/:id\d$' => 'Market/detail',
 		'market/new' => 'Market/newCommodity',
+		'market/add_like' => 'Market/addLike',
+		'market/cancel_like' => 'Market/cancelLike',
 		'market/:category$' => 'Market/index',
 		'market/:category/page/:id\d$' => 'Market/index',
 	),

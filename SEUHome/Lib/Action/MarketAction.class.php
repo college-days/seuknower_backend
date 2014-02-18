@@ -73,7 +73,13 @@ class MarketAction extends Action {
 
     public function detail(){
 		$id = I('param.id');
+		$userId = session('userId');
 		$Commodity = M('Commodity');
+
+		//增加浏览数
+		$add['id'] = $id;
+		$add['click_count'] = array('exp','click_count+1');
+		$Commodity->save($add);
 
 		//for message notify part
 		/*$deleteModel = new Model();
@@ -97,11 +103,19 @@ class MarketAction extends Action {
 		session('eventMessageResult', $eventMessageResult);
 		session('commodityMessageResult', $commodityMessageResult);*/
 
-		/*$add['id'] = $id;
-		$add['click_count'] = array('exp','click_count+1');
-		$Commodity->save($add);*/
-		
 		$result = $Commodity->find($id);
+
+		//判断当前用户是不是已经点过赞了
+		$map['c_id'] = $id;
+		$map['u_id'] = $userId;
+		$CommodityLike = M('CommodityLike');
+		if($CommodityLike->where($map)->find()){
+			$result['currentUserLike'] = 1;
+		}
+		else{
+			$result['currentUserLike'] = 0;
+		}
+
 		$User = M('User');
 		$info = $User->find($result['u_id']);
 		$result['u_name'] = $info['name'];
@@ -135,6 +149,46 @@ class MarketAction extends Action {
 
     	$this->display('detail');
     }
+
+    public function addLike(){
+		$userId = session('userId');
+		if(isset($userId)){
+			$data['u_id'] = $userId;
+			$data['c_id'] = I('param.id');
+			$data['create_time'] = time();
+			$CommodityLike = M('CommodityLike');
+			$CommodityLike->add($data);
+			
+			$Commodity = M('Commodity');
+			$add['id'] = I('param.id');
+			$add['like_count'] = array('exp','like_count+1');
+			$Commodity->save($add);
+			$this->ajaxReturn('', '', 1);
+		}
+		else{
+			//should login first should comeout a view
+			$this->ajaxReturn('', '', 0);
+		}
+    }
+
+    public function cancelLike(){
+		$userId=session('userId');
+		if(isset($userId)){
+			$map['u_id'] = $userId;
+			$map['c_id'] = I('param.id');
+			
+			$CommodityLike = M('CommodityLike');
+			$CommodityLike->where($map)->delete();
+			$Commodity = M('Commodity');
+			$data['id'] = I('param.id');
+			$data['like_count'] = array('exp','like_count-1');
+			$Commodity->save($data);
+			$this->ajaxReturn('', '', 1);
+		}
+		else{
+			$this->ajaxReturn('', '', 0);
+		}
+	}
 
     public function newCommodity(){
     	$this->display('new');
