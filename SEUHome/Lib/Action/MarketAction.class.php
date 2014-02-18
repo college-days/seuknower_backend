@@ -116,6 +116,12 @@ class MarketAction extends Action {
 			$result['currentUserLike'] = 0;
 		}
 
+		$map['u_id'] = $result['u_id'];
+		$relateCommodities = $Commodity->where($map)->select();
+
+		$this->assign('relatecommodities', $relateCommodities);
+		$this->assign('relatecommoditycount', count($relateCommodities));
+
 		$User = M('User');
 		$info = $User->find($result['u_id']);
 		$result['u_name'] = $info['name'];

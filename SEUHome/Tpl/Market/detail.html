@@ -127,16 +127,15 @@
 						</dl>
 					</div>
 					<div class="title">
-						卖家过往的商品<span class="num">(2)</span>
+						卖家过往的商品<span class="num">({$relatecommoditycount})</span>
 					</div>
 					<div class="sell">
 						<ul>
-							<li>
-								<a href="#">32G ipad4 全新...</a>
-							</li>
-							<li>
-								<a href="#">32G ipad4 全新...</a>
-							</li>
+							<volist name="relatecommodities" id="commodity">
+								<li>
+									<a href="/market/commodity/{$commodity.id}">{$commodity.title}</a>
+								</li>
+							</volist>
 						</ul>
 					</div>
 				</div>
