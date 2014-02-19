@@ -3,8 +3,13 @@
 	<div class="meau">
 		<div class="container">
 			<ul>
-				<li class="active"><a href="#">最新问答</a></li>
-				<li><a href="#">我的问答</a></li>
+				<eq name="domin" value="all">
+					<li class="active"><a href="/question/domin/all">最新问答</a></li>
+					<li><a href="/question/domin/myself">我的问答</a></li>
+				<else/>
+					<li><a href="/question/domin/all">最新问答</a></li>
+					<li class="active"><a href="/question/domin/myself">我的问答</a></li>
+				</eq>
 			</ul>
 			<div class="new">
 				<a href="#">+我要提问</a>
@@ -97,13 +102,21 @@
 				<span class="total">共 {$count} 条记录</span>
 				<ul class="pagination">
 					<li>
-						<a href="/question/{$type}/page/1">首页</a>
+						<eq name="domin" value="all">
+							<a href="/question/{$type}/page/1">首页</a>
+						<else/>
+							<a href="/question/domin/myself/page/1">首页</a>
+						</eq>
 					</li>
 					<li>
 						<eq name="curr_page" value="1">
 							<a href="#">«</a>
 							<else/>
-							<a href="/question/{$type}/page/{$curr_page-1}">«</a>
+							<eq name="domin" value="all">
+								<a href="/question/{$type}/page/{$curr_page-1}">«</a>
+							<else/>
+								<a href="/question/domin/myself/page/{$curr_page-1}">«</a>
+							</eq>
 						</eq>
 					</li>
 					<if condition="$page_count lt 6">
@@ -116,9 +129,15 @@
 								</li>
 								<else/>
 								<li>
-									<a href="__URL__/{$type}/page/{$i}">
-										{$i}
-									</a>
+									<eq name="domin" value="all">
+										<a href="__URL__/{$type}/page/{$i}">
+											{$i}
+										</a>
+									<else/>
+										<a href="__URL__/domin/myself/page/{$i}">
+											{$i}
+										</a>
+									</eq>
 								</li>
 							</eq>
 						</for>
@@ -132,9 +151,15 @@
 								</li>
 								<else/>
 								<li>
-									<a href="__URL__/{$type}/page/{$i}">
-										{$i}
-									</a>
+									<eq name="domin" value="all">
+										<a href="__URL__/{$type}/page/{$i}">
+											{$i}
+										</a>
+									<else/>
+										<a href="__URL__/domin/myself/page/{$i}">
+											{$i}
+										</a>
+									</eq>
 								</li>
 							</eq>
 						</for>
@@ -148,9 +173,15 @@
 								</li>
 								<else/>
 								<li>
-									<a href="__URL__/{$type}/page/{$i}">
-										{$i}
-									</a>
+									<eq name="domin" value="all">
+										<a href="__URL__/{$type}/page/{$i}">
+											{$i}
+										</a>
+									<else/>
+										<a href="__URL__/domin/myself/page/{$i}">
+											{$i}
+										</a>
+									</eq>
 								</li>
 							</eq>
 						</for>
@@ -164,9 +195,15 @@
 								</li>
 								<else/>
 								<li>
-									<a href="__URL__/{$type}/page/{$i}">
-										{$i}
-									</a>
+									<eq name="domin" value="all">
+										<a href="__URL__/{$type}/page/{$i}">
+											{$i}
+										</a>
+									<else/>
+										<a href="__URL__/domin/myself/page/{$i}">
+											{$i}
+										</a>
+									</eq>
 								</li>
 							</eq>
 						</for>
@@ -175,11 +212,19 @@
 						<eq name="curr_page" value="$page_count">
                             <a href="#">»</a>
                             <else/>
-                            <a href="/question/{$type}/page/{$curr_page+1}">»</a>
+                            <eq name="domin" value="all">
+	                            <a href="/question/{$type}/page/{$curr_page+1}">»</a>
+	                        <else/>
+	                        	<a href="/question/domin/myself/page/{$curr_page+1}">»</a>
+		                    </eq>
                         </eq>
 					</li>
 					<li>
-						<a href="/question/{$type}/page/{$page_count}">尾页</a>
+						<eq name="domin" value="all">
+							<a href="/question/{$type}/page/{$page_count}">尾页</a>
+						<else/>
+							<a href="/question/domin/myself/page/{$page_count}">尾页</a>
+						</eq>
 					</li>
 				</ul>
 				<span class="total">共 {$page_count} 页</span>
@@ -189,5 +234,5 @@
 	<div class="clear">
 	</div>
 </div>
-
+<script src="__JS__/question/question_new.js"></script>
 <include file="Public:footer" />

@@ -5,7 +5,10 @@ return array(
 	'URL_CASE_INSENSITIVE' => true,					//大小写不敏感
 	'URL_ROUTER_ON' => true, 						//开启路由
 
+	//正则的$一定要加上，不然貌似会出问题，第一个路由的$就一定要加上
 	'URL_ROUTE_RULES'=>array(
+		'question/domin/:domin$' => 'Question/index',
+		'question/domin/:domin/page/:id\d$' => 'Question/index', 
 		'question/:id\d$' => 'Question/detail',
 		'question/page/:id\d$' => 'Question/index',
 		'question/:type$' => 'Question/index',

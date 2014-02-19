@@ -15,6 +15,8 @@ class QuestionAction extends Action {
 
     public function index(){
     	$type = I("param.type");
+    	$domin = I("param.domin");
+
     	if(!$type){
     		$type = "全部";
     	}
@@ -24,29 +26,59 @@ class QuestionAction extends Action {
     	}else{
     		$sql = "";
     	}
-    	
-    	$Model = M();
-		$count = $Model->table('seu_question as question')->where($sql)->count();
-		if($count){
-			$eachPageShowCount = 25;
-			$pageCount = ceil($count/$eachPageShowCount);
-			if(I('param.id')){
-				$page = I('param.id');
-				if($page > $pageCount) $page = $pageCount;
-			}
-			else{
-				$page = 1;
-			}
-			$start = ($page-1)*$eachPageShowCount;
-			
-			$questions = $Model->table('seu_question as question')->order('create_time desc')->limit($start.','.$eachPageShowCount)->where($sql)->select();
+    		
+    	if($domin == "myself"){
+    		$userId = session('userId');
+    		$Model = M();
+    		$map['u_id'] = $userId;
+			$count = $Model->table('seu_question as question')->where($map)->count();
+			if($count){
+				$eachPageShowCount = 25;
+				$pageCount = ceil($count/$eachPageShowCount);
+				if(I('param.id')){
+					$page = I('param.id');
+					if($page > $pageCount) $page = $pageCount;
+				}
+				else{
+					$page = 1;
+				}
+				$start = ($page-1)*$eachPageShowCount;
+				
+				$questions = $Model->table('seu_question as question')->order('create_time desc')->limit($start.','.$eachPageShowCount)->where($map)->select();
 
-			for($i=0; $i<count($questions); $i++){
-				$User = M('User');
-				$result = $User->find($questions[$i]['u_id']);
-				$questions[$i]['u_name'] = $result['name'];
-			}			
-		}
+				for($i=0; $i<count($questions); $i++){
+					$User = M('User');
+					$result = $User->find($questions[$i]['u_id']);
+					$questions[$i]['u_name'] = $result['name'];
+				}			
+			}
+			$this->assign('domin', 'myself');
+    	}else{
+    		$Model = M();
+			$count = $Model->table('seu_question as question')->where($sql)->count();
+			if($count){
+				$eachPageShowCount = 25;
+				$pageCount = ceil($count/$eachPageShowCount);
+				if(I('param.id')){
+					$page = I('param.id');
+					if($page > $pageCount) $page = $pageCount;
+				}
+				else{
+					$page = 1;
+				}
+				$start = ($page-1)*$eachPageShowCount;
+				
+				$questions = $Model->table('seu_question as question')->order('create_time desc')->limit($start.','.$eachPageShowCount)->where($sql)->select();
+
+				for($i=0; $i<count($questions); $i++){
+					$User = M('User');
+					$result = $User->find($questions[$i]['u_id']);
+					$questions[$i]['u_name'] = $result['name'];
+				}			
+			}
+			$this->assign('domin', 'all');
+    	}
+    	
 		$Question = M('Question');
 		$hotQuestions = $Question->order('click_count desc')->limit(10)->select();
 		$this->assign('hots',$hotQuestions);
