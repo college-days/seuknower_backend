@@ -285,6 +285,8 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .question .meau .active a{color:#2ead91;}
 .question .meau .new{float:right;background:url(images/new.png);width:77px;height:21px;font-size:12px;line-height:21px;text-align:center;margin-top:40px;}
 .question .meau .new a{color:white;}
+.question .meau .newtologin{float:right;background:url(images/new.png);width:77px;height:21px;font-size:12px;line-height:21px;text-align:center;margin-top:40px;}
+.question .meau .newtologin a{color:white;}
 
 .question .left {float:left;margin-top:33px;width:165px;}
 .question .left .title{font-size:16px;color:#7a6c59;margin-top:15px;}
@@ -626,6 +628,29 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .footer .contact a:hover{text-decoration:underline;}
 .footer .contact span{margin:0px 2px;color:#717171;}
 .footer .copyright{float:right;margin-top:20px;color:#717171;}
+
+/*问题弹出框*/
+.mask{position:absolute;z-index:100;top:0px;left:0px;background:black;opacity:0.30;}
+.win{position:absolute;z-index:9999;width:554px;top:50px;background:white;}
+.win .title-bar{height:36px;padding:0px 15px;padding-right:20px;font-size:18px;background:#2ead91;line-height:36px;color:white;}
+.win .title-bar div{background:url(images/delete_grey.png);width:13px;height:13px;float:right;margin-top:12px;cursor:pointer;/*float与vertical-align会有冲突，使用float后display被忽略*/}
+.win .title-bar div:hover{background:url(images/delete_red.png);}
+
+.win .content{padding:20px 15px;}
+.win .content .value{width:517px;height:24px;border:1px solid #e5e5e5;padding-left:5px;border-radius:3px;}
+.win .content .search p{margin-bottom:20px;}
+.win .content .search ul{border:1px solid #e5e5e5;border-top:0px;}
+.win .content .search ul>li{line-height:24px;padding-left:5px;}
+.win .content .search .ask{border-top:1px solid #e5e5e5;text-align:center;cursor:pointer;}
+
+.win .content .question-new{margin-top:-20px;display:none;}
+.win .content .question-new p{margin-bottom:10px;margin-top:20px;}
+.win .content .question-new textarea{width:517px;max-width:100%;height:173px;border:1px solid #e5e5e5;border-radius:3px;padding-left:5px;}
+.win .content .question-new select{padding:3px 5px;height:24px;border:1px solid #e5e5e5;border-radius:3px;width:100%;}
+.win .content .question-new div{margin-top:20px;}
+.win .content .question-new span{line-height:24px;}
+.win .content .question-new .check{vertical-align:middle;}
+.win .content .question-new .btn{float:right;width:50px;height:24px;}
 
 .alert {
 padding: 8px 35px 8px 14px;

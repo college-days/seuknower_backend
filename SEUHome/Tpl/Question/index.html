@@ -11,9 +11,15 @@
 					<li class="active"><a href="/question/domin/myself">我的问答</a></li>
 				</eq>
 			</ul>
-			<div class="new">
-				<a href="#">+我要提问</a>
-			</div>
+			<notempty name="Think.session.userName">
+				<div class="new">
+					<a href="#">+我要提问</a>
+				</div>
+			<else/>
+				<div class="newtologin">
+					<a href="/login">+我要提问</a>
+				</div>
+			</notempty>
 		</div>
 	</div>
 	<div class="container">
@@ -234,5 +240,5 @@
 	<div class="clear">
 	</div>
 </div>
-<script src="__JS__/question/question_new.js"></script>
+
 <include file="Public:footer" />

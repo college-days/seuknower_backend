@@ -8,6 +8,7 @@ $(function(){
 				if(data.status) {
 					agree.text(parseInt(agree.text())+1);
 					agree.attr("class", "cancelagree");
+					agree.attr("title", "不赞同");
 				}else{
 					window.location.href="/login";
 				}
@@ -17,6 +18,7 @@ $(function(){
 				if(data.status){
 					agree.text(parseInt(agree.text())-1);
 					agree.attr("class", "addagree");
+					agree.attr("title", "赞同");
 				}else{
 					window.location.href="/login";
 				}
@@ -31,6 +33,7 @@ $(function(){
 				if(data.status){
 					agree.text(parseInt(agree.text())-1);
 					agree.attr("class", "addagree");
+					agree.attr("title", "赞同");
 				}else{
 					window.location.href="/login";
 				}
@@ -40,6 +43,7 @@ $(function(){
 				if(data.status) {
 					agree.text(parseInt(agree.text())+1);
 					agree.attr("class", "cancelagree");
+					agree.attr("title", "不赞同");
 				}else{
 					window.location.href="/login";
 				}
@@ -54,6 +58,7 @@ $(function(){
 				if(data.status) {
 					object.text(parseInt(object.text())+1);
 					object.attr("class", "cancelobject");
+					object.attr("title", "不反对");
 				}else{
 					window.location.href="/login";
 				}
@@ -63,6 +68,7 @@ $(function(){
 				if(data.status) {
 					object.text(parseInt(object.text())-1);
 					object.attr("class", "addobject");
+					object.attr("title", "反对");
 				}else{
 					window.location.href="/login";
 				}
@@ -78,6 +84,7 @@ $(function(){
 				if(data.status) {
 					object.text(parseInt(object.text())-1);
 					object.attr("class", "addobject");
+					object.attr("title", "反对");
 				}else{
 					window.location.href="/login";
 				}
@@ -87,6 +94,7 @@ $(function(){
 				if(data.status) {
 					object.text(parseInt(object.text())+1);
 					object.attr("class", "cancelobject");
+					object.attr("title", "不反对");
 				}else{
 					window.location.href="/login";
 				}

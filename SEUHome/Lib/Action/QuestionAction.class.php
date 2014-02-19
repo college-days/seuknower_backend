@@ -238,5 +238,54 @@ class QuestionAction extends Action {
 
 		$this->display('detail');
 	}
+
+	public function addQuestion(){
+		$userId=session('userId');
+		if(isset($userId)){
+			$data['title'] = I('param.title');
+			$data['intro'] = I('param.intro');
+			$type_id = I('param.typeid');
+			$data['type_id'] = $type_id;
+			$anonymous = I('param.anonymous');
+			if($anonymous){
+				$data['anonymous'] = 1;
+			}else{
+				$data['anonymous'] = 0;
+			}
+
+			switch($type_id){
+				case 0:
+					$data['type'] = '生活娱乐';
+					break;
+				case 1:
+					$data['type'] = '学习考试';
+					break;
+				case 2:
+					$data['type'] = '规章制度';
+					break;
+				case 3:
+					$data['type'] = '技术专业';
+					break;
+				case 4:
+					$data['type'] = '其他';
+					break;
+			}
+			$data['u_id'] = session('userId');
+			$data['create_time'] = time();
+
+			$Question = M('Question');
+			$id = $Question -> add($data);
+			if($id < 1){
+				$this->ajaxReturn('', '', 0);
+			}else{
+				$result['id'] = $id;
+				$this->ajaxReturn($result, '', 1);
+			}
+			//$this->redirect('detail', array('id'=>$id));
+		}else{
+			$this->ajaxReturn('', '', -1);
+		}
+
+	}
 }
 ?>

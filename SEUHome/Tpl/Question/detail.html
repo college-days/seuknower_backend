@@ -55,20 +55,20 @@
                             </div>
                             <div class="attitude">
                                 <eq name="answer.currentUserAgree" value="0">
-                                    <div class="addagree">
+                                    <div class="addagree" title="赞同">
                                         {$answer.support_count}
                                     </div>
                                 <else/>
-                                    <div class="cancelagree">
+                                    <div class="cancelagree" title="不赞同">
                                         {$answer.support_count}
                                     </div>
                                 </eq>
                                 <eq name="answer.currentUserObject" value="0">
-                                    <div class="addobject">
+                                    <div class="addobject" title="反对">
                                         {$answer.nonsupport_count}
                                     </div>
                                 <else/>
-                                    <div class="cancelobject">
+                                    <div class="cancelobject" title="不反对">
                                         {$answer.nonsupport_count}
                                     </div>
                                 </eq>
@@ -135,6 +135,7 @@
                 <div class="title">
                     提问者
                 </div>
+                <eq name="question.anonymous" value="0">
                 <div class="seller">
                     <div class="icon">
                         <img src="{$question.icon}"/>
@@ -173,6 +174,17 @@
                         </empty>
                     </div>
                 </div>
+                <else/>
+                    <div class="seller">
+                        <div class="icon">
+                        </div>
+                        <div class="name-tag">
+                            <div class="name">
+                                <a href="#"> 匿名用户 </a>
+                            </div>
+                        </div>
+                    </div>
+                </eq>
                 <div class="title">
                     热门问题
                 </div>
