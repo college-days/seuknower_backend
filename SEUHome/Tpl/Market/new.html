@@ -4,17 +4,17 @@
 		<div class="container">
 			<div class="left">
 			<div class="title">发布新商品</div>
-			<form>
+			<form id="commodity" name="commodity" action="/market/add_commodity" method="post">
 				<div class="row">
 					<div id="titlealert" style="color:red;margin-left:71px;display:none;">没有填写商品名称</div>
 				</div>
 				<div class="row">
 					<span class="key">名称</span>
-					<input class="value long" type="text" id="commoditytitle"/>
+					<input class="value long" type="text" id="commoditytitle" name="title"/>
 				</div>
 				<div class="row">
 					<span class="key">分类</span>
-					<select class="short" id="commoditytype">
+					<select class="short" id="commoditytype" name="tag_cate">
 						<option value="0">衣物鞋帽</option>
 						<option value="1">数码电子</option>
 						<option value="2">生活日用</option>
@@ -25,7 +25,7 @@
 				</div>
 				<div class="row">
 					<span class="key">校区</span>
-					<select class="short" id="commoditylocation">
+					<select class="short" id="commoditylocation" name="location">
 						<option value="0">九龙湖</option>
 						<option value="1">四牌楼</option>
 						<option value="2">丁家桥</option>
@@ -34,45 +34,54 @@
 				</div>
 
 				<div class="row">
-					<div id="pricealert" style="color:red;margin-left:71px;display:none;">没有填写价格</div>
+					<div id="pricealert" style="color:red;margin-left:71px;"></div>
 				</div>
 				<div class="row">
-					<span class="key">价格</span><input class="value short" type="text" id="commodityprice"/><label style="margin-left:15px">(RMB)</label>
+					<span class="key">价格</span><input class="value short" type="text" id="commodityprice" name="cost"/><label style="margin-left:15px">(RMB)</label>
 				</div>
 
 				<div class="row">
 					<div id="introalert" style="color:red;margin-left:71px;display:none;">没有填写商品详情</div>
 				</div>
 				<div class="row">
-					<span class="key">商品详情</span><textarea id="commodityintro"></textarea>
+					<span class="key">商品详情</span><textarea id="commodityintro" name="intro"></textarea>
 				</div>
 
 				<div class="row">
 					<span class="key">成色</span><input type="text" class="value short" id="commoditystatus"/>
 				</div>
 				<div class="row">
-					<div id="contactalert" style="color:red;margin-left:71px;display:none;">还没有填写联系方式</div>
+					<div id="contactalert" style="color:red;margin-left:71px;"></div>
 				</div>
 				<div class="row">
-					<div id="contactformatalert" style="color:red;margin-left:71px;display:none;">请填写正确的手机号码或者邮箱地址</div>
+					<span class="key">联系方式</span><input class="value short" type="text" id="commoditycontact" name="phone"/><label style="margin-left:15px">(手机号码或者邮箱地址)</label>
 				</div>
 				<div class="row">
-					<span class="key">联系方式</span><input class="value short" type="text" id="commoditycontact"/><label style="margin-left:15px">(手机号码或者邮箱地址)</label>
+					<div id="picturealert" style="color:red;margin-left:71px;"></div>
 				</div>
 				<div class="row">
-					<div id="imagealert" style="color:red;margin-left:71px;display:none;">请上传商品图片</div>
+					<span class="key">商品图片</span>
+					<input class="value" type="file" id="picture" name="picture"/>
 				</div>
-				<div class="row">
-					<span class="key">商品图片</span><input class="value" type="file"/>
+
+				<div class="row" id="div_image" style="display:none;">
+					<table style="margin-left:118px;">
+						<td><img id="target"/></td>
+						<td>
+							<div style="width:150px;height:130px;overflow:hidden;margin-left:5px;">
+								<img id="preview"/>
+							</div>
+						</td>
+					</table>
 				</div>
-				<div class="row">
-					<div class="div-image">
-						<img class="target" src="images/act1.jpg"/>
-						<img class="preview" src="images/act1.jpg"/>
-					</div>
+
+				<div class="row" style="display:none">
+					<input id="rawpath" name="rawpath" type="text"/>
+					<input id="thumbpath" name="thumbpath" type="text"/>
 				</div>
+
 				<div class="row">
-					<span class="key"></span><input class="btn" type="button" value="确认提交"/>
+					<span class="key"></span><input id="nextstep" class="btn" type="button" value="下一步"/>
 				</div>
 			</form>
 			</div>
@@ -85,4 +94,9 @@
 			</div>
 		</div>
 	</div>
+	<link href="__CSS__/jquery.Jcrop.css" rel="stylesheet" type="text/css"/>
+	<script src="__JS__/market/market_new.js"></script>
+	<script src="__JS__/jquery.Jcrop.js"></script>
+	<script src="__JS__/jquery.color.js"></script>
+	<script src="__JS__/ajaxfileupload.js"></script>
 <include file="Public:footer" />

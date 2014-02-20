@@ -250,9 +250,16 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .activity-new .row .target{max-width:250px;max-height:250px;}
 .activity-new .row .preview {width:48px;height:48px;overflow:hidden;margin-left:5px;}
 .activity-new .row .btn{border:1px solid #4e9f74;border-radius:3px;padding:5px 10px;cursor:pointer;}
+.activity-new .row .btn:hover{border:1px solid black;background-color:#4e9f74;border-radius:3px;padding:5px 10px;cursor:pointer;}
 .activity-new .right{float:right;width:290px;}
 .activity-new .right .title{font-size:18px;margin-bottom:20px;}
 .activity-new .right .word{font-size:14px;line-height:24px;margin-bottom:10px;}
+
+/*上传商品图片*/
+.more-picture{overflow:hidden;}
+.more-picture .picture{float:left;margin-right:20px;margin-bottom:20px;overflow:hidden;}
+.more-picture .picture img{max-width:270px;max-height:270px;border:1px solid #e5e5e5;}
+.picture-finish{float:right;margin-right:20px;}
 
 .comment .title{font-size:16px;color:#7a6c59;margin-top:35px;margin-bottom:15px;}
 .comment .title span{font-size:12px;}

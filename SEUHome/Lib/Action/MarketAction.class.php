@@ -299,5 +299,102 @@ class MarketAction extends Action {
 		//dump($data);
 		$this->redirect("/market/commodity/$id");
 	}
+
+	//上传图片
+	public function uploadPicture(){
+		import('@.ORG.UploadFile');
+		$upload = new UploadFile();								 	// 实例化上传类
+		$upload->maxSize  = 3145728 ;							 	// 设置附件上传大小
+		$upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg');	// 设置附件上传类型
+		$upload->savePath =  './Uploads/Images/Market/Picture/Raw/';	// 设置附件上传目录	
+		$upload->saveRule= "uniqid";								//文件保存规则
+		$upload->thumb = true; 										//设置需要生成缩略图，仅对图像文件有效
+		$upload->thumbPrefix = 'r_';  							//设置需要生成缩略图的文件后缀
+        $upload->imageClassPath = '@.ORG.Image';					
+        $upload->thumbMaxWidth = '390'; 						//设置缩略图最大宽度 
+        $upload->thumbMaxHeight = '260';						//设置缩略图最大高度 
+		$upload->thumbRemoveOrigin = true; 
+		 
+		if(!$upload->upload()) {// 上传错误提示错误信息
+			$this->error($upload->getErrorMsg());
+		}else{// 上传成功
+			$info = $upload->getUploadFileInfo();
+			$data['path'] = $info[0]['savepath'].'r_'.$info[0]['savename'];
+			$imageSize = getimagesize($data['path']);
+			$data['width'] = $imageSize[0];
+			$data['height'] = $imageSize[1];
+			$this->ajaxReturn($data, 'success', 1);
+		}
+	}
+
+	//裁剪图片并生成缩略图
+	public function thumbPicture(){
+		$rawPath = I('param.imagepath');
+		$thumbPath = str_replace('Raw','Thumb',$rawPath);
+		$thumbPath = str_replace('r_','t_',$thumbPath);
+		thumb($rawPath,$thumbPath,I('param.width'),I('param.height'),I('param.iconx'),I('param.icony'));
+		$data['rawpath'] = $rawPath;
+		$data['thumbpath'] = $thumbPath;
+		$this->ajaxReturn($data, 'success', 1);
+	}
+
+	public function addCommodity(){
+		$Commodity = M('Commodity');
+		$data['title'] = I('param.title');
+		$data['create_time'] = time();
+		$data['cost'] = I('param.cost');
+		$data['location'] = I('param.location');
+		$data['intro'] = I('param.intro');
+		$data['u_id'] = session('userId');
+		$data['phone'] = I('param.phone');
+		
+		$User = M('User');
+		$result = $User->find(session('userId'));
+		if(!$result['phone']){
+			$update['id'] = session('userId');
+			$update['phone'] = I('param.phone');
+			$User->save($update);
+		}
+		
+		if(I('param.thumbpath')){
+			$data['picture'] = I('param.thumbpath');
+		}
+		if(I('param.tag_cate')){
+			$data['category'] = I('param.tag_cate');
+			$data['tag'] = I('param.tag_cate');
+		}
+		if(I('param.catalog')){
+			$data['tag'] = I('param.catalog');
+		}
+		$cId = $Commodity->add($data);
+		
+		if(I('param.rawpath')){
+			$Picture = M('CommodityPicture');
+			$pdata['c_id'] = $cId;
+			$pdata['create_time'] = time();
+			$pdata['picture'] = I('param.rawpath');
+			$Picture->add($pdata);
+		}
+		
+		$this->redirect("/market/more_picture/$cId");
+		
+	}
+
+	public function morePicture(){
+		$id = I('param.id');
+		$Commodity = M('Commodity');
+		$result = $Commodity->find($id);
+		$User = M('User');
+		$info = $User->find($result['u_id']);
+		$result['u_name'] = $info['name'];
+		$result['phone'] = $info['phone'];
+		$Picture = M('CommodityPicture');
+		$map['c_id'] = $id;
+		$picture = $Picture->where($map)->find();
+		$result['picture'] = $picture['picture'];
+		$this->assign('commodity',$result);
+		
+		$this->display('morepicture');
+	}	
 }
 ?>
