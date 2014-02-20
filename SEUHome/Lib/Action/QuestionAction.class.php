@@ -287,5 +287,25 @@ class QuestionAction extends Action {
 		}
 
 	}
+
+	public function moreSearch(){
+		$content = I('param.content');
+		$count = I('param.count');
+		if(isset($_POST['pos']) && isset($_POST['len']) && isset($_POST['index'])){
+			if($_POST['len']) $data = searchQuestion($content,$count,I('param.len'),I('param.pos'),I('param.index'));
+		}
+		else{
+			$data = searchQuestion($content,$count);
+		}
+		
+		if(count($data['search']) == $count){
+			$this->ajaxReturn($data,'more',1);
+		}
+		else{
+			$this->ajaxReturn($data,'nomore',1);
+		}
+		
+	}
+
 }
 ?>

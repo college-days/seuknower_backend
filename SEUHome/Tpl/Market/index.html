@@ -50,7 +50,11 @@
 				<div class="new">
 					<span>东大通已经帮助</span><span class="total">{$selledcount}</span><span>件物品找到新主人</span>
 					<div>
-						<a href="#">+发布商品</a>
+						<notempty name="Think.session.userName">
+							<a href="/market/new">+发布商品</a>
+						<else/>
+							<a href="/login">+发布商品</a>
+						</notempty>
 					</div>
 				</div>
 				<empty name="commoditys">

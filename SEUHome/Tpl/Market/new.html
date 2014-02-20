@@ -6,45 +6,61 @@
 			<div class="title">发布新商品</div>
 			<form>
 				<div class="row">
-					<span class="key">名称</span><input class="value long" type="text"/>
+					<div id="titlealert" style="color:red;margin-left:71px;display:none;">没有填写商品名称</div>
+				</div>
+				<div class="row">
+					<span class="key">名称</span>
+					<input class="value long" type="text" id="commoditytitle"/>
 				</div>
 				<div class="row">
 					<span class="key">分类</span>
-					<select class="short">
-						<option value="代步">代步</option>
-						<option value="电脑">电脑</option>
-						<option value="数码">数码</option>
-						<option value="电器">电器</option>
-						<option value="图书">图书</option>
-						<option value="运动">运动</option>
-						<option value="日用">日用</option>
-						<option value="娱乐">娱乐</option>
-						<option value="租赁">租赁</option>
-						<option value="其他">其他</option>
+					<select class="short" id="commoditytype">
+						<option value="0">衣物鞋帽</option>
+						<option value="1">数码电子</option>
+						<option value="2">生活日用</option>
+						<option value="3">书籍杂志</option>
+						<option value="4">0元转让</option>
+						<option value="5">其他</option>
 					</select>
 				</div>
 				<div class="row">
 					<span class="key">校区</span>
-					<select class="short">
-						<option value="九龙湖">九龙湖</option>
-						<option value="四牌楼">四牌楼</option>
-						<option value="丁家桥">丁家桥</option>
-						<option value="浦口">浦口</option>
+					<select class="short" id="commoditylocation">
+						<option value="0">九龙湖</option>
+						<option value="1">四牌楼</option>
+						<option value="2">丁家桥</option>
+						<option value="3">浦口</option>
 					</select>
 				</div>
 
 				<div class="row">
-					<span class="key">价格</span><input class="value short" type="text"/>
+					<div id="pricealert" style="color:red;margin-left:71px;display:none;">没有填写价格</div>
 				</div>
 				<div class="row">
-					<span class="key">商品详情</span><textarea ></textarea>
+					<span class="key">价格</span><input class="value short" type="text" id="commodityprice"/><label style="margin-left:15px">(RMB)</label>
 				</div>
 
 				<div class="row">
-					<span class="key">成色</span><input type="text" class="value short"/>
+					<div id="introalert" style="color:red;margin-left:71px;display:none;">没有填写商品详情</div>
 				</div>
 				<div class="row">
-					<span class="key">联系方式</span><input class="value short" type="text"/>
+					<span class="key">商品详情</span><textarea id="commodityintro"></textarea>
+				</div>
+
+				<div class="row">
+					<span class="key">成色</span><input type="text" class="value short" id="commoditystatus"/>
+				</div>
+				<div class="row">
+					<div id="contactalert" style="color:red;margin-left:71px;display:none;">还没有填写联系方式</div>
+				</div>
+				<div class="row">
+					<div id="contactformatalert" style="color:red;margin-left:71px;display:none;">请填写正确的手机号码或者邮箱地址</div>
+				</div>
+				<div class="row">
+					<span class="key">联系方式</span><input class="value short" type="text" id="commoditycontact"/><label style="margin-left:15px">(手机号码或者邮箱地址)</label>
+				</div>
+				<div class="row">
+					<div id="imagealert" style="color:red;margin-left:71px;display:none;">请上传商品图片</div>
 				</div>
 				<div class="row">
 					<span class="key">商品图片</span><input class="value" type="file"/>
@@ -54,9 +70,6 @@
 						<img class="target" src="images/act1.jpg"/>
 						<img class="preview" src="images/act1.jpg"/>
 					</div>
-				</div>
-				<div class="row">
-					<span class="key">感兴趣人数</span><input class="value short" type="text"/>
 				</div>
 				<div class="row">
 					<span class="key"></span><input class="btn" type="button" value="确认提交"/>

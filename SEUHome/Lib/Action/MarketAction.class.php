@@ -255,5 +255,49 @@ class MarketAction extends Action {
     public function newCommodity(){
     	$this->display('new');
     }
+
+    public function saveCommodity(){
+		$Commodity = M('Commodity');
+		$data['id'] = I('param.id');
+		$data['title'] = I('param.title');
+		//$data['create_time'] = time();
+		$data['cost'] = I('param.cost');
+		$data['location'] = I('param.location');
+		$data['intro'] = I('param.intro');
+		$data['phone'] = I('param.phone');
+		$data['u_id'] = session('userId');
+		
+		$User = M('User');
+		$result = $User->find(session('userId'));
+		if(!$result['phone']){
+			$update['id'] = session('userId');
+			$update['phone'] = I('param.phone');
+			$User->save($update);
+		}
+		
+		if(I('param.thumbpath')){
+			$data['picture'] = I('param.thumbpath');
+		}
+		if(I('param.tag_cate')){
+			$data['category'] = I('param.tag_cate');
+			$data['tag'] = I('param.tag_cate');
+		}
+		if(I('param.catalog')){
+			$data['tag'] = I('param.catalog');
+		}
+		//$cId = $Commodity->add($data);
+		//dump($data);
+		$id = $data['id'];
+		$Commodity->save($data);
+		if(I('param.rawpath')){
+			$Picture = M('CommodityPicture');
+			$pdata['c_id'] = $cId;
+			$pdata['create_time'] = time();
+			$pdata['picture'] = I('param.rawpath');
+			$Picture->add($pdata);
+		}
+		//dump($data);
+		$this->redirect("/market/commodity/$id");
+	}
 }
 ?>

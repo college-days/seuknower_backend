@@ -283,10 +283,10 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .question .meau li>a{font-size:16px;}
 .question .meau .active{border-bottom:3px solid #2ead91;}
 .question .meau .active a{color:#2ead91;}
-.question .meau .new{float:right;background:url(images/new.png);width:77px;height:21px;font-size:12px;line-height:21px;text-align:center;margin-top:40px;}
-.question .meau .new a{color:white;}
-.question .meau .newtologin{float:right;background:url(images/new.png);width:77px;height:21px;font-size:12px;line-height:21px;text-align:center;margin-top:40px;}
-.question .meau .newtologin a{color:white;}
+.question .meau .newquestion{float:right;background:url(images/new.png);width:77px;height:21px;font-size:12px;line-height:21px;text-align:center;margin-top:40px;}
+.question .meau .newquestion a{color:white;}
+.question .meau .newquestiontologin{float:right;background:url(images/new.png);width:77px;height:21px;font-size:12px;line-height:21px;text-align:center;margin-top:40px;}
+.question .meau .newquestiontologin a{color:white;}
 
 .question .left {float:left;margin-top:33px;width:165px;}
 .question .left .title{font-size:16px;color:#7a6c59;margin-top:15px;}
@@ -641,7 +641,8 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .win .content .search p{margin-bottom:20px;}
 .win .content .search ul{border:1px solid #e5e5e5;border-top:0px;}
 .win .content .search ul>li{line-height:24px;padding-left:5px;}
-.win .content .search .ask{border-top:1px solid #e5e5e5;text-align:center;cursor:pointer;}
+.win .content .search .ask{border-top:1px solid #e5e5e5;text-align:center;cursor:pointer;margin:0px auto;text-align:center;}
+.asknewquestion, .searcholdquestion{margin:0px auto;text-align:center;background-color:#2ead91;cursor:pointer;color:white;}
 
 .win .content .question-new{margin-top:-20px;display:none;}
 .win .content .question-new p{margin-bottom:10px;margin-top:20px;}
