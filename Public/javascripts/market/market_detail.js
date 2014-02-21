@@ -102,4 +102,19 @@ $(function(){
         	$("#answermsg").hide();
         }
     });
+
+	$(".arrow-right").click(function(){
+		var scroll = document.getElementById("scroll");
+		if(scroll.scrollLeft<($(".scroll li").length-4)*77) scroll.scrollLeft += 77;
+	});
+
+	$(".arrow-left").click(function(){
+		var scroll = document.getElementById("scroll");
+		if(scroll.scrollLeft>0) scroll.scrollLeft -= 77;
+	});
+	
+	$(".thumbnail").hover(function(){
+		$(".big img").attr("src",$(this).attr("src"));
+	});
+
 });

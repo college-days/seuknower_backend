@@ -161,7 +161,7 @@ class MarketAction extends Action {
 		$this->assign('comments',$comments);
 		$this->assign('comment_count',$count);
 
-    	$this->display('detail');
+    	$this->display('detail_new');
     }
 
     public function addLike(){
@@ -396,5 +396,45 @@ class MarketAction extends Action {
 		
 		$this->display('morepicture');
 	}	
+
+	public function uploadify(){
+		$verifyToken = md5($_POST['timestamp']);
+		if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
+			import('@.ORG.UploadFile');
+			$upload = new UploadFile();// 实例化上传类
+			
+			$upload->maxSize  = 3145728 ;							 	// 设置附件上传大小
+			$upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg');	// 设置附件上传类型
+			$upload->savePath =  './Uploads/Images/Market/Picture/Raw/';	// 设置附件上传目录	
+			$upload->saveRule= "uniqid";								//文件保存规则
+			$upload->thumb = true; 										//设置需要生成缩略图，仅对图像文件有效
+			$upload->thumbPrefix = 'r_';  							//设置需要生成缩略图的文件后缀
+	        $upload->imageClassPath = '@.ORG.Image';					
+	        $upload->thumbMaxWidth = '390'; 						//设置缩略图最大宽度 
+	        $upload->thumbMaxHeight = '260';						//设置缩略图最大高度 
+			$upload->thumbRemoveOrigin = true; 
+			if(!$upload->upload()) {// 上传错误提示错误信息
+				echo $upload->getErrorMsg();
+			}else{// 上传成功 获取上传文件信息
+				$info =  $upload->getUploadFileInfo();
+				echo $info[0]['savepath'].'r_'.$info[0]['savename'];
+			}
+		}
+    }
+
+    public function savePicture(){
+		$id = I('param.id');
+		$path = I('param.path');
+		$Picture = M('CommodityPicture');
+		for($i=0; $i<count($path); $i++){
+			if($path[$i]){
+				$data['c_id'] = $id;
+				$data['picture'] = $path[$i];
+				$data['create_time'] = time();
+				$Picture->add($data);
+			}
+		}
+		$this->ajaxReturn($id, '', 1);
+	}
 }
 ?>

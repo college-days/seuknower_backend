@@ -49,6 +49,8 @@ return array(
 		'market/thumb_picture$' => 'Market/thumbPicture',
 		'market/add_commodity$' => 'Market/addCommodity',
 		'market/more_picture/:id\d$' => 'Market/morePicture',
+		'market/uploadify$' => 'Market/uploadify',
+		'market/save_picture$' => 'Market/savePicture',
 		'market/add_comment' => 'Market/addComment',
 		'market/add_like' => 'Market/addLike',
 		'market/cancel_like' => 'Market/cancelLike',

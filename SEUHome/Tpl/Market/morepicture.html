@@ -1,29 +1,18 @@
 <include file="Public:header" title="新商品"/>	
 <div class="back-color">
     <div class="activity-new">
+    	<div id="commodity" cid="{$commodity.id}" style="display:none;">
+    	</div>
 		<div class="container">
 			<div class="left">
-			<div class="title">上传商品图片</div>
-			<div class="more-picture">
-				<div class="picture">
-					<img src="images/goods_02.jpg"/>
-				</div>
-				<div class="picture">
-					<img src="images/goods_02.jpg"/>
-				</div>
-				<div class="picture">
-					<img src="images/goods_02.jpg"/>
-				</div>
-				<div class="picture">
-					<img src="images/goods_02.jpg"/>
-				</div>
-				<div class="picture">
-					<img src="images/goods_02.jpg"/>
-				</div>
+			<div class="title">上传商品图片 (最多只能上传10张照片哦)</div>
+			<div class="more-picture" id="preview">
 			</div>
+
 			<div class="row">
-				<input type="button" value="继续上传图片" class="btn"/><input type="button" value="完成上传" class="btn picture-finish"/>
+				<input type="button" value="完成上传" class="btn picture-finish" id="finishbtn"/>
 			</div>
+			<input id="file_upload" name="file_upload" type="file" multiple="true" style="display:block;">
 			</div>
 			<div class="right">
 				<p class="title">创建活动须知···</p>
@@ -34,4 +23,35 @@
 			</div>
 		</div>
 	</div>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Uploadify/uploadify.css">
+
+	<script src="__PUBLIC__/Uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+	<script src="__JS__/market/market_morepic.js"></script>
+	<script type="text/javascript">
+	//放在js文件会失效
+	$(function() {
+		adjustButtonPos();
+		$('#file_upload').uploadify({
+			'formData': {
+				'timestamp': '{$time}',            //时间
+				'token': '{$time | md5}',		//加密字段
+			},
+
+			'fileTypeDesc': 'Image Files',					//类型描述
+    		'fileTypeExts': '*.gif; *.jpg; *.png',		//允许类型
+    		'fileSizeLimit': '3MB',					//允许上传最大值
+			'swf': '/Public/Uploadify/uploadify.swf',	//加载swf
+			'uploader': '/market/uploadify',					//上传路径
+			'buttonText':'上传更多商品照片',				//按钮的文字
+
+			'onUploadSuccess' : function(file, data, response) {			
+				var html = "<div class='picture'><img src='"+data.replace(".","")+"' class='img-responsive' style='width:712px;height:505px;'/></div>"
+				$("#preview").append(html);
+				adjustButtonPos();
+				checkImageCount();
+			}
+
+		});
+	});
+	</script>
 <include file="Public:footer" />

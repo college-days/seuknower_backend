@@ -1,0 +1,205 @@
+<include file="Public:header" title="商品详情"/>	
+	<div class="back-color">
+		<div class="commodity">
+			<div class="container">
+				<div class="left">
+					<div class="info">
+						<div style="display:none;" id="commodity_id">{$commodity.id}</div>
+						<div class="title">
+							<span>{$commodity.title}</span>
+							<a href="/market/{$commodity.category}" class="tag">{$commodity.category}</a>
+						</div>
+						<div class="count-top">
+							<span class="time">{$commodity.create_time|date='Y-m-d',###}</span>
+							<span class="love">{$commodity.like_count}个喜欢</span>
+							<span class="click">{$commodity.click_count}个浏览</span>
+						</div>
+						<div class="detail">
+							<div class="picture">
+								<div class="big">
+									<img src="images/act1.jpg"/>
+								</div>
+								<div class="small">
+									<img class="arrow-left" src="__IMAGE__/market/arrow_left.png"/>
+									<div class="scroll" id="scroll">
+										<ul id="thumbnail">
+											<li><div class="border"><img src="images/goods_02.jpg" class="thumbnail"/></div></li>
+											<li><div class="border"><img src="images/goods_01.jpg" class="thumbnail"/></div></li>
+											<li><div class="border"><img src="images/goods_02.jpg" class="thumbnail"/></div></li>
+											<li><div class="border"><img src="images/goods_01.jpg" class="thumbnail"/></div></li>
+											<li><div class="border"><img src="images/goods_02.jpg" class="thumbnail"/></div></li>
+											<li><div class="border"><img src="images/goods_01.jpg" class="thumbnail"/></div></li>
+											<li><div class="border"><img src="images/goods_02.jpg" class="thumbnail"/></div></li>
+											<li><div class="border"><img src="images/goods_01.jpg" class="thumbnail"/></div></li>
+										</ul>
+									</div>
+									<img class="arrow-right" src="__IMAGE__/market/arrow_right.png"/>
+								</div>
+							</div>
+							<div class="detail-info">
+								<div class="title">
+									商品信息
+								</div>
+								<div>
+									<dl>
+										<dd>价格：<span>{$commodity.cost}</span>元</dd>
+										<dd>成色：9新</dd>
+										<dd>入手时间：{$commodity.create_time|date='Y-m-d',###}</dd>
+										<dd>校区：{$commodity.location}</dd>
+										<dd>联系方式：<span>{$commodity.phone}</span></dd>
+									</dl>
+								</div>
+							</div>
+						</div>
+						
+						<div class="intro">
+							<span>商品描述</span>
+							<p>{$commodity.intro}</p>
+						</div>
+						<div class="count">
+							<div class="count-left">
+								<span class="like">喜欢</span>
+							</div>
+							<div class="count-right">
+								<span class="edit">编辑</span>
+								<span class="share">分享</span>
+							</div>
+						</div>
+					</div>
+					<div class="more">
+						<div class="title">
+							还有这些正在售(<a href="#">更多</a>)
+						</div>
+						<div class="all">
+							<div class="content">
+								<div class="picture">
+									<img src="images/goods_02.jpg"/>
+								</div>
+								<div class="title">
+									联想 Thinkpad X200
+								</div>
+							</div>
+							<div class="content">
+								<div class="picture">
+									<img src="images/goods_02.jpg"/>
+								</div>
+								<div class="title">
+									联想 Thinkpad X200
+								</div>
+							</div>
+							<div class="content">
+								<div class="picture">
+									<img src="images/goods_02.jpg"/>
+								</div>
+								<div class="title">
+									联想 Thinkpad X200
+								</div>
+							</div>
+							<div class="content">
+								<div class="picture">
+									<img src="images/goods_02.jpg"/>
+								</div>
+								<div class="title">
+									联想 Thinkpad X200
+								</div>
+							</div>
+							<div class="content">
+								<div class="picture">
+									<img src="images/goods_02.jpg"/>
+								</div>
+								<div class="title">
+									联想 Thinkpad X200
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="comment">
+						<div class="title">
+							七嘴八舌<span>(</span><span class="num">1</span><span>)</span>
+						</div>
+						<div class="divide">
+						</div>
+						<div class="list">
+							<ul>
+								<li>
+									<div class="icon">
+										<img src="images/avat_02.jpg"/>
+									</div>
+									<div class="words">
+										<div class="n-t">
+											<span><a href="#" class="name" >Leon</a></span>
+											<span class="time">2013-10-23 22:22:22</span>
+										</div>
+										<p>好好学习天天向上,好好学习天天向上,好好学习天天向上,好好学习天天向上,好好学习天天向上,好好学习天天向上好好学习天天向上,好好学习天天向上,好好学习天天向上</p>
+										<div>
+											<a href="#" class="reply">回复</a>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="speak">
+						<div class="title">
+							我来评论
+						</div>
+						<textarea>
+						</textarea>
+						<input type="button" value="提交">
+					</div>
+				</div>
+				<div class="right">
+					<div class="title">
+							卖家
+					</div>
+					<div class="seller">
+						<div class="icon">
+							<img src="images/avat_02.jpg"/>
+						</div>
+						<div class="name-tag">
+							<div class="name">
+								<span class="female"></span>
+								<a href="#">Lolly</a>
+							</div>
+							<div class="tag">
+								好好学习。。。
+							</div>
+						</div>
+					</div>
+					
+					<div class="title">
+						卖家出售的商品<span class="num">(2)</span>
+					</div>
+					<div class="sell">
+						<ul>
+							<li>
+								<img src="images/goods_02.jpg"/>
+								<a href="#">32G ipad4 全新...</a>
+							</li>
+							<li>
+								<img src="images/goods_02.jpg"/>
+								<a href="#">32G ipad4 全新...</a>
+							</li>
+						</ul>
+					</div>
+					<div class="title">
+						卖家求购的商品<span class="num">(2)</span>
+					</div>
+					<div class="sell buy">
+						<ul>
+							<li>
+								<a href="#">32G ipad4 全新...</a>
+							</li>
+							<li>
+								<a href="#">32G ipad4 全新...</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="clear">
+			</div>
+		</div>
+<include file="Public:footer" />
