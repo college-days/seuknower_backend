@@ -5,36 +5,38 @@
 				<div class="left">
 					<div class="info">
 						<div style="display:none;" id="commodity_id">{$commodity.id}</div>
+						<div id="likeinfo" uid="{$Think.session.userId}" cid="{$commodity.id}" style="display:none;"></div>
 						<div class="title">
 							<span>{$commodity.title}</span>
 							<a href="/market/{$commodity.category}" class="tag">{$commodity.category}</a>
 						</div>
 						<div class="count-top">
 							<span class="time">{$commodity.create_time|date='Y-m-d',###}</span>
-							<span class="love">{$commodity.like_count}个喜欢</span>
+							<span class="love"><div id="likecount" style="display:inline;">{$commodity.like_count}</div>个喜欢</span>
 							<span class="click">{$commodity.click_count}个浏览</span>
 						</div>
 						<div class="detail">
 							<div class="picture">
 								<div class="big">
-									<img src="images/act1.jpg"/>
+									<img src="{$commodity.picture}" class="img-responsive" style="width:350px;height:252px;"/>
 								</div>
+								<neq name="picture_count" value="0">
 								<div class="small">
 									<img class="arrow-left" src="__IMAGE__/market/arrow_left.png"/>
 									<div class="scroll" id="scroll">
 										<ul id="thumbnail">
-											<li><div class="border"><img src="images/goods_02.jpg" class="thumbnail"/></div></li>
-											<li><div class="border"><img src="images/goods_01.jpg" class="thumbnail"/></div></li>
-											<li><div class="border"><img src="images/goods_02.jpg" class="thumbnail"/></div></li>
-											<li><div class="border"><img src="images/goods_01.jpg" class="thumbnail"/></div></li>
-											<li><div class="border"><img src="images/goods_02.jpg" class="thumbnail"/></div></li>
-											<li><div class="border"><img src="images/goods_01.jpg" class="thumbnail"/></div></li>
-											<li><div class="border"><img src="images/goods_02.jpg" class="thumbnail"/></div></li>
-											<li><div class="border"><img src="images/goods_01.jpg" class="thumbnail"/></div></li>
+											<volist name="pictures" id="picture">
+												<li>
+													<div class="border">
+														<img src="{$picture.picture}" class="thumbnail">
+													</div>
+												</li>
+											</volist>
 										</ul>
 									</div>
 									<img class="arrow-right" src="__IMAGE__/market/arrow_right.png"/>
 								</div>
+								</neq>
 							</div>
 							<div class="detail-info">
 								<div class="title">
@@ -43,7 +45,11 @@
 								<div>
 									<dl>
 										<dd>价格：<span>{$commodity.cost}</span>元</dd>
-										<dd>成色：9新</dd>
+										<eq name="commodity.status" value="0">
+											<dd>成色：不详</dd>
+										<else/>
+											<dd>成色：{$commodity.status}成新</dd>
+										</eq>
 										<dd>入手时间：{$commodity.create_time|date='Y-m-d',###}</dd>
 										<dd>校区：{$commodity.location}</dd>
 										<dd>联系方式：<span>{$commodity.phone}</span></dd>
@@ -58,7 +64,13 @@
 						</div>
 						<div class="count">
 							<div class="count-left">
-								<span class="like">喜欢</span>
+								<div class="count-left">
+									<eq name="commodity.currentUserLike" value="0">
+										<span class="addlike">喜欢</span>
+									<else/>
+										<span class="cancellike">喜欢</span>
+									</eq>
+								</div>
 							</div>
 							<div class="count-right">
 								<span class="edit">编辑</span>
@@ -66,88 +78,66 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="more">
 						<div class="title">
-							还有这些正在售(<a href="#">更多</a>)
+							还有这些正在售(<a href="/market/{$commodity.category}">更多</a>)
 						</div>
-						<div class="all">
-							<div class="content">
-								<div class="picture">
-									<img src="images/goods_02.jpg"/>
-								</div>
-								<div class="title">
-									联想 Thinkpad X200
-								</div>
-							</div>
-							<div class="content">
-								<div class="picture">
-									<img src="images/goods_02.jpg"/>
-								</div>
-								<div class="title">
-									联想 Thinkpad X200
-								</div>
-							</div>
-							<div class="content">
-								<div class="picture">
-									<img src="images/goods_02.jpg"/>
-								</div>
-								<div class="title">
-									联想 Thinkpad X200
-								</div>
-							</div>
-							<div class="content">
-								<div class="picture">
-									<img src="images/goods_02.jpg"/>
-								</div>
-								<div class="title">
-									联想 Thinkpad X200
-								</div>
-							</div>
-							<div class="content">
-								<div class="picture">
-									<img src="images/goods_02.jpg"/>
-								</div>
-								<div class="title">
-									联想 Thinkpad X200
-								</div>
-							</div>
+						<div class="all" id="samecate">
 						</div>
 					</div>
 					
 					<div class="comment">
 						<div class="title">
-							七嘴八舌<span>(</span><span class="num">1</span><span>)</span>
+							七嘴八舌<span>(</span><span class="num">{$comment_count}</span><span>)</span>
 						</div>
 						<div class="divide">
 						</div>
 						<div class="list">
 							<ul>
-								<li>
-									<div class="icon">
-										<img src="images/avat_02.jpg"/>
-									</div>
-									<div class="words">
-										<div class="n-t">
-											<span><a href="#" class="name" >Leon</a></span>
-											<span class="time">2013-10-23 22:22:22</span>
+								<volist name="comments" id="comment">
+									<li>
+										<div class="icon">
+											<img src="{$comment.icon}">
 										</div>
-										<p>好好学习天天向上,好好学习天天向上,好好学习天天向上,好好学习天天向上,好好学习天天向上,好好学习天天向上好好学习天天向上,好好学习天天向上,好好学习天天向上</p>
-										<div>
-											<a href="#" class="reply">回复</a>
+										<div class="words">
+											<div class="n-t">
+												<span> <a href="/user/{$comment.user_id}" class="name"> {$comment.user_name} </a> </span>
+												<span class="time">{$comment.create_time|date='Y-m-d H:i:s',###}</span>
+											</div>
+											<p>{$comment.content}</p>
+											<div>
+												<a href="#replyanchor" class="reply">回复</a>
+											</div>
 										</div>
-									</div>
-								</li>
+									</li>
+								</volist>
 							</ul>
 						</div>
 					</div>
-					
+					<a id="replyanchor"></a>
+					<div class="alert alert-success" id="successmsg">
+	                    <a class="close" data-dismiss="alert" href="#replyanchor" id="successcancle">X</a>
+	                    回复成功。
+	                </div>
+	                <div class="alert alert-fail" id='failmsg'>
+	                    <a class="close" data-dismiss="alert" href="#replyanchor" id="failcancle">X</a>
+	                    回复失败。
+	                </div>
+	                <div class="alert alert-fail" id="answermsg">
+	                    <a class="close" data-dismiss="alert" href="#replyanchor" id="answercancle">X</a>
+	                    回答的内容不能为空。
+	                </div>
 					<div class="speak">
 						<div class="title">
 							我来评论
 						</div>
-						<textarea>
-						</textarea>
-						<input type="button" value="提交">
+						<textarea id="editor_id" name="content" style="width:100%;height:300px"></textarea>
+						<notempty name="Think.session.userName">
+							<input type="button" id="submit" value="评论">
+						<else/>
+							<a href="/login">要评论请先登陆</a>
+						</notempty>
 					</div>
 				</div>
 				<div class="right">
@@ -156,32 +146,55 @@
 					</div>
 					<div class="seller">
 						<div class="icon">
-							<img src="images/avat_02.jpg"/>
+							<img src="{$commodity.u_icon}"/>
 						</div>
 						<div class="name-tag">
 							<div class="name">
-								<span class="female"></span>
-								<a href="#">Lolly</a>
+								<eq name="commodity.u_sex" value="male">
+									<span class="male"></span>
+								</eq>
+								<eq name="commodity.u_sex" value="female">
+									<span class="female"></span>
+								</eq>
+								<eq name="commodity.u_sex" value="none">
+									不详
+								</eq>
+								<a href="/user/{$commodity.u_id}"> {$commodity.u_name} </a>
 							</div>
 							<div class="tag">
-								好好学习。。。
+								<empty name="commodity.u_intro">
+									<eq name="commodity.u_sex" value="male">
+										他还没有写简介
+									</eq>
+									<eq name="commodity.u_sex" value="female">
+										她还没有写简介
+									</eq>
+									<eq name="commodity.u_sex" value="none">
+										还没有写简介
+									</eq>
+
+								<else/>
+									<eq name="commodity.u_id" value="1">
+										官方帐号
+									<else/>
+										{$commodity.u_intro}
+									</eq>
+								</empty>
 							</div>
 						</div>
 					</div>
 					
 					<div class="title">
-						卖家出售的商品<span class="num">(2)</span>
+						卖家出售的商品<span class="num">({$relatecommoditycount})</span>
 					</div>
 					<div class="sell">
 						<ul>
-							<li>
-								<img src="images/goods_02.jpg"/>
-								<a href="#">32G ipad4 全新...</a>
-							</li>
-							<li>
-								<img src="images/goods_02.jpg"/>
-								<a href="#">32G ipad4 全新...</a>
-							</li>
+							<volist name="relatecommodities" id="commodity">
+								<li>
+									<img src="{$commodity.picture}" class="img-responsive" style="width:712px;height:505px;"/>
+									<a href="/market/commodity/{$commodity.id}">{$commodity.title}</a>
+								</li>
+							</volist>
 						</ul>
 					</div>
 					<div class="title">
@@ -202,4 +215,29 @@
 			<div class="clear">
 			</div>
 		</div>
+	<link rel="stylesheet" href="__EDITOR__/themes/default/default.css" />
+	<script charset="utf-8" src="__EDITOR__/kindeditor-all-min.js"></script>
+	<script charset="utf-8" src="__EDITOR__/lang/zh_CN.js"></script>
+	<script>
+	    KindEditor.ready(function(K) {
+	        window.editor = K.create('#editor_id');
+	    });
+
+	    $(function(){
+	        var atUserId = 0;
+	        $(".reply").click(function(){
+	            var href = $(this).attr("href");
+	            var pos = $(href).offset().top;
+	            var adjustPos = pos-100;
+	            $("html,body").animate({scrollTop: adjustPos}, 1000);
+	            
+	            var atUserName = $(this).parents("li").find("a.name").text().replace(/[ ]/g,"");
+	            atUserId = $(this).parents("li").attr("uid");
+	            window.editor.focus();
+	            window.editor.appendHtml('<strong>@'+atUserName+'\t'+'</strong>');
+	        });
+
+	    });
+	</script>
+	<script src="__JS__/market/market_detail.js"></script>	
 <include file="Public:footer" />

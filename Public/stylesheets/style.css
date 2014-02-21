@@ -364,7 +364,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .market .content .seller .female{display:inline-block;background:url(images/icon.gif) no-repeat 0 -107px;width:9px;height:12px;margin:6px 0 0 5px;}
 
 /*商品页*/
-.commodity{padding-top:30px;}
+/*.commodity{padding-top:30px;}
 .commodity .left{width:683px;float:left;}
 .commodity .left .info{width:629px;border:1px solid #e5e5e5;background:white;padding:18px 27px 18px 27px;}
 .commodity .left .info .title{font-size:24px;}
@@ -399,8 +399,10 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .commodity .left .comment .divide{width:100%;border-bottom: solid 1px #b5b5b5;}
 .commodity .left .comment li{margin-top:10px;border-bottom:1px solid #e7e9eb;padding-bottom:10px;}
 .commodity .left .comment .n-t{height:24px;}
-.commodity .left .comment .icon{float:left;width:40px;margin-right:15px;}/*两个div 一个float 另一个占据剩余的部分 如果两个都float则可能占据不满*/
-.commodity .left .comment .words{line-height:18px;overflow:hidden;}/**/
+*/
+/*两个div 一个float 另一个占据剩余的部分 如果两个都float则可能占据不满*/
+/*.commodity .left .comment .icon{float:left;width:40px;margin-right:15px;}
+.commodity .left .comment .words{line-height:18px;overflow:hidden;}
 .commodity .left .comment .name{font-size:14px;color:#4e9f74;float:left;}
 .commodity .left .comment .time{float:right;color:#80827f;}
 .commodity .left .comment .reply{float:right;background:url(images/icon.gif) no-repeat 0 -144px;padding-left:22px;color:#80827f;}
@@ -425,7 +427,82 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .commodity .right .info{font-size:14px;color:#80827f;line-height:22px;margin-top:10px;border-bottom:1px solid #cfcfcf;padding-bottom:20px;margin-bottom:15px;}
 .commodity .right .num{font-size:12px;color:#76c2b1;}
 .commodity .right .sell {margin-top:10px;}
+.commodity .right .sell a{font-size:14px;color:#a3bcc4;line-height:20px;}*/
+
+/*2-20更新*/
+.commodity{padding-top:30px;}
+.commodity .left{width:683px;float:left;}
+.commodity .left .info{width:629px;border:1px solid #e5e5e5;background:white;padding:18px 27px 18px 27px;}
+.commodity .left .info .title{font-size:24px;color:#7a6c59;}
+.commodity .left .info .title span{float:left;}
+.commodity .left .info .title .tag{display:inline-block;color:#f49f21;font-size:12px;line-height:24px;background:#fef8ed;padding:0px 10px;margin-left:15px;}
+.commodity .left .info .count-top{margin-top:15px;color:#80827f;overflow:hidden;}
+.commodity .left .info .count-top span{margin-right:30px;line-height:14px;display:inline-block;height:25px;}
+.commodity .left .info .count-top .love{background:url(images/love_grey.png) no-repeat;padding-left:20px;}
+.commodity .left .info .count-top .click{background:url(images/click_grey.png) no-repeat;padding-left:25px;}
+.commodity .left .info .count-top .time{background:url(images/time.png) no-repeat;padding-left:20px;}
+.commodity .left .info .detail .picture{width:362px;height:364px;display:inline-block;/*两个都要设置*/}
+.commodity .left .info .detail .picture .big{width:350px;height:252px;border:1px solid #dcdcdc;padding:5px;vertical-align:middle;display:table-cell;/*使图片垂直居中*/}
+.commodity .left .info .detail .picture .big img{max-width:350px;max-height:252px;margin-right:auto;margin-left:auto;display:block;}
+.commodity .left .info .detail .picture .small{width:360px;height:112px;border:1px solid #dcdcdc;border-top:0px;}
+.commodity .left .info .detail .picture .small .arrow-left{margin-left:10px;cursor:pointer;margin-bottom:20px;margin-right:8px;}
+.commodity .left .info .detail .picture .small .arrow-right{margin-bottom:20px;margin-left:8px;cursor:pointer;}
+.commodity .left .info .detail .picture .small .scroll{width:300px;height:52px;display:inline-block;overflow:hidden;margin-top:25px;}/*图片滚动*/
+.commodity .left .info .detail .picture .small ul{width:800px;height:52px;clear:both;}
+.commodity .left .info .detail .picture .small li{margin-right:9px;float:left;}
+.commodity .left .info .detail .picture .small .thumbnail{max-width:64px;max-height:46px;margin-right:auto;margin-left:auto;display:block;}
+
+.commodity .left .info .detail .picture .small .border{vertical-align:middle;display:table-cell;border:1px solid #dcdcdc;padding:1px;height:48px;width:64px;cursor:pointer;}
+.commodity .left .info .detail .picture .small .border:hover{border:1px solid #f39800;}
+.commodity .left .info .detail .detail-info{display:inline-block;vertical-align:top;margin-left:40px;}
+.commodity .left .info .detail .detail-info .title{font-size:18px;color:#7a6c59;}
+.commodity .left .info .detail .detail-info dl{font-size:16px;color:#80827f;}
+.commodity .left .info .detail .detail-info dd{margin-top:15px;}
+.commodity .left .info .detail .detail-info dd span{color:#f39800;}
+.commodity .left .more{margin-top:30px;}
+
+.commodity .left .more .title{color:#7a6c59;font-size:16px;margin-bottom:10px;}
+.commodity .left .more .title a{color:#2ead91;font-size:12px;cursor:pointer;}
+.commodity .left .more .content{display:inline-block;width:110px;margin-left:32.6px;}
+.commodity .left .more .content .picture{width:108px;height:78px;padding:1px;vertical-align:middle;display:table-cell;border:1px solid #dcdcdc;}
+.commodity .left .more .content .picture img{max-width:108px;max-height:78px;}
+.commodity .left .more .content .title{font-size:12px;color:black;margin-top:10px;}
+.commodity .left .more .all{margin-left:-30px;}
+
+.commodity .left .info .intro{margin-top:40px;}
+.commodity .left .info .intro span{font-size:16px;color:#7a6c59;}
+.commodity .left .info .intro p{font-size:14px;margin-top:8px;line-height:18px;}
+.commodity .left .info .count{margin-top:40px;color:#80827f;overflow:hidden;}
+.commodity .left .info .count  .count-left{float:left;}
+.commodity .left .info .count  .count-right{float:right;}
+.commodity .left .info .count  .count-right span{margin-left:30px;line-height:14px;display:inline-block;height:25px;}
+.commodity .left .info .count .like{background:url(images/like_grey.png) no-repeat ;padding-left:30px;height:25px;display:inline-block;}
+.commodity .left .info .count .like .active,.commodity .left .info .count .like:hover{background:url(images/like_orange.png) no-repeat;color:#f49f21;cursor:pointer;}
+
+.commodity .left .info .count .share{background:url(images/share_grey.png) no-repeat;padding-left:20px;}
+.commodity .left .info .count .share:hover{background:url(images/share_orange.png) no-repeat;padding-left:20px;color:#f49f21;cursor:pointer;}
+.commodity .right{width:153px;float:right;border:1px solid #e5e5e5;background:white;padding:18px 27px 18px 27px;}
+.commodity .right .title{font-size:16px;color:#7a6c59;}
+.commodity .right .seller{margin-top:10px;border-bottom:1px solid #cfcfcf;padding-bottom:20px;margin-bottom:15px;}
+.commodity .right .icon{float:left;margin-right:12px;}
+.commodity .right .icon img{width:40px;height:40px;border-radius:50%;}
+.commodity .right .seller .male{display:inline-block;background:url(images/icon.gif) no-repeat 0 -88px;width:11px;height:11px;}
+.commodity .right .seller .female{display:inline-block;background:url(images/icon.gif) no-repeat 0 -107px;width:11px;height:12px;}
+.commodity .right .name a{color:#77c4b0;font-size:14px;}
+.commodity .right .tag {color:#b0c5cc;font-size:14px;line-height:28px;}
+.commodity .right .info{font-size:14px;color:#80827f;line-height:22px;margin-top:10px;border-bottom:1px solid #cfcfcf;padding-bottom:20px;margin-bottom:15px;}
+.commodity .right .num{font-size:12px;color:#76c2b1;}
+.commodity .right .sell {margin-top:10px;padding-bottom:5px;border-bottom:1px solid #cfcfcf;margin-bottom:15px;}
+.commodity .right .sell img{max-width:140px;max-height:100px;}
 .commodity .right .sell a{font-size:14px;color:#a3bcc4;line-height:20px;}
+.commodity .right .sell li{margin-bottom:10px;}
+.commodity .right .buy{border-bottom:0px;margin-bottom:0px;}
+
+.commodity .left .info .count .addlike{background:url(images/like_grey.png) no-repeat;padding-left:30px;height:25px;display:inline-block;}
+.commodity .left .info .count .cancellike{background:url(images/like_orange.png) no-repeat;color:#f49f21;cursor:pointer;padding-left:30px;height:25px;display:inline-block;}
+.commodity .left .info .count .addlike:hover{background:url(images/like_orange.png) no-repeat;color:#f49f21;cursor:pointer;padding-left:30px;height:25px;display:inline-block;}
+.commodity .left .info .count .cancellike:hover{background:url(images/like_grey.png) no-repeat;color:#80827f;padding-left:30px;height:25px;display:inline-block;}
+/*2-20更新结束*/
 
 /*问答详细页面*/
 .question-detail{padding-top:38px;}
@@ -659,76 +736,6 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .win .content .question-new span{line-height:24px;}
 .win .content .question-new .check{vertical-align:middle;}
 .win .content .question-new .btn{float:right;width:50px;height:24px;}
-
-/*2-20更新*/
-.commodity{padding-top:30px;}
-.commodity .left{width:683px;float:left;}
-.commodity .left .info{width:629px;border:1px solid #e5e5e5;background:white;padding:18px 27px 18px 27px;}
-.commodity .left .info .title{font-size:24px;color:#7a6c59;}
-.commodity .left .info .title span{float:left;}
-.commodity .left .info .title .tag{display:inline-block;color:#f49f21;font-size:12px;line-height:24px;background:#fef8ed;padding:0px 10px;margin-left:15px;}
-.commodity .left .info .count-top{margin-top:15px;color:#80827f;overflow:hidden;}
-.commodity .left .info .count-top span{margin-right:30px;line-height:14px;display:inline-block;height:25px;}
-.commodity .left .info .count-top .love{background:url(images/love_grey.png) no-repeat;padding-left:20px;}
-.commodity .left .info .count-top .click{background:url(images/click_grey.png) no-repeat;padding-left:25px;}
-.commodity .left .info .count-top .time{background:url(images/time.png) no-repeat;padding-left:20px;}
-.commodity .left .info .detail .picture{width:362px;height:364px;display:inline-block;/*两个都要设置*/}
-.commodity .left .info .detail .picture .big{width:350px;height:252px;border:1px solid #dcdcdc;padding:5px;vertical-align:middle;display:table-cell;/*使图片垂直居中*/}
-.commodity .left .info .detail .picture .big img{max-width:350px;max-height:252px;margin-right:auto;margin-left:auto;display:block;}
-.commodity .left .info .detail .picture .small{width:360px;height:112px;border:1px solid #dcdcdc;border-top:0px;}
-.commodity .left .info .detail .picture .small .arrow-left{margin-left:10px;cursor:pointer;margin-bottom:20px;margin-right:8px;}
-.commodity .left .info .detail .picture .small .arrow-right{margin-bottom:20px;margin-left:8px;cursor:pointer;}
-.commodity .left .info .detail .picture .small .scroll{width:300px;height:52px;display:inline-block;overflow:hidden;margin-top:25px;}/*图片滚动*/
-.commodity .left .info .detail .picture .small ul{width:800px;height:52px;clear:both;}
-.commodity .left .info .detail .picture .small li{margin-right:9px;float:left;}
-.commodity .left .info .detail .picture .small .thumbnail{max-width:64px;max-height:46px;margin-right:auto;margin-left:auto;display:block;}
-
-.commodity .left .info .detail .picture .small .border{vertical-align:middle;display:table-cell;border:1px solid #dcdcdc;padding:1px;height:48px;width:64px;cursor:pointer;}
-.commodity .left .info .detail .picture .small .border:hover{border:1px solid #f39800;}
-.commodity .left .info .detail .detail-info{display:inline-block;vertical-align:top;margin-left:40px;}
-.commodity .left .info .detail .detail-info .title{font-size:18px;color:#7a6c59;}
-.commodity .left .info .detail .detail-info dl{font-size:16px;color:#80827f;}
-.commodity .left .info .detail .detail-info dd{margin-top:15px;}
-.commodity .left .info .detail .detail-info dd span{color:#f39800;}
-.commodity .left .more{margin-top:30px;}
-
-.commodity .left .more .title{color:#7a6c59;font-size:16px;margin-bottom:10px;}
-.commodity .left .more .title a{color:#2ead91;font-size:12px;cursor:pointer;}
-.commodity .left .more .content{display:inline-block;width:110px;margin-left:30px;}
-.commodity .left .more .content .picture{width:108px;height:78px;padding:1px;vertical-align:middle;display:table-cell;border:1px solid #dcdcdc;}
-.commodity .left .more .content .picture img{max-width:108px;max-height:78px;}
-.commodity .left .more .content .title{font-size:12px;color:black;margin-top:10px;}
-.commodity .left .more .all{margin-left:-30px;}
-
-.commodity .left .info .intro{margin-top:40px;}
-.commodity .left .info .intro span{font-size:16px;color:#7a6c59;}
-.commodity .left .info .intro p{font-size:14px;margin-top:8px;line-height:18px;}
-.commodity .left .info .count{margin-top:40px;color:#80827f;overflow:hidden;}
-.commodity .left .info .count  .count-left{float:left;}
-.commodity .left .info .count  .count-right{float:right;}
-.commodity .left .info .count  .count-right span{margin-left:30px;line-height:14px;display:inline-block;height:25px;}
-.commodity .left .info .count .like{background:url(images/like_grey.png) no-repeat ;padding-left:30px;height:25px;display:inline-block;}
-.commodity .left .info .count .like .active,.commodity .left .info .count .like:hover{background:url(images/like_orange.png) no-repeat;color:#f49f21;cursor:pointer;}
-
-.commodity .left .info .count .share{background:url(images/share_grey.png) no-repeat;padding-left:20px;}
-.commodity .left .info .count .share:hover{background:url(images/share_orange.png) no-repeat;padding-left:20px;color:#f49f21;cursor:pointer;}
-.commodity .right{width:153px;float:right;border:1px solid #e5e5e5;background:white;padding:18px 27px 18px 27px;}
-.commodity .right .title{font-size:16px;color:#7a6c59;}
-.commodity .right .seller{margin-top:10px;border-bottom:1px solid #cfcfcf;padding-bottom:20px;margin-bottom:15px;}
-.commodity .right .icon{float:left;margin-right:12px;}
-.commodity .right .icon img{width:40px;height:40px;border-radius:50%;}
-.commodity .right .seller .male{display:inline-block;background:url(images/icon.gif) no-repeat 0 -88px;width:11px;height:11px;}
-.commodity .right .seller .female{display:inline-block;background:url(images/icon.gif) no-repeat 0 -107px;width:11px;height:12px;}
-.commodity .right .name a{color:#77c4b0;font-size:14px;}
-.commodity .right .tag {color:#b0c5cc;font-size:14px;line-height:28px;}
-.commodity .right .info{font-size:14px;color:#80827f;line-height:22px;margin-top:10px;border-bottom:1px solid #cfcfcf;padding-bottom:20px;margin-bottom:15px;}
-.commodity .right .num{font-size:12px;color:#76c2b1;}
-.commodity .right .sell {margin-top:10px;padding-bottom:5px;border-bottom:1px solid #cfcfcf;margin-bottom:15px;}
-.commodity .right .sell img{max-width:140px;max-height:100px;}
-.commodity .right .sell a{font-size:14px;color:#a3bcc4;line-height:20px;}
-.commodity .right .sell li{margin-bottom:10px;}
-.commodity .right .buy{border-bottom:0px;margin-bottom:0px;}
-/*2-20更新结束*/
 
 .alert {
 padding: 8px 35px 8px 14px;

@@ -1,4 +1,13 @@
 $(function(){
+	$.post("/market/getsamecate", {
+		'id': $("#likeinfo").attr("cid")
+	}, function(data){
+		for(var i=0; i<data.data.length; i++){
+			var html = '<div class="content"><div class="picture"><img class="img-responsive" style="width:712px;height:505px;" src="'+data.data[i]['picture']+'"/></div><div class="title">'+data.data[i]['title']+'</div></div>'
+			$("#samecate").append(html);
+		}
+	}, "json");
+
 	$(".addlike").click(function(){
 		var id = $("#likeinfo").attr("cid");
 		var like = $(this);
@@ -112,7 +121,7 @@ $(function(){
 		var scroll = document.getElementById("scroll");
 		if(scroll.scrollLeft>0) scroll.scrollLeft -= 77;
 	});
-	
+
 	$(".thumbnail").hover(function(){
 		$(".big img").attr("src",$(this).attr("src"));
 	});

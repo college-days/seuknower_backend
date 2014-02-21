@@ -120,8 +120,7 @@ class MarketAction extends Action {
 			$result['currentUserLike'] = 0;
 		}
 
-		$map['u_id'] = $result['u_id'];
-		$relateCommodities = $Commodity->where($map)->select();
+		$relateCommodities = $Commodity->where("u_id=".$result['u_id']." and id!=".$id)->select();
 
 		$this->assign('relatecommodities', $relateCommodities);
 		$this->assign('relatecommoditycount', count($relateCommodities));
@@ -147,7 +146,7 @@ class MarketAction extends Action {
 		$Picture = M('CommodityPicture');
 		$picture = $Picture->field('picture')->where("c_id = $id")->select();
 		$this->assign('commodity',$result);
-		$this->assign('picture',$picture);
+		$this->assign('pictures',$picture);
 		$this->assign('picture_count',count($picture));
 		
 		$Model = M();
@@ -347,6 +346,7 @@ class MarketAction extends Action {
 		$data['intro'] = I('param.intro');
 		$data['u_id'] = session('userId');
 		$data['phone'] = I('param.phone');
+		$data['status'] = I('param.status');
 		
 		$User = M('User');
 		$result = $User->find(session('userId'));
@@ -435,6 +435,22 @@ class MarketAction extends Action {
 			}
 		}
 		$this->ajaxReturn($id, '', 1);
+	}
+
+	public function getsamecate(){
+		$id = I('param.id');
+		$Commodity = M('Commodity');
+
+		$result = $Commodity->find($id);
+		$sameCateCommodities = $Commodity->where('id!='.$id." and category='".$result['category']."' and onsale=1")->field('id,picture,title')->order('create_time desc')->limit(5)->select();
+
+		$util = new CommonUtil();
+
+		for($i=0; $i<count($sameCateCommodities); $i++){
+			$sameCateCommodities[$i]['title'] = $util->sub_string($sameCateCommodities[$i]['title'], 9);
+		}
+
+		$this->ajaxReturn($sameCateCommodities, '', 1);
 	}
 }
 ?>

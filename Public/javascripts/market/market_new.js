@@ -23,6 +23,10 @@ $(function(){
 		checkPrice();
 	});
 
+	$("#commoditystatus").blur(function(){
+		checkStatus();
+	});
+
 	$("#commoditycontact").blur(function(){
 		checkContact();
 	});
@@ -58,6 +62,7 @@ $(function(){
 			checkPrice();
 			checkContact();
 			checkIntro();
+			checkStatus();
 			checkPicture();
 		}
 	});
@@ -175,6 +180,19 @@ function checkPrice(){
 		}
 	}else{
 		$("#pricealert").text("请填写商品的价格");
+	}
+}
+
+function checkStatus(){
+	var status = $("#commoditystatus").val();
+	if (status) {
+		if(!isNaN(status) && parseInt(status)>0 && parseInt(status)<10){
+			$("#statusalert").text("");
+		}else{
+			$("#statusalert").text("格式不正确哦，只要1-9的数字就可以啦")
+		}
+	}else{
+		$("#statusalert").text("请填写商品的成色");
 	}
 }
 
