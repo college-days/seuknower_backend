@@ -4,9 +4,13 @@
 		<div class="container">
 			<div class="left">
 			<div class="title">发布新活动</div>
-			<form>
+			<form id="event" name="event" action="/event/add_event" method="post">
 				<div class="row">
-					<span class="key">活动名称</span><input class="value long" type="text"/>
+					<div id="titlealert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">活动名称</span>
+					<input class="value long" type="text" id="title" name="title"/>
 				</div>
 				<div class="row">
 					<span class="key">活动类型</span>
@@ -20,42 +24,83 @@
 					</select>
 				</div>
 				<div class="row">
-					<span class="key">开始时间</span><input class="value short" type="text"/><select class="time"></select>
+					<div id="starttimealert" style="color:red;margin-left:71px;"></div>
 				</div>
 				<div class="row">
-					<span class="key">结束时间</span><input class="value short" type="text"/><select class="time"></select>
+					<span class="key">开始时间</span>
+					<input class="value short" type="text" name="startdate" id="startdate"/>
+					<select class="time" id="startlasttime">
+					</select>
 				</div>
 				<div class="row">
-					<span class="key">活动地点</span><input class="value long" type="text"/>
+					<div id="endtimealert" style="color:red;margin-left:71px;"></div>
 				</div>
 				<div class="row">
-					<span class="key">活动详情</span><textarea ></textarea>
+					<span class="key">结束时间</span>
+					<input class="value short" type="text" name="enddate" id="enddate"/>
+					<select class="time" id="endlasttime">
+					</select>
+				</div>
+				<div class="row">
+					<div id="locationalert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">活动地点</span>
+					<input class="value long" type="text" name="location" id="location"/>
+				</div>
+				<div class="row">
+					<div id="introalert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">活动详情</span>
+					<textarea id="intro" name="intro"></textarea>
+				</div>
+				<div class="row">
+					<div id="costalert" style="color:red;margin-left:71px;"></div>
 				</div>
 				<div class="row">
 					<span class="key">费用</span>
-					<input type="radio" class="cost" name="cost"/><label>免费</label>
-					<input type="radio" class="cost" name="cost"/><label>收费</label>
+					<input type="radio" class="cost" name="iscost" id="no_cost" value="no"/><label>免费</label>
+					<input type="radio" class="cost" name="iscost" id="yes_cost" value="yes"/><label>收费</label>
+				</div>
+				<div class="row" id="div_cost">
+					<span class="key"></span>
+					<input type="text" class="value short" id="cost" name="cost"/> 元
 				</div>
 				<div class="row">
-					<span class="key"></span><input type="text" class="value short"/>
+					<div id="organizeralert" style="color:red;margin-left:71px;"></div>
 				</div>
 				<div class="row">
-					<span class="key">发起人</span><input class="value short" type="text"/>
+					<span class="key">主办单位</span>
+					<input class="value short" type="text" id="organizer" name="organizer"/>
 				</div>
 				<div class="row">
-					<span class="key">活动海报</span><input class="value" type="file"/>
+					<div id="posteralert" style="color:red;margin-left:71px;"></div>
 				</div>
 				<div class="row">
-					<div class="div-image">
-						<img class="target" src="images/act1.jpg"/>
-						<img class="preview" src="images/act1.jpg"/>
-					</div>
+					<span class="key">活动海报</span>
+					<input class="value" type="file" id="poster" name="poster"/>
 				</div>
-				<div class="row">
-					<span class="key">感兴趣人数</span><input class="value short" type="text"/>
+
+				<div class="row" id="div_image" style="display:none;">
+					<table style="margin-left:118px;">
+						<td><img id="target"/></td>
+						<td>
+							<div style="width:150px;height:130px;overflow:hidden;margin-left:5px;">
+								<img id="preview"/>
+							</div>
+						</td>
+					</table>
 				</div>
+
+				<div class="row" style="display:none">
+					<input id="rawpath" name="rawpath" type="text"/>
+					<input id="thumbpath" name="thumbpath" type="text"/>
+				</div>
+
 				<div class="row">
-					<span class="key"></span><input class="btn" type="button" value="确认提交"/>
+					<span class="key"></span>
+					<input class="btn" type="button" value="确认提交" id="submitevent"/>
 				</div>
 			</form>
 			</div>
@@ -68,4 +113,9 @@
 			</div>
 		</div>
 	</div>
+	<link href="__CSS__/jquery.Jcrop.css" rel="stylesheet" type="text/css"/>
+	<script src="__JS__/jquery.Jcrop.js"></script>
+	<script src="__JS__/jquery.color.js"></script>
+	<script src="__JS__/ajaxfileupload.js"></script>
+	<script src="__JS__/event/event_new.js"></script>
 <include file="Public:footer" />

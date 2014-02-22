@@ -92,7 +92,6 @@ function jcorp(){
 function showPreview(coords){
 	var rx = 150 / coords.w;//preview的宽
 	var ry = 130 / coords.h;//preview的高
-	//$('#result').text(coords.x+","+coords.y+","+coords.w+","+coords.h);
 	iconX = coords.x;
 	iconY = coords.y;
 	iconWidth = coords.w;

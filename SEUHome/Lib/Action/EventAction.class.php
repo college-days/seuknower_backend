@@ -287,7 +287,11 @@ class EventAction extends Action {
     }
 
     public function newEvent(){
-    	$this->display('new');
+    	if(isset($_SESSION['userId'])){
+    		$this->display('new');
+    	}else{
+    		$this->redirect("/login");
+    	}
     }
 
     public function addJoin(){
@@ -411,6 +415,86 @@ class EventAction extends Action {
 			$this->ajaxReturn('', '请登录', -1);
 		}
 		
+	}
+
+	//上传海报
+	public function uploadPoster(){
+		import('@.ORG.UploadFile');
+
+		$upload = new UploadFile();								 	// 实例化上传类
+		$upload->maxSize  = 3145728 ;							 	// 设置附件上传大小
+		$upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg');	// 设置附件上传类型
+		$upload->savePath =  './Uploads/Images/Event/Poster/Raw/';	// 设置附件上传目录	
+		$upload->saveRule= "uniqid";								//文件保存规则
+		$upload->thumb = true; 										//设置需要生成缩略图，仅对图像文件有效
+		$upload->thumbPrefix = 'r_';  							//设置需要生成缩略图的文件后缀
+        $upload->imageClassPath = '@.ORG.Image';					
+        $upload->thumbMaxWidth = '300'; 						//设置缩略图最大宽度 
+        $upload->thumbMaxHeight = '300';						//设置缩略图最大高度 
+		$upload->thumbRemoveOrigin = true; 
+		 
+		if(!$upload->upload()) {// 上传错误提示错误信息
+			$this->error($upload->getErrorMsg());
+		}else{// 上传成功
+			$info=$upload->getUploadFileInfo();
+			$data['path'] = $info[0]['savepath'].'r_'.$info[0]['savename'];
+			$imageSize = getimagesize($data['path']);
+			$data['width'] = $imageSize[0];
+			$data['height'] = $imageSize[1];
+			$this->ajaxReturn($data, 'success', 1);
+		}
+	}
+
+	//裁剪海报并生成缩略图
+	public function thumbPoster(){
+		$rawPath = I('param.imagepath');
+		$thumbPath = str_replace('Raw','Thumb',$rawPath);
+		$thumbPath = str_replace('r_','t_',$thumbPath);
+		thumb($rawPath,$thumbPath,I('param.width'),I('param.height'),I('param.iconx'),I('param.icony'));
+		$data['rawpath'] = $rawPath;
+		$data['thumbpath'] = $thumbPath;
+		$this->ajaxReturn($data, 'success', 1);
+	}
+
+	//将活动信息添加到数据库
+	public function addEvent(){
+		$startTime = I('param.startdate')." ".I('param.starttime').":00";
+		$endTime = I('param.enddate')." ".I('param.endtime').":00";
+		$data['title'] = I('param.title');
+		$data['create_time'] = time();
+		$data['start_time'] = strtotime($startTime);
+		$data['end_time'] = strtotime($endTime);
+		$data['location'] = I('param.location');
+		$data['intro'] = I('param.intro');
+		$data['u_id'] = session('userId');
+		if(I('param.rawpath') && I('param.thumbpath')){
+			$data['raw_poster'] = I('param.rawpath');
+			$data['poster'] = I('param.thumbpath');
+		}
+		if(I('param.tag_cate')){
+			$data['category'] = I('param.tag_cate');
+			$data['tag'] = I('param.tag_cate');
+		}
+		if(I('param.catalog')){
+			$data['tag'] = I('param.catalog');
+		}
+		
+		if(I('param.iscost')=="yes"){
+			$data['cost'] = I('param.cost');
+		}else{
+			$data['cost'] = "免费";
+		}
+		
+		$Event = M('Event');
+		
+		if(session('userId') == 1){
+			$data['status'] = 1;
+			$saveid = $Event->add($data);
+			$this->redirect('/event/'+$saveid);
+		}else{
+			$saveid = $Event->add($data);
+			$this->redirect('/event/'+$saveid);
+		}
 	}
 }
 ?>

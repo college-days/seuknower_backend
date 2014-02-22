@@ -252,7 +252,11 @@ class MarketAction extends Action {
 	}
 
     public function newCommodity(){
-    	$this->display('new');
+		if(isset($_SESSION['userId'])){
+    		$this->display('new');
+    	}else{
+    		$this->redirect("/login");
+    	}
     }
 
     public function saveCommodity(){
@@ -452,5 +456,6 @@ class MarketAction extends Action {
 
 		$this->ajaxReturn($sameCateCommodities, '', 1);
 	}
+
 }
 ?>
