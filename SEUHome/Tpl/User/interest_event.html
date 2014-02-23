@@ -8,17 +8,41 @@
 						<span class="num">( 全部 )</span>
 					</div>
 					<div class="tag">
-						<a href="#">讲座</a>
-						<a href="#">比赛</a>
-						<a href="#">娱乐交友</a>
-						<a href="#">招聘</a>
-						<a href="#">公益</a>
-						<a href="#">其他</a>
+						<eq name="type" value="讲座">
+							<a href="/user/interest/{$u_id}/type/讲座" class="active">讲座</a>
+						<else/>
+							<a href="/user/interest/{$u_id}/type/讲座">讲座</a>
+						</eq>
+						<eq name="type" value="比赛">
+							<a href="/user/interest/{$u_id}/type/比赛" class="active">比赛</a>
+						<else/>
+							<a href="/user/interest/{$u_id}/type/比赛">比赛</a>
+						</eq>
+						<eq name="type" value="娱乐交友">
+							<a href="/user/interest/{$u_id}/type/娱乐交友" class="active">娱乐交友</a>
+						<else/>
+							<a href="/user/interest/{$u_id}/type/娱乐交友">娱乐交友</a>
+						</eq>
+						<eq name="type" value="招聘">
+							<a href="/user/interest/{$u_id}/type/招聘" class="active">招聘</a>
+						<else/>
+							<a href="/user/interest/{$u_id}/type/招聘">招聘</a>
+						</eq>
+						<eq name="type" value="公益">
+							<a href="/user/interest/{$u_id}/type/公益" class="active">公益</a>
+						<else/>
+							<a href="/user/interest/{$u_id}/type/公益">公益</a>
+						</eq>
+						<eq name="type" value="其他">
+							<a href="/user/interest/{$u_id}/type/其他" class="active">其他</a>
+						<else/>
+							<a href="/user/interest/{$u_id}/type/其他">其他</a>
+						</eq>
 						<a href="/event" class="act-index">>去活动首页</a>
 					</div>
 					<div class="join">
 						<a href="/user/join/{$u_id}">参加({$joineventcount})</a>
-						<a href="#" class="active">感兴趣({$interesteventcount})</a>
+						<a href="/user/interest/{$u_id}" class="active">感兴趣({$interesteventcount})</a>
 					</div>
 					<div class="content">
 						<ul>
@@ -28,7 +52,7 @@
 									<div class="intro">
 										<dl>
 											<dt>
-												<a href="#"> {$event.title} </a>
+												<a href="/event/{$event.id}"> {$event.title} </a>
 											</dt>
 											<dd>时间：{$event.time}</dd>
 											<dd>地点：{$event.location}</dd>

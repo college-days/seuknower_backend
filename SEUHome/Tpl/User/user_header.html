@@ -32,8 +32,8 @@
 							<div><a href="/user/sellon/{$user.id}">出售商品</a></div>
 						</li>
 						<li>
-							<div><span>-3</span></div>
-							<div><a href="#">求购商品</a></div>
+							<div><span>0</span></div>
+							<div><a href="/user/buy/{$user.id}">求购商品</a></div>
 						</li>
 					</ul>
 				</div>
@@ -46,7 +46,7 @@
 				<eq name="isprofile" value="1">
 					<li class="active">
 						<div class="pro-title">
-							<a href="#">个人资料</a>
+							<a href="/user/profile/{$u_id}">个人资料</a>
 						</div>
 						<img src="__IMAGE__/user_center/wave.png"/
 						>
@@ -67,7 +67,7 @@
 					</li>
 					<li class="active">
 						<div class="note-title">
-							<a href="#">动态</a>
+							<a href="/user/{$u_id}">动态</a>
 						</div>
 						<img src="__IMAGE__/user_center/wave.png"/>
 					</li>

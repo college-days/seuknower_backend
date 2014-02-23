@@ -8,16 +8,41 @@
 					<span class="num">( 全部 )</span>
 				</div>
 				<div class="tag">
-					<a href="#">衣服鞋帽</a>
-					<a href="#">数码电子</a>
-					<a href="#">生活日用</a>
-					<a href="#">书籍杂志</a>
-					<a href="#">其他</a>
+					<eq name="type" value="衣物鞋帽">
+						<a href="/user/selldone/{$u_id}/type/衣物鞋帽" class="active">衣物鞋帽</a>
+					<else/>
+						<a href="/user/selldone/{$u_id}/type/衣物鞋帽">衣物鞋帽</a>
+					</eq>
+					<eq name="type" value="数码电子">
+						<a href="/user/selldone/{$u_id}/type/数码电子" class="active">数码电子</a>
+					<else/>
+						<a href="/user/selldone/{$u_id}/type/数码电子">数码电子</a>
+					</eq>
+					<eq name="type" value="生活日用">
+						<a href="/user/selldone/{$u_id}/type/生活日用" class="active">生活日用</a>
+					<else/>
+						<a href="/user/selldone/{$u_id}/type/生活日用">生活日用</a>
+					</eq>
+					<eq name="type" value="书籍杂志">
+						<a href="/user/selldone/{$u_id}/type/书籍杂志" class="active">书籍杂志</a>
+					<else/>
+						<a href="/user/selldone/{$u_id}/type/书籍杂志">书籍杂志</a>
+					</eq>
+					<eq name="type" value="0元转让">
+						<a href="/user/selldone/{$u_id}/type/0元转让" class="active">0元转让</a>
+					<else/>
+						<a href="/user/selldone/{$u_id}/type/0元转让">0元转让</a>
+					</eq>
+					<eq name="type" value="其他">
+						<a href="/user/selldone/{$u_id}/type/其他" class="active">其他</a>
+					<else/>
+						<a href="/user/selldone/{$u_id}/type/其他">其他</a>
+					</eq>
 					<a href="/market" class="act-index">>去跳蚤市场首页</a>
 				</div>
 				<div class="join">
 					<a href="/user/sellon/{$u_id}">出售({$selloncount})</a>
-					<a href="#" class="active">完成({$selldonecount})</a>
+					<a href="/user/selldone/{$u_id}" class="active">完成({$selldonecount})</a>
 				</div>
 				<div class="content">
 					<ul>

@@ -8,17 +8,36 @@
 						<span class="num">( 全部 )</span>
 					</div>
 					<div class="tag">
-						<a href="#">讲座</a>
-						<a href="#">比赛</a>
-						<a href="#">娱乐交友</a>
-						<a href="#">招聘</a>
-						<a href="#">公益</a>
-						<a href="#">其他</a>
-						<a href="#" class="act-index">>去提问</a>
+						<eq name="type" value="生活娱乐">
+							<a href="/user/answer/{$u_id}/type/生活娱乐" class="active">生活娱乐</a>
+						<else/>
+							<a href="/user/answer/{$u_id}/type/生活娱乐">生活娱乐</a>
+						</eq>
+						<eq name="type" value="学习考试">
+							<a href="/user/answer/{$u_id}/type/学习考试" class="active">学习考试</a>
+						<else/>
+							<a href="/user/answer/{$u_id}/type/学习考试">学习考试</a>
+						</eq>
+						<eq name="type" value="规章制度">
+							<a href="/user/answer/{$u_id}/type/规章制度" class="active">  规章制度</a>
+						<else/>
+							<a href="/user/answer/{$u_id}/type/规章制度">规章制度</a>
+						</eq>
+						<eq name="type" value="技术专业">
+							<a href="/user/answer/{$u_id}/type/技术专业" class="active">技术专业</a>
+						<else/>
+							<a href="/user/answer/{$u_id}/type/技术专业">技术专业</a>
+						</eq>
+						<eq name="type" value="其他">
+							<a href="/user/answer/{$u_id}/type/其他" class="active">其他</a>
+						<else/>
+							<a href="/user/answer/{$u_id}/type/其他">其他</a>
+						</eq>
+						<a href="/question" class="act-index">>去问答首页</a>
 					</div>
 					<div class="join">
 						<a href="/user/ask/{$u_id}">提问({$askcount})</a>
-						<a href="#" class="active">回答({$answercount})</a>
+						<a href="/user/answer/{$u_id}" class="active">回答({$answercount})</a>
 					</div>
 					<div class="content">
 						<ul>

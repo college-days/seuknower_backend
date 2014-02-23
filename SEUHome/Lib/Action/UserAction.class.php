@@ -7,9 +7,13 @@ class UserAction extends Action {
         $util->autologin();
 	}
 
-	public function get_ask_question($u_id){
+	public function get_ask_question($u_id, $type){
 		$Question = M('Question');
-    	$askQuestions = $Question->where('u_id='.$u_id)->order('create_time desc')->select();
+        if($type){
+            $askQuestions = $Question->where("u_id=".$u_id." and type='".$type."'")->order('create_time desc')->select();
+        }else{
+            $askQuestions = $Question->where('u_id='.$u_id)->order('create_time desc')->select();
+        }
 		
 		/*
     	for($i=0; $i<count($askQuestions); $i++){
@@ -20,14 +24,18 @@ class UserAction extends Action {
     	return $askQuestions;
 	}
 
-	public function get_answer_question($u_id){
+	public function get_answer_question($u_id, $type){
 		$User = M('User');
 		$Question = M('Question');
     	$Answer = M('Answer');
     	$answerQuestionIds = $Answer->field('q_id')->where('u_id='.$u_id)->order('create_time desc')->select();
     	$answerQuestions = array();
     	for($i=0; $i<count($answerQuestionIds); $i++){
-    		$answerQuestion = $Question->where('id='.$answerQuestionIds[$i]['q_id'])->find();
+            if($type){
+                $answerQuestion = $Question->where("id=".$answerQuestionIds[$i]['q_id']." and type='".$type."'")->find();
+            }else{
+                $answerQuestion = $Question->where('id='.$answerQuestionIds[$i]['q_id'])->find();
+            }
     		if(!empty($answerQuestion)){
     			$askUserInfo = $User->where('id='.$answerQuestion["u_id"])->find();
     			$answerQuestion["ask_name"] = $askUserInfo["name"];
@@ -44,13 +52,17 @@ class UserAction extends Action {
     	return $answerQuestions;
 	}
 
-	public function get_join_event($u_id, $isdetail){
+	public function get_join_event($u_id, $isdetail, $type){
 		$Event = M('Event');
 		$EventJoin = M('JoinEvent');
-    	$joinEventIds = $EventJoin->field('e_id')->where('u_id='.$u_id)->order('create_time desc')->select();
+        $joinEventIds = $EventJoin->field('e_id')->where('u_id='.$u_id)->order('create_time desc')->select();
     	$joinEvents = array();
     	for($i=0; $i<count($joinEventIds); $i++){
-    		$joinEvent = $Event->where('id='.$joinEventIds[$i]['e_id'])->find();
+            if($type){
+                $joinEvent = $Event->where("id=".$joinEventIds[$i]['e_id']." and category='".$type."'")->find();
+            }else{
+                $joinEvent = $Event->where('id='.$joinEventIds[$i]['e_id'])->find();
+            }
     		if(!empty($joinEvent)){
     			array_push($joinEvents, $joinEvent);
     		}
@@ -70,13 +82,17 @@ class UserAction extends Action {
     	return $joinEvents;
 	}
 
-	public function get_interest_event($u_id, $isdetail){
+	public function get_interest_event($u_id, $isdetail, $type){
 		$Event = M('Event');
     	$EventInterest = M('InterestEvent');
     	$interestEventIds = $EventInterest->field('e_id')->where('u_id='.$u_id)->order('create_time desc')->select();
     	$interestEvents = array();
     	for($i=0; $i<count($interestEventIds); $i++){
-    		$interestEvent = $Event->where('id='.$interestEventIds[$i]['e_id'])->find();
+            if($type){
+                $interestEvent = $Event->where('id='.$interestEventIds[$i]['e_id']." and category='".$type."'")->find();
+            }else{
+                $interestEvent = $Event->where('id='.$interestEventIds[$i]['e_id'])->find();
+            }
     		if(!empty($interestEvent)){
     			array_push($interestEvents, $interestEvent);
     		}
@@ -96,9 +112,13 @@ class UserAction extends Action {
     	return $interestEvents;
 	}
 
-	public function get_sell_commodity($u_id, $isdetail){
+	public function get_sell_commodity($u_id, $isdetail, $type){
 		$Commodity = M('Commodity');
-    	$sellCommodities = $Commodity->where('u_id='.$u_id)->order('create_time desc')->select();
+        if($type){
+            $sellCommodities = $Commodity->where("u_id=".$u_id." and category='".$type."'")->order('create_time desc')->select();
+        }else{
+            $sellCommodities = $Commodity->where('u_id='.$u_id)->order('create_time desc')->select();
+        }
     	$util = new CommonUtil();
 
     	for($i=0; $i<count($sellCommodities); $i++){
@@ -114,8 +134,8 @@ class UserAction extends Action {
     	return $sellCommodities;
 	}
 
-	public function get_sell_commodity_on($u_id){
-		$sellCommodities = $this->get_sell_commodity($u_id, 1);
+	public function get_sell_commodity_on($u_id, $type){
+		$sellCommodities = $this->get_sell_commodity($u_id, 1, $type);
 		$sellons = array();
 		for($i=0; $i<count($sellCommodities); $i++){
 			if($sellCommodities[$i]['onsale'] == 1){
@@ -126,8 +146,8 @@ class UserAction extends Action {
 		return $sellons;
 	}
 
-	public function get_sell_commodity_done($u_id){
-		$sellCommodities = $this->get_sell_commodity($u_id, 1);
+	public function get_sell_commodity_done($u_id, $type){
+		$sellCommodities = $this->get_sell_commodity($u_id, 1, $type);
 		$selldones = array();
 		for($i=0; $i<count($sellCommodities); $i++){
 			if($sellCommodities[$i]['onsale'] == 0){
@@ -181,9 +201,10 @@ class UserAction extends Action {
     public function ask_question(){
     	$u_id = I('param.id');
     	$User = M('User');
+        $type = I('param.type');
     	$userInfo = $User->find($u_id);
     	
-    	$askQuestions = $this->get_ask_question($u_id);
+    	$askQuestions = $this->get_ask_question($u_id, $type);
 
     	if($_SESSION['userId'] == $u_id){
     		$this->assign('me', '1');
@@ -197,15 +218,17 @@ class UserAction extends Action {
     	$this->assign('sellcommoditycount', $_SESSION['sellcommoditycount']);
     	$this->assign('user', $userInfo);
     	$this->assign('u_id', $u_id);
+        $this->assign('type', $type);
     	$this->display('ask_question');
     }
 
     public function answer_question(){
     	$u_id = I('param.id');
     	$User = M('User');
+        $type = I('param.type');
     	$userInfo = $User->find($u_id);
 		
-		$answerQuestions = $this->get_answer_question($u_id);
+		$answerQuestions = $this->get_answer_question($u_id, $type);
 
 		if($_SESSION['userId'] == $u_id){
     		$this->assign('me', '1');
@@ -219,15 +242,17 @@ class UserAction extends Action {
     	$this->assign('sellcommoditycount', $_SESSION['sellcommoditycount']);
     	$this->assign('user', $userInfo);
     	$this->assign('u_id', $u_id);
+        $this->assign('type', $type);
     	$this->display('answer_question');
     }
 
     public function join_event(){
     	$u_id = I('param.id');
     	$User = M('User');
+        $type = I('param.type');
     	$userInfo = $User->find($u_id);
 
-    	$joinEvents = $this->get_join_event($u_id, 1);
+    	$joinEvents = $this->get_join_event($u_id, 1, $type);  
 
     	if($_SESSION['userId'] == $u_id){
     		$this->assign('me', '1');
@@ -243,15 +268,17 @@ class UserAction extends Action {
     	$this->assign('joinevents', $joinEvents);
     	$this->assign('user', $userInfo);
     	$this->assign('u_id', $u_id);
+        $this->assign('type', $type);
     	$this->display('join_event');
     }
 
     public function interest_event(){
     	$u_id = I('param.id');
     	$User = M('User');
+        $type = I('param.type');
     	$userInfo = $User->find($u_id);
 
-    	$interestEvents = $this->get_interest_event($u_id, 1);
+    	$interestEvents = $this->get_interest_event($u_id, 1, $type);
 
     	if($_SESSION['userId'] == $u_id){
     		$this->assign('me', '1');
@@ -267,16 +294,18 @@ class UserAction extends Action {
     	$this->assign('interestevents', $interestEvents);
     	$this->assign('user', $userInfo);
     	$this->assign('u_id', $u_id);
+        $this->assign('type', $type);
     	$this->display('interest_event');
     }
 
     public function sell_commodity_on(){
     	$u_id = I('param.id');
     	$User = M('User');
+        $type = I('param.type');
     	$userInfo = $User->find($u_id);
     	
-    	$sellons = $this->get_sell_commodity_on($u_id);
-    	$selldones = $this->get_sell_commodity_done($u_id);
+    	$sellons = $this->get_sell_commodity_on($u_id, $type);
+    	$selldones = $this->get_sell_commodity_done($u_id, $type);
 
     	if($_SESSION['userId'] == $u_id){
     		$this->assign('me', '1');
@@ -292,16 +321,18 @@ class UserAction extends Action {
     	$this->assign('selldonecount', count($selldones));
     	$this->assign('user', $userInfo);
     	$this->assign('u_id', $u_id);
+        $this->assign('type', $type);
     	$this->display('sell_commodity_on');
     }
 
     public function sell_commodity_done(){
     	$u_id = I('param.id');
     	$User = M('User');
+        $type = I('param.type');
     	$userInfo = $User->find($u_id);
 
-    	$sellons = $this->get_sell_commodity_on($u_id);
-    	$selldones = $this->get_sell_commodity_done($u_id);
+    	$sellons = $this->get_sell_commodity_on($u_id, $type);
+    	$selldones = $this->get_sell_commodity_done($u_id, $type);
 
     	if($_SESSION['userId'] == $u_id){
     		$this->assign('me', '1');
@@ -317,6 +348,7 @@ class UserAction extends Action {
     	$this->assign('selldonecount', count($selldones));
     	$this->assign('user', $userInfo);
     	$this->assign('u_id', $u_id);
+        $this->assign('type', $type);
     	$this->display('sell_commodity_done');
     }
 
