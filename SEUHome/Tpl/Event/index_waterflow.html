@@ -24,7 +24,7 @@
 	                            <eq name="currentUser.sex" value="none">
 	                                不详
 	                            </eq>
-								<a href="#">{$currentUser.name}</a>
+								<a href="/user/{$currentUser.id}" target="_blank">{$currentUser.name}</a>
 							</div>
 							<div class="tag">
 								<eq name="currentUser.id" value="1">
@@ -49,7 +49,7 @@
 				<ul>
 					<volist name="hots" id="hot" key="iter">
 							<li>
-								<a href="/event/{$hot.id}">{$hot.title}</a>
+								<a href="/event/{$hot.id}" target="_blank">{$hot.title}</a>
 							</li>
 						</volist>
 				</ul>
@@ -135,7 +135,7 @@
 						</eq>
 						<div class="info">
 							<dl>
-								<dt><a href="/event/{$event.id}">{$event.title}</a></dt>
+								<dt><a href="/event/{$event.id}" target="_blank">{$event.title}</a></dt>
 								<dd>时间：{$event.time}</dd>
 								<dd>地点：{$event.location}</dd>
 								<!--<dd>费用：{$event.cost}</dd>
@@ -157,7 +157,7 @@
 						</eq>
 						<div class="info">
 							<dl>
-								<dt><a href="/event/{$event.id}">{$event.title}</a></dt>
+								<dt><a href="/event/{$event.id}" target="_blank">{$event.title}</a></dt>
 								<dd>时间：{$event.time}</dd>
 								<dd>地点：{$event.location}</dd>
 								<!--<dd>费用：{$event.cost}</dd>
@@ -179,7 +179,7 @@
 						</eq>
 						<div class="info">
 							<dl>
-								<dt><a href="/event/{$event.id}">{$event.title}</a></dt>
+								<dt><a href="/event/{$event.id}" target="_blank">{$event.title}</a></dt>
 								<dd>时间：{$event.time}</dd>
 								<dd>地点：{$event.location}</dd>
 								<!--<dd>费用：{$event.cost}</dd>

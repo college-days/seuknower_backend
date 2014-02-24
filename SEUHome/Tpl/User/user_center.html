@@ -4,27 +4,28 @@
 			<div class="info">
 				<div class="title">
 					<span>活动</span>
-					<span class="num">( <a href="/user/join/{$u_id}">{$joineventcount}个参加</a><span class="dot"></span><a href="/user/interest/{$u_id}">{$interesteventcount}个感兴趣</a> )</span>
+					<span class="num">( <a href="/user/join/{$u_id}" target="_blank">{$joineventcount}个参加</a><span class="dot"></span><a href="/user/interest/{$u_id}" target="_blank">{$interesteventcount}个感兴趣</a> )</span>
+				<a href="/event/new" target="_blank">发布活动</a>
 				</div>
 				<div class="activity">
 					<ul>
 						<volist name="interestevents" id="interest">
 							<li>
-								<a href="/event/{$interest.id}">
+								<a href="/event/{$interest.id}" target="_blank">
 									<img src="{$interest.poster}" class="img-responsive" style="width:70px;height:90px;"/>
 								</a>
 								<div>
-									<a href="/event/{$interest.id}">{$interest.title}</a>
+									<a href="/event/{$interest.id}" target="_blank">{$interest.title}</a>
 								</div>
 							</li>
 						</volist>
 						<volist name="joinevents" id="join">
 							<li>
-								<a href="/event/{$join.id}">
+								<a href="/event/{$join.id}" target="_blank">
 									<img src="{$join.poster}"class="img-responsive" style="width:70px;height:90px;"/>
 								</a>
 								<div>
-									<a href="/event/{$join.id}">{$join.title}</a>
+									<a href="/event/{$join.id}" target="_blank">{$join.title}</a>
 								</div>
 							</li>
 						</volist>
@@ -32,15 +33,15 @@
 				</div>
 				<div class="title">
 					<span>问答</span>
-					<span class="num">( <a href="/user/ask/{$u_id}">{$askcount}个提问</a><span class="dot"></span><a href="/user/answer/{$u_id}">{$answercount}个回答</a> )</span>
-					<a href="#">去提问</a>
+					<span class="num">( <a href="/user/ask/{$u_id}" target="_blank">{$askcount}个提问</a><span class="dot"></span><a href="/user/answer/{$u_id}" target="_blank">{$answercount}个回答</a> )</span>
+					<a href="/question" target="_blank">去问答首页</a>
 				</div>
 				<div class="question">
 					<ul>
 						<volist name="asks" id="ask">
 							<li>
 								<span class="ask">【问】</span>
-								<a href="/question/{$ask.id}">{$ask.title}</a>
+								<a href="/question/{$ask.id}" target="_blank">{$ask.title}</a>
 								<span class="count">{$ask.answer_count}个回答</span>
 								<span class="user">{$user.name}</span>
 								<span class="time">{$ask.create_time|date='Y-m-d',###}</span>
@@ -49,7 +50,7 @@
 						<volist name="answers" id="answer">
 							<li>
 								<span class="answer">【答】</span>
-								<a href="/question/{$answer.id}">{$answer.title}</a>
+								<a href="/question/{$answer.id}" target="_blank">{$answer.title}</a>
 								<span class="count">{$answer.answer_count}</span>
 								<span class="user">{$answer.ask_name}</span>
 								<span class="time">{$answer.create_time|date='Y-m-d',###}</span>
@@ -59,19 +60,19 @@
 				</div>
 				<div class="title">
 					<span>出售</span>
-					<span class="num"><a href="/user/sellon/{$u_id}">( {$sellcommoditycount} )</a></span>
-					<a href="#">发布商品</a>
+					<span class="num"><a href="/user/sellon/{$u_id}" target="_blank">( {$sellcommoditycount} )</a></span>
+					<a href="/market/new" target="_blank">发布商品</a>
 				</div>
 				<div class="sell">
 					<ul>
 						<volist name="sellcommodities" id="commodity">
 							<li>
-								<a href="/market/commodity/{$commodity.id}">
+								<a href="/market/commodity/{$commodity.id}" target="_blank">
 									<img src="{$commodity.picture}" class="img-responsive" style="width:192px;height:146px;"/>
 								</a>
 								
 								<div>
-									<a href="/market/commodity/{$commodity.id}">{$commodity.title}</a>
+									<a href="/market/commodity/{$commodity.id}" target="_blank">{$commodity.title}</a>
 								</div>
 							</li>
 						</volist>
@@ -79,7 +80,7 @@
 				</div>
 				<div class="title">
 					<span>求购</span>
-					<span class="num"><a href="/user/buy/{$u_id}">( 0 )</a></span>
+					<span class="num"><a href="/user/buy/{$u_id}" target="_blank">( 0 )</a></span>
 				</div>
 				<div class="question">
 					<div class="buy">

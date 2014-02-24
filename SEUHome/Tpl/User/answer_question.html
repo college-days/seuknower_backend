@@ -33,7 +33,7 @@
 						<else/>
 							<a href="/user/answer/{$u_id}/type/其他">其他</a>
 						</eq>
-						<a href="/question" class="act-index">>去问答首页</a>
+						<a href="/question" class="act-index" target="_blank">>去问答首页</a>
 					</div>
 					<div class="join">
 						<a href="/user/ask/{$u_id}">提问({$askcount})</a>
@@ -43,7 +43,7 @@
 						<ul>
 							<volist name="answers" id="answer">
 								<li>
-									<a href="/question/{$answer.id}">{$answer.title}</a>
+									<a href="/question/{$answer.id}" target="_blank">{$answer.title}</a>
 									<span class="count">{$answer.answer_count}个回答</span>
 									<span class="user">{$answer.ask_name}</span>
 									<span class="time">{$answer.create_time|date='Y-m-d',###}</span>

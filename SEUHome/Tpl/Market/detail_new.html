@@ -8,7 +8,7 @@
 						<div id="likeinfo" uid="{$Think.session.userId}" cid="{$commodity.id}" style="display:none;"></div>
 						<div class="title">
 							<span>{$commodity.title}</span>
-							<a href="/market/{$commodity.category}" class="tag">{$commodity.category}</a>
+							<a href="/market/{$commodity.category}" target="_blank" class="tag">{$commodity.category}</a>
 						</div>
 						<div class="count-top">
 							<span class="time">{$commodity.create_time|date='Y-m-d',###}</span>
@@ -85,7 +85,7 @@
 
 					<div class="more">
 						<div class="title">
-							还有这些正在售(<a href="/market/{$commodity.category}">更多</a>)
+							还有这些正在售(<a href="/market/{$commodity.category}" target="_blank">更多</a>)
 						</div>
 						<div class="all" id="samecate">
 						</div>
@@ -106,7 +106,7 @@
 										</div>
 										<div class="words">
 											<div class="n-t">
-												<span> <a href="/user/{$comment.user_id}" class="name"> {$comment.user_name} </a> </span>
+												<span> <a href="/user/{$comment.user_id}" class="name" target="_blank"> {$comment.user_name} </a> </span>
 												<span class="time">{$comment.create_time|date='Y-m-d H:i:s',###}</span>
 											</div>
 											<p>{$comment.content}</p>
@@ -140,7 +140,7 @@
 						<notempty name="Think.session.userName">
 							<input type="button" id="submit" value="评论">
 						<else/>
-							<a href="/login">要评论请先登陆</a>
+							<a href="/login" target="_blank">要评论请先登陆</a>
 						</notempty>
 					</div>
 				</div>
@@ -163,7 +163,7 @@
 								<eq name="commodity.u_sex" value="none">
 									不详
 								</eq>
-								<a href="/user/{$commodity.u_id}"> {$commodity.u_name} </a>
+								<a href="/user/{$commodity.u_id}" target="_blank"> {$commodity.u_name} </a>
 							</div>
 							<div class="tag">
 								<empty name="commodity.u_intro">
@@ -196,7 +196,7 @@
 							<volist name="relatecommodities" id="commodity">
 								<li>
 									<img src="{$commodity.picture}" class="img-responsive" style="width:712px;height:505px;"/>
-									<a href="/market/commodity/{$commodity.id}">{$commodity.title}</a>
+									<a href="/market/commodity/{$commodity.id}" target="_blank">{$commodity.title}</a>
 								</li>
 							</volist>
 						</ul>

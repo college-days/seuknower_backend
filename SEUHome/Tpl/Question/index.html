@@ -17,7 +17,7 @@
 				</div>
 			<else/>
 				<div class="newquestiontologin">
-					<a href="/login">+我要提问</a>
+					<a href="/login" target="_blank">+我要提问</a>
 				</div>
 			</notempty>
 		</div>
@@ -66,7 +66,7 @@
 				<ul>
 				<volist name="hots" id="hot">
 					<li>
-						<a href="/question/{$hot.id}">{$hot.title}</a>
+						<a href="/question/{$hot.id}" target="_blank">{$hot.title}</a>
 					</li>
 				</volist>
 				</ul>
@@ -80,7 +80,7 @@
 				<ul>
 					<volist name="lsquestions" id="question">
 						<li>
-							<a href="/question/{$question.id}">{$question.title}</a>
+							<a href="/question/{$question.id}" target="_blank">{$question.title}</a>
 						</li>
 					</volist>
 				</ul>
@@ -96,7 +96,7 @@
 				<ul>
 					<volist name="questions" id="question">
 						<li>
-							<a href="/question/{$question.id}"> {$question.title} </a>
+							<a href="/question/{$question.id}" target="_blank"> {$question.title} </a>
 							<span class="count"> {$question.answer_count} 个回答</span>
 							<span class="user"> {$question.u_name} </span>
 							<span class="time"> {$question.create_time|date='Y-m-d H:i',###} </span>

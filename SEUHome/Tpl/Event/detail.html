@@ -55,7 +55,7 @@
 									</div>
 									<div class="words">
 										<div class="n-t">
-											<span><a href="/user/{$comment.user_id}" class="name" >{$comment.user_name}</a></span>
+											<span><a href="/user/{$comment.user_id}" target="_blank" class="name" >{$comment.user_name}</a></span>
 											<span class="time">{$comment.create_time|date='Y-m-d H:i:s',###}</span>
 										</div>
 										<p>{$comment.content}</p>
@@ -89,7 +89,7 @@
 					<notempty name="Think.session.userName">
 						<input type="button" id="submit" value="评论">
 					<else/>
-						<a href="/login">要评论请先登陆</a>
+						<a href="/login" target="_blank">要评论请先登陆</a>
 					</notempty>
 				</div>
 			</div>

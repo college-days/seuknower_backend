@@ -42,7 +42,7 @@
 						</eq>
 					</ul>
 					<div class="my">
-						<a href="#">我的商品</a>
+						<a href="/user/sellon/{$Think.session.userId}" target="_blank">我的商品</a>
 						<span>|</span>
 						<a href="#">交易版规</a>
 					</div>
@@ -51,9 +51,9 @@
 					<span>东大通已经帮助</span><span class="total">{$selledcount}</span><span>件物品找到新主人</span>
 					<div>
 						<notempty name="Think.session.userName">
-							<a href="/market/new">+发布商品</a>
+							<a href="/market/new" target="_blank">+发布商品</a>
 						<else/>
-							<a href="/login">+发布商品</a>
+							<a href="/login" target="_blank">+发布商品</a>
 						</notempty>
 					</div>
 				</div>
@@ -76,17 +76,17 @@
 										</div>
 									</div>
 									<div class="title">
-										<a href="/market/commodity/{$commodity.id}"> {$commodity.title} </a>
+										<a href="/market/commodity/{$commodity.id}" target="_blank"> {$commodity.title} </a>
 									</div>
 									<div class="intro">
 										<span> {$commodity.intro} </span>
 									</div>
 									<div class="divide"></div>
 									<div class="seller">
-										<a href="/user/{$commodity.u_id}">
+										<a href="/user/{$commodity.u_id}" target="_blank">
 											<img src="{$commodity.u_icon}" class="img-responsive" style="width:21px;height:21px;"/>
 										</a>
-										<a href="/user/{$commodity.u_id}" class="name"> {$commodity.u_name} </a>
+										<a href="/user/{$commodity.u_id}" class="name" target="_blank"> {$commodity.u_name} </a>
 										<eq name="commodity.u_sex" value="male">
 											<span class="male"></span>
 										</eq>
