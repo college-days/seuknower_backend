@@ -1,5 +1,108 @@
 <?php
 	/**
+	* 生成指定长度的随机数函数，用于生成邮箱验证码
+	* @param int $length    随机数函数
+	* @return string 
+	*/
+	function createKey($length){
+		$numchar = array('0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+		for ($i=0; $i<$length; $i++){
+			$key = $key.$numchar[rand(0,61)];
+		}
+		return $key;
+	}
+
+	/**
+	* 根据学生一卡通号获得学生其他信息
+	* @param string $studentId    学生的一卡通号
+	* @return string arrary 
+	*		  'dept'			  院系
+	*		  'major'			  专业
+	*		  'stuNum'            学号
+	*		  'stuId'			  一卡通号
+	*		  'name'			  姓名	
+	*/
+	function getNameById($studentId){
+		import('Common.simple_html_dom',APP_PATH,'.php');
+		if(substr($studentId,0,3) == "213"){
+			$queryStudentId = $studentId;
+			$date = date('Y');
+			$date = substr($date,2);
+			$queryAcademicYear = $date-1;
+			$queryAcademicYear = $queryAcademicYear.'-'.$date.'-'.'1';
+			$url = "http://xk.urp.seu.edu.cn/jw_service/service/stuCurriculum.action?queryStudentId=$queryStudentId&queryAcademicYear=$queryAcademicYear";
+			$html = file_get_html($url);
+			$i = 0;
+			foreach($html->find("table td[align=left]") as $element){
+				$str = explode(":",$element->plaintext);
+				$temp[$i] = trim($str[1]);
+				$i++;
+			}
+			$info['dept'] = explode(']',$temp[0])[1];
+			$info['major'] = explode(']',$temp[1])[1];
+			$info['stuNum'] = $temp[2];
+			$info['stuId'] = $temp[3];
+			$info['name'] = $temp[4];
+		}
+		else{
+			$studentNum = substr($studentId,3);
+			$url = "http://202.119.4.150/nstudent/ggxx/xsggxxinfo.aspx?xh=".$studentNum;
+			$html = file_get_html($url);
+			//$info['url'] = $url;
+			//$info['html'] = $html;
+			$info['stuId'] = $studentId;
+			$info['stuNum'] = $studentNum ;
+			$info['name'] = $html->find("span[id=lblxm]", 0)->plaintext;
+			$info['dept'] = $html->find("span[id=lblyx]", 0)->plaintext;
+			$info['major'] = $html->find("span[id=lblzymc]", 0)->plaintext;
+		}
+		return $info;
+	}
+
+	/**
+	* 系统邮件发送函数
+	* @param string $to    接收邮件者邮箱
+	* @param string $name  接收邮件者名称
+	* @param string $subject 邮件主题 
+	* @param string $body    邮件内容
+	* @param string $attachment 附件列表
+	* @return boolean 
+	*/
+	function think_send_mail($to, $name, $subject = '', $body = '', $attachment = null){
+		$config = C('THINK_EMAIL');
+		vendor('PHPMailer.class#phpmailer'); //从PHPMailer目录导class.phpmailer.php类文件
+		$mail             = new PHPMailer(); //PHPMailer对象
+		$mail->CharSet    = 'UTF-8'; //设定邮件编码，默认ISO-8859-1，如果发中文此项必须设置，否则乱码
+		$mail->IsSMTP();  // 设定使用SMTP服务
+		$mail->IsHTML(true);
+		$mail->SMTPDebug  = 0;                     // 关闭SMTP调试功能
+                                               // 1 = errors and messages
+                                               // 2 = messages only
+		$mail->SMTPAuth   = true;                  // 启用 SMTP 验证功能
+		if($config['SMTP_PORT'] != 25){
+			//$mail->SMTPSecure = 'ssl'; 
+		}
+		//$mail->SMTPSecure = 'ssl';                 // 使用安全协议
+		$mail->Host       = $config['SMTP_HOST'];  // SMTP 服务器
+		$mail->Port       = $config['SMTP_PORT'];  // SMTP服务器的端口号
+		$mail->Username   = $config['SMTP_USER'];  // SMTP服务器用户名
+		$mail->Password   = $config['SMTP_PASS'];  // SMTP服务器密码
+		$mail->SetFrom($config['FROM_EMAIL'], $config['FROM_NAME']);
+		$replyEmail       = $config['REPLY_EMAIL']?$config['REPLY_EMAIL']:$config['FROM_EMAIL'];
+		$replyName        = $config['REPLY_NAME']?$config['REPLY_NAME']:$config['FROM_NAME'];
+		$mail->AddReplyTo($replyEmail, $replyName);
+		$mail->Subject    = $subject;
+		$mail->MsgHTML($body);
+		$mail->AddAddress($to, $name);
+		if(is_array($attachment)){ // 添加附件
+			foreach ($attachment as $file){
+				is_file($file) && $mail->AddAttachment($file);
+			}
+		}
+		return $mail->Send() ? true : $mail->ErrorInfo;
+	}
+
+	/**
 	 * 图片裁剪函数，支持指定定点裁剪和方位裁剪两种裁剪模式
 	 * @param <string>  $src_file       原图片路径
 	 * @param <int>     $new_width      裁剪后图片宽度（当宽度超过原图片宽度时，去原图片宽度）

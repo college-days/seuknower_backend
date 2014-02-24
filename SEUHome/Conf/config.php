@@ -38,6 +38,12 @@ return array(
 		'user/buy/:id\d$' => 'User/buy_commodity',
 		'login' => 'Account/login',
 		'logout' => 'Account/logout',
+		'register' => 'Account/register',
+		'account/check_login$' => 'Account/checkLogin',
+		'account/load_stuinfo$' => 'Account/loadStuInfo',
+		'account/check_verify$' => 'Account/checkVerify',
+		'account/check_register$' => 'Account/checkRegister',
+		'account/active_user/:id\d/:code$' => 'Account/activeUser',
 		'event/page/:id\d$' => 'Event/index',
 		'event/:tag/:time$'	=> 'Event/index',
 		'event/:tag/:time/page/:id\d$' => 'Event/index',
@@ -95,5 +101,16 @@ return array(
 	'USER_AUTH_KEY' => 'authId',			// 用户认证SESSION标记
 	'USER_AUTH_MODEL' => 'User',			// 默认验证数据表模型
 
+	//邮件发送配置
+    'THINK_EMAIL' => array(
+	    'SMTP_HOST'   => 'smtp.126.com', 				//SMTP服务器
+	    'SMTP_PORT'   => '25', 						//SMTP服务器端口
+	    'SMTP_USER'   => 'seutongchuang@126.com', 		//SMTP服务器用户名
+	    'SMTP_PASS'   => 'tongchuang', 					//SMTP服务器密码
+	    'FROM_EMAIL'  => 'seutongchuang@126.com', 		//发件人EMAIL
+	    'FROM_NAME'   => 'SEUKonwer', 					//发件人名称
+	    'REPLY_EMAIL' => '', 							//回复EMAIL（留空则为发件人EMAIL）
+	    'REPLY_NAME'  => '', 							//回复名称（留空则为发件人名称）
+	),
 );
 ?>

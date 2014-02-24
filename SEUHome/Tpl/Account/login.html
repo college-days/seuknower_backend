@@ -1,137 +1,28 @@
 <include file="Public:header" title="登录"/>
-		<script>
-	// Can also be used with $(document).ready()
-	$(window).load(function() {
-		$('.flexslider').flexslider({
-			animation: "slide",
-			directionNav: false, 
-		});
-		$('.searchbtn').click(function(){
-			$('#search_form').submit();
-		});
 
-		//js for login frontend check
-		var isa = false;
-		var isp = false;
-
-		function keydown(e){
-			var e = e || event;
-			if (e.keyCode==13)
-			{
-				//ThinkAjax.sendForm('login','__APP__/Public/checkLogin',complete,'result');
-			}
-		}
-		$(function(){
-			if($("#account").val().length>0){
-				$(".username").addClass("u_hide");
-			}
-			$("#account").focus(function(){
-				$(".username").addClass("u_focus");
-			})
-			$(".username .lab").unbind().click(function(){
-				$(".username").addClass("u_focus");
-				$("#account").focus();
-			})
-			$('#account').keyup(function(){
-				var len = $(this).val().length;
-				if(len>0){
-					if(!$(".username").hasClass("u_hide")){
-						$(".username").addClass("u_hide");
-					}
-				}else{
-					$(".username").removeClass("u_hide")
-				}
-			})
-			$('#account').blur(function(){
-				$(".username").removeClass("u_focus");
-				if(!$(this).val().replace(/[ ]/g,"")){
-					$("#emtip").show();
-					$("#emtip").text('帐户不能为空');
-					isa = false;
-				}
-				/*else if($(this).val().match("@") == null){
-					$("#emtip").show();
-					$("#emtip").text('帐户格式不正确');
-					isa = false;
-				}*/
-				else{
-					$("#emtip").hide();
-					isa = true;
-				}
-			});
-			$('#password').blur(function(){
-				if(!$(this).val().replace(/[ ]/g,"")){
-					$("#pwdtip").show();
-					$("#pwdtip").text('密码不能为空');
-					isp = false;
-				}
-				else{
-					$("#pwdtip").hide();
-					isp = true;
-				}
-			});
-			
-			//ajax
-			$('#submit').click(function(){
-				alert('cleantha');
-				alert(isa);
-				alert(isp);
-				alert($('#account').val()+"@seu.edu.cn");
-				if(isa && isp){
-					$.post('__URL__/checkLogin',{
-						account:$('#account').val()+"@seu.edu.cn", 
-						password:$('#password').val(), 
-						rememberme:document.getElementById('rememberme').checked},
-						function(data){
-							if(data.status){
-								window.location.href = '__APP__/index';
-							}else{
-								alert(data.info);	
-							} 
-					},'json');
-				}
-			});
-			
-		});
-		
-	});
-	</script>
-	<!--<form id="login" action="">
-		<div id="emtip" class="tip"></div>
-		<label for="account">用户名</label>
-		<input type="text" name="account"  id="account" value="" />
-		<br />
-		<div id="pwdtip" class="tip"></div>
-		<label for="password">密码</label>
-		<input type="password" name="password" id="password" onKeyDown="keydown(event)" />
-		<br />
-
-		<label for="rememberme">记住登录状态</label></div>
-		<input type="checkbox" checked="checked" id="rememberme" name="rememberme">
-
-		<input type="button" value="登录" id="submit" name="loginsub">
-		<a target="_blank" href="#">忘记密码？</a>
-	</form>-->
-	<div class="register">
-		<div class="blank">
-		    <div class="white">
-				<div class="title"><span>登录</span></div>
-				<div class="info"> 
-					<div class="row">
-						<div id="emtip" class="tip"></div>
-						<span class="key">邮箱</span><input class="value  num" type="text" id="account"/><span class="text">@seu.edu.cn</span>
-					</div>
-					<div class="row">
-						<div id="pwdtip" class="tip"></div>
-						<span class="key">密码</span><input class="value" type="text" id="password"/>
-					</div>
-
-				</div>
-				<input type="button" value="确定" class="btn" id="submit"/>
-				<label for="rememberme">记住登录状态</label></div>
-				<input type="checkbox" checked="checked" id="rememberme" name="rememberme">
+<div class="register">
+	<div class="blank">
+    <div class="white">
+		<div class="title"><span>登录</span></div>
+		<div class="info"> 
+			<div class="row">
+				<span class="key">邮箱</span>
+				<input class="value num" type="text" id="username" placeholder="请输入注册时的一卡通"/>
+				<span class="text">@seu.edu.cn</span>
+				<span class="tip" id="usernamealert"></span>
+			</div>
+			<div class="row">
+				<span class="key">密码</span>
+				<input class="value" type="password" id="password" placeholder="请输入注册时的密码"/>
+				<span class="tip" id="passwordalert"></span>
+			</div>
+			<div class="row">
+				<input type="checkbox" class="check" id="rememberme"/><span>记住密码</span><a href="#" class="forget">忘了密码？</a>
 			</div>
 		</div>
+		<input type="button" value="确定" class="btn" id="submit"/>
 	</div>
-
+	</div>
+</div>
+<script src="__JS__/auth/login.js"></script>
 <include file="Public:footer" />
