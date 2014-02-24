@@ -174,7 +174,8 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .activity .left .divide{margin-top:20px;border-bottom:solid 1px #e5e5e5;margin-bottom:20px;}
 .activity .left .title-line{font-size:16px;color:#7a6c59;border-left:solid 2px #7a6c59;margin-left:-21px;padding-left:19px;}
 .activity .left .title{font-size:16px;color:#7a6c59;}
-.activity .user-recommend{padding:20px;border:solid 1px #e5e5e5;background:white;}
+/*.activity .user-recommend{padding:20px;border:solid 1px #e5e5e5;background:white;}*/
+.activity .user-recommend{padding:20px;padding-right:10px;border:solid 1px #e5e5e5;background:white;}
 .activity .user-recommend .user{margin-top:20px;margin-left:10px;}
 .activity .user-recommend .icon{float:left;margin-right:12px;}
 .activity .user-recommend .icon img{width:40px;height:40px;border-radius:50%;}
@@ -186,7 +187,8 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .activity .user-recommend .interest span{margin-left:10px;font-size:14px;color:#80827f;}
 .activity .user-recommend .interest .line{padding:0px 10px;}
 .activity .user-recommend ul{margin-top:15px;}
-.activity .user-recommend li{margin-top:10px;}
+/*.activity .user-recommend li{margin-top:10px;}*/
+.activity .user-recommend li{margin-top:10px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
 .activity .user-recommend li a{font-size:14px;color:#80827f;line-height:18px;}
 
 .activity .page{float:left;margin-top:65px;margin-left: 300px;}
@@ -206,13 +208,17 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .activity .column{margin-top:15px;width:217px;float:left;margin-left:20px;}
 .activity .column .content{border:solid 1px #e5e5e5;background:white;margin-bottom:20px;}
 .activity .column .content   img{width:215px;}
-.activity .column .content .info{padding:20px;}
+/*.activity .column .content .info{padding:20px;}*/
+.activity .column .content .info{padding:20px 20px 16px;}
 .activity .column .content .info a{font-size:16px;line-height:20px;text-align:center;}
 .activity .column .content .info a:hover{color:#2ead91;}
-.activity .column .content .info dt{margin-bottom:30px;}
+/*.activity .column .content .info dt{margin-bottom:30px;}*/
+.activity .column .content .info dt{margin-bottom:10px;}
 .activity .column .content .info dd{text-align:center;line-height:18px;color:#808280;}
 .activity .column .content .info dd span{margin:0px 12px;}
-.activity .column .content .info .interest{margin-top:20px;}
+/*.activity .column .content .info .interest{margin-top:20px;}*/
+.activity .column .content .info .interest{margin-top:18px;}
+
 
 /*活动详情页*/
 .activity-detail{padding-top:38px;padding-bottom:58px;}
