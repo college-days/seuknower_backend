@@ -41,13 +41,15 @@
 				</div>
 
 				<div class="row">
-					<div id="introalert" style="color:red;margin-left:71px;display:none;">没有填写商品详情</div>
+					<div id="introalert" style="color:red;margin-left:71px;display:none;">没有填写商品描述</div>
 				</div>
 				<div class="row">
-					<span class="key">商品详情</span><textarea id="commodityintro" name="intro"></textarea>
+					<span class="key">商品描述</span><textarea id="commodityintro" name="intro"></textarea>
 				</div>
 
-				<div id="statusalert" style="color:red;margin-left:71px;"></div>
+				<div class="row">
+					<div id="statusalert" style="color:red;margin-left:71px;"></div>
+				</div>
 				<div class="row">
 					<span class="key">成色(请填写数字1-9即可)</span><input type="text" class="value short" id="commoditystatus" name="status"/>
 				</div>
@@ -56,6 +58,13 @@
 				</div>
 				<div class="row">
 					<span class="key">联系方式</span><input class="value short" type="text" id="commoditycontact" name="phone"/><label style="margin-left:15px">(手机号码或者邮箱地址)</label>
+				</div>
+
+				<div class="row">
+					<div id="gettimealert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">入手时间</span><input type="text" class="value short" id="gettime" name="gettime"/>
 				</div>
 				<div class="row">
 					<div id="picturealert" style="color:red;margin-left:71px;"></div>
@@ -96,8 +105,8 @@
 		</div>
 	</div>
 	<link href="__CSS__/jquery.Jcrop.css" rel="stylesheet" type="text/css"/>
-	<script src="__JS__/market/market_new.js"></script>
 	<script src="__JS__/jquery.Jcrop.js"></script>
 	<script src="__JS__/jquery.color.js"></script>
 	<script src="__JS__/ajaxfileupload.js"></script>
+	<script src="__JS__/market/market_new.js"></script>
 <include file="Public:footer" />

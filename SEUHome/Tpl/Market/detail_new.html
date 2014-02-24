@@ -50,7 +50,11 @@
 										<else/>
 											<dd>成色：{$commodity.status}成新</dd>
 										</eq>
-										<dd>入手时间：{$commodity.create_time|date='Y-m-d',###}</dd>
+										<eq name="commodity.getittime" value="0">
+											<dd>入手时间：卖家还没有编辑</dd>
+										<else/>
+											<dd>入手时间：{$commodity.getittime|date='Y-m-d',###}</dd>
+										</eq>
 										<dd>校区：{$commodity.location}</dd>
 										<dd>联系方式：<span>{$commodity.phone}</span></dd>
 									</dl>
