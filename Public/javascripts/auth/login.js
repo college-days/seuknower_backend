@@ -32,9 +32,6 @@ $(function(){
 	
 	//ajax
 	$('#submit').click(function(){
-		alert($('#username').val()+"@seu.edu.cn");
-		alert($('#password').val());
-		alert(document.getElementById('rememberme').checked);
 		if(isa && isp){
 			$.post('account/check_login', {
 				account: $('#username').val()+"@seu.edu.cn", 
