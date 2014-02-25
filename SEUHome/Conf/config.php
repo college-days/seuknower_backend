@@ -18,6 +18,7 @@ return array(
 		'answer/add_agree' => 'Answer/addAgree',
 		'answer/cancel_agree' => 'Answer/cancelAgree',
 		'answer/add_object'	=> 'Answer/addObject',
+		'answer/add_reply$' => 'Answer/addReply',
 		'answer/cancel_object' => 'Answer/cancelObject',
 		'answer/add_answer' => 'Answer/addAnswer',
 		'user/:id\d$' => 'User/index',

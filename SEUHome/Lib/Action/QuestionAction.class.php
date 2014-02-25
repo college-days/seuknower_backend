@@ -187,22 +187,19 @@ class QuestionAction extends Action {
 
 			$AnswerInfo[$i]['content'] = htmlspecialchars_decode($AnswerInfo[$i]['content']);
 
-			$Support = M('SupportAnswer');
-			if($Support->where("u_id = $userId AND a_id =".$AnswerInfo[$i]['id'])->find()){
-				$AnswerInfo[$i]['support'] = 1;
-
+			//添加实名回答的所有评论和回复
+			$AnswerReply = M('AnswerReply');
+			$User = M('User');
+			$replyMap['a_id'] = $AnswerInfo[$i]['id'];
+			$replys = $AnswerReply->where($replyMap)->select();
+			for($j=0; $j<count($replys); $j++){
+				$replyUser = $User->where('id='.$replys[$j]['u_id'])->find();
+				$replys[$j]['u_name'] = $replyUser['name'];
+				$replys[$j]['u_id'] = $replyUser['id'];
+				$replys[$j]['avatar'] = $replyUser['icon'];
+				$replys[$j]['content'] = htmlspecialchars_decode($replys[$j]['content']);
 			}
-			else{
-				$AnswerInfo[$i]['support'] = 0;
-			}
-
-			$Nonsupport = M('NonsupportAnswer');
-			if($Nonsupport->where("u_id = $userId AND a_id =".$AnswerInfo[$i]['id'])->find()){
-				$AnswerInfo[$i]['nonsupport'] = 1;
-			}
-			else{
-				$AnswerInfo[$i]['nonsupport'] = 0;
-			}
+			$AnswerInfo[$i]['replys'] = $replys;
 		}
 
 		for($i=0; $i<count($AnonymousInfo); $i++){
@@ -236,7 +233,7 @@ class QuestionAction extends Action {
 		$this->assign('hots',$hotQuestions);
 		$this->assign('lsquestions', $this->getLatestSolvedQuestion());
 
-		$this->display('detail');
+		$this->display('detail_new');
 	}
 
 	public function addQuestion(){

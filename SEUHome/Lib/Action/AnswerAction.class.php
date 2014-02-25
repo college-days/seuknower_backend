@@ -191,5 +191,20 @@ class AnswerAction extends Action {
 			$this->ajaxReturn('', '', -1);
 		}
 	}
+
+	public function addReply(){
+		$data['a_id'] = I('param.a_id');
+		$data['u_id'] = session('userId');
+		$data['content'] = I('param.msg');
+		$data['create_time'] = time();
+
+		$AnswerReply = M('AnswerReply');
+		$result = $AnswerReply->add($data);
+		if($result < 1){
+			$this->ajaxReturn('', '', 0);
+		}else{
+			$this->ajaxReturn('', '', 1);
+		}
+	}
 }
 ?>
