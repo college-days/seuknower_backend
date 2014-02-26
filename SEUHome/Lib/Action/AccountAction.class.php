@@ -188,6 +188,6 @@ class AccountAction extends Action{
 			$this->error('激活码不正确！');
 		}
 	}
-	
+
 }
 ?>

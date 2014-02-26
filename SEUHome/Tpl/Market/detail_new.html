@@ -100,7 +100,7 @@
 						<div class="list">
 							<ul>
 								<volist name="comments" id="comment">
-									<li>
+									<li uname="{$comment.user_name}" uid="{$comment.user_id}">
 										<div class="icon">
 											<img src="{$comment.icon}">
 										</div>
@@ -136,11 +136,11 @@
 						<div class="title">
 							我来评论
 						</div>
-						<textarea id="editor_id" name="content" style="width:100%;height:300px"></textarea>
 						<notempty name="Think.session.userName">
+							<textarea id="editor_id" name="content" style="width:100%;height:300px"></textarea>
 							<input type="button" id="submit" value="评论">
 						<else/>
-							<a href="/login" target="_blank">要评论请先登陆</a>
+							<a href="/login">要评论请先登陆</a>
 						</notempty>
 					</div>
 				</div>

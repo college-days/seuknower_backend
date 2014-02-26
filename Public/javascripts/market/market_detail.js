@@ -61,36 +61,10 @@ $(function(){
 	$("#submit").click(function(){
 		$("div.alert").hide();
 		var content = window.editor.html();
-		var at = content.match(/<strong>@.*?<\/strong>/);
-
-		if(at){
-			content = content.replace(/<strong>@.*?<\/strong>/, "");
-			var atUserName = String(String(at).replace(/<strong>@/, "")).replace(/<\/strong>/, "");
-			atUserName = String(atUserName).replace(/[ ]/g, "");
-			var atUserId = $("li[uname='"+atUserName+"']").attr("uid");
-			var finalContent = "<a href='/user/"+atUserId+"' target='_blank'>"+at+"</a>" + content;
-		}else{
-			var finalContent = content;
-		}
-
-		var commodity_id = $("#commodity_id").text();
+		content = content.replace(/<strong>@.*?<\/strong>/, "");
 		if(content.replace(/[ ]/g, "")){
-			$.post('/market/add_comment',{
-				commodity_id: commodity_id,
-				content: finalContent,
-			}, function(data){
-				if(data.status == 1){
-					window.location.reload();	
-				}
-				if(data.status == 0){
-					$("#failmsg").show();
-				}
-				if(data.status == -1){
-					window.location.href = "/login";
-				}
-			},'json');
-		}
-		else{
+			showVerify();
+		}else{
 			$('#answermsg').show();
 		}
     });
@@ -127,3 +101,109 @@ $(function(){
 	});
 
 });
+
+function submitComment(){
+	$("div.alert").hide();
+	var content = window.editor.html();
+	var at = content.match(/<strong>@.*?<\/strong>/);
+
+	if(at){
+		content = content.replace(/<strong>@.*?<\/strong>/, "");
+		var atUserName = String(String(at).replace(/<strong>@/, "")).replace(/<\/strong>/, "");
+		atUserName = String(atUserName).replace(/[ ]/g, "");
+		var atUserId = $("li[uname='"+atUserName+"']").attr("uid");
+		var finalContent = "<a href='/user/"+atUserId+"' target='_blank'>"+at+"</a>" + content;
+	}else{
+		var finalContent = content;
+	}
+
+	var commodity_id = $("#commodity_id").text();
+	if(content.replace(/[ ]/g, "")){
+		$.post('/market/add_comment',{
+			commodity_id: commodity_id,
+			content: finalContent,
+		}, function(data){
+			if(data.status == 1){
+				window.location.reload();	
+			}
+			if(data.status == 0){
+				$("#failmsg").show();
+			}
+			if(data.status == -1){
+				window.location.href = "/login";
+			}
+		},'json');
+	}
+	else{
+		$('#answermsg').show();
+	}
+}
+
+//for verify dialog
+function showVerify(){
+	var verifytop = $(".speak").offset().top;
+	if($(".verifywin").length > 0) {
+		removeVerifyCode();
+	}
+	else{
+		newVerifyCode();
+		$(".verifywin").css('top', verifytop);
+	}
+}
+
+function newVerifyCode(){
+	initVerifyCode();
+
+	$(".verifyclose").click(function(){
+		removeVerifyCode();
+	});
+	
+	$(".verifymask").click(function(){
+		removeVerifyCode();
+	});
+
+	$(".verifysubmit").click(function(){
+		var verifycode = $(".verifycode").val();
+		if(verifycode.replace(/[ ]/g, "")){
+			$.post('/account/check_verify', {
+	            verify: verifycode
+	        }, function(data) {
+	            if (!data.status){
+					$('.verifycodealert').text("验证码不正确");
+				}
+				else {
+					removeVerifyCode();
+					$('#verifycodealert').text("");
+					submitComment();
+				}
+	        }, 'json');
+		}else{
+			$(".verifycodealert").text("请填写验证码");
+		}
+		
+	});
+
+}
+
+function initVerifyCode(){
+	var newMask = document.createElement("div");
+	newMask.id = 'verifymask';  
+	newMask.className = "verifymask";
+	newMask.style.width = document.body.scrollWidth + "px";
+	newMask.style.height = document.body.scrollHeight + "px";
+		
+	var newWin = document.createElement("div");
+	newWin.id = 'verifywin';
+	newWin.className = "verifywin";
+	newWin.style.left = (parseInt(document.body.scrollWidth) - 544)/2 + "px";
+	var html = '<div class="title-bar"><span>请输入验证码</span><div class="verifyclose"></div></div><div class="content"><div class="verifycodealert" style="color:red;"></div><img src="/account/verifycode"><input type="text" class="verifycode"><input type="button" value="确认" class="verifysubmit"></div>';
+	newWin.innerHTML = html;
+
+	document.body.appendChild(newMask);
+	document.body.appendChild(newWin);
+}
+
+function removeVerifyCode(){
+	document.body.removeChild(document.getElementById('verifymask'));
+	document.body.removeChild(document.getElementById('verifywin'));
+}

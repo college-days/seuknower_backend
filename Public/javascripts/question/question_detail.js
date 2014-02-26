@@ -29,7 +29,7 @@ $(function(){
 	$("#changedialog").hide();
 
 	$("a.modify").click(function(){
-		var answerContent = $(this).parents("div.words").find("p").html();
+		var answerContent = $(this).parents("div.words").find("div.answercontent").html();
 		var answerId = $(this).parents("li").attr("aid");
 		$(".mask").show();
 		$("#changedialog").show();
@@ -60,6 +60,7 @@ $(function(){
 				'content': content 
 			}, function(data){
 				if(data.status == 1){
+					window.editor = answerEditor;
 					window.location.reload();
 				}
 				if(data.status == 0){
@@ -261,79 +262,22 @@ $(function(){
 	$("#submit").click(function(){
 		$("div.alert").hide();
 		var content = window.editor.html();
-		var at = content.match(/<strong>@.*?<\/strong>/);
-
-		if(at){
-			content = content.replace(/<strong>@.*?<\/strong>/, "");
-			var atUserName = String(String(at).replace(/<strong>@/, "")).replace(/<\/strong>/, "");
-			atUserName = String(atUserName).replace(/[ ]/g, "");
-			var atUserId = $("li[uname='"+atUserName+"']").attr("uid");
-			var finalContent = "<a href='/user/"+atUserId+"' target='_blank'>"+at+"</a>" + content;
-		}else{
-			var finalContent = content;
-		}
-
-		var qid = $("#question").attr("qid");
+		content = content.replace(/<strong>@.*?<\/strong>/, "");
 		if(content.replace(/[ ]/g, "")){
-			$.post('/answer/add_answer',{
-				q_id: qid,
-				content: finalContent,
-				anonymous: 0
-			}, function(data){
-				if(data.status == 1){
-					window.location.reload();	
-				}
-				if(data.status == 0){
-					$("#failmsg").show();
-				}
-				if(data.status == 3){
-					$("#limitmsg").show();
-				}
-				if(data.status == -1){
-					window.location.href = "/login";
-				}
-			},'json');
-		}
-		else{
-			$('#answermsg').show();
+			showVerify(false);
+		}else{
+			$("#answermsg").show();
 		}
     });
 
     $('#anonymous_submit').click(function(){
-		$("div.alert").hide();
+    	$("div.alert").hide();
 		var content = window.editor.html();
-		var at = content.match(/<strong>@.*?<\/strong>/);
-		if(at){
-			content = content.replace(/<strong>@.*?<\/strong>/, "");
-			var atUserName = String(String(at).replace(/<strong>@/, "")).replace(/<\/strong>/, "");
-			atUserName = String(atUserName).replace(/[ ]/g, "");
-			var atUserId = $("li[uname='"+atUserName+"']").attr("uid");
-			var finalContent = "<a href='/user/"+atUserId+"' target='_blank'>"+at+"</a>" + content;
-		}else{
-			var finalContent = content;
-		}
-
-		var qid = $("#question").attr("qid");
+		content = content.replace(/<strong>@.*?<\/strong>/, "");
 		if(content.replace(/[ ]/g, "")){
-			$.post('/answer/add_answer', {
-				"q_id": qid,
-				"content": finalContent, 
-				"anonymous": 1
-			}, function(data){
-				if(data.status == 1){
-					window.location.reload();	
-				}
-				if(data.status == 0){
-					$("#failmsg").show();
-				}
-				if(data.status == -1){
-					window.location.href = "/login";
-				}
-				
-			}, 'json');
-		}
-		else{
-			$('#answermsg').show();
+			showVerify(true);
+		}else{
+			$("#answermsg").show();
 		}
     });
 
@@ -358,3 +302,155 @@ $(function(){
     });
 });
 });
+
+function submitComment(){
+	$("div.alert").hide();
+	var content = window.editor.html();
+	var at = content.match(/<strong>@.*?<\/strong>/);
+
+	if(at){
+		content = content.replace(/<strong>@.*?<\/strong>/, "");
+		var atUserName = String(String(at).replace(/<strong>@/, "")).replace(/<\/strong>/, "");
+		atUserName = String(atUserName).replace(/[ ]/g, "");
+		var atUserId = $("li[uname='"+atUserName+"']").attr("uid");
+		var finalContent = "<a href='/user/"+atUserId+"' target='_blank'>"+at+"</a>" + content;
+	}else{
+		var finalContent = content;
+	}
+
+	var qid = $("#question").attr("qid");
+	if(content.replace(/[ ]/g, "")){
+		$.post('/answer/add_answer',{
+			q_id: qid,
+			content: finalContent,
+			anonymous: 0
+		}, function(data){
+			if(data.status == 1){
+				window.location.reload();	
+			}
+			if(data.status == 0){
+				$("#failmsg").show();
+			}
+			if(data.status == 3){
+				$("#limitmsg").show();
+			}
+			if(data.status == -1){
+				window.location.href = "/login";
+			}
+		},'json');
+	}
+	else{
+		$('#answermsg').show();
+	}
+}
+
+function submitCommentAnonymous(){
+	$("div.alert").hide();
+	var content = window.editor.html();
+	var at = content.match(/<strong>@.*?<\/strong>/);
+	if(at){
+		content = content.replace(/<strong>@.*?<\/strong>/, "");
+		var atUserName = String(String(at).replace(/<strong>@/, "")).replace(/<\/strong>/, "");
+		atUserName = String(atUserName).replace(/[ ]/g, "");
+		var atUserId = $("li[uname='"+atUserName+"']").attr("uid");
+		var finalContent = "<a href='/user/"+atUserId+"' target='_blank'>"+at+"</a>" + content;
+	}else{
+		var finalContent = content;
+	}
+
+	var qid = $("#question").attr("qid");
+	if(content.replace(/[ ]/g, "")){
+		$.post('/answer/add_answer', {
+			"q_id": qid,
+			"content": finalContent, 
+			"anonymous": 1
+		}, function(data){
+			if(data.status == 1){
+				window.location.reload();	
+			}
+			if(data.status == 0){
+				$("#failmsg").show();
+			}
+			if(data.status == -1){
+				window.location.href = "/login";
+			}
+			
+		}, 'json');
+	}
+	else{
+		$('#answermsg').show();
+	}
+}
+
+//for verify dialog
+function showVerify(isanonymous){
+	var verifytop = $(".speak").offset().top;
+	if($(".verifywin").length > 0) {
+		removeVerifyCode();
+	}
+	else{
+		newVerifyCode(isanonymous);
+		$(".verifywin").css('top', verifytop);
+	}
+}
+
+function newVerifyCode(isanonymous){
+	initVerifyCode();
+
+	$(".verifyclose").click(function(){
+		removeVerifyCode();
+	});
+	
+	$(".verifymask").click(function(){
+		removeVerifyCode();
+	});
+
+	$(".verifysubmit").click(function(){
+		var verifycode = $(".verifycode").val();
+		if(verifycode.replace(/[ ]/g, "")){
+			$.post('/account/check_verify', {
+	            verify: verifycode
+	        }, function(data) {
+	            if (!data.status){
+					$('.verifycodealert').text("验证码不正确");
+				}
+				else {
+					removeVerifyCode();
+					$('#verifycodealert').text("");
+					if(isanonymous){
+						submitCommentAnonymous();
+					}else{
+						submitComment();
+					}
+				}
+	        }, 'json');
+		}else{
+			$(".verifycodealert").text("请填写验证码");
+		}
+		
+	});
+
+}
+
+function initVerifyCode(){
+	var newMask = document.createElement("div");
+	newMask.id = 'verifymask';  
+	newMask.className = "verifymask";
+	newMask.style.width = document.body.scrollWidth + "px";
+	newMask.style.height = document.body.scrollHeight + "px";
+		
+	var newWin = document.createElement("div");
+	newWin.id = 'verifywin';
+	newWin.className = "verifywin";
+	newWin.style.left = (parseInt(document.body.scrollWidth) - 544)/2 + "px";
+	var html = '<div class="title-bar"><span>请输入验证码</span><div class="verifyclose"></div></div><div class="content"><div class="verifycodealert" style="color:red;"></div><img src="/account/verifycode"><input type="text" class="verifycode"><input type="button" value="确认" class="verifysubmit"></div>';
+	newWin.innerHTML = html;
+
+	document.body.appendChild(newMask);
+	document.body.appendChild(newWin);
+}
+
+function removeVerifyCode(){
+	document.body.removeChild(document.getElementById('verifymask'));
+	document.body.removeChild(document.getElementById('verifywin'));
+}
