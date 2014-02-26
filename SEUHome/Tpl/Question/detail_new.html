@@ -3,7 +3,7 @@
 	<div class="question-detail">
 		<div class="container">
 			<div class="left">
-				<div id="question" qid="{$question.id}" style="display:none;"></div>
+				<div id="question" qid="{$question.id}" uid="{$Think.session.userId}" style="display:none;"></div>
 				<div class="title">
 					<span> {$question.title} </span>
 					<a href="/question/{$question.type}" class="tag" target="_blank"> {$question.type} </a>
@@ -89,7 +89,7 @@
                                         </span>
                                         <span class="time"> {$answer.create_time|date='Y-m-d H:i',###} </span>
                                     </div>
-                                    <p> {$answer.content} </p>
+                                    <p>{$answer.content}</p>
                                     <div>
                                         <eq name="answer.anonymous" value="0">
                                         	<notempty name="Think.session.userId">
@@ -98,7 +98,10 @@
 	                                        	<a href="/login" class="reply" target="_blank">评论</a>
 		                                    </notempty>
                                         </eq>
-                                      
+                                       	<eq name="answer.anonymous" value="0">
+                                   			<a href="#" class="modify" uid="{$answer.u_id}" style="display:none;">修改</a>
+                                        </eq>
+
                                     </div>
                                 </div>
                             </div>
@@ -176,20 +179,56 @@
 				<div class="title">
 					提问者
 				</div>
-				<div class="seller">
-					<div class="icon">
-						<img src="images/avat_02.jpg"/>
-					</div>
-					<div class="name-tag">
-						<div class="name">
-							<span class="female"></span>
-							<a href="#">Lolly</a>
-						</div>
-						<div class="tag">
-							好好学习。。。
-						</div>
-					</div>
-				</div>
+				<eq name="question.anonymous" value="0">
+                <div class="seller">
+                    <div class="icon">
+                        <img src="{$question.icon}"/>
+                    </div>
+                    <div class="name-tag">
+                        <div class="name">
+                            <eq name="question.u_sex" value="male">
+                                <span class="male"></span>
+                            </eq>
+                            <eq name="question.u_sex" value="female">
+                                <span class="female"></span>
+                            </eq>
+                            <eq name="question.u_sex" value="none">
+                                不详
+                            </eq>
+                            <a href="/user/{$question.u_id}" target="_blank"> {$question.u_name} </a>
+                        </div>
+                        <empty name="question.u_intro">
+                            <eq name="question.u_sex" value="male">
+                                他还没有写简介
+                            </eq>
+                            <eq name="question.u_sex" value="female">
+                                她还没有写简介
+                            </eq>
+                            <eq name="question.u_sex" value="none">
+                                还没有写简介
+                            </eq>
+                        <else/>
+                            <eq name="question.u_id" value="1">
+                                <div class="tag">官方帐号</div>
+                            <else/>
+                                <div class="tag">
+                                    {$question.u_intro}
+                                </div>
+                            </eq>
+                        </empty>
+                    </div>
+                </div>
+                <else/>
+                    <div class="seller">
+                        <div class="icon">
+                        </div>
+                        <div class="name-tag">
+                            <div class="name">
+                                <a href="#"> 匿名用户 </a>
+                            </div>
+                        </div>
+                    </div>
+                </eq>
 				<div class="title">
 					热门问题
 				</div>
@@ -220,15 +259,32 @@
 		<div class="clear">
 		</div>
 	</div>
+	<div class="win" id="changedialog" style="display:none;">
+		<div style="display:none;" id="changeanswerid"></div>
+		<div class="title-bar">
+			<span>修改答案</span>
+			<div class="close" id="closechange">
+			</div>
+		</div>
+		<textarea id="changearea" style="width:100%;height:300px"></textarea>
+		<div class="content">
+			<div class="question-new" style="display:block;">
+				<div id="changepwdalert" style="display:block;color:red;"></div>
+				<input type="password" class="value" id="changepwd" placeholder="请输入密码"/>
+				<div>
+					<input type="button" id="applychange" value="确定修改" class="btn"/>
+				</div>
+			</div>
+		</div>
+	</div>
+		
 
 <link rel="stylesheet" href="__EDITOR__/themes/default/default.css" />
 <script charset="utf-8" src="__EDITOR__/kindeditor-all-min.js"></script>
 <script charset="utf-8" src="__EDITOR__/lang/zh_CN.js"></script>
 
 <script>
-    KindEditor.ready(function(K) {
-        window.editor = K.create('#editor_id');
-    });
+
 </script>
 <script src="__JS__/question/question_detail.js"></script>
 <include file="Public:footer" />

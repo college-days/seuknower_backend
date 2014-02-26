@@ -206,5 +206,30 @@ class AnswerAction extends Action {
 			$this->ajaxReturn('', '', 1);
 		}
 	}
+
+	public function changeContent(){
+		$aid = I('param.a_id');
+		$content = I('param.content');
+		$pwd = I('param.pwd');
+
+		$Answer = M('Answer');
+		$User = M('User');
+
+		$answer = $Answer->where("id=".$aid)->find();
+		$user = $User->where("id=".$answer['u_id'])->find();
+
+		if(md5($pwd) != $user['pwd']){
+			//密码不正确
+			$this->ajaxReturn('', '', -1);
+		}else{
+			$answerSaveData['content'] = $content;
+			$result = $Answer->where('id='.$aid)->save($answerSaveData);
+			if($result){
+				$this->ajaxReturn('', '', 1);
+			}else{
+				$this->ajaxReturn('', '', 0);
+			}
+		}
+	}
 }
 ?>

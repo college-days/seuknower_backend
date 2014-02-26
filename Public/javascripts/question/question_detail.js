@@ -1,3 +1,83 @@
+var answerEditor;
+var changeEditor;
+
+KindEditor.ready(function(K) {
+	answerEditor = K.create("#editor_id");
+	changeEditor = K.create("#changearea");
+    window.editor = answerEditor;
+
+	$("a.modify").click(function(){
+    	window.editor = changeEditor;
+    });
+	$(".closechange").click(function(){
+		window.editor = answerEditor;
+	});
+	$(".mask").click(function(){
+		window.editor = answerEditor;
+	});
+
+$(function(){
+	var newMask = document.createElement("div");
+	newMask.className = "mask";
+	newMask.style.width = document.body.scrollWidth + "px";
+	newMask.style.height = document.body.scrollHeight + "px";
+	document.body.appendChild(newMask);
+
+	$('#changedialog').css('left', (parseInt(document.body.scrollWidth) - 544)/2); 
+
+	$('.mask').hide();
+	$("#changedialog").hide();
+
+	$("a.modify").click(function(){
+		var answerContent = $(this).parents("div.words").find("p").html();
+		var answerId = $(this).parents("li").attr("aid");
+		$(".mask").show();
+		$("#changedialog").show();
+        window.editor.focus();
+        window.editor.appendHtml(answerContent);
+        $("#changeanswerid").text(answerId);
+	});
+	
+	$("#closechange").click(function(){
+		$(".win").css("display","none");
+		$(".mask").css("display","none");
+	});
+	
+	$(".mask").click(function(){
+		$(".win").css("display","none");
+		$(".mask").css("display","none");
+	});
+	
+	$("#applychange").click(function(){
+		var content = window.editor.html();
+		var pwd = $("#changepwd").val();
+		var aid = $("#changeanswerid").text();
+		if(pwd.replace(/[ ]/g, "")){
+			$("#changepwdalert").text("");
+			$.post('/answer/change_content', {
+				'a_id': aid,
+				'pwd': pwd,
+				'content': content 
+			}, function(data){
+				if(data.status == 1){
+					window.location.reload();
+				}
+				if(data.status == 0){
+					$("#changepwdalert").text("回答更新失败，请稍后再试");
+				}
+				if(data.status == -1){
+					$("#changepwdalert").text("密码不正确");
+				}
+			}, 'json');
+		}else{
+			$("#changepwdalert").text("请输入密码");
+		}
+	});
+
+	var sessionUserid = $("#question").attr("uid");
+	$("a[uid='"+sessionUserid+"']").show();
+});
+
 $(function(){
     var atUserId = 0;
     $(".reply").click(function(){
@@ -30,6 +110,7 @@ $(function(){
 
     $(".sendreply").click(function(){
     	var replyMsg = $(this).parents("div.reply-content").find("input.write").val();
+    	replyMsg = String(String(replyMsg).replace(/<script>/, "")).replace(/<\/script>/, "");
   		var at = replyMsg.match(/@.*?\t/);
   		var current = $(this);
 
@@ -275,4 +356,5 @@ $(function(){
         }
 
     });
+});
 });

@@ -542,6 +542,8 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .question-detail .left .answer .reply:hover{background:url(images/reply_orange.png) no-repeat;color:#f49f21;display:inline-block;}
 .question-detail .left .answer .replytoreply{float:right;background:url(images/icon.gif) no-repeat 0 -144px;padding-left:22px;color:#80827f;}
 .question-detail .left .answer .replytoreply:hover{background:url(images/reply_orange.png) no-repeat;color:#f49f21;display:inline-block;}
+.question-detail .left .answer .modify{float:right;background:url(images/modify_grey.png) no-repeat;padding-left:22px;color:#80827f;margin-right:20px;}
+.question-detail .left .answer .modify:hover{background:url(images/modify_orange.png) no-repeat;color:#f49f21;display:inline-block;}
 .question-detail .left .answer .delete{background:url(images/delete_grey.png) no-repeat;float:right;padding-left:20px;color:#80827f;background-position:0px 2px;}
 .question-detail .left .answer .delete:hover{background:url(images/delete_red.png) no-repeat;color:#cd3b3c;}
 
@@ -736,13 +738,13 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 
 /*问题弹出框*/
 .mask{position:absolute;z-index:100;top:0px;left:0px;background:black;opacity:0.30;}
-.win{position:absolute;z-index:9999;width:554px;top:50px;background:white;}
+.win{position:absolute;z-index:9999;width:600px;top:50px;background:white;}
 .win .title-bar{height:36px;padding:0px 15px;padding-right:20px;font-size:18px;background:#2ead91;line-height:36px;color:white;}
 .win .title-bar div{background:url(images/delete_grey.png);width:13px;height:13px;float:right;margin-top:12px;cursor:pointer;/*float与vertical-align会有冲突，使用float后display被忽略*/}
 .win .title-bar div:hover{background:url(images/delete_red.png);}
 
 .win .content{padding:20px 15px;}
-.win .content .value{width:517px;height:24px;border:1px solid #e5e5e5;padding-left:5px;border-radius:3px;}
+.win .content .value{width:562px;height:24px;border:1px solid #e5e5e5;padding-left:5px;border-radius:3px;}
 .win .content .search p{margin-bottom:20px;}
 .win .content .search ul{border:1px solid #e5e5e5;border-top:0px;}
 .win .content .search ul>li{line-height:24px;padding-left:5px;}
@@ -756,7 +758,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .win .content .question-new div{margin-top:20px;}
 .win .content .question-new span{line-height:24px;}
 .win .content .question-new .check{vertical-align:middle;}
-.win .content .question-new .btn{float:right;width:50px;height:24px;}
+.win .content .question-new .btn{width:100%;height:24px;}
 
 /*更新 2-17 其实是用于登陆的*/
 .register .white .check{vertical-align:middle;margin-left:215px;}
