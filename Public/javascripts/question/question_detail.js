@@ -111,40 +111,12 @@ $(function(){
 
     $(".sendreply").click(function(){
     	var replyMsg = $(this).parents("div.reply-content").find("input.write").val();
-    	replyMsg = String(String(replyMsg).replace(/<script>/, "")).replace(/<\/script>/, "");
-  		var at = replyMsg.match(/@.*?\t/);
-  		var current = $(this);
-
-		if(at){
-			replyMsg = replyMsg.replace(/@.*?\t/, "");
-			var atUserName = String(String(at).replace(/@/, "")).replace(/\t/, "");
-			atUserName = String(atUserName).replace(/[ ]/g, "");
-			// var atUserId = $("li[uname='"+atUserName+"']").attr("uid");
-			// var finalMsg = "<a href='/user/"+atUserId+"' target='_blank'>"+at+"</a>" + content;
-			var atUserId = $("div[uname='"+atUserName+"']").attr("uid");
-			var finalMsg = "<strong><a href='/user/"+atUserId+"' target='_blank'>"+at+"</a></strong>" + replyMsg;
-		}else{
-			var finalMsg = replyMsg;
-		}
-
-		var aid = $(this).parents("li").attr("aid");
-
-		if(replyMsg.replace(/[ ]/g, "")){
-			$.post('/answer/add_reply',{
-				a_id: aid,
-				msg: finalMsg
-			}, function(data){
-				if(data.status == 1){
-					window.location.reload();	
-				}
-				if(data.status == 0){
-					$(current.parents("div.reply-content").find("div.alert")[1]).slideDown();
-				}
-			}, 'json');
-		}else{
-			$($(this).parents("div.reply-content").find("div.alert")[0]).slideDown();
-		}
-
+    	replyMsg = replyMsg.replace(/@.*?\t/, "");
+    	if(replyMsg.replace(/[ ]/g, "")){
+    		showReplyVerify($(this));
+    	}else{
+    		$($(this).parents("div.reply-content").find("div.alert")[0]).slideDown();
+    	}
     });
 
     $(".canclewrite").click(function(){
@@ -303,6 +275,43 @@ $(function(){
 });
 });
 
+function submitReply($object){
+	var replyMsg = $object.parents("div.reply-content").find("input.write").val();
+	replyMsg = String(String(replyMsg).replace(/<script>/, "")).replace(/<\/script>/, "");
+	var at = replyMsg.match(/@.*?\t/);
+	var current = $object;
+
+	if(at){
+		replyMsg = replyMsg.replace(/@.*?\t/, "");
+		var atUserName = String(String(at).replace(/@/, "")).replace(/\t/, "");
+		atUserName = String(atUserName).replace(/[ ]/g, "");
+		// var atUserId = $("li[uname='"+atUserName+"']").attr("uid");
+		// var finalMsg = "<a href='/user/"+atUserId+"' target='_blank'>"+at+"</a>" + content;
+		var atUserId = $("div[uname='"+atUserName+"']").attr("uid");
+		var finalMsg = "<strong><a href='/user/"+atUserId+"' target='_blank'>"+at+"</a></strong>" + replyMsg;
+	}else{
+		var finalMsg = replyMsg;
+	}
+
+	var aid = $object.parents("li").attr("aid");
+
+	if(replyMsg.replace(/[ ]/g, "")){
+		$.post('/answer/add_reply',{
+			a_id: aid,
+			msg: finalMsg
+		}, function(data){
+			if(data.status == 1){
+				window.location.reload();	
+			}
+			if(data.status == 0){
+				$(current.parents("div.reply-content").find("div.alert")[1]).slideDown();
+			}
+		}, 'json');
+	}else{
+		$($object.parents("div.reply-content").find("div.alert")[0]).slideDown();
+	}
+}
+
 function submitComment(){
 	$("div.alert").hide();
 	var content = window.editor.html();
@@ -416,7 +425,7 @@ function newVerifyCode(isanonymous){
 				}
 				else {
 					removeVerifyCode();
-					$('#verifycodealert').text("");
+					$('.verifycodealert').text("");
 					if(isanonymous){
 						submitCommentAnonymous();
 					}else{
@@ -453,4 +462,73 @@ function initVerifyCode(){
 function removeVerifyCode(){
 	document.body.removeChild(document.getElementById('verifymask'));
 	document.body.removeChild(document.getElementById('verifywin'));
+}
+
+//for verify dialog for reply to answer
+function showReplyVerify($object){
+	var verifytop = $object.offset().top;
+	if($(".replyverifywin").length > 0) {
+		removeReplyVerifyCode();
+	}
+	else{
+		newReplyVerifyCode($object);
+		$(".replyverifywin").css('top', verifytop);
+	}
+}
+
+function newReplyVerifyCode($object){
+	initReplyVerifyCode();
+
+	$(".replyverifyclose").click(function(){
+		removeReplyVerifyCode();
+	});
+	
+	$(".replyverifymask").click(function(){
+		removeReplyVerifyCode();
+	});
+
+	$(".replyverifysubmit").click(function(){
+		var verifycode = $(".replyverifycode").val();
+		if(verifycode.replace(/[ ]/g, "")){
+			$.post('/account/check_verify', {
+	            verify: verifycode
+	        }, function(data) {
+	            if (!data.status){
+					$('.replyverifycodealert').text("验证码不正确");
+				}
+				else {
+					removeReplyVerifyCode();
+					$('.replyverifycodealert').text("");
+					submitReply($object);
+				}
+	        }, 'json');
+		}else{
+			$(".replyverifycodealert").text("请填写验证码");
+		}
+		
+	});
+
+}
+
+function initReplyVerifyCode(){
+	var newMask = document.createElement("div");
+	newMask.id = 'replyverifymask';  
+	newMask.className = "replyverifymask";
+	newMask.style.width = document.body.scrollWidth + "px";
+	newMask.style.height = document.body.scrollHeight + "px";
+		
+	var newWin = document.createElement("div");
+	newWin.id = 'replyverifywin';
+	newWin.className = "replyverifywin";
+	newWin.style.left = (parseInt(document.body.scrollWidth) - 544)/2 + "px";
+	var html = '<div class="title-bar"><span>请输入验证码</span><div class="replyverifyclose"></div></div><div class="content"><div class="replyverifycodealert" style="color:red;"></div><img src="/account/verifycode"><input type="text" class="replyverifycode"><input type="button" value="确认" class="replyverifysubmit"></div>';
+	newWin.innerHTML = html;
+
+	document.body.appendChild(newMask);
+	document.body.appendChild(newWin);
+}
+
+function removeReplyVerifyCode(){
+	document.body.removeChild(document.getElementById('replyverifymask'));
+	document.body.removeChild(document.getElementById('replyverifywin'));
 }

@@ -173,7 +173,7 @@ function newVerifyCode(){
 				}
 				else {
 					removeVerifyCode();
-					$('#verifycodealert').text("");
+					$('.verifycodealert').text("");
 					submitComment();
 				}
 	        }, 'json');

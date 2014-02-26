@@ -785,6 +785,31 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 
 .verifyclose{float:right;font-size:20px;font-weight:bold;line-height:18px;color:#000000;text-shadow:0 1px 0 #ffffff;opacity:0.2;filter:alpha(opacity=20);}
 
+/*回复回答验证码弹出框*/
+.replyverifymask{position:absolute;z-index:100;top:0px;left:0px;background:black;opacity:0.30;}
+.replyverifywin{position:absolute;z-index:9999;width:260px;top:50px;background:white;}
+.replyverifywin .title-bar{height:36px;padding:0px 15px;padding-right:20px;font-size:18px;background:#2ead91;line-height:36px;color:white;}
+.replyverifywin .title-bar div{background:url(images/delete_grey.png);width:13px;height:13px;float:right;margin-top:12px;cursor:pointer;/*float与vertical-align会有冲突，使用float后display被忽略*/}
+.replyverifywin .title-bar div:hover{background:url(images/delete_red.png);}
+
+.replyverifywin .content{padding:20px 15px;}
+.replyverifywin .content .value{width:562px;height:24px;border:1px solid #e5e5e5;padding-left:5px;border-radius:3px;}
+.replyverifywin .content .search p{margin-bottom:20px;}
+.replyverifywin .content .search ul{border:1px solid #e5e5e5;border-top:0px;}
+.replyverifywin .content .search ul>li{line-height:24px;padding-left:5px;}
+.replyverifywin .content .search .ask{border-top:1px solid #e5e5e5;text-align:center;cursor:pointer;margin:0px auto;text-align:center;}
+
+.replyverifywin .content .question-new{margin-top:-20px;display:none;}
+.replyverifywin .content .question-new p{margin-bottom:10px;margin-top:20px;}
+.replyverifywin .content .question-new textarea{width:517px;max-width:100%;height:173px;border:1px solid #e5e5e5;border-radius:3px;padding-left:5px;}
+.replyverifywin .content .question-new select{padding:3px 5px;height:24px;border:1px solid #e5e5e5;border-radius:3px;width:100%;}
+.replyverifywin .content .question-new div{margin-top:20px;}
+.replyverifywin .content .question-new span{line-height:24px;}
+.replyverifywin .content .question-new .check{vertical-align:middle;}
+.replyverifywin .content .question-new .btn{width:100%;height:24px;}
+
+.verifyclose{float:right;font-size:20px;font-weight:bold;line-height:18px;color:#000000;text-shadow:0 1px 0 #ffffff;opacity:0.2;filter:alpha(opacity=20);}
+
 /*更新 2-17 其实是用于登陆的*/
 .register .white .check{vertical-align:middle;margin-left:215px;}
 .register .white .forget{margin-left:20px;color:blue;}
