@@ -1,3 +1,24 @@
 <include file="Public:header" title="东大通首页"/>	
-{$query}
+<div class="back-color">
+		<div class="error">
+			<img src="__IMAGE__/common/404.png"/>
+			<div class="link">
+				<ul>
+					<li><a href="/">点击此处返回首页</a></li>
+					<li class="distance"><a href="#"><span id="wait">3</span>秒后自动为您跳转</a></li>
+				</ul>
+			</div>
+		</div>
+	<script type="text/javascript">
+		$(function(){
+			var wait = document.getElementById('wait');
+			var interval = setInterval(function(){
+				var time = --wait.innerHTML;
+				if(time <= 0) {
+					window.location.href = '/';
+					clearInterval(interval);
+				};
+			}, 1000);
+		});
+	</script>
 <include file="Public:footer" />
