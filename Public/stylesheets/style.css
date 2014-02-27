@@ -815,6 +815,15 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .register .white .forget{margin-left:20px;color:blue;}
 .register .white .tip{margin-left:15px;color:red;}
 
+/*2-26更新*/
+.error{padding-top:60px;margin-bottom:300px;}
+.error img{margin-left:auto;margin-right:auto;display:block;}
+.error .link{margin-left:auto;margin-right:auto;width:288px;margin-top:20px;}
+.error .link li{float:left;list-style-image:url(images/dot_grey.png);font-size:14px;}
+.error .link .distance{margin-left:40px;}
+.error .link li a{color:#2ead91;}
+/*2-26更新结束*/
+
 .alert {
 padding: 8px 35px 8px 14px;
 margin-bottom: 18px;

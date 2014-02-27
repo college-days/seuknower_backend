@@ -77,6 +77,8 @@ return array(
 		'market/:category/page/:id\d$' => 'Market/index',
 	),
 
+	'TMPL_EXCEPTION_FILE' => '404.html',
+
 	//新的路径替换
 	'TMPL_PARSE_STRING' =>array(
 		'__EDITOR__' => '/Public/kindeditor',
