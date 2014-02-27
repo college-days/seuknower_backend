@@ -116,7 +116,7 @@ class AnswerAction extends Action {
 					$Question->save($questiondata);
 
 					//回答的消息提示
-					/*$model = new Model();
+					$model = new Model();
 					$newresult = $model->query('select u_id, title from seu_question where id='.$qid);
 					$uidforqid = $newresult[0]['u_id'];
 					$titleforqid = $newresult[0]['title'];
@@ -133,7 +133,7 @@ class AnswerAction extends Action {
 						$messageData['answer_count'] = array('exp','answer_count+1');
 						$messageModel = M('Question_message');
 						$saveResult = $messageModel->where('q_id='.$qid.' and u_id='.$uidforqid)->save($messageData);
-					}*/
+					}
 
 					$this->ajaxReturn('', '', 1);
 	       	 	}else{
@@ -163,7 +163,7 @@ class AnswerAction extends Action {
 				$Question->save($questiondata);
 
 				//回答的消息提示
-				/*$model = new Model();
+				$model = new Model();
 				$result = $model->query('select u_id, title from seu_question where id='.$qid);
 				$uidforqid = $result[0]['u_id'];
 				$titleforqid = $result[0]['title'];
@@ -180,7 +180,7 @@ class AnswerAction extends Action {
 					$messageData['answer_count'] = array('exp','answer_count+1');
 					$messageModel = M('Question_message');
 					$saveResult = $messageModel->where('q_id='.$qid.' and u_id='.$uidforqid)->save($messageData);
-				}*/
+				}
 
 				$this->ajaxReturn('', '', 1);
 			}

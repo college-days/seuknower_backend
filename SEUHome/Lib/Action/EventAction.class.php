@@ -220,6 +220,10 @@ class EventAction extends Action {
     	$Event = M('Event');
     	$User = M('User');
 
+		//about notify message
+		$deleteModel = new Model();
+		$deleteResult = $deleteModel->execute('delete from seu_event_message where e_id='.$id.' and u_id='.session('userId'));
+
     	//活动的点击数增加
     	$add['id'] = $id;
 		$add['click_count'] = array('exp','click_count+1');
@@ -382,7 +386,7 @@ class EventAction extends Action {
 
 			$eventModel = new Model();
 			$eventResult = $eventModel->query('select u_id, title from seu_event where id='.I('param.e_id'));
-			//发布活动的u_id，因为要做消息机制，需要提示活动发布者
+			//发布活动的u_id，因为要做消息机制，需要提示活动发布者，这个u_id是活动发布者的u_id，而不是评论活动的人的id
 			$eventuid = $eventResult[0]['u_id'];
 			$eventTitle = $eventResult[0]['title'];
 			$eventMsgModel = new Model('EventMessage');
@@ -496,5 +500,6 @@ class EventAction extends Action {
 			$this->redirect('/event/'+$saveid);
 		}
 	}
+
 }
 ?>

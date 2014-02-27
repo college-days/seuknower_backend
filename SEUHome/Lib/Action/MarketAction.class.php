@@ -85,11 +85,12 @@ class MarketAction extends Action {
 		$add['click_count'] = array('exp','click_count+1');
 		$Commodity->save($add);
 
-		//for message notify part
-		/*$deleteModel = new Model();
+		//for message notify part，浏览过之后就要把和当前session有关的message都从db中clear掉啦
+		$deleteModel = new Model();
 		$deleteResult = $deleteModel->execute('delete from seu_commodity_message where c_id='.$id.' and u_id='.session('userId'));
 
-		$model = new Model();
+		//现在不用存在session里了，所以不用再次查询更新了
+		/*$model = new Model();
 		$questionMessageResult = $model->query('select * from seu_question_message where u_id='.session('userId'));
 		$questionMessageCount = count($questionMessageResult);
 
@@ -151,7 +152,7 @@ class MarketAction extends Action {
 		
 		$Model = M();
 		$count = $Model->table('seu_commodity_comment')->where("c_id = $id")->count();
-		$comments = $Model->table('seu_commodity_comment comment,seu_user user')->field('comment.id,comment.u_id as user_id,comment.content,comment.create_time,user.name as user_name,user.icon as icon')->where("comment.c_id = $id AND comment.u_id = user.id")->order('comment.create_time')->limit(10)->select();
+		$comments = $Model->table('seu_commodity_comment comment,seu_user user')->field('comment.id,comment.u_id as user_id,comment.content,comment.create_time,user.name as user_name,user.icon as icon')->where("comment.c_id = $id AND comment.u_id = user.id")->order('comment.create_time')->select();
 		
 		for($i=0; $i<count($comments); $i++){
 			$comments[$i]['content'] = htmlspecialchars_decode($comments[$i]['content']);
@@ -215,8 +216,11 @@ class MarketAction extends Action {
 			$commodityResult = $commodityModel->query('select u_id, title from seu_commodity where id='.I('param.commodity_id'));
 			$commodityuid = $commodityResult[0]['u_id'];
 			$commodityTitle = $commodityResult[0]['title'];
+
+			//评论商品的消息提示
 			$commodityMsgModel = new Model('CommodityMessage');
-			$messageResult = $commodityModel->query('select * from seu_commodity_comment where c_id='.I('param.commodity_id').' and u_id='.session('userId'));
+			//$messageResult = $commodityModel->query('select * from seu_commodity_comment where c_id='.I('param.commodity_id').' and u_id='.session('userId'));
+			$messageResult = $commodityMsgModel->where('c_id='.I('param.commodity_id'))->select();
 
 			if($messageResult == null){
 				$messageData['c_id'] = I('param.commodity_id');

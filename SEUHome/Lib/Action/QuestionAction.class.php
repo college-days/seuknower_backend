@@ -97,10 +97,10 @@ class QuestionAction extends Action {
     public function detail(){
 		$id = I('param.id');
 		$userId = session('userId');
-		//about notify message
 
-		//$deleteModel = new Model();
-		//$deleteResult = $deleteModel->execute('delete from seu_question_message where q_id='.$id.' and u_id='.$userId);
+		//about notify message
+		$deleteModel = new Model();
+		$deleteResult = $deleteModel->execute('delete from seu_question_message where q_id='.$id.' and u_id='.$userId);
 	
 		/*$model = new Model();
 		$questionMessageResult = $model->query('select * from seu_question_message where u_id='.session('userId'));

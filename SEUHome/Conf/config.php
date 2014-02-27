@@ -44,6 +44,7 @@ return array(
 		'account/check_login$' => 'Account/checkLogin',
 		'account/load_stuinfo$' => 'Account/loadStuInfo',
 		'account/check_verify$' => 'Account/checkVerify',
+		'account/check_message$' => 'Account/checkMessage',
 		'account/check_register$' => 'Account/checkRegister',
 		'account/active_user/:id\d/:code$' => 'Account/activeUser',
 		'event/page/:id\d$' => 'Event/index',

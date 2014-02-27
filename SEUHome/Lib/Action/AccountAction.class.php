@@ -189,5 +189,54 @@ class AccountAction extends Action{
 		}
 	}
 
+	public function checkMessage(){
+		$QuestionMessage = M('QuestionMessage');
+		$EventMessage = M('EventMessage');
+		$CommodityMessage = M('CommodityMessage');
+		$currentUserId = session('userId');
+
+		$messageMap['u_id'] = $currentUserId;
+		$questionResult = $QuestionMessage->where($messageMap)->select();
+		$eventResult = $EventMessage->where($messageMap)->select();
+		$commodityResult = $CommodityMessage->where($messageMap)->select();
+
+		for($i=0; $i<count($questionResult); $i++){
+			$questionResult[$i]['type'] = 'question';
+			$questionResult[$i]['title'] = "有人回答了你提出的问题";
+		}
+
+		for($i=0; $i<count($eventResult); $i++){
+			$eventResult[$i]['type'] = 'event';
+			$eventResult[$i]['title'] = "有人回复了你发起的活动";
+		}
+
+		for($i=0; $i<count($commodityResult); $i++){
+			$commodityResult[$i]['type'] = 'commodity';
+			$commodityResult[$i]['title'] = "有人评论了你发布的商品";
+		}
+
+		if(!$questionResult){
+			$questionResult = array();
+		}
+
+		if(!$eventResult){
+			$eventResult = array();
+		}
+
+		if(!$commodityResult){
+			$commodityResult = array();
+		}
+
+		$finalResult = array_merge($questionResult, $eventResult, $commodityResult);
+
+		session('messagecount', count($finalResult));
+		session('messages', $finalResult);
+
+		if(count($finalResult) == 0){
+			$this->ajaxReturn('', '', 0);
+		}else{
+			$this->ajaxReturn($finalResult, '', 1);
+		}
+	}
 }
 ?>
