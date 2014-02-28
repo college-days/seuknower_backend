@@ -44,7 +44,7 @@
 								</div>
 								<div>
 									<dl>
-										<dd>价格：<span>{$commodity.cost}</span>元</dd>
+										<dd>价格：¥ <span>{$commodity.cost}</span></dd>
 										<eq name="commodity.status" value="0">
 											<dd>成色：不详</dd>
 										<else/>
@@ -87,7 +87,7 @@
 						<div class="title">
 							还有这些正在售(<a href="/market/{$commodity.category}" target="_blank">更多</a>)
 						</div>
-						<div class="all" id="samecate">
+						<div align="center" class="all" id="samecate">
 						</div>
 					</div>
 					
@@ -194,7 +194,7 @@
 					<div class="sell">
 						<ul>
 							<volist name="relatecommodities" id="commodity">
-								<li>
+								<li align="center">
 									<img src="{$commodity.picture}" class="img-responsive" style="width:712px;height:505px;"/>
 									<a href="/market/commodity/{$commodity.id}" target="_blank">{$commodity.title}</a>
 								</li>

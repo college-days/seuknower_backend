@@ -14,7 +14,7 @@ class EventAction extends Action {
 		$type = $tag;
 		
 		$Model = M();	
-		$hots = $Model->table('seu_event event')->field('event.id,event.poster,event.title')->order('join_count desc')->limit(10)->select();
+		$hots = $Model->table('seu_event event')->field('event.id,event.poster,event.title')->order('join_count desc')->limit(5)->select();
 
 		$this->assign("hots", $hots);
 
@@ -214,6 +214,85 @@ class EventAction extends Action {
     	//$this->display('index');
     	$this->display('index_waterflow');
     }
+
+    /*gcc*/
+	public function load(){
+		$tag = I("param.tag");
+		$time = I("param.time");
+		if(!$tag) $tag = "全部";
+		if(!$time) $time = "全部";
+		$type = $tag;
+		
+		$Model = M();	
+
+		if($tag != "全部"){
+			$sql = "event.category = '".$tag."'";
+		}else{
+			$sql = "";
+		}
+
+		if($time == "今天") {
+			$sql .=  ' AND event.start_time < '.strtotime('tomorrow').' AND ';
+			$sql .=  ' event.end_time >='.strtotime('today');
+		}
+		elseif($time == "明天"){
+			$sql .=  ' AND event.start_time < '.(strtotime('tomorrow')+86400).' AND ';
+			$sql .=  'event.end_time >='.(strtotime('today')+86400);
+		}
+		elseif($time == "本周"){
+			$sql .=  ' AND event.start_time < '.(strtotime('next sunday')+86400).' AND ';
+			$sql .=  'event.end_time >='.(strtotime('today'));
+		}
+
+		$count = $Model->table('seu_event as event')->where($sql)->count();
+		if($count){
+			if($sql){
+				$sql .= ' AND event.u_id = user.id ';
+			}
+			else{
+				$sql = 'event.u_id = user.id'; 
+			}
+			$pageCount = ceil($count/6);
+			if(I('param.id')){
+				$page = I('param.id');
+				if($page > $pageCount) $page = $pageCount;
+			}
+			else{
+				$page = 1;
+			}
+			$start = ($page-1)*6;
+
+			$events = $Model->table('seu_event event, seu_user user')->field('event.id,event.u_id, event.title, event.start_time, event.end_time, event.cost, event.location, event.join_count, event.interest_count, event.poster, user.is_group, user.name as organizer')->order('event.create_time desc')->limit($start.',6')->where($sql)->select();
+			
+			for($i=0; $i<count($events); $i++){
+				$startTime = explode(" ",date("Y年m月d日 H:i:s",$events[$i]['start_time']));	
+				$endTime = explode(" ",date("Y年m月d日 H:i:s",$events[$i]['end_time']));
+				unset($events[$i]['start_time']);
+				unset($events[$i]['end_time']);
+				if($startTime[0] == $endTime[0]){
+					$events[$i]['time'] = substr($startTime[0],7)." ".substr($startTime[1],0,5)."-".substr($endTime[1],0,5);
+				}
+				else{
+					$events[$i]['time'] = substr($startTime[0],7)."~".substr($endTime[0],7);
+				}
+			}
+		}
+		
+		$util = new CommonUtil();
+		for($i=0; $i<count($events); $i++){
+			if(!$util->exists_file($events[$i]["poster"])){
+				$events[$i]["poster"] = "notexists";
+			}
+		}
+		//dump($events);
+		if($events){
+			$this->ajaxReturn($events,"",1);
+		}
+		else{
+			$this->ajaxReturn("","",0);
+		}
+	}
+
 
     public function detail(){
     	$id = I('param.id');
