@@ -41,7 +41,8 @@ $(function(){
 					if(data.status){
 						window.location.href = '/';
 					}else{
-						alert(data.info);	
+						// alert(data.info);	
+						$("#title").text(data.info);
 					} 
 			}, 'json');
 		}

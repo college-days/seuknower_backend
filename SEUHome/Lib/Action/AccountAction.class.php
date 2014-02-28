@@ -101,12 +101,17 @@ class AccountAction extends Action{
 		$str = explode('@', $id);
 		$info = getNameById($str[0]);
 		if($info !== null){
-			session('dept',$info['dept']);
-			session('major',$info['major']);
-			session('stuNum',$info['stuNum']);
-			session('stuId',$info['stuId']);
-			session('name',$info['name']);
-			$this->ajaxReturn($info, '', 1);
+			if($info['name'] != null){
+				session('dept',$info['dept']);
+				session('major',$info['major']);
+				session('stuNum',$info['stuNum']);
+				session('stuId',$info['stuId']);
+				session('name',$info['name']);
+
+				$this->ajaxReturn($info, '', 1);
+			}else{
+				$this->ajaxReturn('', '请输入正确的一卡通号', 0);
+			}
 		}
 		else{
 			$this->ajaxReturn('', '网络出错', 0);
@@ -140,7 +145,8 @@ class AccountAction extends Action{
 				$result = $getUser['id'];
 				$activeCode = $getUser['active_code'];
 				$body = "请点击此<a href='http://www.seuknower.com/account/active_user/$result/$activeCode' target='_blank'>链接</a>来激活用户";
-		
+				// $body = "请点击此<a href='http://localhost/account/active_user/$result/$activeCode' target='_blank'>链接</a>来激活用户";
+
 				$info = think_send_mail($account, session('name'), "用户激活", $body);
 				if($info === true){
 					$this->ajaxReturn($info, '', 1);
@@ -167,7 +173,8 @@ class AccountAction extends Action{
 			$activeCode = $data['active_code'];
 			$result = $User->add($data);
 			$body = "请点击此<a href='http://www.seuknower.com/account/active_user/$result/$activeCode' target='_blank'>链接</a>来激活用户";
-		
+			// $body = "请点击此<a href='http://localhost/account/active_user/$result/$activeCode' target='_blank'>链接</a>来激活用户";
+
 			$info = think_send_mail($account, session('name'), "用户激活", $body);
 			if($info === true){
 				$this->ajaxReturn($info, '', 1);
@@ -191,7 +198,8 @@ class AccountAction extends Action{
 				$result = $getUser['id'];
 				$activeCode = $getUser['active_code'];
 				$body = "请点击此<a href='http://www.seuknower.com/account/active_user/$result/$activeCode' target='_blank'>链接</a>来激活用户";
-		
+				// $body = "请点击此<a href='http://localhost/account/active_user/$result/$activeCode' target='_blank'>链接</a>来激活用户";
+
 				$info = think_send_mail($account, session('name'), "用户激活", $body);
 				if($info === true){
 					$this->ajaxReturn($info, '', 1);
@@ -218,7 +226,8 @@ class AccountAction extends Action{
 			$activeCode = $data['active_code'];
 			$result = $User->add($data);
 			$body = "请点击此<a href='http://www.seuknower.com/account/active_user/$result/$activeCode' target='_blank'>链接</a>来激活用户";
-		
+			// $body = "请点击此<a href='http://localhost/account/active_user/$result/$activeCode' target='_blank'>链接</a>来激活用户";
+			
 			$info = think_send_mail($account, session('name'), "用户激活", $body);
 			if($info === true){
 				$this->ajaxReturn($info, '', 1);
@@ -313,6 +322,83 @@ class AccountAction extends Action{
 			$this->ajaxReturn('', '', 0);
 		}else{
 			$this->ajaxReturn($finalResult, '', 1);
+		}
+	}
+
+	public function changePassword(){
+		$this->display('changepassword');
+	}
+
+	public function savePassword(){
+		$account = I('param.account');
+		$password = I('param.password');
+		$verify = I('param.verify');
+		if(session('verify') != md5($verify)) {
+			$this ->ajaxReturn('', '验证码错误！', 0);
+		}
+		
+		$User = M('User');
+		$map['account'] = $account;
+		$map['status'] = 1;
+		
+		$user = $User->where($map)->find();
+		if($user){
+			$id = $user['id'];
+			$data['id'] = $id;
+			$data['active_code'] = createKey(32);
+			$data['pwd'] = md5($password);
+			$data['status'] = 0;
+			
+			$activeCode = $data['active_code'];
+			$User -> save($data);
+
+			// $url =  "http://www.seuknower.com/account/active_password/$id/$activeCode";
+			// $body = "请将此链接 $url 复制到浏览器中完成修改密码";
+			$body = "请点击此<a href='http://www.seuknower.com/account/active_password/$id/$activeCode' target='_blank'>链接</a>来完成修改密码";
+			// $body = "请点击此<a href='http://localhost/account/active_password/$id/$activeCode' target='_blank'>链接</a>来完成修改密码";
+
+			$info = think_send_mail($account,$user['name'], "修改账户密码", $body);
+		
+			if($info === true){
+				$this ->ajaxReturn($info, '', 1);
+			}
+			else{
+				$this ->ajaxReturn($info, '邮件发送失败', 0);
+			}
+		}
+		else{
+			$this ->ajaxReturn('', '用户不存在或未激活', 0);
+		}
+	}
+
+	public function activePassword(){
+		$id = I('param.id');
+		$code = I('param.code');
+		$User = M('User');
+		$map['id'] = $id ;
+		$result = $User->field('active_code')->where($map)->find();
+		if($result === false){
+			$this->error('激活时查询数据库出错！');
+		}
+		elseif($result === null){
+			$this->error('激活时用户不存在！');
+		}
+		elseif($result['active_code'] == $code){
+			$result = $User->find($id);
+			session('userId',$id);
+			session('account',$result['account']);
+			session('userName',$result['name']);
+			session('icon',$result['icon']);
+			$data['id'] = $id;
+			$data['status'] = 1;
+			$User->save($data);			
+			//$this->redirect('User/profile', array('id' => $id));
+			$this->assign('name', $result['name']);
+			$this->assign('id', $id);
+			$this->display('finishchange');
+		}
+		else{
+			$this->error('激活码不正确！');
 		}
 	}
 }
