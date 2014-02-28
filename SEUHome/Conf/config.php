@@ -41,6 +41,8 @@ return array(
 		'login' => 'Account/login',
 		'logout' => 'Account/logout',
 		'register' => 'Account/register',
+		'account/re_send$' => 'Account/reSendActiveEmail',
+		'account/start_active$' => 'Account/startActiveUser',
 		'account/check_login$' => 'Account/checkLogin',
 		'account/load_stuinfo$' => 'Account/loadStuInfo',
 		'account/check_verify$' => 'Account/checkVerify',

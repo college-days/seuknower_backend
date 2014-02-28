@@ -92,6 +92,8 @@
 		$replyName        = $config['REPLY_NAME']?$config['REPLY_NAME']:$config['FROM_NAME'];
 		$mail->AddReplyTo($replyEmail, $replyName);
 		$mail->Subject    = $subject;
+		// $mail->IsHTML(true);
+		// $mail->Body ="<a href='www.google.com' target='_blank'>google</a>";
 		$mail->MsgHTML($body);
 		$mail->AddAddress($to, $name);
 		if(is_array($attachment)){ // 添加附件

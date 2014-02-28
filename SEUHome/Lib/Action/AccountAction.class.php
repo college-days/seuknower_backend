@@ -134,31 +134,105 @@ class AccountAction extends Action{
 		}		
 		
 		$User = M('User');
-		$data['account'] = $account;
-		$data['pwd'] = md5($pwd);
-		$data['name'] = session('name');
-		$data['dept'] = session('dept');
-		$data['degree'] = '20'.substr(session('stuId'),3,2);
-		$data['stu_id'] = session('stuId');
-		$data['stu_num'] = session('stuNum');
-		$data['major'] = session('major');
-		$data['reg_time'] = time();
-		$data['login_time'] = time();
-		$data['modify_time'] = time();
-		$data['active_code'] = createKey(32);
-		$activeCode = $data['active_code'];
-		$result = $User->add($data);
-		//$url =  "http://www.seuknower.com/account/active_user/$result/$activeCode";
-		$url = "http://localhost/account/active_user/$result/$activeCode";
-		$body = "请将此链接 $url 复制到浏览器中激活用户";
+		$getUser =  $User->where(array('account' => $account))->find();
+		if($getUser){
+			if($getUser['status'] == 0){
+				$result = $getUser['id'];
+				$activeCode = $getUser['active_code'];
+				$body = "请点击此<a href='http://www.seuknower.com/account/active_user/$result/$activeCode' target='_blank'>链接</a>来激活用户";
 		
-		$info = think_send_mail($account, session('name'), "用户激活", $body);
-		if($info === true){
-			$this->ajaxReturn($info, '', 1);
+				$info = think_send_mail($account, session('name'), "用户激活", $body);
+				if($info === true){
+					$this->ajaxReturn($info, '', 1);
+				}
+				else{
+					$this->ajaxReturn($info, '注册失败', 0);
+				}
+			}else{
+				$this->ajaxReturn('', '你已经注册过了', 0);
+			}
+		}else{
+			$data['account'] = $account;
+			$data['pwd'] = md5($pwd);
+			$data['name'] = session('name');
+			$data['dept'] = session('dept');
+			$data['degree'] = '20'.substr(session('stuId'),3,2);
+			$data['stu_id'] = session('stuId');
+			$data['stu_num'] = session('stuNum');
+			$data['major'] = session('major');
+			$data['reg_time'] = time();
+			$data['login_time'] = time();
+			$data['modify_time'] = time();
+			$data['active_code'] = createKey(32);
+			$activeCode = $data['active_code'];
+			$result = $User->add($data);
+			$body = "请点击此<a href='http://www.seuknower.com/account/active_user/$result/$activeCode' target='_blank'>链接</a>来激活用户";
+		
+			$info = think_send_mail($account, session('name'), "用户激活", $body);
+			if($info === true){
+				$this->ajaxReturn($info, '', 1);
+			}
+			else{
+				$this->ajaxReturn($info, '注册失败', 0);
+			}
 		}
-		else{
-			$this->ajaxReturn($info, '注册失败', 0);
+		
+		//$url =  "http://www.seuknower.com/account/active_user/$result/$activeCode";
+		// $url = "http://localhost/account/active_user/$result/$activeCode";
+		// $body = "请将此链接 $url 复制到浏览器中激活用户";
+    }
+
+    public function reSendActiveEmail(){
+    	$account = session('account');
+    	$User = M('User');
+		$getUser =  $User->where(array('account' => $account))->find();
+		if($getUser){
+			if($getUser['status'] == 0){
+				$result = $getUser['id'];
+				$activeCode = $getUser['active_code'];
+				$body = "请点击此<a href='http://www.seuknower.com/account/active_user/$result/$activeCode' target='_blank'>链接</a>来激活用户";
+		
+				$info = think_send_mail($account, session('name'), "用户激活", $body);
+				if($info === true){
+					$this->ajaxReturn($info, '', 1);
+				}
+				else{
+					$this->ajaxReturn($info, '发送失败', 0);
+				}
+			}else{
+				$this->ajaxReturn('', '你已经注册过了', 0);
+			}
+		}else{
+			$data['account'] = $account;
+			$data['pwd'] = md5($pwd);
+			$data['name'] = session('name');
+			$data['dept'] = session('dept');
+			$data['degree'] = '20'.substr(session('stuId'),3,2);
+			$data['stu_id'] = session('stuId');
+			$data['stu_num'] = session('stuNum');
+			$data['major'] = session('major');
+			$data['reg_time'] = time();
+			$data['login_time'] = time();
+			$data['modify_time'] = time();
+			$data['active_code'] = createKey(32);
+			$activeCode = $data['active_code'];
+			$result = $User->add($data);
+			$body = "请点击此<a href='http://www.seuknower.com/account/active_user/$result/$activeCode' target='_blank'>链接</a>来激活用户";
+		
+			$info = think_send_mail($account, session('name'), "用户激活", $body);
+			if($info === true){
+				$this->ajaxReturn($info, '', 1);
+			}
+			else{
+				$this->ajaxReturn($info, '发送失败', 0);
+			}
 		}
+    }
+
+    public function startActiveUser(){
+    	$userAccount = session('account');
+    	$this->assign('account', $userAccount);
+    	$this->display('startactive');
     }
 
     public function activeUser(){
@@ -182,7 +256,10 @@ class AccountAction extends Action{
 			$data['id'] = $id;
 			$data['status'] = 1;
 			$User->save($data);			
-			$this->redirect('/user/profile');
+			//$this->redirect('User/profile', array('id' => $id));
+			$this->assign('name', $result['name']);
+			$this->assign('id', $id);
+			$this->display('finishactive');
 		}
 		else{
 			$this->error('激活码不正确！');

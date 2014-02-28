@@ -52,6 +52,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .register .white .info .num{width:140px;}
 .register .white .info .text{font-size:16px;color:#7a6c59;margin-left:10px;}
 .register .white .btn{width:112px;height:40px;margin-left:245px;margin-top:22px;font-size:21px;line-height:40px;color:white;background:#7a6c59;border:0px;border-radius:3px;cursor:pointer;}
+.register .white .btn:hover{width:112px;height:40px;margin-left:245px;margin-top:22px;font-size:21px;line-height:40px;color:white;background:#6a3906;border:0px;border-radius:3px;cursor:pointer;}
 
 
 /*热门*/
@@ -823,6 +824,31 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .error .link .distance{margin-left:40px;}
 .error .link li a{color:#2ead91;}
 /*2-26更新结束*/
+
+/*激活*/
+.activate{background:url(images/hall.png) no-repeat;background-size:100% auto;width:100%;height:723px;}
+.activate .blank{padding-top:130px;}
+.activate .white{background:url(images/tran_active.png) no-repeat;width:612px;height:310px;margin-left:auto;margin-right:auto;padding-top:45px;}
+.activate .white .title{font-size:30px;color:#7a6c59;text-align:center;}
+.activate .white .email{font-size:16px;margin-top:50px;text-align:center;}
+.activate .white .email span{margin-left:20px;}
+.activate .white div{margin-top:65px;font-size:18px;color:white;line-height:40px;}
+.activate .white div>span{display:inline-block;width:162px;height:40px;text-align:center;border-radius:3px;cursor:pointer;}
+.activate .white div>a{display:inline-block;width:162px;height:40px;text-align:center;border-radius:3px;cursor:pointer;color:white;}
+.activate .white .active{background:#7a6c59;margin-left:68px;}
+.activate .white .active:hover{background:#6a3906;margin-left:68px;}
+.activate .white .repeat{background:#7a6c59;margin-left:155px;}
+.activate .white .repeat span{font-size:12px;}
+.activate .white .repeat:hover{background:#6a3906;margin-left:155px;}
+.activate .white .repeat:hover span{font-size:12px;}
+
+/*邮箱验证*/
+.activate .white .jump{font-size:14px;color:#80827f;margin-left:200px;margin-top:3px;}
+.activate .white .hello{font-size:30px;margin-left:200px;margin-top:30px;}
+.activate .white .hello span{margin-left:12px;font-size:18px;}
+.activate .white .slogan{margin-left:200px;font-size:12px;color:#e6632f;}
+.activate .white .info{width:250px;height:40px;text-align:center;border-radius:3px;cursor:pointer;background:#7a6c59;margin-left:200px;margin-top:40px;display:block;font-size:21px;color:white;line-height:40px;}
+.activate .white .info:hover{width:250px;height:40px;text-align:center;border-radius:3px;cursor:pointer;background:#6a3906;margin-left:200px;margin-top:40px;display:block;font-size:21px;color:white;line-height:40px;}
 
 .alert {
 padding: 8px 35px 8px 14px;
