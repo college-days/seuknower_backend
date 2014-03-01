@@ -40,3 +40,7 @@ to
 extension=php_mbstring.dll
 extension=php_exif.dll
 ```
+
+## common bugs
+
+* 假如部署之后发现页面上多出一块空白，很可能是出现了二次编辑时在文本编辑器中增加的bom头，只要直接用URL访问运行```clearBOM.php```或者```delbom.php```即可
