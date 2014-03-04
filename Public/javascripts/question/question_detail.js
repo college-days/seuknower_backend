@@ -86,15 +86,30 @@ $(function(){
 $(function(){
     var atUserId = 0;
     $(".reply").click(function(){
-        var href = $(this).attr("href");
-        var pos = $(href).offset().top;
-        var adjustPos = pos-100;
-        $("html,body").animate({scrollTop: adjustPos}, 1000);
+    	var flag = $(this).text();
+    	if(flag == "评论"){
+    		var href = $(this).attr("href");
+	        var pos = $(href).offset().top;
+	        var adjustPos = pos-100;
+	        $("html,body").animate({scrollTop: adjustPos}, 1000);
+	        
+	        var replyContent = $(this).parents("li").find("div.reply-content");
+	        replyContent.slideDown();
+	        var content = replyContent.find("input.write");
+	        content.focus();
+	        $(this).text("收起评论");
+    	}else{
+    		var href = $(this).attr("href");
+	        var pos = $(href).offset().top;
+	        var adjustPos = pos-100;
+	        $("html,body").animate({scrollTop: adjustPos}, 1000);
+
+    		var replyContent = $(this).parents("li").find("div.reply-content");
+	    	replyContent.find('input.write').val("");
+	    	replyContent.slideUp();
+	    	$(this).text("评论");
+    	}
         
-        var replyContent = $(this).parents("li").find("div.reply-content");
-        replyContent.slideDown();
-        var content = replyContent.find("input.write");
-        content.focus();
     });
 
     $(".replytoreply").click(function(){
@@ -122,13 +137,6 @@ $(function(){
     		$($(this).parents("div.reply-content").find("div.alert")[0]).slideDown();
     	}
     });
-
-    $(".canclewrite").click(function(){
-    	var replyContent = $(this).parents("div.reply-content");
-    	replyContent.find('input.write').val("");
-    	replyContent.slideUp();
-    });
-
 });
 
 $(function(){
