@@ -113,6 +113,16 @@
 			</div>
 		</div>
 	</div>
+	<link rel="stylesheet" href="__EDITOR__/themes/default/default.css" />
+	<script charset="utf-8" src="__EDITOR__/kindeditor-all-min.js"></script>
+	<script charset="utf-8" src="__EDITOR__/lang/zh_CN.js"></script>
+	<script>
+	    KindEditor.ready(function(K) {
+	        window.editor = K.create('#intro', {
+				items: ["bold", "italic", "underline", "preview", "code", "image", "link", "quickformat", "removeformat", "insertorderedlist", "insertunorderedlist"]
+	        });
+	    });
+	</script>
 	<link href="__CSS__/jquery.Jcrop.css" rel="stylesheet" type="text/css"/>
 	<script src="__JS__/jquery.Jcrop.js"></script>
 	<script src="__JS__/jquery.color.js"></script>

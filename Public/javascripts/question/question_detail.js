@@ -2,8 +2,12 @@ var answerEditor;
 var changeEditor;
 
 KindEditor.ready(function(K) {
-	answerEditor = K.create("#editor_id");
-	changeEditor = K.create("#changearea");
+	answerEditor = K.create("#editor_id", {
+		items: ["bold", "italic", "underline", "preview", "code", "image", "link", "quickformat", "removeformat", "insertorderedlist", "insertunorderedlist"]
+	});
+	changeEditor = K.create("#changearea", {
+		items: ["bold", "italic", "underline", "preview", "code", "image", "link", "quickformat", "removeformat", "insertorderedlist", "insertunorderedlist"]
+	});
     window.editor = answerEditor;
 
 	$("a.modify").click(function(){

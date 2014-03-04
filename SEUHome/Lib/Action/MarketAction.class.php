@@ -110,6 +110,9 @@ class MarketAction extends Action {
 
 		$result = $Commodity->find($id);
 
+		//prevent xss
+		$result['intro'] = htmlspecialchars_decode($result['intro']);
+
 		//判断当前用户是不是已经点过赞了
 		$map['c_id'] = $id;
 		$map['u_id'] = $userId;

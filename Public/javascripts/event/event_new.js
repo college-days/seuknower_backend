@@ -61,7 +61,7 @@ $(function(){
 	});
 
 	$('#submitevent').click(function(){
-		if($("#title").val().replace(/[ ]/g,"") && $("#startdate").val().replace(/[ ]/g,"") && $("#enddate").val().replace(/[ ]/g,"") && $("#location").val().replace(/[ ]/g,"") && $("#intro").val().replace(/[ ]/g,"") && $("#organizer").val().replace(/[ ]/g,"")){
+		if($("#title").val().replace(/[ ]/g,"") && $("#startdate").val().replace(/[ ]/g,"") && $("#enddate").val().replace(/[ ]/g,"") && $("#location").val().replace(/[ ]/g,"") && window.editor.html().replace(/[ ]/g,"") && $("#organizer").val().replace(/[ ]/g,"")){
 			if(iconWidth && iconHeight){
 				iconX=iconX*width/imageWidth;
 				iconWidth=iconWidth*width/imageWidth;
@@ -76,6 +76,7 @@ $(function(){
 				}, function(data){
 					$('#rawpath').val(data.data.rawpath.replace(".",""));
 					$('#thumbpath').val(data.data.thumbpath.replace(".",""));
+					$("#intro").val(window.editor.html());
 					$('#event').submit();
 				},'json');
 			}else{
@@ -234,7 +235,8 @@ function checkLocation(){
 }
 
 function checkIntro(){
-	var intro = $("#intro").val();
+	// var intro = $("#intro").val();
+	var intro = window.editor.html();
 	if(intro.replace(/[ ]/g, "")){
 		$("#introalert").text("");
 	}else{

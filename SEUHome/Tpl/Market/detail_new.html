@@ -224,7 +224,9 @@
 	<script charset="utf-8" src="__EDITOR__/lang/zh_CN.js"></script>
 	<script>
 	    KindEditor.ready(function(K) {
-	        window.editor = K.create('#editor_id');
+	        window.editor = K.create('#editor_id', {
+	        	items: []
+	        });
 	    });
 
 	    $(function(){

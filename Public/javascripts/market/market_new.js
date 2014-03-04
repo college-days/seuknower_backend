@@ -38,7 +38,7 @@ $(function(){
 	});
 
 	$('#nextstep').click(function(){
-		if($("#commoditytitle").val().replace(/[ ]/g,"") && $("#commodityprice").val().replace(/[ ]/g,"") && $("#commoditycontact").val().replace(/[ ]/g,"") && $("#commodityintro").val().replace(/[ ]/g,"") && $("#gettime").val().replace(/[ ]/g,"")){
+		if($("#commoditytitle").val().replace(/[ ]/g,"") && $("#commodityprice").val().replace(/[ ]/g,"") && $("#commoditycontact").val().replace(/[ ]/g,"") && window.editor.html().replace(/[ ]/g,"") && $("#gettime").val().replace(/[ ]/g,"")){
 			if(iconWidth && iconHeight){
 				iconX = iconX*width/imageWidth;
 				iconWidth = iconWidth*width/imageWidth;
@@ -53,6 +53,7 @@ $(function(){
 				}, function(data){
 					$('#rawpath').val(data.data.rawpath.replace(".",""));
 					$('#thumbpath').val(data.data.thumbpath.replace(".",""));
+					$("#commodityintro").val(window.editor.html());
 					$("#commodity").submit();
 				}, 'json');
 			}else{
@@ -185,7 +186,8 @@ function checkTitle(){
 }
 
 function checkIntro(){
-	var intro = $("#commodityintro").val();
+	// var intro = $("#commodityintro").val();
+	var intro = window.editor.html();
 	if(intro.replace(/[ ]/g, "")){
 		$("#introalert").hide();
 	}else{
