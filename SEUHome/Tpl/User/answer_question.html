@@ -4,7 +4,11 @@
 			<div class="person-question">
 				<div class="info">
 					<div class="title">
-						<span>我的问答</span>
+						<eq name="me" value="1">
+							<span>我的问答</span>
+						<else/>
+							<span>回答</span>
+						</eq>
 						<span class="num">( 全部 )</span>
 					</div>
 					<div class="tag">
@@ -36,7 +40,9 @@
 						<a href="/question" class="act-index" target="_blank">>去问答首页</a>
 					</div>
 					<div class="join">
-						<a href="/user/ask/{$u_id}">提问({$askcount})</a>
+						<eq name="me" value="1">
+							<a href="/user/ask/{$u_id}">提问({$askcount})</a>
+						</eq>
 						<a href="/user/answer/{$u_id}" class="active">回答({$answercount})</a>
 					</div>
 					<div class="content">

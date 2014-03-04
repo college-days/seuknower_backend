@@ -33,7 +33,11 @@
 				</div>
 				<div class="title">
 					<span>问答</span>
-					<span class="num">( <a href="/user/ask/{$u_id}" target="_blank">{$askcount}个提问</a><span class="dot"></span><a href="/user/answer/{$u_id}" target="_blank">{$answercount}个回答</a> )</span>
+					<eq name="me" value="1">
+						<span class="num">( <a href="/user/ask/{$u_id}" target="_blank">{$askcount}个提问</a><span class="dot"></span><a href="/user/answer/{$u_id}" target="_blank">{$answercount}个回答</a> )</span>
+					<else/>
+						<span class="num">( <a href="/user/answer/{$u_id}" target="_blank">{$answercount}个回答</a> )</span>
+					</eq>
 					<a href="/question" target="_blank">去问答首页</a>
 				</div>
 				<div class="question">

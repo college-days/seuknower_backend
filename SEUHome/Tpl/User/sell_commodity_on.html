@@ -4,7 +4,11 @@
 		<div class="person-sell">
 			<div class="info">
 				<div class="title">
-					<span>我的出售</span>
+					<eq name="me" value="1">
+						<span>我的出售</span>
+					<else/>
+						<span>出售</span>
+					</eq>
 					<span class="num">( 全部 )</span>
 				</div>
 				<div class="tag">

@@ -97,8 +97,8 @@
 					<volist name="questions" id="question">
 						<li>
 							<a href="/question/{$question.id}" target="_blank"> {$question.title} </a>
+							<span class="user"><!-- {$question.u_name} -->&nbsp</span>
 							<span class="count"> {$question.answer_count} 个回答</span>
-							<span class="user"> {$question.u_name} </span>
 							<span class="time"> {$question.create_time|date='Y-m-d H:i',###} </span>
 						</li>
 					</volist>

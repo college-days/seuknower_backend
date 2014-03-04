@@ -4,7 +4,11 @@
 			<div class="person-activity">
 				<div class="info">
 					<div class="title">
-						<span>我的活动</span>
+						<eq name="me" value="1">
+							<span>我的活动</span>
+						<else/>
+							<span>活动</span>
+						</eq>
 						<span class="num">( 全部 )</span>
 					</div>
 					<div class="tag">
