@@ -550,16 +550,10 @@ class EventAction extends Action {
 		$data['location'] = I('param.location');
 		$data['intro'] = I('param.intro');
 		$data['u_id'] = session('userId');
+		$data['category'] = I('param.tag_cate');
 		if(I('param.rawpath') && I('param.thumbpath')){
 			$data['raw_poster'] = I('param.rawpath');
 			$data['poster'] = I('param.thumbpath');
-		}
-		if(I('param.tag_cate')){
-			$data['category'] = I('param.tag_cate');
-			$data['tag'] = I('param.tag_cate');
-		}
-		if(I('param.catalog')){
-			$data['tag'] = I('param.catalog');
 		}
 		
 		if(I('param.iscost')=="yes"){
