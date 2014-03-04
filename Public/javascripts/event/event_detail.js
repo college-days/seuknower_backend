@@ -7,14 +7,14 @@ $(function(){
 			$.post('/event/add_join', {'e_id': event_id}, function(data){
 				if(data.status){
 					$("#joinCount").text(parseInt($("#joinCount").text())+1);
-					join.val("不想参加");
+					join.val("取消参加");
 				}else{
 					window.location.href="/login";
 				}
 			}, "json");
 		}
 
-		if(content == "不想参加"){
+		if(content == "取消参加"){
 			$.post('/event/cancel_join', {'e_id': event_id}, function(data){
 				if(data.status){
 					$("#joinCount").text(parseInt($("#joinCount").text())-1);
@@ -34,14 +34,14 @@ $(function(){
 			$.post('/event/add_interest', {'e_id': event_id}, function(data){
 				if(data.status){
 					$("#interestCount").text(parseInt($("#interestCount").text())+1);
-					interest.val("不感兴趣");
+					interest.val("取消感兴趣");
 				}else{
 					window.location.href="/login";
 				}
 			}, "json");
 		}
 
-		if(content == "不感兴趣"){
+		if(content == "取消感兴趣"){
 			$.post('/event/cancel_interest', {'e_id': event_id}, function(data){
 				if(data.status){
 					$("#interestCount").text(parseInt($("#interestCount").text())-1);
