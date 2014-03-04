@@ -54,9 +54,9 @@ $(function(){
 	
 	$("#applychange").click(function(){
 		var content = window.editor.html();
-		var pwd = $("#changepwd").val();
+		// var pwd = $("#changepwd").val();
 		var aid = $("#changeanswerid").text();
-		if(pwd.replace(/[ ]/g, "")){
+		/*if(pwd.replace(/[ ]/g, "")){
 			$("#changepwdalert").text("");
 			$.post('/answer/change_content', {
 				'a_id': aid,
@@ -76,7 +76,20 @@ $(function(){
 			}, 'json');
 		}else{
 			$("#changepwdalert").text("请输入密码");
-		}
+		}*/
+		$("#changepwdalert").text("");
+		$.post('/answer/change_content', {
+			'a_id': aid,
+			'content': content 
+		}, function(data){
+			if(data.status == 1){
+				window.editor = answerEditor;
+				window.location.reload();
+			}
+			if(data.status == 0){
+				$("#changepwdalert").text("回答更新失败，请稍后再试");
+			}
+		}, 'json');
 	});
 
 	var sessionUserid = $("#question").attr("uid");

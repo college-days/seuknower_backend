@@ -210,7 +210,7 @@ class AnswerAction extends Action {
 	public function changeContent(){
 		$aid = I('param.a_id');
 		$content = I('param.content');
-		$pwd = I('param.pwd');
+		// $pwd = I('param.pwd');
 
 		$Answer = M('Answer');
 		$User = M('User');
@@ -218,7 +218,15 @@ class AnswerAction extends Action {
 		$answer = $Answer->where("id=".$aid)->find();
 		$user = $User->where("id=".$answer['u_id'])->find();
 
-		if(md5($pwd) != $user['pwd']){
+		$answerSaveData['content'] = $content;
+		$result = $Answer->where('id='.$aid)->save($answerSaveData);
+		if($result){
+			$this->ajaxReturn('', '', 1);
+		}else{
+			$this->ajaxReturn('', '', 0);
+		}
+
+		/*if(md5($pwd) != $user['pwd']){
 			//密码不正确
 			$this->ajaxReturn('', '', -1);
 		}else{
@@ -229,7 +237,7 @@ class AnswerAction extends Action {
 			}else{
 				$this->ajaxReturn('', '', 0);
 			}
-		}
+		}*/
 	}
 }
 ?>
