@@ -630,8 +630,8 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .person-profile .info .title a{font-size:12px;color:#7c7c7c;background:#f1f5f5;padding:5px 5px;border-radius:3px;}*/
 .person-profile .info .title .text{float:left;line-height:25px;}
 .person-profile .info .title .line{float:left;margin-top:12px;margin-left:10px;border-top:1px solid #e5e5e5;width:170px;}
-.person-profile .info .title .button{float:right;font-size:12px;color:#7c7c7c;background:#f1f5f5;margin-right:20px;padding:5px 5px;border-radius:3px;cursor:pointer;}
-
+.person-profile .info .title .button{float:right;font-size:12px;color:#FFF;background:#7c7c7c;margin-right:20px;padding:5px 5px;border-radius:3px;cursor:pointer;}
+.person-profile .info .title .button:hover{float:right;font-size:12px;color:#000;background:#80c269;margin-right:20px;padding:5px 5px;border-radius:3px;cursor:pointer;}
 
 /*.person-profile .info .detail {margin-top:42px;float:left;display:none;overflow:hidden;}
 .person-profile .info .detail li{margin-bottom:20px;overflow:hidden;}
@@ -656,14 +656,15 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .person-profile .info .modify  .icon .target img{max-width:250px;max-height:250px;float:left;}
 .person-profile .info .modify  .icon .preview img{width:48px;height:48px;overflow:hidden;margin-left:5px;float:right;margin-right:30px;}
 
-.person-profile  .tag{width:240px;height:352px;background:white;border:1px solid #e5e5e5;border-left:0px;padding:30px 0px 18px 30px;float:left;}
-.person-profile  .tag .title{font-size:16px;color:#7a6c59;}
-.person-profile  .tag .title .divide{border-top:1px solid #e5e5e5;width:102px;margin-bottom:6px;margin-left:5px;margin-right:5px;display:inline-block;}
-.person-profile  .tag .title a{font-size:12px;color:#7c7c7c;background:#f1f5f5;padding:5px 5px;border-radius:3px;}
-.person-profile  .tag .detail{margin-top:38px;margin-left:-30px;width:250px;}
+.person-profile .tag{width:240px;height:352px;background:white;border:1px solid #e5e5e5;border-left:0px;padding:30px 0px 18px 30px;float:left;}
+.person-profile .tag .title{font-size:16px;color:#7a6c59;}
+.person-profile .tag .title .divide{border-top:1px solid #e5e5e5;width:102px;margin-bottom:6px;margin-left:5px;margin-right:5px;display:inline-block;}
+.person-profile .tag .title a{font-size:12px;color:#FFF;background:#7c7c7c;padding:5px 5px;border-radius:3px;}
+.person-profile .tag .title a:hover{font-size:12px;color:#000;background:#80c269;padding:5px 5px;border-radius:3px;}
+.person-profile .tag .detail{margin-top:38px;margin-left:-30px;width:250px;}
 
-.person-profile  .tag .detail .content{background:url(images/tag_head.png) no-repeat;padding-left:8px;height:32px;margin-bottom:30px;float:left;margin-left:30px;}
-.person-profile  .tag .detail .content span{padding:8px 12px ;color:white;font-size:14px;background:#80c269;border-radius:2px;}
+.person-profile .tag .detail .content{background:url(images/tag_head.png) no-repeat;padding-left:8px;height:32px;margin-bottom:30px;float:left;margin-left:30px;}
+.person-profile .tag .detail .content span{padding:8px 12px ;color:white;font-size:14px;background:#80c269;border-radius:2px;}
 .trace{width:233px;border:1px solid #e5e5e5;float:right;background:white;padding:30px;}
 .trace .title{font-size:16px;color:#7a6c59;}
 .trace ul{margin-top:20px;line-height:18px;}
@@ -671,7 +672,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .trace .delete{float:right;color:#a3bcc4;cursor:pointer;}
 
 
-.person-center  .info{width:607px;background:white;border:1px solid #e5e5e5;padding:0px 0px 18px 30px;float:left;}
+.person-center .info{width:607px;background:white;border:1px solid #e5e5e5;padding:0px 0px 18px 30px;float:left;}
 .person-center .title{font-size:16px;color:#7a6c59;margin-bottom:20px;margin-top:30px;line-height:25px;}
 .person-center .title .num,.person-center .title .num a{font-size:12px;color:#4e9f74;}
 .person-center .title .num .dot{background:url(images/person_dot.png) no-repeat;width:10px;height:10px;display:inline-block;margin-top:1px;}
@@ -692,7 +693,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .person-center .sell li img{max-width:96px;max-height:74px;}
 .person-center .question .buy li a{float:left;width:310px;overflow:hidden;}
 
-.person  .info{width:607px;background:white;border:1px solid #e5e5e5;padding:0px 0px 18px 30px;float:left;}
+.person .info{width:607px;background:white;border:1px solid #e5e5e5;padding:0px 0px 18px 30px;float:left;}
 .person .title{font-size:16px;color:#7a6c59;margin-bottom:10px;margin-top:30px;line-height:25px;}
 .person .title .num{font-size:12px;color:#4e9f74;}
 

@@ -1,9 +1,20 @@
+var width;
+var height;
+
+var imageWidth;
+var imageHeight;
+var iconX;
+var iconY;
+var iconWidth;
+var iconHeight;
+var count = -1;
+
 $(function(){
 	var sex = $('#sex').text().replace(/[ ]/g,"");
 	var dept = $('#dept').text().replace(/[ ]/g,"");
 	var grade = $('#grade').text().replace(/[ ]/g,"");
 	var campus = $('#campus').text().replace(/[ ]/g,"");
-	var intro = $('#intro').text().replace(/[ ]/g,"");
+	var intro = $('#intro').text();
 	var qq = $('#qq').text().replace(/[ ]/g,"");
 	var email = $('#email').text().replace(/[ ]/g,"");
 	var weibo = $('#weibo').text().replace(/[ ]/g,"");
@@ -129,3 +140,110 @@ $(function(){
 	}
 
 });
+
+function jcorp(){
+	var api;
+	$('#target').Jcrop({
+		onChange: showPreview,
+		onSelect: showPreview,
+		aspectRatio: 1
+	},function(){
+		api = this;
+		api.setSelect([imageWidth/2-50,imageHeight/2-50,imageWidth/2+50,imageHeight/2+50]);
+		api.setOptions({ bgFade: true });
+		api.ui.selection.addClass('jcrop-selection');
+		$("#icon").click(function(){
+			api.destroy();
+		});
+	});
+}
+
+function showPreview(coords){
+	var rx = 48 / coords.w;//preview的宽
+	var ry = 48 / coords.h;//preview的高
+	iconX=coords.x;
+	iconY=coords.y;
+	iconWidth=coords.w;
+	iconHeight=coords.h;
+	$('#preview').css({
+		width: Math.round(rx * imageWidth) + 'px',
+		height: Math.round(ry * imageHeight) + 'px',
+		marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+		marginTop: '-' + Math.round(ry * coords.y) + 'px'
+	});
+}
+
+function ajaxFileUpload(){
+    $.ajaxFileUpload
+    (
+        {
+            url: '/user/upload_icon', //你处理上传文件的服务端
+            secureuri: false,
+            fileElementId: 'icon',
+            dataType: 'json',
+			complete:function(){
+			},
+            success: function (data, status)
+			{
+				var path = data.data.path.replace('.',"");
+				width = data.data.width;
+				height = data.data.height;
+				if(width<300 && height<300){
+					imageWidth=width;
+					imageHeight=height;
+				}
+				else if(width>height){
+					imageWidth=300;
+					imageHeight=300*height/width;
+				}
+				else{
+					imageHeight=300;
+					imageWidth=300*width/height;
+				}
+
+				$('#div_image').css('display', 'block');					
+				$('#target').attr('src', path);
+				$('#preview').attr('src', path);
+
+				$('#target').load(function(){
+					$('#target').css('width', 222);
+					$('#target').css('height', 222);
+					jcorp();
+				});					
+			},
+			error: function (data, status, e)
+			{
+				alert(e);
+			}
+        }
+    )
+	return false;
+} 
+
+// $(function(){
+// 	width = parseInt($("#target").attr('raw_width'));
+// 	height = parseInt($("#target").attr('raw_height'));
+	
+// 	if(width<300 && height<300){
+// 		imageWidth=width;
+// 		imageHeight=height;
+// 	}
+// 	else if(width>height){
+// 		imageWidth=300;
+// 		imageHeight=300*height/width;
+// 	}
+// 	else if(height<width){
+// 		imageHeight=300;
+// 		imageWidth=300*width/height;
+// 	}
+
+// 	$('#target').css('width',imageWidth);
+// 	$('#target').css('height',imageHeight);
+	
+// 	$("#target").click(function(){
+// 		if($("#target").attr("src") != $("#preview").attr("src")) {
+// 			$("#preview").attr("src",$("#target").attr("src"));
+// 			jcorp();
+// 		}
+// 	});
+// });

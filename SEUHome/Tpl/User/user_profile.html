@@ -1,33 +1,4 @@
 <include file="Public:header" title="资料"/> 
-	<script>
-		$(function(){
-			$("#updateprofile").click(function(){
-				$.post("__URL__/updateprofile/", {
-					"id": $("#userid").text().replace(/[ ]/g,""),
-					"sex": $('#usersex').find("option:selected").text().replace(/[ ]/g,""), 
-					"dept": $('#userdept').find("option:selected").text().replace(/[ ]/g,""),
-					"grade": $('#usergrade').find("option:selected").text().replace(/[ ]/g,""),
-					"campus": $('#usercampus').find("option:selected").text().replace(/[ ]/g,""),
-					"intro": $('#userintro').val().replace(/[ ]/g,""),
-					"qq": $('#userqq').val().replace(/[ ]/g,""),
-					"email": $('#useremail').val().replace(/[ ]/g,""),
-					"weibo": $('#userweibo').val().replace(/[ ]/g,"")
-				}, function(data){
-					if(data.status){
-						//window.location.reload();
-						alert('success');
-						alert(data.data);
-						window.location.reload();
-					}else{
-						// alert(data.info);
-						alert('error');
-						//$('#loginwrongmsg').html(data.info);	
-						//$('#loginmsg').show();	
-					} 
-				}, "json");
-			});
-		});
-	</script>
 	<include file="User:user_header"/>
 		<div class="person-profile">
 			<div class="info">
@@ -54,7 +25,7 @@
 						</li>
 						<li>
 							<div class="key">学院</div>
-							<empty name="$user.dept">
+							<empty name="user.dept">
 								<div class="value" id="dept">未知</div>
 							<else/>
 								<div class="value" id="dept">{$user.dept}</div>
@@ -62,7 +33,7 @@
 						</li>
 						<li>
 							<div class="key">年级</div>
-							<empty name="$user.grade">
+							<empty name="user.grade">
 								<div class="value" id="grade">未知</div>
 							<else/>
 								<div class="value" id="grade">{$user.grade}</div>
@@ -70,7 +41,7 @@
 						</li>
 						<li>
 							<div class="key">校区</div>
-							<empty name="$user.campus">
+							<empty name="user.campus">
 								<div class="value" id="campus">未知</div>
 							<else/>
 								<div class="value" id="campus">{$user.campus}</div>
@@ -78,7 +49,7 @@
 						</li>
 						<li>
 							<div class="key">个性签名</div>
-							<empty name="$user.intro">
+							<empty name="user.intro">
 								<div class="value" id="intro">还没有填写个人签名</div>
 							<else/>
 								<div class="value" id="intro">{$user.intro}</div>
@@ -86,7 +57,7 @@
 						</li>
 						<li>
 							<div class="key">QQ</div>
-							<empty name="$user.qq">
+							<empty name="user.qq">
 								<div class="value" id="qq">还没有填写qq号</div>
 							<else/>
 								<div class="value" id="qq">{$user.qq}</div>
@@ -94,7 +65,7 @@
 						</li>
 						<li>
 							<div class="key">邮箱</div>
-							<empty name="$user.email">
+							<empty name="user.email">
 								<div class="value" id="email">还没有填写邮箱地址</div>
 							<else/>
 								<div class="value" id="email">{$user.email}</div>
@@ -102,7 +73,7 @@
 						</li>
 						<li>
 							<div class="key">微博</div>
-							<empty name="$user.weibo">
+							<empty name="user.weibo">
 								<div class="value" id="weibo">还没有填写微博昵称</div>
 							<else/>
 								<div class="value" id="weibo">{$user.weibo}</div>
@@ -111,6 +82,10 @@
 					</ul>
 				</div>
 				<else/>
+				<div class="row" style="display:none">
+					<input id="rawpath" name="rawpath" type="text"/>
+					<input id="thumbpath" name="thumbpath" type="text"/>
+				</div>
 				<div class="detail" style="display:none;">
 					<ul>
 						<li>
@@ -248,28 +223,43 @@
 						<div class="title">
 							<div class="text"><span>修改头像</span></div>
 							<div class="line"></div>
-							<div class="button"><input type="file"/>上传照片</div>
+							<div class="button"><input id="icon" name="icon" type="file"/>上传照片</div>
 						</div>
-						<div class="div-image">
+						<!-- <div class="div-image">
 							<div class="target">
-								<img src="{$user.icon}" style="width:712px;height:505px;"/>
+								<img src="{$user.raw_icon}" id="target" style="width:712px;height:505px;"/>
 							</div>
 							<div class="preview">
-								<img src="{$user.icon}"/>
+								<img src="{$user.icon}" id="preview" />
 							</div>
-						</div>
+						</div> -->
+					</div>
+					<div class="row" id="div_image">
+						<table>
+							<td><img src="{$user.raw_icon}" id="target" style="width:222px;height:222px;overflow:hidden;"/></td>
+							<td>
+								<div style="width:48px;height:48px;overflow:hidden;margin-left:5px;">
+									<img src="{$user.icon}" id="preview"/>
+								</div>
+							</td>
+						</table>
 					</div>
 				</div>
 				</eq>
 			</div>
 			<div class="tag">
 				<div class="title">
-					<span>我的标签</span>
-					<span class="divide"></span>
-					<a href="#">管理</a>
+					<eq name="me" value="1">
+						<span>我的标签</span>
+						<span class="divide"></span>
+						<a href="#">管理</a>
+					<else/>
+						<span>标签</span>
+						<span class="divide"></span>
+					</eq>
 				</div>
 				<div class="detail">
-					<div class="content">
+					<!-- <div class="content">
 						<span>九龙湖-橘园九龙湖-橘园</span>
 					</div>
 					<div class="content">
@@ -283,7 +273,7 @@
 					</div>
 					<div class="content">
 						<span>动漫宅</span>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -291,5 +281,61 @@
 		<div class="clear">
 		</div>
 	</div>
+	<script src="__JS__/jquery.Jcrop.js"></script>
+	<script src="__JS__/jquery.color.js"></script>
+	<script src="__JS__/ajaxfileupload.js"></script>
+	<link rel="stylesheet" href="__CSS__/jquery.Jcrop.css" type="text/css" />
+	<script>
+		$(function(){
+			$("#updateprofile").click(function(){
+				if(iconWidth && iconHeight){
+					iconX=iconX*width/imageWidth;
+					iconWidth=iconWidth*width/imageWidth;
+					iconY=iconY*height/imageHeight;
+					iconHeight=iconHeight*height/imageHeight;
+					$.post('/user/thumb_icon', {
+						imagepath: '.'+$('#target').attr('src'),
+						iconx: iconX,
+						icony: iconY,
+						width: iconWidth,
+						height: iconHeight
+					}, function(data){
+						$('#rawpath').val(data.data.rawpath.replace(".", ""));
+						$('#thumbpath').val(data.data.thumbpath.replace(".", ""));
+						postProfileData();
+					}, 'json');
+				}
+				else{
+					postProfileData();
+				}
+			});
+
+			function postProfileData(){
+				$.post("/user/update_profile", {
+					"rawpath": $("#rawpath").val(),
+					"thumbpath": $("#thumbpath").val(),
+					"id": $("#userid").text().replace(/[ ]/g,""),
+					"sex": $('#usersex').find("option:selected").text().replace(/[ ]/g,""), 
+					"dept": $('#userdept').find("option:selected").text().replace(/[ ]/g,""),
+					"grade": $('#usergrade').find("option:selected").text().replace(/[ ]/g,""),
+					"campus": $('#usercampus').find("option:selected").text().replace(/[ ]/g,""),
+					"intro": $('#userintro').val(),
+					"qq": $('#userqq').val().replace(/[ ]/g,""),
+					"email": $('#useremail').val().replace(/[ ]/g,""),
+					"weibo": $('#userweibo').val().replace(/[ ]/g,"")
+				}, function(data){
+					if(data.status){
+						window.location.reload();
+					}else{
+						alert('修改资料失败');
+					} 
+				}, "json");
+			}
+
+			$('#icon').change(function(){		
+				ajaxFileUpload();
+			});
+		});
+	</script>
 	<script src="__JS__/user/user_profile.js"></script>
 <include file="Public:footer" />

@@ -376,7 +376,7 @@ class UserAction extends Action {
     	$u_id = I('param.id');
     	$User = M('User');
     	$userInfo = $User->find($u_id);
-    	
+
         $util = new CommonUtil();
 
         $userInfo["sex"] = $util->filter_sex($userInfo["sex"]);
@@ -396,7 +396,44 @@ class UserAction extends Action {
         $this->display('user_profile');
     }
 
-    public function updateprofile(){
+    //上传头像
+    public function uploadIcon(){
+        import('ORG.Net.UploadFile');
+        import('ORG.Util.Image');
+        $upload = new UploadFile();                                 // 实例化上传类
+        $upload->maxSize  = 3145728 ;                               // 设置附件上传大小
+        $upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg');   // 设置附件上传类型
+        $upload->savePath =  './Uploads/Images/User/Icon/Raw/'; // 设置附件上传目录 
+        $upload->saveRule= "time";                                  //文件保存规则
+         
+        if(!$upload->upload()) {// 上传错误提示错误信息
+            $this->error($upload->getErrorMsg());
+        }else{// 上传成功
+            $info = $upload->getUploadFileInfo();
+            $data['path'] = $info[0]['savepath'].$info[0]['savename'];
+            $imageSize = getimagesize($data['path']);
+            $data['width'] = $imageSize[0];
+            $data['height'] = $imageSize[1];
+            $this->ajaxReturn($data, 'success', 1);
+        }
+    }
+
+    //裁剪头像并生成缩略图
+    public function thumbIcon(){
+        $srcPath=I('param.imagepath');
+        $rawPath='./Uploads/Images/User/Icon/Raw/r'.time().'.jpg';
+        thumb($srcPath,$rawPath,I('param.width'),I('param.height'),I('param.iconx'),I('param.icony'));
+        
+        import('ORG.Util.Image');
+        $thumbPath='./Uploads/Images/User/Icon/t'.time().'.jpg';
+        image::thumb($rawPath, $thumbPath, 'jpg', 48, 48);
+        $result = unlink($rawPath);
+        $data['rawpath'] = $srcPath;
+        $data['thumbpath'] = $thumbPath;
+        $this->ajaxReturn($data, 'success', $result);
+    }
+
+    public function updateProfile(){
         $u_id = I('param.id');
 
         //无权修改他人的信息
@@ -425,30 +462,32 @@ class UserAction extends Action {
                 $data['intro'] = $intro;
             }
             if(empty($qq)){
-                $data['qq'] = '';
+                $data['qq'] = $userInfo['qq'];
             }else{
                 $data['qq'] = $qq;
             }
             if(empty($email)){
-                $data['email'] = '';
+                $data['email'] = $userInfo['email'];
             }else{
                 $data['email'] = $email;
             }
             if(empty($weibo)){
-                $data['weibo'] = '';
+                $data['weibo'] = $userInfo['weibo'];
             }else{
                 $data['weibo'] = $weibo;
             }
 
-            if($userInfo['sex'] == $data['sex'] && $userInfo['dept'] == $data['dept'] && $userInfo['grade'] == $data['grade'] && $userInfo['campus'] == $data['campus'] && $userInfo['intro'] == $data['intro'] && $userInfo['qq'] == $data['qq'] && $userInfo['email'] == $data['email'] && $userInfo['weibo'] == $data['weibo']){
-                $this->ajaxReturn('啥也没更新', '', 1);
+            if(I('param.rawpath') && I('param.thumbpath')){
+                $data['raw_icon'] = I('param.rawpath');
+                $data['icon'] = I('param.thumbpath');
             }
 
-            $result = $User->where('id='.$u_id)->save($data);
-            $this->ajaxReturn('123', '', $result);
+            // if($userInfo['sex'] == $data['sex'] && $userInfo['dept'] == $data['dept'] && $userInfo['grade'] == $data['grade'] && $userInfo['campus'] == $data['campus'] && $userInfo['intro'] == $data['intro'] && $userInfo['qq'] == $data['qq'] && $userInfo['email'] == $data['email'] && $userInfo['weibo'] == $data['weibo']){
+            //     $this->ajaxReturn('啥也没更新', '', 1);
+            // }
 
-            //$User = M();
-            //$result = $User->execute("update seu_user set sex='".$sex."', dept='".$dept."', grade='".$grade."', campus='".$campus."', intro='".$intro."', qq='".$qq."', email='".$email."', weibo='".$weibo."' where id=".$u_id.";");
+            $result = $User->where('id='.$u_id)->save($data);
+            $this->ajaxReturn('333', '', $result);
 
         }else{
             $this->ajaxReturn($u_id, '', 0);
