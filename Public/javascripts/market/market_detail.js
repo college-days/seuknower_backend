@@ -109,9 +109,12 @@ $(function(){
 			$(".bshare-custom").slideUp();
 			$(this).text("分享");
 		}
-		
 	});
 
+	$(".edit").click(function(){
+		var commodity_id = $("#commodity_id").text();
+		window.location.href = "/market/modify_commodity/"+commodity_id;
+	});
 });
 
 function submitComment(){

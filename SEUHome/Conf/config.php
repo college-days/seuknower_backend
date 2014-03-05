@@ -67,6 +67,8 @@ return array(
 		'event/add_interest' => 'Event/addInterest',
 		'event/cancel_interest' => 'Event/cancelInterest',
 		'event/add_comment' => 'Event/addComment',
+		'market/modify_commodity/:id\d$' => 'Market/modifyCommodity',
+		'market/save_commodity$' => 'Market/saveCommodity',
 		'market/getsamecate$' => 'Market/getsamecate',
 		'market/page/:id\d$' => 'Market/index',
 		'market/commodity/:id\d$' => 'Market/detail',

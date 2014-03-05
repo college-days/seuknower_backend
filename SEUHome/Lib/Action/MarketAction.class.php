@@ -110,6 +110,12 @@ class MarketAction extends Action {
 
 		$result = $Commodity->find($id);
 
+    	if($_SESSION['userId'] == $result['u_id']){
+    		$this->assign('me', '1');
+    	}else{
+    		$this->assign('me', '0');
+    	}
+
 		//prevent xss
 		$result['intro'] = htmlspecialchars_decode($result['intro']);
 
@@ -266,50 +272,6 @@ class MarketAction extends Action {
     	}
     }
 
-    public function saveCommodity(){
-		$Commodity = M('Commodity');
-		$data['id'] = I('param.id');
-		$data['title'] = I('param.title');
-		//$data['create_time'] = time();
-		$data['cost'] = I('param.cost');
-		$data['location'] = I('param.location');
-		$data['intro'] = I('param.intro');
-		$data['phone'] = I('param.phone');
-		$data['u_id'] = session('userId');
-		
-		$User = M('User');
-		$result = $User->find(session('userId'));
-		if(!$result['phone']){
-			$update['id'] = session('userId');
-			$update['phone'] = I('param.phone');
-			$User->save($update);
-		}
-		
-		if(I('param.thumbpath')){
-			$data['picture'] = I('param.thumbpath');
-		}
-		if(I('param.tag_cate')){
-			$data['category'] = I('param.tag_cate');
-			$data['tag'] = I('param.tag_cate');
-		}
-		if(I('param.catalog')){
-			$data['tag'] = I('param.catalog');
-		}
-		//$cId = $Commodity->add($data);
-		//dump($data);
-		$id = $data['id'];
-		$Commodity->save($data);
-		if(I('param.rawpath')){
-			$Picture = M('CommodityPicture');
-			$pdata['c_id'] = $cId;
-			$pdata['create_time'] = time();
-			$pdata['picture'] = I('param.rawpath');
-			$Picture->add($pdata);
-		}
-		//dump($data);
-		$this->redirect("/market/commodity/$id");
-	}
-
 	//上传图片
 	public function uploadPicture(){
 		import('@.ORG.UploadFile');
@@ -465,5 +427,69 @@ class MarketAction extends Action {
 		$this->ajaxReturn($sameCateCommodities, '', 1);
 	}
 
+	public function modifyCommodity(){
+		$id = I('param.id');
+		$Commodity = M("Commodity");
+		$commodityInfo = $Commodity->find($id);
+		if($commodityInfo['u_id'] == session('userId')){
+			$this->assign('commodity', $commodityInfo);
+			$Picture = M('CommodityPicture');
+			$map['c_id']=$id;
+			$picture = $Picture->where($map)->select();
+			$this->assign('picture',$picture);
+			if(!$commodityInfo['phone']){
+				$User = M('User');
+				$user = $User->find(session('userId'));
+				$this->assign('phone',$user['phone']);
+			}
+			else{
+				$this->assign('phone',$commodityInfo['phone']);
+			}
+			$this->display('modify');
+		}
+		else{
+			$this->error("您无操作权限");
+		}
+		
+	}
+
+	public function saveCommodity(){
+		$Commodity = M('Commodity');
+		$data['id'] = I('param.id');
+		$data['title'] = I('param.title');
+		//$data['create_time'] = time();
+		$data['cost'] = I('param.cost');
+		$data['location'] = I('param.location');
+		$data['intro'] = I('param.intro');
+		$data['phone'] = I('param.phone');
+		$data['u_id'] = session('userId');
+		$data['status'] = I('param.status');
+		$data['getittime'] = strtotime(I('param.gettime')." 00:00:00");
+
+		$User = M('User');
+		$result = $User->find(session('userId'));
+		if(!$result['phone']){
+			$update['id'] = session('userId');
+			$update['phone'] = I('param.phone');
+			$User->save($update);
+		}
+
+		if(I('param.thumbpath')){
+			$data['picture'] = I('param.thumbpath');
+		}
+		if(I('param.tag_cate')){
+			$data['category'] = I('param.tag_cate');
+		}
+		$id = $data['id'];
+		$Commodity->save($data);
+		if(I('param.rawpath')){
+			$Picture = M('CommodityPicture');
+			$pdata['c_id'] = $cId;
+			$pdata['create_time'] = time();
+			$pdata['picture'] = I('param.rawpath');
+			$Picture->add($pdata);
+		}
+		$this->redirect("/market/commodity/$id");
+	}
 }
 ?>

@@ -1,0 +1,133 @@
+<include file="Public:header" title="新商品"/>
+<div class="back-color">
+    <div class="activity-new">
+		<div class="container">
+			<div class="left">
+			<div class="title">编辑商品</div>
+			<form id="commodity" name="commodity" action="/market/save_commodity" method="post">
+				<div class="row">
+					<div id="titlealert" style="color:red;margin-left:71px;display:none;">没有填写商品名称</div>
+				</div>
+				<div class="row">
+					<span class="key">名称</span>
+					<input class="value long" type="text" id="commoditytitle" name="title" value="{$commodity.title}"/>
+				</div>
+				<div class="row">
+					<span class="key">分类</span>
+					<select class="short" id="commoditytype" name="tag_cate">
+						<option value="衣物鞋帽">衣物鞋帽</option>
+						<option value="数码电子">数码电子</option>
+						<option value="生活日用">生活日用</option>
+						<option value="书籍杂志">书籍杂志</option>
+						<option value="0元转让">0元转让</option>
+						<option value="其他">其他</option>
+					</select>
+				</div>
+				<div class="row">
+					<span class="key">校区</span>
+					<select class="short" id="commoditylocation" name="location">
+						<option value="九龙湖">九龙湖</option>
+						<option value="四牌楼">四牌楼</option>
+						<option value="丁家桥">丁家桥</option>
+						<option value="浦口">浦口</option>
+					</select>
+				</div>
+
+				<div class="row">
+					<div id="pricealert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">价格</span><input class="value short" type="text" id="commodityprice" name="cost" value="{$commodity.cost}"/><label style="margin-left:15px">(RMB)</label>
+				</div>
+
+				<div class="row">
+					<div id="introalert" style="color:red;margin-left:71px;display:none;">没有填写商品描述</div>
+				</div>
+				<div class="row">
+					<span class="key">商品描述</span><textarea id="commodityintro" name="intro">{$commodity.intro}</textarea>
+				</div>
+
+				<div class="row">
+					<div id="statusalert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">成色(请填写数字1-9即可)</span><input type="text" class="value short" id="commoditystatus" name="status" value="{$commodity.status}"/>
+				</div>
+				<div class="row">
+					<div id="contactalert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">联系方式</span><input class="value short" type="text" id="commoditycontact" name="phone" value="{$commodity.phone}"/><label style="margin-left:15px">(手机号码或者邮箱地址)</label>
+				</div>
+
+				<div class="row">
+					<div id="gettimealert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">入手时间</span><input type="text" class="value short" id="gettime" name="gettime" value="{$commodity.getittime|date='Y-m-d',###}"/>
+				</div>
+				<div class="row">
+					<div id="picturealert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">商品图片</span>
+					<input class="value" type="file" id="picture" name="picture"/>
+				</div>
+
+				<div class="row" id="div_image">
+					<table style="margin-left:118px;">
+						<td><img src="{$commodity.picture}" id="target"/></td>
+						<td>
+							<div style="width:150px;height:130px;overflow:hidden;margin-left:5px;">
+								<img id="preview"/>
+							</div>
+						</td>
+					</table>
+				</div>
+
+				<div class="row" style="display:none">
+					<input id="rawpath" name="rawpath" type="text"/>
+					<input id="thumbpath" name="thumbpath" type="text"/>
+					<input id="id" name="id" value="{$commodity.id}" type="text"/>
+					<input id="previousCategory" value="{$commodity.category}" type="text"/>
+					<input id="previousLocation" value="{$commodity.location}" type="text"/>
+				</div>
+
+				<div class="row">
+					<span class="key"></span><input id="nextstep" class="btn" type="button" value="完成"/>
+				</div>
+			</form>
+			</div>
+			<div class="right">
+				<p class="title">创建活动须知···</p>
+				<p class="word">1、活动标题简单明了，时间地点准确；</p>
+				<p class="word">2、活动内容和特点介绍详细；</p>
+				<p class="word">3、记得上传一张活动海报，分辨率大于500x500，如没有海报，可以上传相关的照片、图片；</p>
+				<p class="word">4、遇到任何问题可以邮件联系我们获得帮助。</p>
+			</div>
+		</div>
+	</div>
+	<link rel="stylesheet" href="__EDITOR__/themes/default/default.css" />
+	<script charset="utf-8" src="__EDITOR__/kindeditor-all-min.js"></script>
+	<script charset="utf-8" src="__EDITOR__/lang/zh_CN.js"></script>
+	<script>
+	    KindEditor.ready(function(K) {
+	        window.editor = K.create('#commodityintro', {
+				items: ["bold", "italic", "underline", "preview", "code", "image", "link", "quickformat", "removeformat", "insertorderedlist", "insertunorderedlist"]
+	        });
+
+	        $(function(){
+	        	window.editor.html($("#commodityintro").text());
+	        	var previousLocation = $("#previousLocation").val();
+	        	var previousCategory = $("#previousCategory").val();
+	        	$("#commoditytype").find("option[value='"+previousCategory+"']").attr("selected", true);
+	        	$("#commoditylocation").find("option[value='"+previousLocation+"']").attr("selected", true);
+	        });
+	    });
+	</script>
+	<link href="__CSS__/jquery.Jcrop.css" rel="stylesheet" type="text/css"/>
+	<script src="__JS__/jquery.Jcrop.js"></script>
+	<script src="__JS__/jquery.color.js"></script>
+	<script src="__JS__/ajaxfileupload.js"></script>
+	<script src="__JS__/market/market_modify.js"></script>
+<include file="Public:footer" />
