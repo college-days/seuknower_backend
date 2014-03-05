@@ -4,14 +4,50 @@
 	</div>
 	<div class="detail">
 		<ul>
-			<li>
+			<eq name="footcount" value="0">
+				<li>
+					<div>【你还没有留下脚印，快去做点什么吧】</div>
+				</li>
+			<else/>
+				<volist name="recentevents" id="event">
+					<li>
+						<div><a href="/event/{$event.id}" target="_blank">发起了活动【{$event.title}】</a></div>
+					</li>
+				</volist>
+				<volist name="recentquestions" id="question">
+					<li>
+						<div ><a href="/question/{$question.id}" target="_blank">提出了问题【{$question.title}】</a></div>
+					</li>
+				</volist>
+				<volist name="recentcommodities" id="commodity">
+					<li>
+						<div ><a href="/market/commodity/{$commodity.id}" target="_blank">发布了商品【{$commodity.title}】</a></div>
+					</li>
+				</volist>
+				<volist name="recentanswers" id="answer">
+					<li>
+						<div ><a href="/question/{$answer.q_id}" target="_blank">回答了问题【{$answer.q_title}】</a></div>
+					</li>
+				</volist>
+				<volist name="recenteventcomments" id="comment">
+					<li>
+						<div ><a href="/event/{$comment.e_id}" target="_blank">评论了活动【{$comment.e_title}】</a></div>
+					</li>
+				</volist>
+				<volist name="recentcommoditycomments" id="comment">
+					<li>
+						<div ><a href="/market/commodity/{$comment.c_id}" target="_blank">评论了商品【{$comment.c_title}】</a></div>
+					</li>
+				</volist>
+			</eq>
+			<!-- <li>
 				<div ><a href="#">评论了活动【东南大学第三届研究生十佳歌手大赛】</a></div>
 				<div class="delete">删除</div>
 			</li>
 			<li>
 				<div ><a href="#">发布了新商品【thinkpad】</a></div>
 				<div class="delete">删除</div>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 </div>

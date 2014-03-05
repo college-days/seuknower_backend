@@ -183,6 +183,8 @@ class UserAction extends Action {
     	session('joineventcount', count($joinEvents));
     	session('interesteventcount', count($interestEvents));
 
+        $this->footPrint($u_id);
+
     	$this->assign('asks', $askQuestions);
     	$this->assign('askcount', count($askQuestions));
     	$this->assign('answers', $answerQuestions);
@@ -495,6 +497,45 @@ class UserAction extends Action {
         
     }
 
-}
+    public function footPrint($u_id){
+        $Event = M('Event');
+        $Question = M('Question');
+        $Commodity = M('Commodity');
+        $Answer = M('Answer');
+        $EventComment = M('EventComment');
+        $CommodityComment = M('CommodityComment');
 
+        $recentEvents = $Event->where("u_id=".$u_id)->order('create_time desc')->limit(1)->select();
+        $recentQuestions = $Question->where("u_id=".$u_id)->order('create_time desc')->limit(1)->select();
+        $recentCommodities = $Commodity->where("u_id=".$u_id)->order('create_time desc')->limit(1)->select();
+        $recentAnswers = $Answer->where("u_id=".$u_id)->order('create_time desc')->limit(1)->select();
+        $recentEventComments = $EventComment->where("u_id=".$u_id)->order('create_time desc')->limit(1)->select();
+        $recentCommodityComments = $CommodityComment->where("u_id=".$u_id)->order('create_time desc')->limit(1)->select();
+
+        for($i=0; $i<count($recentAnswers); $i++){
+            $targetQuestion = $Question->where("id=".$recentAnswers[$i]['q_id'])->find();
+            $recentAnswers[$i]['q_title'] = $targetQuestion['title'];
+        }
+
+        for($i=0; $i<count($recentEventComments); $i++){
+            $targetEvent = $Event->where("id=".$recentEventComments[$i]['e_id'])->find();
+            $recentEventComments[$i]['e_title'] = $targetEvent['title'];
+        }
+
+        for($i=0; $i<count($recentCommodityComments); $i++){
+            $targetCommodity = $Commodity->where("id=".$recentCommodityComments[$i]['c_id'])->find();
+            $recentCommodityComments[$i]['c_title'] = $targetCommodity['title'];
+        }
+
+        $footCount = count($recentEvents)+count($recentQuestions)+count($recentCommodities)+count($recentAnswers)+count($recentEventComments)+count($recentCommodityComments);
+
+        $this->assign('footcount', $footCount);
+        $this->assign('recentevents', $recentEvents);
+        $this->assign('recentquestions', $recentQuestions);
+        $this->assign('recentcommodities', $recentCommodities);
+        $this->assign('recentanswers', $recentAnswers);
+        $this->assign('recenteventcomments', $recentEventComments);
+        $this->assign('recentcommoditycomments', $recentCommodityComments);
+    }
+}
 ?>
