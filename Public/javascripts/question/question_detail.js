@@ -1,5 +1,6 @@
 var answerEditor;
 var changeEditor;
+var changeQuesEditor;
 
 KindEditor.ready(function(K) {
 	answerEditor = K.create("#editor_id", {
@@ -8,16 +9,27 @@ KindEditor.ready(function(K) {
 	changeEditor = K.create("#changearea", {
 		items: ["bold", "italic", "underline", "preview", "code", "image", "link", "quickformat", "removeformat", "insertorderedlist", "insertunorderedlist"]
 	});
+	changeQuesEditor = K.create("#changequesarea", {
+		items: ["bold", "italic", "underline", "preview", "code", "image", "link", "quickformat", "removeformat", "insertorderedlist", "insertunorderedlist"]
+	});
+
     window.editor = answerEditor;
 
 	$("a.modify").click(function(){
     	window.editor = changeEditor;
     });
-	$(".closechange").click(function(){
+    $("a.modifyques").click(function(){
+    	window.editor = changeQuesEditor;
+    });
+	$("#closechange").click(function(){
+		window.editor.html("");
 		window.editor = answerEditor;
+		window.editor.html("");
 	});
-	$(".mask").click(function(){
+	$("#closequeschange").click(function(){
+		window.editor.html("");
 		window.editor = answerEditor;
+		window.editor.html("");
 	});
 
 $(function(){
@@ -27,10 +39,19 @@ $(function(){
 	newMask.style.height = document.body.scrollHeight + "px";
 	document.body.appendChild(newMask);
 
+	//作用顺序的关系，绑定.mask的函数必须要在.mask的dom对象创建完之后才能有，不然就跪了，相当于给空对象加回调
+	$(".mask").click(function(){
+		window.editor.html("");
+		window.editor = answerEditor;
+		window.editor.html("");
+	});
+
 	$('#changedialog').css('left', (parseInt(document.body.scrollWidth) - 544)/2); 
+	$('#changequesdialog').css('left', (parseInt(document.body.scrollWidth) - 544)/2); 
 
 	$('.mask').hide();
 	$("#changedialog").hide();
+	$("#changequesdialog").hide();
 
 	$("a.modify").click(function(){
 		var answerContent = $(this).parents("div.words").find("div.answercontent").html();
@@ -41,8 +62,23 @@ $(function(){
         window.editor.appendHtml(answerContent);
         $("#changeanswerid").text(answerId);
 	});
+
+	$("a.modifyques").click(function(){
+		var questionContent = $(this).parents("div.left").find("div.intro").html();
+		var questionId = $("#question").attr("qid");
+		$(".mask").show();
+		$("#changequesdialog").show();
+        window.editor.focus();
+        window.editor.appendHtml(questionContent);
+        $("#changequesid").text(questionId);
+	});
 	
 	$("#closechange").click(function(){
+		$(".win").css("display","none");
+		$(".mask").css("display","none");
+	});
+
+	$("#closequeschange").click(function(){
 		$(".win").css("display","none");
 		$(".mask").css("display","none");
 	});
@@ -88,6 +124,24 @@ $(function(){
 			}
 			if(data.status == 0){
 				$("#changepwdalert").text("回答更新失败，请稍后再试");
+			}
+		}, 'json');
+	});
+
+	$("#applychangeques").click(function(){
+		var content = window.editor.html();
+		var qid = $("#changequesid").text();
+		$("#changequespwdalert").text("");
+		$.post('/question/change_content', {
+			'q_id': qid,
+			'content': content 
+		}, function(data){
+			if(data.status == 1){
+				window.editor = answerEditor;
+				window.location.reload();
+			}
+			if(data.status == 0){
+				$("#changequespwdalert").text("回答更新失败，请稍后再试");
 			}
 		}, 'json');
 	});

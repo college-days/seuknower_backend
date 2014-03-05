@@ -13,7 +13,10 @@
 					<span>回答：{$question.answer_count}</span>
 				</div>
 				<div class="intro">
-					<p> {$question.intro} </p>
+					{$question.intro}
+				</div>
+				<div class="editques">
+					<a href="#" class="modifyques">修改</a>
 				</div>
 				<!--<div class="adopt">
 					<span>被题主采纳答案</span>
@@ -272,19 +275,29 @@
 				<div id="changepwdalert" style="display:block;color:red;"></div>
 				<!-- <input type="password" class="value" id="changepwd" placeholder="请输入密码"/> -->
 				<div>
-					<input type="button" id="applychange" value="确定修改" class="btn"/>
+					<input type="button" id="applychange" value="确认修改" class="btn"/>
 				</div>
 			</div>
 		</div>
 	</div>
-		
 
-<link rel="stylesheet" href="__EDITOR__/themes/default/default.css" />
-<script charset="utf-8" src="__EDITOR__/kindeditor-all-min.js"></script>
-<script charset="utf-8" src="__EDITOR__/lang/zh_CN.js"></script>
-
-<script>
-
-</script>
+	<div class="win" id="changequesdialog" style="display:none;">
+		<div style="display:none;" id="changequesid"></div>
+		<div class="title-bar">
+			<span>修改答案</span>
+			<div class="close" id="closequeschange">
+			</div>
+		</div>
+		<textarea id="changequesarea" style="width:100%;height:300px"></textarea>
+		<div class="content">
+			<div class="question-new" style="display:block;">
+				<div id="changequespwdalert" style="display:block;color:red;"></div>
+				<!-- <input type="password" class="value" id="changepwd" placeholder="请输入密码"/> -->
+				<div>
+					<input type="button" id="applychangeques" value="确认修改" class="btn"/>
+				</div>
+			</div>
+		</div>
+	</div>
 <script src="__JS__/question/question_detail.js"></script>
 <include file="Public:footer" />

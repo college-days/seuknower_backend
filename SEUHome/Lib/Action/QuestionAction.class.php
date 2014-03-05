@@ -128,6 +128,8 @@ class QuestionAction extends Action {
 		
 		//获取问题编号之后获取问题信息，再获取问题的提问者编号
 		$questionInfo = $Question->find($id);
+		$questionInfo['intro'] = htmlspecialchars_decode($questionInfo['intro']);
+ 
 		$User = M('User');
 		$result = $User->find($questionInfo['u_id']);
 		$questionInfo['u_name'] = $result['name'];
@@ -302,6 +304,20 @@ class QuestionAction extends Action {
 			$this->ajaxReturn($data,'nomore',1);
 		}
 		
+	}
+
+	public function changeContent(){
+		$qid = I('param.q_id');
+		$content = I('param.content');
+		$Question = M('Question');
+		
+		$questionSaveData['intro'] = $content;
+		$result = $Question->where('id='.$qid)->save($questionSaveData);
+		if($result){
+			$this->ajaxReturn('', '', 1);
+		}else{
+			$this->ajaxReturn('', '', 0);
+		}
 	}
 
 }
