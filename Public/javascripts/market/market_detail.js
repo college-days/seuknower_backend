@@ -100,6 +100,18 @@ $(function(){
 		$(".big img").attr("src",$(this).attr("src"));
 	});
 
+	$(".share").click(function(){
+		var flag = $(this).text().replace(/[ ]/g, "");
+		if(flag == "分享"){
+			$(".bshare-custom").slideDown();
+			$(this).text("收起分享");
+		}else{
+			$(".bshare-custom").slideUp();
+			$(this).text("分享");
+		}
+		
+	});
+
 });
 
 function submitComment(){
