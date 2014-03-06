@@ -120,10 +120,11 @@ class AnswerAction extends Action {
 					$newresult = $model->query('select u_id, title from seu_question where id='.$qid);
 					$uidforqid = $newresult[0]['u_id'];
 					$titleforqid = $newresult[0]['title'];
-					$messageResult = $model->query('select * from seu_question_message where u_id='.$uidforqid.' and q_id='.$qid);
+					$messageResult = $model->query('select * from seu_question_message where u_id='.$uidforqid.' and q_id='.$qid.' and from_id='.session('userId'));
 					if($messageResult == null){
 						$messageData['q_id'] = $qid;
 						$messageData['u_id'] = $uidforqid;
+						$messageData['from_id'] = session("userId");
 						$messageData['title'] = $titleforqid;
 						$messageData['answer_count'] = array('exp','answer_count+1');
 						$messageModel = M('Question_message');
@@ -132,7 +133,7 @@ class AnswerAction extends Action {
 						//需要主键才可以= =
 						$messageData['answer_count'] = array('exp','answer_count+1');
 						$messageModel = M('Question_message');
-						$saveResult = $messageModel->where('q_id='.$qid.' and u_id='.$uidforqid)->save($messageData);
+						$saveResult = $messageModel->where('q_id='.$qid.' and u_id='.$uidforqid.' and from_id='.session('userId'))->save($messageData);
 					}
 
 					$this->ajaxReturn('', '', 1);
@@ -171,6 +172,7 @@ class AnswerAction extends Action {
 				if($messageResult == null){
 					$messageData['q_id'] = $qid;
 					$messageData['u_id'] = $uidforqid;
+					$messageData['from_id'] = -3;
 					$messageData['title'] = $titleforqid;
 					$messageData['answer_count'] = array('exp','answer_count+1');
 					$messageModel = M('Question_message');

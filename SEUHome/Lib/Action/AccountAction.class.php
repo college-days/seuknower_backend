@@ -280,6 +280,7 @@ class AccountAction extends Action{
 		$EventMessage = M('EventMessage');
 		$CommodityMessage = M('CommodityMessage');
 		$currentUserId = session('userId');
+		$User = M('User');
 
 		$messageMap['u_id'] = $currentUserId;
 		$questionResult = $QuestionMessage->where($messageMap)->select();
@@ -288,17 +289,30 @@ class AccountAction extends Action{
 
 		for($i=0; $i<count($questionResult); $i++){
 			$questionResult[$i]['type'] = 'question';
-			$questionResult[$i]['title'] = "有人回答了你提出的问题";
+			if($questionResult[$i]['from_id'] == -3){
+				$questionResult[$i]['title'] = "有人匿名回答了你提出的问题";
+			}else{
+				$from_id = $questionResult[$i]['from_id'];
+				$from_user = $User->where('id='.$from_id)->find();
+				$from_name = $from_user['name'];
+				$questionResult[$i]['title'] = $from_name."回答了你提出的问题";
+			}
 		}
 
 		for($i=0; $i<count($eventResult); $i++){
 			$eventResult[$i]['type'] = 'event';
-			$eventResult[$i]['title'] = "有人回复了你发起的活动";
+			$from_id = $eventResult[$i]['from_id'];
+			$from_user = $User->where('id='.$from_id)->find();
+			$from_name = $from_user['name'];
+			$eventResult[$i]['title'] = $from_name."回复了你发起的活动";
 		}
 
 		for($i=0; $i<count($commodityResult); $i++){
 			$commodityResult[$i]['type'] = 'commodity';
-			$commodityResult[$i]['title'] = "有人评论了你发布的商品";
+			$from_id = $commodityResult[$i]['from_id'];
+			$from_user = $User->where('id='.$from_id)->find();
+			$from_name = $from_user['name'];
+			$commodityResult[$i]['title'] = $from_name."评论了你发布的商品";
 		}
 
 		if(!$questionResult){

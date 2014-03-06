@@ -229,17 +229,18 @@ class MarketAction extends Action {
 			//评论商品的消息提示
 			$commodityMsgModel = new Model('CommodityMessage');
 			//$messageResult = $commodityModel->query('select * from seu_commodity_comment where c_id='.I('param.commodity_id').' and u_id='.session('userId'));
-			$messageResult = $commodityMsgModel->where('c_id='.I('param.commodity_id'))->select();
+			$messageResult = $commodityMsgModel->where('c_id='.I('param.commodity_id').' and from_id='.session('userId'))->select();
 
 			if($messageResult == null){
 				$messageData['c_id'] = I('param.commodity_id');
 				$messageData['u_id'] = $commodityuid;
+				$messageData['from_id'] = session("userId");
 				$messageData['title'] = $commodityTitle;
 				$messageData['comment_count'] = array('exp', 'comment_count+1');
 				$commodityMsgModel->add($messageData);
 			}else{
 				$messageData['comment_count'] = array('exp', 'comment_count+1');
-				$commodityMsgModel->where('c_id='.I('param.commodity_id').' and u_id='.$commodityuid)->save($messageData);
+				$commodityMsgModel->where('c_id='.I('param.commodity_id').' and u_id='.$commodityuid.' and from_id='.session('userId'))->save($messageData);
 			}
 
 			$Commodity = M('Commodity');

@@ -469,11 +469,12 @@ class EventAction extends Action {
 			$eventuid = $eventResult[0]['u_id'];
 			$eventTitle = $eventResult[0]['title'];
 			$eventMsgModel = new Model('EventMessage');
-			$messageResult = $eventModel->query('select * from seu_event_message where e_id='.I('param.e_id').' and u_id='.$eventuid);
+			$messageResult = $eventModel->query('select * from seu_event_message where e_id='.I('param.e_id').' and u_id='.$eventuid.' and from_id='.session('userId'));
 			if($messageResult == null){
 				//不存在就insert
 				$messageData['e_id'] = I('param.e_id');
 				$messageData['u_id'] = $eventuid;
+				$messageData['from_id'] = session("userId");
 				$messageData['title'] = $eventTitle;
 				// $messageData['comment_count'] = array('exp', 'comment_count+1');
 				$messageData['comment_count'] = 1;
@@ -481,7 +482,7 @@ class EventAction extends Action {
 			}else{
 				//如果已经存在就update
 				$messageData['comment_count'] = array('exp', 'comment_count+1');
-				$eventMsgModel->where('e_id='.I('param.e_id').' and u_id='.$eventuid)->save($messageData);
+				$eventMsgModel->where('e_id='.I('param.e_id').' and u_id='.$eventuid.' and from_id='.session('userId'))->save($messageData);
 			}
 			
 			$result = $Comment->add($data);
