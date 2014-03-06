@@ -281,11 +281,15 @@ class AccountAction extends Action{
 		$CommodityMessage = M('CommodityMessage');
 		$currentUserId = session('userId');
 		$User = M('User');
+		$EventAt = M('EventAt');
+		$CommodityAt = M('CommodityAt');
 
 		$messageMap['u_id'] = $currentUserId;
 		$questionResult = $QuestionMessage->where($messageMap)->select();
 		$eventResult = $EventMessage->where($messageMap)->select();
 		$commodityResult = $CommodityMessage->where($messageMap)->select();
+		$eventAtResult = $EventAt->where($messageMap)->select();
+		$commodityAtResult = $CommodityAt->where($messageMap)->select();
 
 		for($i=0; $i<count($questionResult); $i++){
 			$questionResult[$i]['type'] = 'question';
@@ -315,6 +319,22 @@ class AccountAction extends Action{
 			$commodityResult[$i]['title'] = $from_name."评论了你发布的商品";
 		}
 
+		for($i=0; $i<count($eventAtResult); $i++){
+			$eventAtResult[$i]['type'] = 'event';
+			$from_id = $eventAtResult[$i]['from_id'];
+			$from_user = $User->where('id='.$from_id)->find();
+			$from_name = $from_user['name'];
+			$eventAtResult[$i]['title'] = $from_name."@了你";
+		}
+
+		for($i=0; $i<count($commodityAtResult); $i++){
+			$commodityAtResult[$i]['type'] = 'commodity';
+			$from_id = $commodityAtResult[$i]['from_id'];
+			$from_user = $User->where('id='.$from_id)->find();
+			$from_name = $from_user['name'];
+			$commodityAtResult[$i]['title'] = $from_name."@了你";
+		}
+
 		if(!$questionResult){
 			$questionResult = array();
 		}
@@ -327,7 +347,15 @@ class AccountAction extends Action{
 			$commodityResult = array();
 		}
 
-		$finalResult = array_merge($questionResult, $eventResult, $commodityResult);
+		if(!$eventAtResult){
+			$eventAtResult = array();
+		}
+
+		if(!$commodityAtResult){
+			$commodityAtResult = array();
+		}
+
+		$finalResult = array_merge($questionResult, $eventResult, $commodityResult, $eventAtResult, $commodityAtResult);
 
 		session('messagecount', count($finalResult));
 		session('messages', $finalResult);

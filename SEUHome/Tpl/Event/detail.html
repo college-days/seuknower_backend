@@ -102,22 +102,6 @@
 	        	items: []
 	        });
 	    });
-
-	    $(function(){
-	        var atUserId = 0;
-	        $(".reply").click(function(){
-	            var href = $(this).attr("href");
-	            var pos = $(href).offset().top;
-	            var adjustPos = pos-100;
-	            $("html,body").animate({scrollTop: adjustPos}, 1000);
-	            
-	            var atUserName = $(this).parents("li").find("a.name").text().replace(/[ ]/g,"");
-	            atUserId = $(this).parents("li").attr("uid");
-	            window.editor.focus();
-	            window.editor.appendHtml('<strong>@'+atUserName+'\t'+'</strong>');
-	        });
-
-	    });
 	</script>
 	<script src="__JS__/event/event_detail.js"></script>
 <include file="Public:footer" />

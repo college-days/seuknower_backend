@@ -88,6 +88,8 @@ class MarketAction extends Action {
 		//for message notify part，浏览过之后就要把和当前session有关的message都从db中clear掉啦
 		$deleteModel = new Model();
 		$deleteResult = $deleteModel->execute('delete from seu_commodity_message where c_id='.$id.' and u_id='.session('userId'));
+		$CommodityAt = M('CommodityAt');
+		$CommodityAt->where('c_id='.$id.' and u_id='.session('userId'))->delete();
 
 		//现在不用存在session里了，所以不用再次查询更新了
 		/*$model = new Model();
@@ -241,6 +243,15 @@ class MarketAction extends Action {
 			}else{
 				$messageData['comment_count'] = array('exp', 'comment_count+1');
 				$commodityMsgModel->where('c_id='.I('param.commodity_id').' and u_id='.$commodityuid.' and from_id='.session('userId'))->save($messageData);
+			}
+
+			$CommodityAt = M('CommodityAt');
+			$atMessageResult = $CommodityAt->where('c_id='.I('param.commodity_id').' and u_id='.I('param.at_id').' and from_id='.session('userId'))->select();
+			if($atMessageResult == null){
+				$atMessageData['c_id'] = I('param.commodity_id');
+				$atMessageData['u_id'] = I('param.at_id');
+				$atMessageData['from_id'] = session("userId");
+				$CommodityAt->add($atMessageData);
 			}
 
 			$Commodity = M('Commodity');

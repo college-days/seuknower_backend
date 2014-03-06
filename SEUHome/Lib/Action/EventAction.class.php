@@ -302,6 +302,8 @@ class EventAction extends Action {
 		//about notify message
 		$deleteModel = new Model();
 		$deleteResult = $deleteModel->execute('delete from seu_event_message where e_id='.$id.' and u_id='.session('userId'));
+		$EventAt = M('EventAt');
+		$EventAt->where('e_id='.$id.' and u_id='.session('userId'))->delete();
 
     	//活动的点击数增加
     	$add['id'] = $id;
@@ -483,6 +485,17 @@ class EventAction extends Action {
 				//如果已经存在就update
 				$messageData['comment_count'] = array('exp', 'comment_count+1');
 				$eventMsgModel->where('e_id='.I('param.e_id').' and u_id='.$eventuid.' and from_id='.session('userId'))->save($messageData);
+			}
+
+			$eventAtModel = new Model();
+			$EventAt = M('EventAt');
+			$atMessageResult = $eventAtModel->query('select * from seu_event_at where e_id='.I('param.e_id').' and u_id='.I('param.at_id').' and from_id='.session('userId'));
+			if($atMessageResult == null){
+				//不存在就insert
+				$atMessageData['e_id'] = I('param.e_id');
+				$atMessageData['u_id'] = I('param.at_id');
+				$atMessageData['from_id'] = session("userId");
+				$EventAt->add($atMessageData);
 			}
 			
 			$result = $Comment->add($data);

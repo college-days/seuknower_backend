@@ -1,3 +1,18 @@
+var atUserId = 0;
+$(function(){
+    $(".reply").click(function(){
+        var href = $(this).attr("href");
+        var pos = $(href).offset().top;
+        var adjustPos = pos-100;
+        $("html,body").animate({scrollTop: adjustPos}, 1000);
+        
+        var atUserName = $(this).parents("li").find("a.name").text().replace(/[ ]/g,"");
+        atUserId = $(this).parents("li").attr("uid");
+        window.editor.focus();
+        window.editor.appendHtml('<strong>@'+atUserName+'\t'+'</strong>');
+    });
+});
+
 $(function(){
 	$.post("/market/getsamecate", {
 		'id': $("#likeinfo").attr("cid")
@@ -136,6 +151,7 @@ function submitComment(){
 	if(content.replace(/[ ]/g, "")){
 		$.post('/market/add_comment',{
 			commodity_id: commodity_id,
+			at_id: atUserId,
 			content: finalContent,
 		}, function(data){
 			if(data.status == 1){
