@@ -90,6 +90,7 @@ class MarketAction extends Action {
 		$deleteResult = $deleteModel->execute('delete from seu_commodity_message where c_id='.$id.' and u_id='.session('userId'));
 		$CommodityAt = M('CommodityAt');
 		$CommodityAt->where('c_id='.$id.' and u_id='.session('userId'))->delete();
+		$CommodityAt->where('c_id='.$id.' and u_id=0')->delete();
 
 		//现在不用存在session里了，所以不用再次查询更新了
 		/*$model = new Model();

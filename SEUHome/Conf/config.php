@@ -12,6 +12,7 @@ return array(
 		'question/domin/:domin$' => 'Question/index',
 		'question/domin/:domin/page/:id\d$' => 'Question/index', 
 		'question/:id\d$' => 'Question/detail',
+		'question/:id\d/answer/:aid\d$' => 'Question/detail',
 		'question/new$' => 'Question/addQuestion',
 		'question/page/:id\d$' => 'Question/index',
 		'question/:type$' => 'Question/index',

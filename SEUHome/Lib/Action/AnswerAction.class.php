@@ -199,6 +199,28 @@ class AnswerAction extends Action {
 		$data['u_id'] = session('userId');
 		$data['content'] = I('param.msg');
 		$data['create_time'] = time();
+		$Answer = M('Answer');
+
+		$targetAnswer = $Answer->where('id='.I('param.a_id'))->find();
+		$AnswerMessage = M('AnswerMessage');
+		$messageResult = $AnswerMessage->where('a_id='.I('param.a_id').' and u_id='.$targetAnswer['u_id'].' and from_id='.session('userId'))->select();
+		if($messageResult == null){
+			$messageData['q_id'] = I('param.q_id');
+			$messageData['a_id'] = I('param.a_id');
+			$messageData['u_id'] = $targetAnswer['u_id'];
+			$messageData['from_id'] = session("userId");
+			$AnswerMessage->add($messageData);
+		}
+
+		$AnswerAt = M('AnswerAt');
+		$atMessageResult = $AnswerAt->where('a_id='.I('param.a_id').' and u_id='.I('param.at_id').' and from_id='.session('userId'))->select();
+		if($atMessageResult == null){
+			$atMessageData['q_id'] = I('param.q_id');
+			$atMessageData['a_id'] = I('param.a_id');
+			$atMessageData['u_id'] = I('param.at_id');
+			$atMessageData['from_id'] = session("userId");
+			$AnswerAt->add($atMessageData);
+		}
 
 		$AnswerReply = M('AnswerReply');
 		$result = $AnswerReply->add($data);

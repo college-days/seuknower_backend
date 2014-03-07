@@ -33,6 +33,18 @@ KindEditor.ready(function(K) {
 	});
 
 $(function(){
+	var targetaid = $("#question").attr("aid");
+	if(targetaid){
+		$('li[aid='+targetaid+']').find("div.reply-content").slideDown();
+		$('li[aid='+targetaid+']').find('a.reply').text("收起评论");
+		var href = $('li[aid='+targetaid+']').find('a.reply').attr("href");
+        var pos = $(href).offset().top;
+        var adjustPos = pos-100;
+        $("html,body").animate({scrollTop: adjustPos}, 1000);
+	}
+});
+
+$(function(){
 	var newMask = document.createElement("div");
 	newMask.className = "mask";
 	newMask.style.width = document.body.scrollWidth + "px";
@@ -373,10 +385,13 @@ function submitReply($object){
 	}
 
 	var aid = $object.parents("li").attr("aid");
+	var qid = $("#question").attr("qid");
 
 	if(replyMsg.replace(/[ ]/g, "")){
 		$.post('/answer/add_reply',{
+			q_id: qid,
 			a_id: aid,
+			at_id: atUserId,
 			msg: finalMsg
 		}, function(data){
 			if(data.status == 1){

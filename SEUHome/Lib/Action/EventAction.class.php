@@ -293,7 +293,6 @@ class EventAction extends Action {
 		}
 	}
 
-
     public function detail(){
     	$id = I('param.id');
     	$Event = M('Event');
@@ -304,6 +303,7 @@ class EventAction extends Action {
 		$deleteResult = $deleteModel->execute('delete from seu_event_message where e_id='.$id.' and u_id='.session('userId'));
 		$EventAt = M('EventAt');
 		$EventAt->where('e_id='.$id.' and u_id='.session('userId'))->delete();
+		$EventAt->where('e_id='.$id.' and u_id=0')->delete();
 
     	//活动的点击数增加
     	$add['id'] = $id;

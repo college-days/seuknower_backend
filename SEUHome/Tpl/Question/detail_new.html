@@ -3,7 +3,7 @@
 	<div class="question-detail">
 		<div class="container">
 			<div class="left">
-				<div id="question" qid="{$question.id}" uid="{$Think.session.userId}" style="display:none;"></div>
+				<div id="question" qid="{$question.id}" aid="{$aid}" uid="{$Think.session.userId}" style="display:none;"></div>
 				<div class="title">
 					<span> {$question.title} </span>
 					<a href="/question/{$question.type}" class="tag" target="_blank"> {$question.type} </a>
@@ -16,7 +16,7 @@
 					{$question.intro}
 				</div>
 				<div class="editques">
-					<a href="#" class="modifyques">修改</a>
+					<a href="#" uid="{$question.u_id}" class="modifyques" style="display:none;">修改</a>
 				</div>
 				<!--<div class="adopt">
 					<span>被题主采纳答案</span>

@@ -283,6 +283,8 @@ class AccountAction extends Action{
 		$User = M('User');
 		$EventAt = M('EventAt');
 		$CommodityAt = M('CommodityAt');
+		$AnswerMessage = M('AnswerMessage');
+		$AnswerAt = M('AnswerAt');
 
 		$messageMap['u_id'] = $currentUserId;
 		$questionResult = $QuestionMessage->where($messageMap)->select();
@@ -290,6 +292,8 @@ class AccountAction extends Action{
 		$commodityResult = $CommodityMessage->where($messageMap)->select();
 		$eventAtResult = $EventAt->where($messageMap)->select();
 		$commodityAtResult = $CommodityAt->where($messageMap)->select();
+		$answerResult = $AnswerMessage->where($messageMap)->select();
+		$answerAtResult = $AnswerAt->where($messageMap)->select();
 
 		for($i=0; $i<count($questionResult); $i++){
 			$questionResult[$i]['type'] = 'question';
@@ -335,6 +339,22 @@ class AccountAction extends Action{
 			$commodityAtResult[$i]['title'] = $from_name."@了你";
 		}
 
+		for($i=0; $i<count($answerResult); $i++){
+			$answerResult[$i]['type'] = 'answer';
+			$from_id = $answerResult[$i]['from_id'];
+			$from_user = $User->where('id='.$from_id)->find();
+			$from_name = $from_user['name'];
+			$answerResult[$i]['title'] = $from_name."回复了你的回答";
+		}
+
+		for($i=0; $i<count($answerAtResult); $i++){
+			$answerAtResult[$i]['type'] = 'answer';
+			$from_id = $answerAtResult[$i]['from_id'];
+			$from_user = $User->where('id='.$from_id)->find();
+			$from_name = $from_user['name'];
+			$answerAtResult[$i]['title'] = $from_name."@了你";
+		}
+
 		if(!$questionResult){
 			$questionResult = array();
 		}
@@ -355,7 +375,15 @@ class AccountAction extends Action{
 			$commodityAtResult = array();
 		}
 
-		$finalResult = array_merge($questionResult, $eventResult, $commodityResult, $eventAtResult, $commodityAtResult);
+		if(!$answerResult){
+			$answerResult = array();
+		}
+
+		if(!$answerAtResult){
+			$answerAtResult = array();
+		}
+
+		$finalResult = array_merge($questionResult, $eventResult, $commodityResult, $eventAtResult, $commodityAtResult, $answerResult, $answerAtResult);
 
 		session('messagecount', count($finalResult));
 		session('messages', $finalResult);

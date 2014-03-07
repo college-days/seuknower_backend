@@ -26,6 +26,10 @@ function checkMessage(){
 					var newItem = '<li><a style="width:180px;" href="/market/commodity/'+data.data[i]['c_id']+'">'+data.data[i]['title']+'</a></li>';
 					html = html+newItem;
 				}
+				if(data.data[i]['type'] == 'answer'){
+					var newItem = '<li><a style="width:180px;" href="/question/'+data.data[i]['q_id']+'/answer/'+data.data[i]['a_id']+'">'+data.data[i]['title']+'</a></li>';
+					html = html+newItem;
+				}
 			}
 			document.getElementById("messagelist").innerHTML = html;	
 			$("#messagecount").text(data.data.length);
