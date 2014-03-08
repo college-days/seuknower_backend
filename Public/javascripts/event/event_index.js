@@ -10,15 +10,15 @@ $(function(){
 	});*/
 	var id = 1;
 	var load = 1;
-	$(".category a").hover(function(){
+	$("#cate_type a").hover(function(){
 		var tag = $(this).text().replace(/[ ]/g,"");
-		var time = $(".time .active").text().replace(/[ ]/g,"");						
+		var time = $("#cate_time .active").text().replace(/[ ]/g,"");						
 		var link_to = "/event/" + tag + "/" + time;
 		$(this).attr("href", link_to);
 	});
 
-	$(".time a").hover(function(){			
-		var tag = $(".category .active").text().replace(/[ ]/g,"");
+	$("#cate_time a").hover(function(){			
+		var tag = $("#cate_type .active").text().replace(/[ ]/g,"");
 		var time = $(this).text().replace(/[ ]/g,"");
 		var link_to = "/event/" + tag + "/" + time;
 		$(this).attr("href", link_to);
@@ -43,8 +43,8 @@ $(function(){
 
 		if($(document).scrollTop() > $(".load").offset().top - $(window).height() && $(".load").text().replace(/[ ]/g,"")){
 			id = id+1;
-			var tag = $(".category .active").text().replace(/[ ]/g,"");
-			var time = $(".time .active").text().replace(/[ ]/g,"");
+			var tag = $("#cate_type .active").text().replace(/[ ]/g,"");
+			var time = $("#cate_time .active").text().replace(/[ ]/g,"");
 			$.post(APP+'/event/load',{'tag':tag,'time':time,'id':id},function(data){
 				if(data.status){
 					var events = data.data;

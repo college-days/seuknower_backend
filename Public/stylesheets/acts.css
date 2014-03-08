@@ -1,0 +1,35 @@
+body{background:#f3f7fa;}
+.wrap{margin:15px auto;width:943px;position:relative;overflow:hidden;min-height:1000px;}
+.introduce{width:220px;float:left;position:absolute;}
+.user_box{border:1px solid #e5e5e5;background:#fff;}
+.introduce .tit{font-size:16px;color:#7a6c59;border-left:2px solid #7a6c59;margin:21px 0 0 -1px;padding-left:22px;line-height:18px;}
+.introduce .nl{margin-left:1px;border:none;}
+.user .infos{margin:12px 24px 0;background:url(images/line.gif) no-repeat 0 bottom;padding-bottom:21px;font-size:14px;}
+.user .infos .pic{float:left;padding:6px 13px 0 9px;}
+.user .infos .pic img{border-radius:40px;display:block;}
+.user .infos .rt{overflow:hidden;line-height:24px;height:48px;}
+.user .infos .rt span{display:block;color:#2ead91;}
+.user .infos .rt span img{margin-right:8px;vertical-align:middle;}
+.user .infos .rt p{color:#a3bcc4;}
+.user .infos .pa{color:#80827f;margin-top:19px;}
+.user .infos .pa .sp{margin:0 15px;}
+.user_box .recom{margin:25px 10px 0 23px;line-height:18px;padding-bottom:9px;}
+.user_box .recom dt{font-size:16px;color:#7a6c59;margin-bottom:16px;}
+.user_box .recom dd{font-size:14px;color:#80827f;margin-bottom:10px;}
+.user_box .recom a{color:#80827f;}
+.category{border:1px solid #e5e5e5;background:#fff;margin-top:21px;}
+.category .cont{margin:12px 0 0 24px;font-size:14px;overflow:hidden;padding-bottom:21px;}
+.category .line{background:url(images/line.gif) no-repeat 0 bottom;padding-bottom:20px;}
+.category .cont a{color:#80827f;float:left;line-height:20px;margin:3px 18px 2px 0;white-space:nowrap;}
+.category .cont .active{color:#333;}
+.category .cont a:hover{color:#2ead91;}
+.poster_grid{float:left;background:#fff;border:1px solid #e5e5e5;width:218px;color:#808280;position:absolute;}
+.poster_grid .title{font-size:16px;line-height:24px;text-align:center;margin:14px 24px 0;color:#000;}
+.poster_grid .title a:hover{color:#2ead91;}
+.poster_grid .intro{color:#808280;line-height:18px;text-align:center;margin:10px 10px 0;}
+.poster_grid .pa{text-align:center;line-height:18px;margin:18px 10px;}
+.poster_grid .pa .sp{margin:0 12px;}
+.poster_grid .pic{margin:-1px -1px -5px;}
+.poster_grid .pic img{width:100%;}
+.go_top{background:#cfd2d5 url(images/top.png) no-repeat center center;cursor:pointer;border-radius:5px;width:46px;height:46px;position:fixed;bottom:40px;right:20px;}
+.load{margin:15px auto;width:943px;text-align:center;}

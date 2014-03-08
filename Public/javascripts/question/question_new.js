@@ -1,4 +1,5 @@
 var newEditor;
+var answerEditor;
 KindEditor.ready(function(K) {
 	
 $(function(){
@@ -15,13 +16,17 @@ $(function(){
 	$(".newmask").click(function(){
 		window.editor.html("");
 		window.editor = answerEditor;
-		window.editor.html("");
+		if(window.editor){
+			window.editor.html("");
+		}
 	});
 
 	$("#closenewques").click(function(){
 		window.editor.html("");
 		window.editor = answerEditor;
-		window.editor.html("");
+		if(window.editor){
+			window.editor.html("");
+		}
 	});
 	
 	$(".close").click(function(){
@@ -36,20 +41,6 @@ $(function(){
 		$(".newmask").css("display","none");
 		$("#questiontitle").val("");
 		$("#questionintro").val("");
-	});
-	
-	$(".asknewquestion").click(function(){
-		$(".newwin .search").slideUp();
-		$(".question-new").css("display","block");
-		$(this).hide();
-		$(".searcholdquestion").show();
-	});
-
-	$(".searcholdquestion").click(function(){
-		$(".newwin .search").slideDown();
-		$(".question-new").css("display","none");
-		$(this).hide();
-		$(".asknewquestion").show();
 	});
 
 	$("#questiontitle").blur(function(){
@@ -86,8 +77,7 @@ $(function(){
 		}
 	});
 
-	$("#before_ask").bind('input propertychange', function(){
-		//console.log($(this).val());
+	$("#questiontitle").bind('input propertychange', function(){
 		if($(this).val().replace(/[ ]/g,"")){
 			$('#preview_ask').show();
 			$('#preview_ask').empty();

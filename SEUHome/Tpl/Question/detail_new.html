@@ -62,17 +62,17 @@
                                         {$answer.support_count}
                                     </div>
                                 <else/>
-                                    <div class="cancelagree" title="不赞同">
+                                    <div class="cancelagree" title="取消赞同">
                                         {$answer.support_count}
                                     </div>
                                 </eq>
                                 <eq name="answer.currentUserObject" value="0">
                                     <div class="addobject" title="反对">
-                                        {$answer.nonsupport_count}
+                                        <!-- {$answer.nonsupport_count} -->
                                     </div>
                                 <else/>
-                                    <div class="cancelobject" title="不反对">
-                                        {$answer.nonsupport_count}
+                                    <div class="cancelobject" title="取消反对">
+                                        <!-- {$answer.nonsupport_count} -->
                                     </div>
                                 </eq>
                             </div>

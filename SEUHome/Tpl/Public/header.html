@@ -89,7 +89,7 @@
 				<nav>
 				<ul>
 					<li>
-						<a href="#">
+						<!-- <a href="#">
 							<span id="messagecount">
 								<notempty name="Think.session.messagecount">
 									<eq name="Think.session.messagecount" value="0">
@@ -99,6 +99,17 @@
 									</eq>
 								<else/>
 									消息
+								</notempty>
+							</span>
+						</a> -->
+						<a href="#" class="mes">
+							<span id="redPoint" class="red"></span>
+							<span id="messagecount" class="mb">
+								<notempty name="Think.session.messagecount">
+									<eq name="Think.session.messagecount" value="0">
+									<else/>
+									</eq>
+								<else/>
 								</notempty>
 							</span>
 						</a>

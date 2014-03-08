@@ -9,16 +9,27 @@ class AnswerAction extends Action {
 	public function addAgree(){
 		$userId = session('userId');
 		if(isset($userId)){
-			$data['u_id'] = $userId;
-			$data['a_id'] = I('param.id');
-			$data['create_time'] = time();
+			$agreedata['u_id'] = $userId;
+			$agreedata['a_id'] = I('param.id');
+			$agreedata['create_time'] = time();
 			$SupportAnswer = M('SupportAnswer');
-			$SupportAnswer->add($data);
+			$SupportAnswer->add($agreedata);
 			
 			$Answer = M('Answer');
 			$add['id'] = I('param.id');
 			$add['support_count'] = array('exp','support_count+1');
 			$Answer->save($add);
+
+			$objectdata['u_id'] = $userId;
+			$objectdata['a_id'] = I('param.id');
+			$NonsupportAnswer = M('NonsupportAnswer');
+			$NonsupportAnswer->where($objectdata)->delete();
+
+			$Answer = M('Answer');
+			$data['id'] = I('param.id');
+			$data['nonsupport_count'] = array('exp','nonsupport_count-1');
+			$Answer->save($data);
+
 			$this->ajaxReturn('', '', 1);
 		}
 		else{
@@ -49,16 +60,27 @@ class AnswerAction extends Action {
 	public function addObject(){
 		$userId=session('userId');
 		if(isset($userId)){
-			$data['u_id'] = $userId;
-			$data['a_id'] = I('param.id');
-			$data['create_time'] = time();
+			$objectdata['u_id'] = $userId;
+			$objectdata['a_id'] = I('param.id');
+			$objectdata['create_time'] = time();
 			$NonsupportAnswer = M('NonsupportAnswer');
-			$NonsupportAnswer->add($data);
+			$NonsupportAnswer->add($objectdata);
 			
 			$Answer = M('Answer');
 			$add['id'] = I('param.id');
 			$add['nonsupport_count'] = array('exp','nonsupport_count+1');
 			$Answer->save($add);
+
+			$agreedata['u_id'] = $userId;
+			$agreedata['a_id'] = I('param.id');
+			$SupportAnswer = M('SupportAnswer');
+			$SupportAnswer->where($agreedata)->delete();
+
+			$Answer = M('Answer');
+			$data['id'] = I('param.id');
+			$data['support_count'] = array('exp','support_count-1');
+			$Answer->save($data);
+
 			$this->ajaxReturn('', '', 1);
 		}
 		else{

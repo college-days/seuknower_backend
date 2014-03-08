@@ -223,12 +223,17 @@ $(function(){
 	//$(".addagree")和$(".cancelagree")是初始化的时候决定的，很奇怪
 	$(".addagree").click(function(){
 		var agree = $(this);
+		var object = $(this).next();
 		if(agree.attr("class") == "addagree"){
 			$.post('/answer/add_agree', {'id': $(this).parents("li").attr("aid")}, function(data){
 				if(data.status) {
 					agree.text(parseInt(agree.text())+1);
 					agree.attr("class", "cancelagree");
-					agree.attr("title", "不赞同");
+					agree.attr("title", "取消赞同");
+					if(object.attr("class") == "cancelobject"){
+						object.attr("class", "addobject");
+						object.attr("title", "反对");
+					}
 				}else{
 					window.location.href="/login";
 				}
@@ -248,6 +253,7 @@ $(function(){
 
 	$(".cancelagree").click(function(){
 		var agree = $(this);
+		var object = $(this).next();
 		if(agree.attr("class") == "cancelagree"){
 			$.post('/answer/cancel_agree', {'id': $(this).parents("li").attr("aid")}, function(data){
 				if(data.status){
@@ -263,7 +269,11 @@ $(function(){
 				if(data.status) {
 					agree.text(parseInt(agree.text())+1);
 					agree.attr("class", "cancelagree");
-					agree.attr("title", "不赞同");
+					agree.attr("title", "取消赞同");
+					if(object.attr("class") == "cancelobject"){
+						object.attr("class", "addobject");
+						object.attr("title", "反对");
+					}
 				}else{
 					window.location.href="/login";
 				}
@@ -273,12 +283,18 @@ $(function(){
 	
 	$(".addobject").click(function(){
 		var object = $(this);
+		var agree = $(this).prev();
 		if(object.attr("class") == "addobject"){
 			$.post('/answer/add_object', {'id': $(this).parents("li").attr("aid")}, function(data){
 				if(data.status) {
-					object.text(parseInt(object.text())+1);
+					// object.text(parseInt(object.text())+1);
 					object.attr("class", "cancelobject");
-					object.attr("title", "不反对");
+					object.attr("title", "取消反对");
+					if(agree.attr("class") == "cancelagree"){
+						agree.attr("class", "addagree");
+						agree.attr("title", "赞同");
+						agree.text(parseInt(agree.text())-1);
+					}
 				}else{
 					window.location.href="/login";
 				}
@@ -286,7 +302,7 @@ $(function(){
 		}else{
 			$.post('/answer/cancel_object', {'id': $(this).parents("li").attr("aid")}, function(data){
 				if(data.status) {
-					object.text(parseInt(object.text())-1);
+					// object.text(parseInt(object.text())-1);
 					object.attr("class", "addobject");
 					object.attr("title", "反对");
 				}else{
@@ -299,10 +315,11 @@ $(function(){
 
 	$(".cancelobject").click(function(){
 		var object = $(this);
+		var agree = $(this).prev();
 		if(object.attr("class") == "cancelobject"){
 			$.post('/answer/cancel_object', {'id': $(this).parents("li").attr("aid")}, function(data){
 				if(data.status) {
-					object.text(parseInt(object.text())-1);
+					// object.text(parseInt(object.text())-1);
 					object.attr("class", "addobject");
 					object.attr("title", "反对");
 				}else{
@@ -312,9 +329,14 @@ $(function(){
 		}else{
 			$.post('/answer/add_object', {'id': $(this).parents("li").attr("aid")}, function(data){
 				if(data.status) {
-					object.text(parseInt(object.text())+1);
+					// object.text(parseInt(object.text())+1);
 					object.attr("class", "cancelobject");
-					object.attr("title", "不反对");
+					object.attr("title", "取消反对");
+					if(agree.attr("class") == "cancelagree"){
+						agree.attr("class", "addagree");
+						agree.attr("title", "赞同");
+						agree.text(parseInt(agree.text())-1);
+					}
 				}else{
 					window.location.href="/login";
 				}

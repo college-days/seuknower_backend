@@ -8,7 +8,7 @@ $(function(){
 });
 
 function checkMessage(){
-	console.log('定时轮询');
+	console.log('checkmessage');
 	// html = html+'<li><a href="/question/123">title</a></li>';
 	$.post('/account/check_message', {}, function(data){
 		if(data.status == 1){
@@ -32,11 +32,11 @@ function checkMessage(){
 				}
 			}
 			document.getElementById("messagelist").innerHTML = html;	
-			$("#messagecount").text(data.data.length);
-			$("#messagecount").css('color', 'green');
+			$("#redPoint").show();	
+			$("#redPoint").text(data.data.length);
 		}
 		if(data.status == 0){
-			$("#messagecount").text("消息");
+			$("#redPoint").hide();
 			document.getElementById("messagelist").innerHTML = '<li><a href="#">暂时没有消息</a></li>';
 		}
 	}, 'json');
