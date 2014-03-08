@@ -100,6 +100,10 @@ $(function(){
 			$("#preview_ask").hide();
 		}
 	});
+
+	$("#questiontitle").blur(function(){
+		$("#preview_ask").hide();
+	});
 });
 });
 
