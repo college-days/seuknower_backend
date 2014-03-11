@@ -41,6 +41,12 @@ extension=php_mbstring.dll
 extension=php_exif.dll
 ```
 
+## timestamp
+
+* 根目录下有一个python文件用来为stylesheet和javascript添加时间戳，防止有修改后需要用户手动清空浏览器缓存才能加载新的效果，现在浏览器根据新的get参数自动加载带有新的时间戳的静态文件
+
+* 无依赖，python2.7.x is ok (_python2.7.6 recommended_)
+
 ## common bugs
 
 * 假如部署之后发现页面上多出一块空白，很可能是出现了二次编辑时在文本编辑器中增加的bom头，只要直接用URL访问运行```clearBOM.php```或者```delbom.php```即可
