@@ -1,0 +1,57 @@
+<include file="Manage:header" title="用户管理"/>
+<div class="jumbotron">
+    <input type="button" class="deletequestion" value="选中要删除的问题然后点这里删除">
+    <div style="margin-top:33px;"></div>
+    <ul class="list-group"> 
+        <volist name="questions" id="question">
+            <li class="list-group-item" style="cursor:pointer;background:white;">
+                <div class="content question" picked="0" qid="{$question.id}">{$question.title}</div>
+            </li>
+        </volist>
+    </ul>
+	<!-- <div id="msg"></div>
+
+	<% if @questions.count == 0 %>
+		<h1>There Is No Questions In This Bucket Right Now</h1>
+	<% else %>
+		<ul class="list-group">
+            <% @questions.each do |question| %>
+                <% if @current.to_s == "un-matched" %>
+                    <li class="list-group-item" style="cursor:pointer;background:white;">
+                        <div class="content fromun" picked="0" qid="<%= question.id %>"><%= question.content %></div>
+                    </li>
+                <% elsif @current.to_s == "not-matchable" %>
+                    <li class="list-group-item" style="cursor:pointer;background:white;">
+                        <div class="content fromnot" picked="0" qid="<%= question.id %>"><%= question.content %></div>
+                    </li>
+                <% else %>
+                    <li class="list-group-item">
+                        <div class="content"><%= question.content %></div>
+                    </li>
+                <% end%>
+            <% end %>
+        </ul>
+        <% if @current.to_s == "un-matched" %>
+            <ul class="nav navbar-nav" style="background:white;">
+                <li class="">
+                <a href="http://www.bootstrapzero.com/bootstrap-template/facebook#" class="dropdown-toggle" data-toggle="dropdown">MoveQuestionTo<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <% @boxes.each do |box| %>
+                        <li>
+                            <a href="#" class="moveto" bid="<%= box.id %>"><%= box.boxname %></a>
+                        </li>
+                    <% end %>
+                    <li>
+                        <a href="#" class="moveto" bid="-2">not-matchable</a>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+        <% end %>
+        <% if @current.to_s == "not-matchable" %>
+            <input type="button" class="moveto2" value="Move to un-matched">
+        <% end %>
+
+    <% end %> -->
+</div>
+<include file="Manage:footer" />
