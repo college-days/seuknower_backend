@@ -32,7 +32,7 @@
 					<volist name="hotevents" id="event">
 						<li>
 							<div class="act">
-								<img src="{$event.poster}" style="width:70px;height:90px;">
+								<a href="/event/{$event.id}" target="_blank"><img src="{$event.poster}" style="width:70px;height:90px;"></a>
 								<div class="info">
 									<dl>
 										<dt><a href="/event/{$event.id}" target="_blank">{$event.title}</a></dt>
@@ -148,21 +148,21 @@
 			</div>
 			<div class="meau">
 				<ul>
-					<li><a href="/market/衣物鞋帽" target="_blank"><div class="go"><img src="__IMAGE__/index/clothes_normal.png"/></div></a><br /><br /><span>衣物鞋帽</span></li>
-					<li style="margin-left:99px;"><a href="/market/数码电子" target="_blank"><div class="go"><img src="__IMAGE__/index/computer_normal.png"/></div></a><br /><br /><span>数码电子</span></li>
-					<li style="margin-left:99px;"><a href="/market/生活日用" target="_blank"><div class="go"><img src="__IMAGE__/index/bike_normal.png"/></div></a><br /><br /><span>生活日用</span></li>
-					<li style="margin-left:99px;"><a href="/market/书籍杂志" target="_blank"><div class="go"><img src="__IMAGE__/index/book_normal.png"/></div></a><br /><br /><span>书籍杂志</span></li>
-					<li style="margin-left:99px;"><a href="/market/0元转让" target="_blank"><div class="go"><img src="__IMAGE__/index/love_normal.png"/></div></a><br /><br /><span>0元转让</span></li>
+					<li><a href="/market/衣物鞋帽" target="_blank"><div class="go"><img src="__IMAGE__/index/clothes_normal.png"/></div></a><br /><br /><span><a class="markettitle" href="/market/衣物鞋帽" target="_blank">衣物鞋帽</a></span></li>
+					<li style="margin-left:99px;"><a href="/market/数码电子" target="_blank"><div class="go"><img src="__IMAGE__/index/computer_normal.png"/></div></a><br /><br /><span><a class="markettitle" href="/market/数码电子" target="_blank">数码电子</a></span></li>
+					<li style="margin-left:99px;"><a href="/market/生活日用" target="_blank"><div class="go"><img src="__IMAGE__/index/bike_normal.png"/></div></a><br /><br /><span><a class="markettitle" href="/market/生活日用" target="_blank">生活日用</a></span></li>
+					<li style="margin-left:99px;"><a href="/market/书籍杂志" target="_blank"><div class="go"><img src="__IMAGE__/index/book_normal.png"/></div></a><br /><br /><span><a class="markettitle" href="/market/书籍杂志" target="_blank">书籍杂志</a></span></li>
+					<li style="margin-left:99px;"><a href="/market/0元转让" target="_blank"><div class="go"><img src="__IMAGE__/index/love_normal.png"/></div></a><br /><br /><span><a class="markettitle" href="/market/0元转让" target="_blank">0元转让</a></span></li>
 				</ul>
 			</div>
 			<div class="divide">
 			</div>
-			<div class="star">
+			<!--<div class="star">
 				<span>★ 板块人气之星 ★</span>
-			</div>
+			</div>-->
 		</div>
 	</div>		
-	<div class="index-popular">
+	<!--<div class="index-popular">
 		<div class="container">
 			<ul>
 				<li > <img class="icon" src="__IMAGE__/index/touxiang1.png"/> <img class="hat" src="__IMAGE__/index/xueba.png"/> <div class="intro"><a href="#">Lemon</a> <p>“学霸，学霸，我们去哪里呀 有你在就天不怕地不怕。”</p></div></li>
@@ -170,5 +170,5 @@
 				<li > <img class="icon" src="__IMAGE__/index/touxiang3.png"/> <img class="hat" src="__IMAGE__/index/tuhao.png"/><div class="intro"><a href="#">Lemon</a> <p>”土豪 我们做朋友吧！“</p></div></li>
 			</ul>
 		</div>
-	</div>
+	</div>-->
 <include file="Public:footer" />

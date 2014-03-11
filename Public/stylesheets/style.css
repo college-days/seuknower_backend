@@ -35,6 +35,8 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .nav-bottom{height:53px;}
 .slide{height:360px;}
 
+.markettitle:hover{color:#2ead91;}
+
 .img-responsive {display:block;height:auto;max-width:100%;}
 
 .clear{clear:both;}
@@ -497,6 +499,8 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .commodity .left .info .count .edit:hover{background:url(images/modify_orange.png) no-repeat;color:#f49f21;display:inline-block;cursor:pointer;}
 .commodity .left .info .count .share{background:url(images/share_grey.png) no-repeat;padding-left:20px;cursor:pointer;}
 .commodity .left .info .count .share:hover{background:url(images/share_orange.png) no-repeat;padding-left:20px;color:#f49f21;cursor:pointer;}
+.commodity .left .info .count .delete{float:right;background:url(images/modify_grey.png) no-repeat;padding-left:22px;color:#80827f;margin-right:-3px;cursor:pointer;}
+.commodity .left .info .count .delete:hover{background:url(images/modify_orange.png) no-repeat;color:#f49f21;display:inline-block;cursor:pointer;}
 .commodity .right{width:153px;float:right;border:1px solid #e5e5e5;background:white;padding:18px 27px 18px 27px;}
 .commodity .right .title{font-size:15px;color:#333;font-weight: 700}
 .commodity .right .seller{margin-top:10px;border-bottom:1px solid #cfcfcf;padding-bottom:20px;margin-bottom:15px;}
