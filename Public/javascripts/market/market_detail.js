@@ -78,7 +78,8 @@ $(function(){
 		var content = window.editor.html();
 		content = content.replace(/<strong>@.*?<\/strong>/, "");
 		if(content.replace(/[ ]/g, "")){
-			showVerify();
+			// showVerify();
+			submitComment();
 		}else{
 			$('#answermsg').show();
 		}

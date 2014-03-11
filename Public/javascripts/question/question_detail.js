@@ -212,7 +212,8 @@ $(function(){
     	var replyMsg = $(this).parents("div.reply-content").find("input.write").val();
     	replyMsg = replyMsg.replace(/@.*?\t/, "");
     	if(replyMsg.replace(/[ ]/g, "")){
-    		showReplyVerify($(this));
+    		// showReplyVerify($(this));
+    		submitReply($(this));
     	}else{
     		$($(this).parents("div.reply-content").find("div.alert")[0]).slideDown();
     	}
@@ -350,7 +351,8 @@ $(function(){
 		var content = window.editor.html();
 		content = content.replace(/<strong>@.*?<\/strong>/, "");
 		if(content.replace(/[ ]/g, "")){
-			showVerify(false);
+			// showVerify(false);
+			submitComment();
 		}else{
 			$("#answermsg").show();
 		}
@@ -361,7 +363,8 @@ $(function(){
 		var content = window.editor.html();
 		content = content.replace(/<strong>@.*?<\/strong>/, "");
 		if(content.replace(/[ ]/g, "")){
-			showVerify(true);
+			// showVerify(true);
+			submitCommentAnonymous();
 		}else{
 			$("#answermsg").show();
 		}
