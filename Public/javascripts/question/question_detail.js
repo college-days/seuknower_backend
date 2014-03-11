@@ -165,7 +165,8 @@ $(function(){
 $(function(){
     var atUserId = 0;
     $(".reply").click(function(){
-    	var flag = $(this).text();
+    	var flag = $(this).text().split("(")[0];
+    	var replycount = $(this).parents("li").attr("replycount");
     	if(flag == "评论"){
     		var href = $(this).attr("href");
 	        var pos = $(href).offset().top;
@@ -176,7 +177,7 @@ $(function(){
 	        replyContent.slideDown();
 	        var content = replyContent.find("input.write");
 	        content.focus();
-	        $(this).text("收起评论");
+	        $(this).text("收起评论("+replycount+")");
     	}else{
     		var href = $(this).attr("href");
 	        var pos = $(href).offset().top;
@@ -186,7 +187,7 @@ $(function(){
     		var replyContent = $(this).parents("li").find("div.reply-content");
 	    	replyContent.find('input.write').val("");
 	    	replyContent.slideUp();
-	    	$(this).text("评论");
+	    	$(this).text("评论("+replycount+")");
     	}
         
     });

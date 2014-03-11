@@ -211,6 +211,7 @@ class QuestionAction extends Action {
 				$replys[$j]['content'] = htmlspecialchars_decode($replys[$j]['content']);
 			}
 			$AnswerInfo[$i]['replys'] = $replys;
+			$AnswerInfo[$i]['replycount'] = count($replys);
 		}
 
 		for($i=0; $i<count($AnonymousInfo); $i++){

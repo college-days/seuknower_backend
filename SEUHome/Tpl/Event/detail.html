@@ -16,7 +16,7 @@
 						<dd>发起人：{$event.organizer}</dd>
 						<dd class="join">
 							<span id="interestCount">{$event.interest_count}</span>人感兴趣
-							<span id="joinCount">{$event.join_count}</span>人参加 
+							<!--<span id="joinCount">{$event.join_count}</span>人参加 -->
 						</dd>
 						<dd class="btn">
 							<eq name="interest" value="0">
@@ -24,11 +24,11 @@
 							<else/>
 								<input type="button" class="interestbtn" value="取消感兴趣"/>
 							</eq>
-							<eq name="join" value="0">
+							<!--<eq name="join" value="0">
 								<input type="button" class="joinbtn" value="我要参加"/>
 							<else/>
 								<input type="button" class="joinbtn" value="取消参加"/>
-							</eq>
+							</eq>-->
 						</dd>
 					</dl>
 				</div>

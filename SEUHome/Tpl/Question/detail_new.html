@@ -53,7 +53,7 @@
 					</div>
 					<ul>
 						<volist name="answers" id="answer">
-                            <li uid="{$answer.u_id}" aid="{$answer.id}" uname="{$answer.u_name}">
+                            <li uid="{$answer.u_id}" aid="{$answer.id}" uname="{$answer.u_name}" replycount="{$answer.replycount}">
                             <div class="divide">
                             </div>
                             <div class="attitude">
@@ -96,7 +96,7 @@
                                     <div>
                                         <eq name="answer.anonymous" value="0">
                                         	<notempty name="Think.session.userId">
-	                                            <a href="#replyanchor{$answer.id}" class="reply">评论</a>
+	                                            <a href="#replyanchor{$answer.id}" class="reply">评论({$answer.replycount})</a>
 	                                        <else/>
 	                                        	<a href="/login" class="reply" target="_blank">评论</a>
 		                                    </notempty>
