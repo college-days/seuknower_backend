@@ -2,10 +2,11 @@ $(function(){
 	$("#finishbtn").click(function(){
 		var image = $("#preview img");
 		var path = new Array();
-		for(var i=1; i<image.length; i++){
-			path[i-1] = image.get(i).src;
-			path[i-1] = path[i-1].substr(path[i-1].indexOf("Uploads")-1);
+		for(var i=0; i<image.length; i++){
+			path[i] = image.get(i).src;
+			path[i] = path[i].substr(path[i].indexOf("Uploads")-1);
 		}
+		
 		$.post('/market/save_picture', {
 			'id': $("#commodity").attr("cid"),
 			'path': path
