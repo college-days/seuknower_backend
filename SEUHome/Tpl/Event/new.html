@@ -79,7 +79,7 @@
 				</div>
 				<div class="row">
 					<span class="key">活动海报</span>
-					<input class="value" type="file" id="poster" name="poster"/>
+					<input type="file" id="poster" name="poster"/>
 				</div>
 
 				<div class="row" id="div_image" style="display:none;">
@@ -100,7 +100,7 @@
 
 				<div class="row">
 					<span class="key"></span>
-					<input class="btn" type="button" value="确认提交" id="submitevent"/>
+					<input class="btn" type="button" value="确认提交" id="submitevent" style="margin-left:120px;"/>
 				</div>
 			</form>
 			</div>
@@ -116,8 +116,10 @@
 	<script>
 	    KindEditor.ready(function(K) {
 	        window.editor = K.create('#intro', {
+				minWidth: "466",
+				resizeType: 0,
 				items: ["bold", "italic", "underline", "preview", "code", "image", "link", "quickformat", "removeformat", "insertorderedlist", "insertunorderedlist"]
-	        });
+			});
 	    });
 	</script>
 	<link href="__CSS__/jquery.Jcrop.css?t=1394509240" rel="stylesheet" type="text/css"/>

@@ -51,7 +51,7 @@
 					<div id="statusalert" style="color:red;margin-left:71px;"></div>
 				</div>
 				<div class="row">
-					<span class="key">成色(请填写数字1-9即可)</span><input type="text" class="value short" id="commoditystatus" name="status"/>
+					<span class="key">成色</span><input type="text" class="value short" id="commoditystatus" name="status"/><span style="margin-left:15px">(请填写数字1-9即可)</span>
 				</div>
 				<div class="row">
 					<div id="contactalert" style="color:red;margin-left:71px;"></div>
@@ -71,7 +71,7 @@
 				</div>
 				<div class="row">
 					<span class="key">商品图片</span>
-					<input class="value" type="file" id="picture" name="picture"/>
+					<input type="file" id="picture" name="picture"/>
 				</div>
 
 				<div class="row" id="div_image" style="display:none;">
@@ -91,12 +91,12 @@
 				</div>
 
 				<div class="row">
-					<span class="key"></span><input id="nextstep" class="btn" type="button" value="下一步"/>
+					<span class="key"></span><input id="nextstep" class="btn" type="button" value="下一步" style="margin-left:120px;"/>
 				</div>
 			</form>
 			</div>
 			<div class="right">
-				<p class="title">创建活动须知···</p>
+				<p class="title">发布商品须知:</p>
 				<p class="word">1、活动标题简单明了，时间地点准确；</p>
 				<p class="word">2、活动内容和特点介绍详细；</p>
 				<p class="word">3、记得上传一张活动海报，分辨率大于500x500，如没有海报，可以上传相关的照片、图片；</p>
@@ -107,8 +107,10 @@
 	<script>
 	    KindEditor.ready(function(K) {
 	        window.editor = K.create('#commodityintro', {
+				minWidth: "466",
+				resizeType: 0,
 				items: ["bold", "italic", "underline", "preview", "code", "image", "link", "quickformat", "removeformat", "insertorderedlist", "insertunorderedlist"]
-	        });
+			});
 	    });
 	</script>
 	<link href="__CSS__/jquery.Jcrop.css?t=1394509240" rel="stylesheet" type="text/css"/>
