@@ -504,5 +504,17 @@ class MarketAction extends Action {
 		}
 		$this->redirect("/market/commodity/$id");
 	}
+
+	public function deleteCommodity(){
+		$cid = I('param.cid');
+		$Commodity = M('Commodity');
+		$map['onsale'] = 0;
+		$result = $Commodity->where("id=".$cid)->save($map);
+		if(!$result){
+			$this->ajaxReturn('', '', 0);
+		}else{
+			$this->ajaxReturn('', '', 1);
+		}
+	}
 }
 ?>

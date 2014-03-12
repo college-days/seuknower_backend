@@ -499,8 +499,8 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .commodity .left .info .count .edit:hover{background:url(images/modify_orange.png) no-repeat;color:#f49f21;display:inline-block;cursor:pointer;}
 .commodity .left .info .count .share{background:url(images/share_grey.png) no-repeat;padding-left:20px;cursor:pointer;}
 .commodity .left .info .count .share:hover{background:url(images/share_orange.png) no-repeat;padding-left:20px;color:#f49f21;cursor:pointer;}
-.commodity .left .info .count .delete{float:right;background:url(images/modify_grey.png) no-repeat;padding-left:22px;color:#80827f;margin-right:-3px;cursor:pointer;}
-.commodity .left .info .count .delete:hover{background:url(images/modify_orange.png) no-repeat;color:#f49f21;display:inline-block;cursor:pointer;}
+.commodity .left .info .count .delete{float:right;background:url(images/delcommodity_gray.png) no-repeat;padding-left:22px;color:#80827f;margin-right:-3px;cursor:pointer;}
+.commodity .left .info .count .delete:hover{background:url(images/delcommodity_orange.png) no-repeat;color:#f49f21;display:inline-block;cursor:pointer;}
 .commodity .right{width:153px;float:right;border:1px solid #e5e5e5;background:white;padding:18px 27px 18px 27px;}
 .commodity .right .title{font-size:15px;color:#333;font-weight: 700}
 .commodity .right .seller{margin-top:10px;border-bottom:1px solid #cfcfcf;padding-bottom:20px;margin-bottom:15px;}
@@ -898,6 +898,12 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .activate .white .slogan{margin-left:200px;font-size:12px;color:#e6632f;}
 .activate .white .info{width:250px;height:40px;text-align:center;border-radius:3px;cursor:pointer;background:#7a6c59;margin-left:200px;margin-top:40px;display:block;font-size:21px;color:white;line-height:40px;}
 .activate .white .info:hover{width:250px;height:40px;text-align:center;border-radius:3px;cursor:pointer;background:#6a3906;margin-left:200px;margin-top:40px;display:block;font-size:21px;color:white;line-height:40px;}
+
+/*2-24更新*/
+.activate .white .account{margin-top:50px;width:200px;height:28px;margin-left:200px;}
+.activate .white .send{margin-left:220px;}
+.activate .white .send:hover{margin-left:220px;}
+/*2-24更新结束*/
 
 .alert {
 padding: 8px 35px 8px 14px;

@@ -1,6 +1,4 @@
 var isa = false;
-var isp = false;
-var ispr = false;
 var isv = false;
 //get from jwc via a spider
 var name;
@@ -10,18 +8,10 @@ $(function(){
 		checkUsername();
 	});
 
-	$('#email').bind('input propertychange', function() {
-		if($("#email").val().replace(/[ ]/g, "").length == 9){
-			checkEmail();	
+	$('#username').bind('input propertychange', function() {
+		if($("#username").val().replace(/[ ]/g, "").length == 9){
+			checkUsername();	
 		} 
-	});
-
-	$("#password").blur(function() {
-		checkPassword();
-    });
-
-     $("#passwordrepeat").blur(function() {
-     	checkPasswordRepeat();
 	});
 
 	$("#verify").blur(function() {
@@ -35,8 +25,8 @@ $(function(){
 	});
 
 	$("#register_submit").click(function() {
-		if(isa && isp && isv){
-			$("#title").text("请稍等，正在为你修改密码");
+		if(isa && isv){
+			$("#title").text("请稍等，正在初始化修改密码服务");
 			$.post('/account/load_stuinfo', {
 		        id: $("#username").val().replace(/[ ]/g, "")+"@seu.edu.cn"
 		    }, function(data) {
@@ -57,32 +47,27 @@ $(function(){
 		    }, 'json');
 		}else{
 			checkUsername();
-			checkPassword();
-			checkPasswordRepeat();
 			checkVerify();
 		}
 	});
 });
 
 function postRegisterInfo(){
-	if(isa && isp && isv ){
-		  $.post('/account/save_password', {
+	if(isa && isv){
+		  $.post('/account/change_session', {
             account: $("#username").val().replace(/[ ]/g, "")+"@seu.edu.cn",
-            password: $("#password").val().replace(/[ ]/g, ""),
             verify: $("#verify").val().replace(/[ ]/g, "")
         }, function(data) {
 			if(data.status){
-				window.location.href = "/account/active_password";
+				alert('请去邮箱重新激活账号，激活邮件可能会被拦截，如果没收到，请查看拦截队列，给您带来不便，敬请谅解！');
+				window.location.href = "http://my.seu.edu.cn";
 			}
 			else{
-				// alert(data.info);
 				$("#title").text(data.info);
 			}
         }, 'json');
 	}else{
 		checkUsername();
-		checkPassword();
-		checkPasswordRepeat();
 		checkVerify();
 	}
 }
@@ -102,39 +87,6 @@ function checkUsername(){
 			isa = true;
 		}
 	}
-}
-
-function checkPassword(){
-	var password = $("#password").val().replace(/[ ]/g, "");
-    if(!password) {
-		isp = false;
-        $('#passwordalert').text("请填写密码");
-    } else {
-        $('#passwordalert').text("");
-		if ($('#password').val() == $('#passwordrepeat').val()) {
-            isp = true;
-            $('#passwordalert').text("");
-        } else {
-            isp = false;
-        }
-    }
-}
-
-function checkPasswordRepeat(){
-	var passwordrepeat = $("#passwordrepeat").val().replace(/[ ]/g, "");
-    if (!passwordrepeat) {
-		isp = false;
-        $('#passwordrepeatalert').text("请确认你的密码");
-    } else {
-        $('#passwordrepeatalert').text("");
-        if ($('#password').val() == $('#passwordrepeat').val()) {
-            isp = true;
-            $('#passwordrepeatalert').text("");
-        } else {
-            $('#passwordrepeatalert').text("密码验证不正确");
-            isp = false;
-        }
-    }
 }
 
 function checkVerify() {

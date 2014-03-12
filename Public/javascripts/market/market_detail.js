@@ -131,6 +131,20 @@ $(function(){
 		var commodity_id = $("#commodity_id").text();
 		window.location.href = "/market/modify_commodity/"+commodity_id;
 	});
+
+	$(".delete").click(function(){
+		var commodity_id = $("#commodity_id").text();
+		$.post("/market/delete_commodity", {
+			'cid': commodity_id
+		}, function(data){
+			if(data.status == 1){
+				alert("商品下架成功");
+				window.location.href = "/market";
+			}else{
+				alert("商品下架失败");
+			}
+		}, "json");
+	});
 });
 
 function submitComment(){

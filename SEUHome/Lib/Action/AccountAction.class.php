@@ -395,8 +395,69 @@ class AccountAction extends Action{
 		}
 	}
 
+	public function startChangePassword(){
+		$this->display('startchangepassword');
+	}
+
+	public function changePasswordSession(){
+		$account = I('param.account');
+		$verify = I('param.verify');
+		if(session('verify') != md5($verify)) {
+			$this->ajaxReturn('', '验证码错误！', 0);
+		}
+		
+		$User = M('User');
+		$map['account'] = $account;
+		$map['status'] = 1;
+		
+		$user = $User->where($map)->find();
+		if($user){
+			$id = $user['id'];
+			$data['id'] = $id;
+			$data['active_code'] = createKey(32);
+			$data['status'] = 0;
+			
+			$activeCode = $data['active_code'];
+			$User->save($data);
+
+			$body = "请点击此<a href='http://www.seuknower.com/account/change_password/$id/$activeCode' target='_blank'>链接</a>来完成修改密码";
+			// $body = "请点击此<a href='http://localhost/account/change_password/$id/$activeCode' target='_blank'>链接</a>来完成修改密码";
+
+			$info = think_send_mail($account,$user['name'], "修改账户密码", $body);
+		
+			if($info === true){
+				$this->ajaxReturn($info, '', 1);
+			}
+			else{
+				$this->ajaxReturn($info, '邮件发送失败', 0);
+			}
+		}
+		else{
+			$this->ajaxReturn('', '用户不存在或未激活', 0);
+		}
+	}
+
 	public function changePassword(){
-		$this->display('changepassword');
+		$id = I('param.id');
+		$code = I('param.code');
+		$User = M('User');
+		$map['id'] = $id;
+		$result = $User->field('active_code')->where($map)->find();
+		if($result === false){
+			$this->error('激活时查询数据库出错！');
+		}
+		elseif($result === null){
+			$this->error('激活时用户不存在！');
+		}
+		elseif($result['active_code'] == $code){
+			$data['id'] = $id;
+			$data['status'] = 1;
+			$User->save($data);
+			$this->display('changepassword');
+		}
+		else{
+			$this->error('激活码不正确！');
+		}
 	}
 
 	public function savePassword(){
@@ -415,61 +476,29 @@ class AccountAction extends Action{
 		if($user){
 			$id = $user['id'];
 			$data['id'] = $id;
-			$data['active_code'] = createKey(32);
 			$data['pwd'] = md5($password);
-			$data['status'] = 0;
 			
-			$activeCode = $data['active_code'];
-			$User -> save($data);
+			$result = $User->save($data);
 
-			// $url =  "http://www.seuknower.com/account/active_password/$id/$activeCode";
-			// $body = "请将此链接 $url 复制到浏览器中完成修改密码";
-			$body = "请点击此<a href='http://www.seuknower.com/account/active_password/$id/$activeCode' target='_blank'>链接</a>来完成修改密码";
-			// $body = "请点击此<a href='http://localhost/account/active_password/$id/$activeCode' target='_blank'>链接</a>来完成修改密码";
-
-			$info = think_send_mail($account,$user['name'], "修改账户密码", $body);
-		
-			if($info === true){
-				$this ->ajaxReturn($info, '', 1);
-			}
-			else{
-				$this ->ajaxReturn($info, '邮件发送失败', 0);
+			if(!$result){
+				$this->ajaxReturn('', '密码修改失败', 0);
+			}else{
+				session('userId', $id);
+				session('account', $account);
+				session('userName', $user['name']);
+				session('icon', $user['icon']);
+				$this->ajaxReturn('', '', 1);
 			}
 		}
 		else{
-			$this ->ajaxReturn('', '用户不存在或未激活', 0);
+			$this->ajaxReturn('', '用户不存在或未激活', 0);
 		}
 	}
 
 	public function activePassword(){
-		$id = I('param.id');
-		$code = I('param.code');
-		$User = M('User');
-		$map['id'] = $id ;
-		$result = $User->field('active_code')->where($map)->find();
-		if($result === false){
-			$this->error('激活时查询数据库出错！');
-		}
-		elseif($result === null){
-			$this->error('激活时用户不存在！');
-		}
-		elseif($result['active_code'] == $code){
-			$result = $User->find($id);
-			session('userId',$id);
-			session('account',$result['account']);
-			session('userName',$result['name']);
-			session('icon',$result['icon']);
-			$data['id'] = $id;
-			$data['status'] = 1;
-			$User->save($data);			
-			//$this->redirect('User/profile', array('id' => $id));
-			$this->assign('name', $result['name']);
-			$this->assign('id', $id);
-			$this->display('finishchange');
-		}
-		else{
-			$this->error('激活码不正确！');
-		}
+		$this->assign('name', session('userName'));
+		$this->assign('id', session('userId'));
+		$this->display('finishchange');
 	}
 }
 ?>
