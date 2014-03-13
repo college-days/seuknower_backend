@@ -354,7 +354,11 @@ $(function(){
 		if(content.replace(/[ ]/g, "")){
 			// showVerify(false);
 			if(invited){
-				submitComment();
+				if($("#anonymous_check").is(":checked")){
+					submitCommentAnonymous();	
+				}else{
+					submitComment();
+				}
 			}else{
 				showInvite(false);				
 			}

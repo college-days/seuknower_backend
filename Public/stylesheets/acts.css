@@ -3,6 +3,7 @@ body{background:#f3f7fa;}
 .introduce{width:220px;float:left;position:absolute;}
 .user_box{border:1px solid #e5e5e5;background:#fff;}
 .introduce .tit{font-size:16px;color:#7a6c59;border-left:2px solid #7a6c59;margin:21px 0 0 -1px;padding-left:22px;line-height:18px;}
+.introduce .notlg{margin:12px 24px 0;background:url(images/line.gif) no-repeat 0 bottom;padding-bottom:16px;font-size:14px;color:#80827f;}
 .introduce .nl{margin-left:1px;border:none;}
 .user .infos{margin:12px 24px 0;background:url(images/line.gif) no-repeat 0 bottom;padding-bottom:21px;font-size:14px;}
 .user .infos .pic{float:left;padding:6px 13px 0 9px;}

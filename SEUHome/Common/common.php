@@ -210,6 +210,27 @@
 		return $arr;
 	}  	
 
+	//二维数组去掉重复值
+	function array_unique_fb($array2D)
+	{
+		$keys = array_keys($array2D[0]);
+		foreach ($array2D as $v)
+		{
+			$v = join(",",$v);  //降维,也可以用implode,将一维数组转换为用逗号连接的字符串
+			$arr[] = $v;
+		}
+	
+		$arr = array_unique($arr);    //去掉重复的字符串,也就是重复的一维数组
+		foreach ($arr as $k => $v)
+		{
+			$temp = explode(",",$v); //再将拆开的数组重新组装
+			for($i=0; $i<count($temp); $i++){
+				$result[$k][$keys[$i]] = $temp[$i];
+			} 
+		}
+		return $result;
+	}
+
 	function searchQuestion($content,$count,$len="null",$pos=0,$index=0){
 		if(!$len) return null;
 		
@@ -331,4 +352,79 @@
 		return $data;
 	}
 
+	function simpleSearchQuestion($content,$count,$page){
+	
+		preg_match_all("/[\x{4E00}-\x{9FFF}]/u",$content,$ch,PREG_OFFSET_CAPTURE);      //获取所有的汉字
+		preg_match_all("/[a-zA-Z]+/u",$content,$en,PREG_OFFSET_CAPTURE);				//获取连着的英文
+		preg_match_all("/[0-9]+/u",$content,$num,PREG_OFFSET_CAPTURE);					//获取连着个数字
+		
+		$ch = $ch[0];
+		$en = $en[0];
+		$num = $num[0];
+		
+		$temp = array_merge($ch,$en,$num);
+		$temp = array_sort($temp,1);
+		
+		//获取关键字
+		$i = 0;
+		foreach($temp as $v){
+			$key[$i] = $v[0];
+			$i++;
+		}
+		
+		$keyCount = count($key);
+		//获取查询的词组
+		for($i=0; $i<$keyCount; $i++){
+			for($j=0; $j<$keyCount-$i; $j++){
+				for($k=0; $k<$i+1; $k++){
+					$like[$i][$j] = $like[$i][$j].$key[$j+$k];  
+				}
+			}
+		}
+		
+		$len = count($like)-1;
+
+		
+		$Model = M();
+		for($i=$len; $i>=0; $i--){		
+			for($j=0; $j<$keyCount-$i; $j++){
+				$sql = " title LIKE '%".$like[$i][$j]."%'";
+				
+				if($j>0) $sql = $sql." AND title NOT LIKE '%".$key[$j-1].$like[$i][$j]."%'";
+				if($j+$i<$keyCount - 1) $sql = $sql." AND title NOT LIKE '%".$like[$i][$j].$key[$j+$i+1]."%'";
+				$sql = "SELECT title,id,create_time,answer_count FROM seu_question WHERE".$sql." ORDER BY create_time DESC "; 
+				$result = $Model->query($sql);
+				
+				
+				//计算搜索结果的权值
+				for($n=0; $n<count($result); $n++){
+					$result[$n]['value'] = $i;
+					for($k=0; $k<$j; $k++){			
+						if(!(strpos($result[$n]['title'],$key[$k]) === false)) {
+							$result[$n]['value']++;
+						}
+					}
+					for($k=$j+$i+1; $k<$keyCount; $k++){
+						if(!(strpos($result[$n]['title'],$key[$k]) === false)) {
+							$result[$n]['value']++;
+						}
+					}		
+				}
+				
+				if($search){
+					$search = array_merge($search,$result);
+					$search = array_unique_fb($search);
+					$search = array_sort($search,'value','desc');
+				}
+				else{
+					$search = $result;
+					$search = array_sort($search,'value','desc');
+				}
+				//dump($search);
+				if(count($search) > $count*$page) break;
+			}
+			if(count($search) > $count*$page) break;
+		}
+		return array_slice($search,$count*($page-1)-1,$count);
+	}
 ?>
