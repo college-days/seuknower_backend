@@ -85,7 +85,7 @@ $(function(){
 				content: $(this).val(),
 				count: 5
 			}, function(data){
-				var search = data.data.search;
+				var search = data.data;
 				for(var i=0; i<search.length; i++){
 					if($('#preview_ask [href="/question/'+search[i].id+'"]').length > 0){
 					}
@@ -101,9 +101,14 @@ $(function(){
 		}
 	});
 
+	$("#preview_ask").hover(function(){
+		$("#preview_ask").show();
+	});
+
 	$("#questiontitle").blur(function(){
 		$("#preview_ask").hide();
 	});
+
 });
 });
 

@@ -300,18 +300,21 @@ class QuestionAction extends Action {
 	public function moreSearch(){
 		$content = I('param.content');
 		$count = I('param.count');
-		if(isset($_POST['pos']) && isset($_POST['len']) && isset($_POST['index'])){
-			if($_POST['len']) $data = searchQuestion($content,$count,I('param.len'),I('param.pos'),I('param.index'));
-		}
-		else{
-			$data = searchQuestion($content,$count);
+
+		$model = new Model();
+		$sql = "select title,id,create_time,answer_count from seu_question where title like '%".$content."%' order by create_time desc limit ".$count;
+
+		$questionMessageResult = $model->query($sql);
+
+		for($i=0; $i<count($questionMessageResult); $i++){
+			$questionMessageResult[$i]['title'] = str_replace($content, "<span style=\"color:red\">".$content."</span>", $questionMessageResult[$i]['title']);
 		}
 		
-		if(count($data['search']) == $count){
-			$this->ajaxReturn($data,'more',1);
+		if(count($questionMessageResult) == $count){
+			$this->ajaxReturn($questionMessageResult, 'more', 1);
 		}
 		else{
-			$this->ajaxReturn($data,'nomore',1);
+			$this->ajaxReturn($questionMessageResult, 'nomore', 1);
 		}
 		
 	}
