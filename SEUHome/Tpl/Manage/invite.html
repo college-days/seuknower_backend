@@ -1,0 +1,20 @@
+<include file="Manage:header" title="用户管理"/>
+<div class="jumbotron">
+	<div>
+		<p class="lead" id="createerror" style="color:red;"></p>
+		<label for="count">生成新的邀请码的数量</label>
+		<input id="count" type="text"/>
+		<input type="button" class="createinvite" value="生成邀请码">
+	</div>
+	<div style="margin-top:33px;"></div>
+    <input type="button" class="deleteinvite" value="选中要发给用户的邀请码然后点这里把邀请码设置为以发送">
+    <div style="margin-top:33px;"></div>
+    <ul class="list-group"> 
+        <volist name="invites" id="invite">
+            <li class="list-group-item" style="cursor:pointer;background:white;">
+                <div class="content invite" picked="0" iid="{$invite.id}">{$invite.content}</div>
+            </li>
+        </volist>
+    </ul>
+</div>
+<include file="Manage:footer" />

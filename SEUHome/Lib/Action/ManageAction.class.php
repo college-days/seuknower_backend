@@ -158,5 +158,42 @@ class ManageAction extends Action {
 		}
 		$this->ajaxReturn('', '', 1);
 	}
+
+	public function invite(){
+		$this->assign("current", "invite");
+		$Invite = M('Invite');
+
+		$invites = $Invite->where("invited=0")->select();
+		$this->assign("invites", $invites);
+		$this->display("invite");
+	}
+
+	public function createInvite(){
+		$count = I('param.count');
+		$Invite = M('Invite');
+
+		for($i=0; $i<$count; $i++){
+			$data['content'] = createKey(32);
+			$data['invited'] = 0;
+			$result = $Invite->add($data);
+			if(!$result){
+				$this->ajaxReturn('', '', 0);
+			}
+		}
+		$this->ajaxReturn('', '', 1);
+	}
+
+	public function deleteInvite(){
+		$iids = I('param.iids');
+		$Invite = M('Invite');
+		$data['invited'] = 1;
+		for($i=0; $i<count($iids); $i++){
+			$result = $Invite->where('id='.$iids[$i])->save($data);
+			if(!$result){
+				$this->ajaxReturn('', '', 0);
+			}
+		}
+		$this->ajaxReturn('', '', 1);
+	}
 }
 ?>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0056)http://www.bootstrapzero.com/bootstrap-template/facebook -->
-<html lang="en">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -133,6 +133,12 @@ ga('send', 'pageview');
                     <else/>
                         <li><a href="/manage/answerreply">回答回复</a></li>
                     </eq>
+                    <eq name="current" value="invite">
+                        <li class="active"><a href="/manage/invite">邀请码</a></li>
+                    <else/> 
+                        <li><a href="/manage/invite">邀请码</a></li>
+                    </eq>
+
                 </ul>
             </nav>
         </div>

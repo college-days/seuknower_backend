@@ -500,5 +500,24 @@ class AccountAction extends Action{
 		$this->assign('id', session('userId'));
 		$this->display('finishchange');
 	}
+
+	public function checkInvite(){
+		$inviteCode = I('param.invitecode');
+		$Invite = M('Invite');
+		$result = $Invite->where("content='".$inviteCode."'")->delete();
+		if(!$result){
+			$this->ajaxReturn('', '', 0);
+		}else{
+			$User = M('User');
+			$userId = session('userId');
+			$data['invited'] = 1;
+			$userresult = $User->where('id='.$userId)->save($data);
+			if(!$userresult){
+				$this->ajaxReturn('', '', -1);
+			}else{
+				$this->ajaxReturn('', '', 1);
+			}
+		}
+	}
 }
 ?>

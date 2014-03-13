@@ -5,6 +5,7 @@ var delete_answers = [];
 var delete_eventcommets = [];
 var delete_commoditycomments = [];
 var delete_answerreplys = [];
+var delete_invites = [];
 
 $(function(){
 	$(".event").click(function(){
@@ -271,6 +272,66 @@ $(function(){
         			alert("删除失败");
         		}
         	}, "json");
+        }
+    });
+
+    $(".invite").click(function(){
+        if(parseInt($(this).attr("picked")) == 0){
+            var iid = $(this).attr("iid");
+            $(this).attr("picked", 1);
+            $(this).parents("li").css("background-color", "red");
+            if($.inArray(parseInt(iid), delete_invites) == -1){
+                delete_invites.push(parseInt(iid));
+            }
+            console.log(delete_invites);
+        }else{
+            var iid = $(this).attr("iid");
+            $(this).attr("picked", 0);
+            $(this).parents("li").css("background-color", "white");
+            if($.inArray(parseInt(iid), delete_invites) != -1){
+                delete_invites = $.grep(delete_invites, function(value){
+                    return value != parseInt(iid);
+                });
+            }
+            console.log(delete_invites);
+        }
+    });
+
+    $(".deleteinvite").click(function(){
+        if(delete_invites.length == 0){
+            alert("还没有选择要设为已发送的邀请码");
+        }else{
+            $.post("/manage/deleteInvite", {
+                'iids': delete_invites
+            }, function(data){
+                if(data.status == 1){
+                    window.location.reload();
+                }else{
+                    alert("操作失败");
+                }
+            }, "json");
+        }
+    });
+
+    $(".createinvite").click(function(){
+        var count = $("#count").val().replace(/[ ]/g,"");
+        if(count){
+            var r = /^\d+$/;
+            if(r.test(count)){
+                $.post("/manage/createInvite", {
+                    'count': count
+                }, function(data){
+                    if(data.status == 1){
+                        window.location.reload();
+                    }else{
+                        alert("生成邀请码失败");
+                    }
+                }, "json");
+            }else{
+                $("#createerror").text("请填写整数");
+            }
+        }else{
+            $("#createerror").text("请填写要生成邀请码的数量");
         }
     });
 });

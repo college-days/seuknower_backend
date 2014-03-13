@@ -55,6 +55,7 @@ return array(
 		'account/start_active$' => 'Account/startActiveUser',
 		'account/check_login$' => 'Account/checkLogin',
 		'account/load_stuinfo$' => 'Account/loadStuInfo',
+		'account/check_invite$' => 'Account/checkInvite',
 		'account/check_verify$' => 'Account/checkVerify',
 		'account/check_message$' => 'Account/checkMessage',
 		'account/check_register$' => 'Account/checkRegister',

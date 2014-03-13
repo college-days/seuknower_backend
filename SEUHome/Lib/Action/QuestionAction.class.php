@@ -145,6 +145,9 @@ class QuestionAction extends Action {
 		$questionInfo['icon'] = $result['icon'];
 		$questionInfo['u_intro'] = $result['intro'];
 
+		$currentUser = $User->where('id='.$userId)->find();
+		$this->assign('invited', $currentUser['invited']);
+
 		$util = new CommonUtil();
 		$questionInfo["u_sex"] = $util->filter_sex($result["sex"]);
 

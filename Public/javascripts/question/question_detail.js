@@ -349,10 +349,15 @@ $(function(){
 	$("#submit").click(function(){
 		$("div.alert").hide();
 		var content = window.editor.html();
+		var invited = parseInt($("#question").attr("invited"));
 		content = content.replace(/<strong>@.*?<\/strong>/, "");
 		if(content.replace(/[ ]/g, "")){
 			// showVerify(false);
-			submitComment();
+			if(invited){
+				submitComment();
+			}else{
+				showInvite(false);				
+			}
 		}else{
 			$("#answermsg").show();
 		}
@@ -361,10 +366,15 @@ $(function(){
     $('#anonymous_submit').click(function(){
     	$("div.alert").hide();
 		var content = window.editor.html();
+		var invited = parseInt($("#question").attr("invited"));
 		content = content.replace(/<strong>@.*?<\/strong>/, "");
 		if(content.replace(/[ ]/g, "")){
 			// showVerify(true);
-			submitCommentAnonymous();
+			if(invited){
+				submitCommentAnonymous();
+			}else{
+				showInvite(true);
+			}
 		}else{
 			$("#answermsg").show();
 		}
@@ -651,4 +661,79 @@ function initReplyVerifyCode(){
 function removeReplyVerifyCode(){
 	document.body.removeChild(document.getElementById('replyverifymask'));
 	document.body.removeChild(document.getElementById('replyverifywin'));
+}
+
+//for invite code
+function showInvite(isanonymous){
+	var invitetop = $(".speak").offset().top;
+	if($(".invitewin").length > 0) {
+		removeInviteCode();
+	}
+	else{
+		newInviteCode(isanonymous);
+		$(".invitewin").css('top', invitetop);
+	}
+}
+
+function newInviteCode(isanonymous){
+	initInviteCode();
+
+	$(".inviteclose").click(function(){
+		removeInviteCode();
+	});
+	
+	$(".invitemask").click(function(){
+		removeInviteCode();
+	});
+
+	$(".invitesubmit").click(function(){
+		var invitecode = $(".invitecode").val();
+		if(invitecode.replace(/[ ]/g, "")){
+			$.post('/account/check_invite', {
+	            'invitecode': invitecode
+	        }, function(data) {
+	            if(data.status == 0){
+					$('.invitecodealert').text("邀请码不正确");
+				}
+				if(data.status == -1){
+					$('.invitecodealert').text("邀请失败，请重新申请邀请码");
+				}
+				if(data.status == 1){
+					removeInviteCode();
+					$('.invitecodealert').text("");
+					if(isanonymous){
+						submitCommentAnonymous();
+					}else{
+						submitComment();
+					}
+				}
+	        }, 'json');
+		}else{
+			$(".invitecodealert").text("请填写邀请码");
+		}
+		
+	});
+}
+
+function initInviteCode(){
+	var newMask = document.createElement("div");
+	newMask.id = 'invitemask';  
+	newMask.className = "invitemask";
+	newMask.style.width = document.body.scrollWidth + "px";
+	newMask.style.height = document.body.scrollHeight + "px";
+		
+	var newWin = document.createElement("div");
+	newWin.id = 'invitewin';
+	newWin.className = "invitewin";
+	newWin.style.left = (parseInt(document.body.scrollWidth) - 544)/2 + "px";
+	var html = '<div class="title-bar"><span>请输入邀请码</span><div class="inviteclose"></div></div><div class="content"><div class="invitecodealert" style="color:red;"></div><input type="text" class="invitecode"><input type="button" value="确认" class="invitesubmit"></div>';
+	newWin.innerHTML = html;
+
+	document.body.appendChild(newMask);
+	document.body.appendChild(newWin);
+}
+
+function removeInviteCode(){
+	document.body.removeChild(document.getElementById('invitemask'));
+	document.body.removeChild(document.getElementById('invitewin'));
 }

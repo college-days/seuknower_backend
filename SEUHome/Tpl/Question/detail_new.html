@@ -3,7 +3,7 @@
 	<div class="question-detail">
 		<div class="container">
 			<div class="left">
-				<div id="question" qid="{$question.id}" aid="{$aid}" uid="{$Think.session.userId}" style="display:none;"></div>
+				<div id="question" qid="{$question.id}" aid="{$aid}" uid="{$Think.session.userId}" invited="{$invited}" style="display:none;"></div>
 				<div class="title">
 					<span> {$question.title} </span>
 					<a href="/question/{$question.type}" class="tag" target="_blank"> {$question.type} </a>
