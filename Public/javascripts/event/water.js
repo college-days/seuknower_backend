@@ -41,24 +41,29 @@
 
 		// 插入数据
 		function insert(data) {
-			var fragElement = document.createDocumentFragment();
-			var datas = data.data;
-			if (datas.length > 0) {
+			var fragElement = document.createDocumentFragment(),
+				datas = data.data,
+				len = datas.length;
+			if (len > 0) {
 				$.each(datas, function(i,item){
-					// var html = '<div class="title"><a href="/event/' + item.id + '">'+ item.title +'</a></div><div class="intro">时间：'+ item.time + '<br />地点：' + item.location +'</div><div class="pa">'+ item.join_count +'人参加<span class="sp">|</span>'+ item.interest_count +'人感兴趣</div>';
-					var html = '<div class="title"><a href="/event/' + item.id + '">'+ item.title +'</a></div><div class="intro">时间：'+ item.time + '<br />地点：' + item.location +'</div><div class="pa">'+ item.interest_count +'人感兴趣</div>';
+					var html = '<div class="title"><a href="/event/' + item.id + '">'+ item.title +'</a></div><div class="intro">时间：'+ item.time + '<br />地点：' + item.location +'</div><div class="pa">'+ item.join_count +'人参加<span class="sp">|</span>'+ item.interest_count +'人感兴趣</div>';
 					if(item.poster.length>0){
 						var pic = '<div class="pic"><a href="/event/' + item.id + '"><img src="'+ item.poster +'" /></a></div>';
 						html = pic + html;
 					}
 					var node = $('<div class="poster_grid"></div>').html(html);
 					fragElement.appendChild($(node)[0]);
-					postersArr.push($(node)[0]);
+					$(".pic img",$(node)).load(function(){
+						postersArr.push($(node)[0]);
+						len--;
+						if(len == 0){
+							owrap.appendChild(fragElement);
+							// 插入后再排序
+							sort();
+						}
+					});
 				})
-				owrap.appendChild(fragElement);
 			}
-			// 插入后再排序
-			sort();
 		}
 
 		//排序

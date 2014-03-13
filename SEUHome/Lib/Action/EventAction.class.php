@@ -368,6 +368,10 @@ class EventAction extends Action {
 		else{
 			$this->assign('interest',0);
 		}
+
+		$relatedEvents = $Event->where("category='".$currentEvent['category']."'")->order("create_time desc")->limit(10)->select();
+		$this->assign('relatedevents', $relatedEvents);
+
     	$this->display('detail');
     }
 

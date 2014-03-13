@@ -32,6 +32,7 @@
 						</dd>
 					</dl>
 				</div>
+
 				<div class="detail">
 					<span>活动详情</span>
 					<p>{$event.intro}</p>
@@ -40,6 +41,7 @@
 					<span class="click">已阅读：{$event.click_count}</span><span class="time">发布时间：{$event.create_time|date='Y-m-d',###}</span>
 				</div>
 				</div>
+
 				<div class="comment">
 					<div class="title">
 						七嘴八舌<span>(</span><span class="num">{$comment_count}</span><span>)</span>
@@ -81,6 +83,7 @@
                     <a class="close" data-dismiss="alert" href="#replyanchor" id="answercancle">X</a>
                     回答的内容不能为空。
                 </div>
+
 				<div class="speak">
 					<div class="title">
 						我来评论
@@ -93,7 +96,17 @@
 					</notempty>
 				</div>
 			</div>
-			
+			<div class="acthots">
+				<div class="tit">相关活动</div>
+				<ul class="list">
+					<volist name="relatedevents" id="event">
+						<li>
+							<a href="/event/{$event.id}" target="_blank">{$event.title}</a>
+						</li>
+					</volist>
+				</ul>
+			</div>
+			<div class="clear"></div>
 		</div>
 	</div>
 	<script>
