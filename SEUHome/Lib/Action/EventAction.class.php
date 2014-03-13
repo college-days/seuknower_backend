@@ -4,6 +4,7 @@ class EventAction extends Action {
 	public function _initialize(){
 		$util = new CommonUtil();
 		$util->autologin();
+		$this->assign('current', 'event');
 	}
 	
     public function index(){

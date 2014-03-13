@@ -4,6 +4,7 @@ class MarketAction extends Action {
 	public function _initialize(){
 		$util = new CommonUtil();
 		$util->autologin();
+		$this->assign('current', 'market');
 	}
 
     public function index(){

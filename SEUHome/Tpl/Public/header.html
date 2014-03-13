@@ -58,9 +58,21 @@
 			<div class="line"> <img src="__IMAGE__/header/line.png"/></div>
 			<div class="meau">
 				<ul>
-					<li><a href="__APP__/event">活动</a></li>
-					<li><a href="__APP__/question">问答</a></li>
-					<li><a href="__APP__/market">跳蚤市场</a></li>
+					<eq name="current" value="event">
+						<li><a class="active" href="__APP__/event">活动</a></li>
+					<else/>
+						<li><a href="__APP__/event">活动</a></li>
+					</eq>
+					<eq name="current" value="question">
+						<li><a class="active" href="__APP__/question">问答</a></li>
+					<else/>
+						<li><a href="__APP__/question">问答</a></li>
+					</eq>
+					<eq name="current" value="market">
+						<li><a class="active" href="__APP__/market">跳蚤市场</a></li>
+					<else/>
+						<li><a href="__APP__/market">跳蚤市场</a></li>
+					</eq>
 				</ul>
 			</div>
 

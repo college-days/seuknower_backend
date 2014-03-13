@@ -4,6 +4,7 @@ class QuestionAction extends Action {
 	public function _initialize(){
 		$util = new CommonUtil();
 		$util->autologin();
+		$this->assign('current', 'question');
 	}
 					
 	//获得最新解决的问题

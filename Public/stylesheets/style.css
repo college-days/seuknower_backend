@@ -28,6 +28,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .navbar .color-line  img{width:100%;}
 /*update*/
 .navbar .container .meau a:hover{color:#2ead91;}
+.navbar .container .meau .active{color:#2ead91;}
 .navbar .container .user a:hover{color:#2ead91;}
 .navbar .user .login{margin-left:28px;}
 .navbar .user .submit{margin-left:28px;}
