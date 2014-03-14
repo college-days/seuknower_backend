@@ -116,12 +116,12 @@ function submitQuestion(){
 	var title = $("#questiontitle").val();
 	// var intro = $("#questionintro").val();
 	var intro = window.editor.html();
-	var anonymousBool = document.getElementById('anonymous').checked;
-	if (anonymousBool) {
-		var anonymous = 1;
-	}else{
-		var anonymous = 0;
-	}
+	// var anonymousBool = document.getElementById('anonymous').checked;
+	// if (anonymousBool) {
+	// 	var anonymous = 1;
+	// }else{
+	// 	var anonymous = 0;
+	// }
 
 	var typeid = document.getElementById("questiontype").value;
 
@@ -144,8 +144,8 @@ function submitQuestion(){
 		$.post('/question/new', {
 			'title': title,
 			'intro': intro,
-			'typeid': typeid,
-			'anonymous': anonymous
+			'typeid': typeid
+			// 'anonymous': anonymous
 		}, function(data){
 			if(data.status == 1){
 				window.location.href = "/question/" + parseInt(data.data['id']);
