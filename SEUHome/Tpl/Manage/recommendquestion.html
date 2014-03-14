@@ -1,0 +1,35 @@
+<include file="Manage:header" title="用户管理"/>
+<div class="container">
+    <div class="header">
+      <h1 class="text-muted" style="color:red;">只能推荐四个问题，多余的推荐问题将不会出现在首页中</h1>
+    </div>
+    <div style="margin-top:33px;"></div>
+    <div class="row marketing">
+      <div class="col-lg-6">
+        <p><a id="addrecommendquestion" class="btn btn-lg btn-success" href="#" role="button">选中要推荐的问题然后点这里</a></p>
+          <ul class="list-group"> 
+            <volist name="questions" id="question">
+                <li class="list-group-item" style="cursor:pointer;background:white;">
+                    <div class="content addrecommendquestion" picked="0" qid="{$question.id}">{$question.title}</div>
+                </li>
+            </volist>
+        </ul>
+      </div>
+
+      <div class="col-lg-6">
+        <p><a id="deleterecommendquestion" class="btn btn-lg btn-success" href="#" role="button">选中要取消推荐的问题然后点这里</a></p>
+        <eq name="recommendcount" value="0">
+          还没有管理员推荐的问题
+        <else/>
+          <ul class="list-group"> 
+            <volist name="recommendquestions" id="question">
+                <li class="list-group-item" style="cursor:pointer;background:white;">
+                    <div class="content deleterecommendquestion" picked="0" qid="{$question.q_id}">{$question.q_title}</div>
+                </li>
+            </volist>
+        </ul>
+        </eq>
+      </div>
+    </div>
+  </div> <!-- /container -->
+<include file="Manage:footer" />

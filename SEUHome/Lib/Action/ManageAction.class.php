@@ -200,5 +200,109 @@ class ManageAction extends Action {
 		}
 		$this->ajaxReturn('', '', 1);
 	}
+
+	public function recommendEvent(){
+		$Event = M('Event');
+		$EventRecommend = M('EventRecommend');
+		$events = $Event->where('recommended=0')->order("create_time desc")->select();
+		$recommendEvents = $EventRecommend->select();
+		$this->assign("events", $events);
+		$this->assign("recommendevents", $recommendEvents);
+		$this->assign("recommendcount", count($recommendEvents));
+		$this->assign('current', 'recommendevent');
+		$this->display("recommendevent");
+	}
+
+	public function addRecommendEvent(){
+		$eids = I('param.eids');
+		$Event = M('Event');
+		$EventRecommend = M('EventRecommend');
+		$recommendEvents = $EventRecommend->select();
+		if(count($eids) > 4){
+			$this->ajaxReturn('', '', -1);
+		}
+		if(count($recommendEvents) >= 4){
+			$this->ajaxReturn('', '', -1);
+		}
+		for($i=0; $i<count($eids); $i++){
+			$updateData['recommended'] = 1;
+			$Event->where('id='.$eids[$i])->save($updateData);
+			$event = $Event->where('id='.$eids[$i])->find();
+			$addData['e_id'] = $eids[$i];
+			$addData['e_title'] = $event['title'];
+			$result = $EventRecommend->add($addData);
+			if(!$result){
+				$this->ajaxReturn('', '', 0);
+			}
+		}
+		$this->ajaxReturn('', '', 1);
+	}
+
+	public function deleteRecommendEvent(){
+		$eids = I('param.eids');
+		$Event = M('Event');
+		$EventRecommend = M('EventRecommend');
+		for($i=0; $i<count($eids); $i++){
+			$updateData['recommended'] = 0;
+			$Event->where('id='.$eids[$i])->save($updateData);
+			$result = $EventRecommend->where('e_id='.$eids[$i])->delete();
+			if(!$result){
+				$this->ajaxReturn('', '', 0);
+			}
+		}
+		$this->ajaxReturn('', '', 1);
+	}
+
+	public function recommendQuestion(){
+		$Question = M('Question');
+		$QuestionRecommend = M('QuestionRecommend');
+		$questions = $Question->where('recommended=0')->order("create_time desc")->select();
+		$recommendQuestions = $QuestionRecommend->select();
+		$this->assign("questions", $questions);
+		$this->assign("recommendquestions", $recommendQuestions);
+		$this->assign("recommendcount", count($recommendQuestions));
+		$this->assign('current', 'recommendquestion');
+		$this->display("recommendquestion");
+	}
+
+	public function addRecommendQuestion(){
+		$qids = I('param.qids');
+		$Question = M('Question');
+		$QuestionRecommend = M('QuestionRecommend');
+		$recommendQuestions = $QuestionRecommend->select();
+		if(count($qids) > 4){
+			$this->ajaxReturn('', '', -1);
+		}
+		if(count($recommendQuestions) >= 4){
+			$this->ajaxReturn('', '', -1);
+		}
+		for($i=0; $i<count($qids); $i++){
+			$updateData['recommended'] = 1;
+			$Question->where('id='.$qids[$i])->save($updateData);
+			$question = $Question->where('id='.$qids[$i])->find();
+			$addData['q_id'] = $qids[$i];
+			$addData['q_title'] = $question['title'];
+			$result = $QuestionRecommend->add($addData);
+			if(!$result){
+				$this->ajaxReturn('', '', 0);
+			}
+		}
+		$this->ajaxReturn('', '', 1);
+	}
+
+	public function deleteRecommendQuestion(){
+		$qids = I('param.qids');
+		$Question = M('Question');
+		$QuestionRecommend = M('QuestionRecommend');
+		for($i=0; $i<count($qids); $i++){
+			$updateData['recommended'] = 0;
+			$Question->where('id='.$qids[$i])->save($updateData);
+			$result = $QuestionRecommend->where('q_id='.$qids[$i])->delete();
+			if(!$result){
+				$this->ajaxReturn('', '', 0);
+			}
+		}
+		$this->ajaxReturn('', '', 1);
+	}
 }
 ?>
