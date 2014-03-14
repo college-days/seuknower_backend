@@ -224,6 +224,9 @@ class ManageAction extends Action {
 		if(count($recommendEvents) >= 4){
 			$this->ajaxReturn('', '', -1);
 		}
+		if(count($eids)+count($recommendEvents) > 4){
+			$this->ajaxReturn('', '', -1);
+		}
 		for($i=0; $i<count($eids); $i++){
 			$updateData['recommended'] = 1;
 			$Event->where('id='.$eids[$i])->save($updateData);
@@ -274,6 +277,9 @@ class ManageAction extends Action {
 			$this->ajaxReturn('', '', -1);
 		}
 		if(count($recommendQuestions) >= 4){
+			$this->ajaxReturn('', '', -1);
+		}
+		if(count($qids)+count($recommendQuestions) > 4){
 			$this->ajaxReturn('', '', -1);
 		}
 		for($i=0; $i<count($qids); $i++){

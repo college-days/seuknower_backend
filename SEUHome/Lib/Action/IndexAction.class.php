@@ -9,14 +9,35 @@ class IndexAction extends Action {
     public function index(){
     	$util = new CommonUtil();
     	$Question = M('Question');
-		$hotQuestions = $Question->order('click_count desc')->limit(4)->select();
+    	$recommendQuestions = $Question->where("recommended=1")->select();
+    	if(!$recommendQuestions){
+    		$hotQuestions = $Question->order('click_count desc')->limit(4)->select();
+    	}elseif(count($recommendQuestions) == 4){
+    		$hotQuestions = $recommendQuestions;
+    	}else{
+    		$rest = 4-count($recommendQuestions);
+    		$questions = $Question->order('click_count desc')->limit($rest)->select();
+    		$hotQuestions = array_merge($recommendQuestions, $questions);
+    	}
+		
 		for($i=0; $i<count($hotQuestions); $i++){
 			$hotQuestions[$i]['title'] = $util->sub_string($hotQuestions[$i]['title'], 15);
 		}
 
     	$Model = M();
     	$User = M('User');
-    	$hotEvents = $Model->table('seu_event event')->order('click_count desc')->limit(4)->select();
+    	$Event = M('Event');
+    	$recommendEvents = $Event->where("recommended=1")->select();
+    	if(!$recommendEvents){
+    		$hotEvents = $Model->table('seu_event event')->order('click_count desc')->limit(4)->select();  		
+    	}elseif(count($recommendEvents) == 4){
+    		$hotEvents = $recommendEvents;
+    	}else{
+    		$rest = 4-count($recommendEvents);
+    		$events = $Model->table('seu_event event')->order('click_count desc')->limit($rest)->select();
+    		$hotEvents = array_merge($recommendEvents, $events);
+    	}
+    	
     	for($i=0; $i<count($hotEvents); $i++){
 			$startTime = explode(" ",date("Y年m月d日 H:i:s",$hotEvents[$i]['start_time']));	
 			$endTime = explode(" ",date("Y年m月d日 H:i:s",$hotEvents[$i]['end_time']));
