@@ -18,7 +18,7 @@ $(function(){
 		'id': $("#likeinfo").attr("cid")
 	}, function(data){
 		for(var i=0; i<data.data.length; i++){
-			var html = '<div class="content"><div class="picture"><img class="img-responsive" style="width:712px;height:505px;" src="'+data.data[i]['picture']+'"/></div><div class="title">'+data.data[i]['title']+'</div></div>'
+			var html = '<div class="content"><div class="picture"><a target="_blank" href="/market/commodity/'+data.data[i]['id']+'"><img class="img-responsive" style="width:712px;height:505px;" src="'+data.data[i]['picture']+'"/></a></div><div class="title"><a target="_blank" href="/market/commodity/'+data.data[i]['id']+'">'+data.data[i]['title']+'</a></div></div>'
 			$("#samecate").append(html);
 		}
 	}, "json");

@@ -114,7 +114,12 @@ class ManageAction extends Action {
 	public function deleteAnswer(){
 		$aids = I('param.aids');
 		$Answer = M('Answer');
+		$Question = M('Question');
 		for($i=0; $i<count($aids); $i++){
+			$answer = $Answer->where('id='.$aids[$i])->find();
+			$delete['id'] = $answer['q_id'];
+			$delete['answer_count'] = array('exp','answer_count-1');
+			$Question->save($delete);
 			$result = $Answer->where('id='.$aids[$i])->delete();
 			if(!$result){
 				$this->ajaxReturn('', '', 0);
