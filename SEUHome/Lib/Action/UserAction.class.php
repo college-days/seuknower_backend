@@ -139,6 +139,8 @@ class UserAction extends Action {
 		$sellons = array();
 		for($i=0; $i<count($sellCommodities); $i++){
 			if($sellCommodities[$i]['onsale'] == 1){
+                $sellCommodities[$i]['title'] = htmlspecialchars_decode($sellCommodities[$i]['title']);
+                $sellCommodities[$i]['intro'] = htmlspecialchars_decode($sellCommodities[$i]['intro']);
 				array_push($sellons, $sellCommodities[$i]);
 			}
 		}
@@ -151,6 +153,8 @@ class UserAction extends Action {
 		$selldones = array();
 		for($i=0; $i<count($sellCommodities); $i++){
 			if($sellCommodities[$i]['onsale'] == 0){
+                $sellCommodities[$i]['title'] = htmlspecialchars_decode($sellCommodities[$i]['title']);
+                $sellCommodities[$i]['intro'] = htmlspecialchars_decode($sellCommodities[$i]['intro']);
 				array_push($selldones, $sellCommodities[$i]);
 			}
 		}
