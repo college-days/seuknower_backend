@@ -227,21 +227,21 @@ class EventAction extends Action {
 		$Model = M();	
 
 		if($tag != "全部"){
-			$sql = "event.category = '".$tag."'";
+			$sql = "event.category = '".$tag."' AND";
 		}else{
 			$sql = "";
 		}
 
 		if($time == "今天") {
-			$sql .=  ' AND event.start_time < '.strtotime('tomorrow').' AND ';
+			$sql .=  ' event.start_time < '.strtotime('tomorrow').' AND ';
 			$sql .=  ' event.end_time >='.strtotime('today');
 		}
 		elseif($time == "明天"){
-			$sql .=  ' AND event.start_time < '.(strtotime('tomorrow')+86400).' AND ';
+			$sql .=  ' event.start_time < '.(strtotime('tomorrow')+86400).' AND ';
 			$sql .=  'event.end_time >='.(strtotime('today')+86400);
 		}
 		elseif($time == "本周"){
-			$sql .=  ' AND event.start_time < '.(strtotime('next sunday')+86400).' AND ';
+			$sql .=  ' event.start_time < '.(strtotime('next sunday')+86400).' AND ';
 			$sql .=  'event.end_time >='.(strtotime('today'));
 		}
 
@@ -256,15 +256,19 @@ class EventAction extends Action {
 			$pageCount = ceil($count/6);
 			if(I('param.id')){
 				$page = I('param.id');
-				if($page > $pageCount) $page = $pageCount;
+				// if($page > $pageCount) $page = $pageCount;
 			}
 			else{
 				$page = 1;
 			}
-			$start = ($page-1)*6;
 
-			$events = $Model->table('seu_event event, seu_user user')->field('event.id,event.u_id, event.title, event.start_time, event.end_time, event.cost, event.location, event.join_count, event.interest_count, event.poster, user.is_group, user.name as organizer')->order('event.create_time desc')->limit($start.',6')->where($sql)->select();
-			
+			if($page > $pageCount){
+				$events = array();
+			}else{
+				$start = ($page-1)*6;
+				$events = $Model->table('seu_event event, seu_user user')->field('event.id,event.u_id, event.title, event.start_time, event.end_time, event.cost, event.location, event.join_count, event.interest_count, event.poster, user.is_group, user.name as organizer')->order('event.create_time desc')->limit($start.',6')->where($sql)->select();			
+			}
+
 			for($i=0; $i<count($events); $i++){
 				$startTime = explode(" ",date("Y年m月d日 H:i:s",$events[$i]['start_time']));	
 				$endTime = explode(" ",date("Y年m月d日 H:i:s",$events[$i]['end_time']));
