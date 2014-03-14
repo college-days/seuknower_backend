@@ -376,6 +376,12 @@ class UserAction extends Action {
 
     public function profile(){
     	$u_id = I('param.id');
+        $modify_flag = I('param.modify');
+        if(!$modify_flag){
+            $this->assign('modify', 0);
+        }else{
+            $this->assign('modify', 1);
+        }
     	$User = M('User');
     	$userInfo = $User->find($u_id);
 
@@ -388,6 +394,7 @@ class UserAction extends Action {
     	}else{
             $this->assign('me', '0'); 
     	}
+        $this->footPrint($u_id);
 
         $this->assign('answercount', $_SESSION['answercount']);
         $this->assign('askcount', $_SESSION['askcount']);

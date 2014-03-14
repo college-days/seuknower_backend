@@ -6,7 +6,12 @@
 					<div class="text"><span>基本信息</span></div>
 					<div class="line"><span></span></div>
 					<eq name="me" value="1">
-						<div class="button" id="updateprofile">编辑资料</div>
+						<eq name="modify" value="0">
+							<div class="button" id="modifyprofile">编辑资料</div>
+						<else/>
+							<div class="button" id="updateprofile">确认编辑</div>
+						</eq>
+						
 						<div id="userid" style="display:none;">{$user.id}</div>
 					</eq>
 				</div>
@@ -81,6 +86,78 @@
 						</li>
 					</ul>
 				</div>
+				<else/>
+				<eq name="modify" value="0">
+				<div class="detail">
+					<ul>
+						<li>
+							<div class="key">性别</div>
+							<if condition="$user.sex eq male">
+								<div class="value" id="sex">男</div>
+							<elseif condition="$user.sex eq female"/>
+								<div class="value" id="sex">女</div>
+							<else/>
+								<div class="value" id="sex">未知</div>
+							</if>
+						</li>
+						<li>
+							<div class="key">学院</div>
+							<empty name="user.dept">
+								<div class="value" id="dept">未知</div>
+							<else/>
+								<div class="value" id="dept">{$user.dept}</div>
+							</empty>
+						</li>
+						<li>
+							<div class="key">年级</div>
+							<empty name="user.grade">
+								<div class="value" id="grade">未知</div>
+							<else/>
+								<div class="value" id="grade">{$user.grade}</div>
+							</empty>
+						</li>
+						<li>
+							<div class="key">校区</div>
+							<empty name="user.campus">
+								<div class="value" id="campus">未知</div>
+							<else/>
+								<div class="value" id="campus">{$user.campus}</div>
+							</empty>
+						</li>
+						<li>
+							<div class="key">个性签名</div>
+							<empty name="user.intro">
+								<div class="value" id="intro">还没有填写个人签名</div>
+							<else/>
+								<div class="value" id="intro">{$user.intro}</div>
+							</empty>
+						</li>
+						<li>
+							<div class="key">QQ</div>
+							<empty name="user.qq">
+								<div class="value" id="qq">还没有填写qq号</div>
+							<else/>
+								<div class="value" id="qq">{$user.qq}</div>
+							</empty>
+						</li>
+						<li>
+							<div class="key">邮箱</div>
+							<empty name="user.email">
+								<div class="value" id="email">还没有填写邮箱地址</div>
+							<else/>
+								<div class="value" id="email">{$user.email}</div>
+							</empty>
+						</li>
+						<li>
+							<div class="key">微博</div>
+							<empty name="user.weibo">
+								<div class="value" id="weibo">还没有填写微博昵称</div>
+							<else/>
+								<div class="value" id="weibo">{$user.weibo}</div>
+							</empty>
+						</li>
+					</ul>
+				</div>	
 				<else/>
 				<div class="row" style="display:none">
 					<input id="rawpath" name="rawpath" type="text"/>
@@ -246,6 +323,7 @@
 					</div>
 				</div>
 				</eq>
+				</eq>
 			</div>
 			<div class="tag">
 				<div class="title">
@@ -287,6 +365,11 @@
 	<link rel="stylesheet" href="__CSS__/jquery.Jcrop.css?t=1394724207" type="text/css" />
 	<script>
 		$(function(){
+			$("#modifyprofile").click(function(){
+				var userid = $("#userid").text().replace(/[ ]/g,"");
+				window.location.href = '/user/profile/'+userid+'/1';
+			});
+
 			$("#updateprofile").click(function(){
 				if(iconWidth && iconHeight){
 					iconX=iconX*width/imageWidth;
@@ -311,6 +394,7 @@
 			});
 
 			function postProfileData(){
+				var userid = $("#userid").text().replace(/[ ]/g,"");
 				$.post("/user/update_profile", {
 					"rawpath": $("#rawpath").val(),
 					"thumbpath": $("#thumbpath").val(),
@@ -325,7 +409,7 @@
 					"weibo": $('#userweibo').val().replace(/[ ]/g,"")
 				}, function(data){
 					if(data.status){
-						window.location.reload();
+						window.location.href = '/user/profile/'+userid+'/0';
 					}else{
 						alert('修改资料失败');
 					} 

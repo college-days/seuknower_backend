@@ -37,6 +37,7 @@ return array(
 		'user/upload_icon$' => 'User/uploadIcon',
 		'user/thumb_icon$' => 'User/thumbIcon',
 		'user/profile/:id\d$' => 'User/profile',
+		'user/profile/:id\d/:modify\d$' => 'User/profile',
 		'user/update_profile$' => 'User/updateProfile',
 		'user/sellon/:id\d$' => 'User/sell_commodity_on',
 		'user/sellon/:id\d/type/:type$' => 'User/sell_commodity_on',
