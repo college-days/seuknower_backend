@@ -334,7 +334,12 @@ class MarketAction extends Action {
 		$data['u_id'] = session('userId');
 		$data['phone'] = I('param.phone');
 		$data['status'] = I('param.status');
-		$data['getittime'] = strtotime(I('param.gettime')." 00:00:00");
+		$getittime = I('param.gettime');
+		if(!$getittime){
+			$data['getittime'] = "0";
+		}else{
+			$data['getittime'] = strtotime(I('param.gettime')." 00:00:00");
+		}
 		
 		$User = M('User');
 		$result = $User->find(session('userId'));
@@ -478,7 +483,12 @@ class MarketAction extends Action {
 		$data['phone'] = I('param.phone');
 		$data['u_id'] = session('userId');
 		$data['status'] = I('param.status');
-		$data['getittime'] = strtotime(I('param.gettime')." 00:00:00");
+		$getittime = I('param.gettime');
+		if(!$getittime){
+			$data['getittime'] = "0";
+		}else{
+			$data['getittime'] = strtotime(I('param.gettime')." 00:00:00");
+		}
 
 		$User = M('User');
 		$result = $User->find(session('userId'));

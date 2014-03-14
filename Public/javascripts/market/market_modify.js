@@ -23,9 +23,9 @@ $(function(){
 		checkPrice();
 	});
 
-	$("#commoditystatus").blur(function(){
-		checkStatus();
-	});
+	// $("#commoditystatus").blur(function(){
+	// 	checkStatus();
+	// });
 
 	$("#commoditycontact").blur(function(){
 		checkContact();
@@ -38,7 +38,7 @@ $(function(){
 	});
 
 	$('#nextstep').click(function(){
-		if($("#commoditytitle").val().replace(/[ ]/g,"") && $("#commodityprice").val().replace(/[ ]/g,"") && $("#commoditycontact").val().replace(/[ ]/g,"") && window.editor.html().replace(/[ ]/g,"") && $("#gettime").val().replace(/[ ]/g,"")){
+		if($("#commoditytitle").val().replace(/[ ]/g,"") && $("#commodityprice").val().replace(/[ ]/g,"") && $("#commoditycontact").val().replace(/[ ]/g,"") && window.editor.html().replace(/[ ]/g,"")){
 			if(iconWidth && iconHeight){
 				iconX = iconX*width/imageWidth;
 				iconWidth = iconWidth*width/imageWidth;
@@ -66,12 +66,10 @@ $(function(){
 				}
 			}
 		}else{
-			checkGettime();
 			checkTitle();
 			checkPrice();
 			checkContact();
 			checkIntro();
-			checkStatus();
 		}
 	});
 

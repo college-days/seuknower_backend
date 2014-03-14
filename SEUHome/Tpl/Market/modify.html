@@ -51,7 +51,11 @@
 					<div id="statusalert" style="color:red;margin-left:71px;"></div>
 				</div>
 				<div class="row">
-					<span class="key">成色(请填写数字1-9即可)</span><input type="text" class="value short" id="commoditystatus" name="status" value="{$commodity.status}"/>
+					<eq name="commodity.status" value="0">
+						<span class="key">成色<span class="not-must">(可选)</span></span><input type="text" class="value short" id="commoditystatus" name="status"/><span style="margin-left:15px">(请填写数字1-9即可)</span>
+					<else/>
+						<span class="key">成色<span class="not-must">(可选)</span></span><input type="text" class="value short" id="commoditystatus" name="status" value="{$commodity.status}"/><span style="margin-left:15px">(请填写数字1-9即可)</span>
+					</eq>
 				</div>
 				<div class="row">
 					<div id="contactalert" style="color:red;margin-left:71px;"></div>
@@ -64,7 +68,11 @@
 					<div id="gettimealert" style="color:red;margin-left:71px;"></div>
 				</div>
 				<div class="row">
-					<span class="key">入手时间</span><input type="text" class="value short" id="gettime" name="gettime" value="{$commodity.getittime|date='Y-m-d',###}"/>
+					<eq name="commodity.getittime" value="0">
+						<span class="key">入手时间<span class="not-must">(可选)</span></span><input type="text" class="value short" id="gettime" name="gettime"/>
+					<else/>
+						<span class="key">入手时间<span class="not-must">(可选)</span></span><input type="text" class="value short" id="gettime" name="gettime" value="{$commodity.getittime|date='Y-m-d',###}"/>
+					</eq>
 				</div>
 				<div class="row">
 					<div id="picturealert" style="color:red;margin-left:71px;"></div>
@@ -94,7 +102,7 @@
 				</div>
 
 				<div class="row">
-					<span class="key"></span><input id="nextstep" class="btn" type="button" value="完成"/>
+					<span class="key"></span><input id="nextstep" class="btn" type="button" value="完成" style="margin-left:120px;"/>
 				</div>
 			</form>
 			</div>
@@ -113,6 +121,8 @@
 	<script>
 	    KindEditor.ready(function(K) {
 	        window.editor = K.create('#commodityintro', {
+	        	minWidth: "466",
+				resizeType: 0,
 				items: ["bold", "italic", "underline", "preview", "code", "image", "link", "quickformat", "removeformat", "insertorderedlist", "insertunorderedlist"]
 	        });
 
