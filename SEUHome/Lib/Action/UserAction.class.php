@@ -169,7 +169,7 @@ class UserAction extends Action {
     	$joinEvents = $this->get_join_event($u_id, 0);
         $interestEvents = $this->get_interest_event($u_id, 0);
 
-		$sellCommodities = $this->get_sell_commodity($u_id, 0);
+		$sellCommodities = $this->get_sell_commodity_on($u_id, 0);
 
     	if($_SESSION['userId'] == $u_id){
     		$this->assign('me', '1');
