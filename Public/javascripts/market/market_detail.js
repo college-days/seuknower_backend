@@ -135,17 +135,7 @@ $(function(){
 	});
 
 	$(".delete").click(function(){
-		var commodity_id = $("#commodity_id").text();
-		$.post("/market/delete_commodity", {
-			'cid': commodity_id
-		}, function(data){
-			if(data.status == 1){
-				alert("商品下架成功");
-				window.location.href = "/market";
-			}else{
-				alert("商品下架失败");
-			}
-		}, "json");
+		showDelete();
 	});
 });
 
@@ -254,4 +244,71 @@ function initVerifyCode(){
 function removeVerifyCode(){
 	document.body.removeChild(document.getElementById('verifymask'));
 	document.body.removeChild(document.getElementById('verifywin'));
+}
+
+
+//for delete dialog
+function showDelete(){
+	var deletetop = $(".delete").offset().top - 100;
+	if($(".deletewin").length > 0) {
+		removeDelete();
+	}
+	else{
+		newDelete();
+		$(".deletewin").css('top', deletetop);
+	}
+}
+
+function newDelete(){
+	initDelete();
+
+	$(".deleteclose").click(function(){
+		removeDelete();
+	});
+
+	$(".cancledelete").click(function(){
+		removeDelete();
+	});
+	
+	$(".deletemask").click(function(){
+		removeDelete();
+	});
+
+	$(".deletesubmit").click(function(){
+		var commodity_id = $("#commodity_id").text();
+		$.post("/market/delete_commodity", {
+			'cid': commodity_id
+		}, function(data){
+			if(data.status == 1){
+				alert("商品下架成功");
+				window.location.href = "/market";
+			}else{
+				alert("商品下架失败");
+			}
+		}, "json");
+	});
+
+}
+
+function initDelete(){
+	var newMask = document.createElement("div");
+	newMask.id = 'deletemask';  
+	newMask.className = "deletemask";
+	newMask.style.width = document.body.scrollWidth + "px";
+	newMask.style.height = document.body.scrollHeight + "px";
+		
+	var newWin = document.createElement("div");
+	newWin.id = 'deletewin';
+	newWin.className = "deletewin";
+	newWin.style.left = (parseInt(document.body.scrollWidth) - 100)/2 + "px";
+	var html = '<div class="title-bar"><span>确认要下架吗</span></div><div class="content"><div class="verifycodealert" style="color:red;"></div><input type="button" value="取消" class="cancledelete"><div style="display:inline-block;margin-left:50px;"></div><input type="button" value="确认" class="deletesubmit"></div>';
+	newWin.innerHTML = html;
+
+	document.body.appendChild(newMask);
+	document.body.appendChild(newWin);
+}
+
+function removeDelete(){
+	document.body.removeChild(document.getElementById('deletemask'));
+	document.body.removeChild(document.getElementById('deletewin'));
 }

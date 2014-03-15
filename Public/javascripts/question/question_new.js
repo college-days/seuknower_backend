@@ -1,6 +1,9 @@
 var newEditor;
-var answerEditor;
 KindEditor.ready(function(K) {
+	newEditor = K.create("#questionintro", {
+		items: ["bold", "italic", "underline", "preview", "code", "image", "link", "quickformat", "removeformat", "insertorderedlist", "insertunorderedlist"]
+	});
+	window.editor = newEditor;
 	
 $(function(){
 	var newMask = document.createElement("div");
@@ -15,32 +18,24 @@ $(function(){
 
 	$(".newmask").click(function(){
 		window.editor.html("");
-		window.editor = answerEditor;
+		window.editor = newEditor;
 		if(window.editor){
 			window.editor.html("");
 		}
+		$(".newwin").css("display","none");
+		$(".newmask").css("display","none");
+		$("#questiontitle").val("");
 	});
 
 	$("#closenewques").click(function(){
 		window.editor.html("");
-		window.editor = answerEditor;
+		window.editor = newEditor;
 		if(window.editor){
 			window.editor.html("");
 		}
-	});
-	
-	$(".close").click(function(){
 		$(".newwin").css("display","none");
 		$(".newmask").css("display","none");
 		$("#questiontitle").val("");
-		$("#questionintro").val("");
-	});
-	
-	$(".newmask").click(function(){
-		$(".newwin").css("display","none");
-		$(".newmask").css("display","none");
-		$("#questiontitle").val("");
-		$("#questionintro").val("");
 	});
 
 	$("#questiontitle").blur(function(){
@@ -51,30 +46,13 @@ $(function(){
 			$("#newquestitlealert").show();
 		}
 	});
-
-	$("#questionintro").blur(function(){
-		var intro = $("#questionintro").val();
-		if(intro.replace(/[ ]/g, "")){
-			$("#newquesintroalert").hide();
-		}else{
-			$("#newquesintroalert").show();
-		}
-	});
-
 });
 
 $(function(){
 	$(".newquestion a").click(function(){
-		if($(".newwin").length > 0) {
-			newEditor = K.create("#questionintro", {
-				items: ["bold", "italic", "underline", "preview", "code", "image", "link", "quickformat", "removeformat", "insertorderedlist", "insertunorderedlist"]
-			});
-
-		    window.editor = newEditor;
-
-			$(".newmask").css("display","block");
-			$(".newwin").css("display","block");
-		}
+		window.editor = newEditor;
+		$(".newmask").css("display","block");
+		$(".newwin").css("display","block");
 	});
 
 	$("#questiontitle").bind('input propertychange', function(){
@@ -116,6 +94,7 @@ function submitQuestion(){
 	var title = $("#questiontitle").val();
 	// var intro = $("#questionintro").val();
 	var intro = window.editor.html();
+
 	// var anonymousBool = document.getElementById('anonymous').checked;
 	// if (anonymousBool) {
 	// 	var anonymous = 1;
