@@ -451,6 +451,7 @@ class UserAction extends Action {
 
         //无权修改他人的信息
         if($_SESSION['userId'] == $u_id){
+            $nickname = $_POST['nickname'];
             $sex = $_POST['sex'];
             $dept = $_POST['dept'];
             $grade = $_POST['grade'];
@@ -465,6 +466,7 @@ class UserAction extends Action {
 
             $userInfo = $User->find($u_id);
 
+            $data['name'] = $nickname;
             $data['sex'] = $sex;
             $data['dept'] = $dept;
             $data['grade'] = $grade;

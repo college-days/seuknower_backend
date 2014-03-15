@@ -10,6 +10,7 @@ var iconHeight;
 var count = -1;
 
 $(function(){
+	var nickname = $("#nickname").text().replace(/[ ]/g,"");
 	var sex = $('#sex').text().replace(/[ ]/g,"");
 	var dept = $('#dept').text().replace(/[ ]/g,"");
 	var grade = $('#grade').text().replace(/[ ]/g,"");
@@ -137,6 +138,12 @@ $(function(){
 		$("#userweibo").attr("placeholder", weibo);
 	}else{
 		$("#userweibo").attr("placeholder", "还没有填写微博昵称");
+	}
+
+	if(nickname != ""){
+		$("#usernickname").attr("placeholder", nickname);
+	}else{
+		$("#usernickname").attr("placeholder", "还没有填写昵称");
 	}
 
 });
