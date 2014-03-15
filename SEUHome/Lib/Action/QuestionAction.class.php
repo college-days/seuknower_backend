@@ -156,11 +156,11 @@ class QuestionAction extends Action {
 
 		$Model = M();
 		//多表查询
-		$AnswerInfo = $Model->table('seu_answer answer, seu_user user')->field('answer.*,user.name as u_name, user.icon as icon, user.sex as u_sex')->where("answer.q_id = $id AND answer.u_id = user.id")->order('answer.support_count desc')->select();
+		$AnswerInfo = $Model->table('seu_answer answer, seu_user user')->field('answer.*,user.name as u_name, user.icon as icon, user.sex as u_sex')->where("answer.q_id = $id AND answer.u_id = user.id AND answer.anonymous = 0")->order('answer.support_count desc')->select();
 		$AnonymousInfo = $Model->query('select * from seu_answer where q_id='.$id.' and anonymous=1;');
 
 		for($i=0; $i<count($AnonymousInfo); $i++){
-			$AnonymousInfo[$i]['u_name'] = "匿名用户";
+			$AnonymousInfo[$i]['u_name'] = "雷锋";
 			//判断当前用户是不是已经点过赞了
 			$map['a_id'] = $AnonymousInfo[$i]['id'];
 			$map['u_id'] = $userId;
@@ -219,6 +219,20 @@ class QuestionAction extends Action {
 		}
 
 		for($i=0; $i<count($AnonymousInfo); $i++){
+			//添加匿名回答的所有评论和回复
+			$AnswerReply = M('AnswerReply');
+			$User = M('User');
+			$replyMap['a_id'] = $AnonymousInfo[$i]['id'];
+			$replys = $AnswerReply->where($replyMap)->select();
+			for($j=0; $j<count($replys); $j++){
+				$replyUser = $User->where('id='.$replys[$j]['u_id'])->find();
+				$replys[$j]['u_name'] = $replyUser['name'];
+				$replys[$j]['u_id'] = $replyUser['id'];
+				$replys[$j]['avatar'] = $replyUser['icon'];
+				$replys[$j]['content'] = htmlspecialchars_decode($replys[$j]['content']);
+			}
+			$AnonymousInfo[$i]['replys'] = $replys;
+			$AnonymousInfo[$i]['replycount'] = count($replys);
 			$AnonymousInfo[$i]['content'] = htmlspecialchars_decode($AnonymousInfo[$i]['content']);
 		}
 

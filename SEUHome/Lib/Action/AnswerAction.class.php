@@ -170,6 +170,7 @@ class AnswerAction extends Action {
 				$data['q_id'] = I('param.q_id');
 				$data['content'] = I('param.content');
 				$data['anonymous'] = 1;
+				$data['u_id'] = session('userId');
 				$data['create_time'] = time();
 				$Answer = M('Answer');
 				$result = $Answer->add($data);

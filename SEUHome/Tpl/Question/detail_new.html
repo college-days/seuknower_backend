@@ -91,28 +91,32 @@
                                             <eq name="answer.anonymous" value="0">
                                                 <a href="/user/{$answer.u_id}" class="name" target="_blank"> {$answer.u_name} </a>
                                             <else/>
-                                                <a href="#{$answer.id}" class="name" name="{$answer.id}" target="_blank"> {$answer.u_name} </a>
+                                                <a href="#" class="name" name="{$answer.id}"> {$answer.u_name} </a>
                                             </eq>
                                         </span>
                                         <span class="time"> {$answer.create_time|date='Y-m-d H:i',###} </span>
                                     </div>
                                     <div class="answercontent">{$answer.content}</div>
                                     <div>
-                                        <eq name="answer.anonymous" value="0">
+                                       <!--  <eq name="answer.anonymous" value="0">
                                         	<notempty name="Think.session.userId">
 	                                            <a href="#replyanchor{$answer.id}" class="reply">评论({$answer.replycount})</a>
 	                                        <else/>
 	                                        	<a href="/login" class="reply" target="_blank">评论</a>
 		                                    </notempty>
-                                        </eq>
-                                       	<eq name="answer.anonymous" value="0">
+                                        </eq> -->
+                                       	<!-- <eq name="answer.anonymous" value="0">
                                    			<a href="#" class="modify" uid="{$answer.u_id}" style="display:none;">修改</a>
-                                        </eq>
-
+                                        </eq> -->
+                                        <notempty name="Think.session.userId">
+                                            <a href="#replyanchor{$answer.id}" class="reply">评论({$answer.replycount})</a>
+                                        <else/>
+                                        	<a href="/login" class="reply" target="_blank">评论</a>
+	                                    </notempty>
+                                        <a href="#" class="modify" uid="{$answer.u_id}" style="display:none;">修改</a>
                                     </div>
                                 </div>
                             </div>
-                            <eq name="answer.anonymous" value="0">
                             	<a id="replyanchor{$answer.id}"></a>
 	                    		<div class="reply-content" style="display:none;">
 	                    			<div class="alert alert-fail">
@@ -147,7 +151,6 @@
 										</div>
 									</volist>
 								</div>
-							</eq>
                             </li>
                         </volist>
 					</ul>
@@ -290,7 +293,7 @@
 	<div class="win" id="changequesdialog" style="display:none;">
 		<div style="display:none;" id="changequesid"></div>
 		<div class="title-bar">
-			<span>修改答案</span>
+			<span>修改问题</span>
 			<div class="close" id="closequeschange">
 			</div>
 		</div>
