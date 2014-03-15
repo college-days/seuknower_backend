@@ -9,6 +9,9 @@ var iconWidth;
 var iconHeight;
 
 var uploading = false;
+var isphone = true;
+var isprice = true;
+var isstatus = true;
 
 $(function(){
 	$("#commoditytitle").blur(function(){
@@ -23,9 +26,9 @@ $(function(){
 		checkPrice();
 	});
 
-	// $("#commoditystatus").blur(function(){
-	// 	checkStatus();
-	// });
+	$("#commoditystatus").blur(function(){
+		checkStatus();
+	});
 
 	$("#commoditycontact").blur(function(){
 		checkContact();
@@ -38,7 +41,12 @@ $(function(){
 	});
 
 	$('#nextstep').click(function(){
-		if($("#commoditytitle").val().replace(/[ ]/g,"") && $("#commodityprice").val().replace(/[ ]/g,"") && $("#commoditycontact").val().replace(/[ ]/g,"") && window.editor.html().replace(/[ ]/g,"")){
+		console.log(isphone);
+		console.log(isstatus);
+		console.log(isprice);
+		if($("#commoditytitle").val().replace(/[ ]/g,"") && $("#commodityprice").val().replace(/[ ]/g,"") && $("#commoditycontact").val().replace(/[ ]/g,"") && window.editor.html().replace(/[ ]/g,"") && isphone && isprice && isstatus){
+			console.log(iconWidth);
+			console.log(iconHeight);
 			if(iconWidth && iconHeight){
 				iconX = iconX*width/imageWidth;
 				iconWidth = iconWidth*width/imageWidth;
@@ -70,6 +78,7 @@ $(function(){
 			checkContact();
 			checkIntro();
 			checkPicture();
+			checkStatus();
 		}
 	});
 
@@ -199,24 +208,30 @@ function checkPrice(){
 		//判断是不是仅由数字组成
 		if(!isNaN(price)){
 			$("#pricealert").text("");
+			isprice = true;
 		}else{
 			$("#pricealert").text("亲～～只要输入数字就可以了");
+			isprice = false;
 		}
 	}else{
 		$("#pricealert").text("请填写商品的价格");
+		isprice = false;
 	}
 }
 
 function checkStatus(){
 	var status = $("#commoditystatus").val();
-	if (status) {
+	if(status){
 		if(!isNaN(status) && parseInt(status)>0 && parseInt(status)<10){
 			$("#statusalert").text("");
+			isstatus = true;
 		}else{
 			$("#statusalert").text("格式不正确哦，只要1-9的数字就可以啦")
+			isstatus = false;
 		}
 	}else{
-		$("#statusalert").text("请填写商品的成色");
+		$("#statusalert").text("");
+		isstatus = true;
 	}
 }
 
@@ -225,17 +240,21 @@ function checkContact(){
 	if(contact){
 		if(!isNaN(contact) && contact.length == 11){
 			$("#contactalert").text("");
+			isphone = true;
 		}else{
 			$("#contactalert").text("手机号格式不正确");
+			isphone = false;
 		}
 	}
 	else{
 		$("#contactalert").text("手机号仅用于买家与您联系，不会用作他途，请放心");
+		isphone = false;
 	}
 }
 
 function checkPicture(){
-	if($("#thumbpath").val().replace(/[ ]/g,"")){
+	// if($("#thumbpath").val().replace(/[ ]/g,"")){
+	if(iconWidth && iconHeight){
 		console.log("yes");
 		$("#picturealert").text("");
 	}
