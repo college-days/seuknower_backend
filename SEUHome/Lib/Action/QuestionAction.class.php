@@ -111,6 +111,8 @@ class QuestionAction extends Action {
 		$AnswerAt = M('AnswerAt');
 		$AnswerAt->where('q_id='.$id.' and u_id='.session('userId'))->delete();
 		$AnswerAt->where('q_id='.$id.' and u_id=0')->delete();
+		$AgreeMessage = M('AgreeMessage');
+		$AgreeMessage->where("q_id=".$id.' and u_id='.session('userId'))->delete();
 	
 		/*$model = new Model();
 		$questionMessageResult = $model->query('select * from seu_question_message where u_id='.session('userId'));

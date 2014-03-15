@@ -285,6 +285,7 @@ class AccountAction extends Action{
 		$CommodityAt = M('CommodityAt');
 		$AnswerMessage = M('AnswerMessage');
 		$AnswerAt = M('AnswerAt');
+		$AgreeMessage = M('AgreeMessage');
 
 		$messageMap['u_id'] = $currentUserId;
 		$questionResult = $QuestionMessage->where($messageMap)->select();
@@ -294,6 +295,7 @@ class AccountAction extends Action{
 		$commodityAtResult = $CommodityAt->where($messageMap)->select();
 		$answerResult = $AnswerMessage->where($messageMap)->select();
 		$answerAtResult = $AnswerAt->where($messageMap)->select();
+		$agreeResult = $AgreeMessage->where($messageMap)->select();
 
 		for($i=0; $i<count($questionResult); $i++){
 			$questionResult[$i]['type'] = 'question';
@@ -355,6 +357,14 @@ class AccountAction extends Action{
 			$answerAtResult[$i]['title'] = $from_name."@了你";
 		}
 
+		for($i=0; $i<count($agreeResult); $i++){
+			$agreeResult[$i]['type'] = 'question';
+			$from_id = $agreeResult[$i]['from_id'];
+			$from_user = $User->where('id='.$from_id)->find();
+			$from_name = $from_user['name'];
+			$agreeResult[$i]['title'] = $from_name."赞同了你的回答";
+		}
+
 		if(!$questionResult){
 			$questionResult = array();
 		}
@@ -383,7 +393,11 @@ class AccountAction extends Action{
 			$answerAtResult = array();
 		}
 
-		$finalResult = array_merge($questionResult, $eventResult, $commodityResult, $eventAtResult, $commodityAtResult, $answerResult, $answerAtResult);
+		if(!$agreeResult){
+			$agreeResult = array();
+		}
+
+		$finalResult = array_merge($questionResult, $eventResult, $commodityResult, $eventAtResult, $commodityAtResult, $answerResult, $answerAtResult, $agreeResult);
 
 		session('messagecount', count($finalResult));
 		session('messages', $finalResult);

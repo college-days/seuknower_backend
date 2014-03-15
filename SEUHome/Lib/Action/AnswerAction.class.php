@@ -30,6 +30,21 @@ class AnswerAction extends Action {
 			$data['nonsupport_count'] = array('exp','nonsupport_count-1');
 			$Answer->save($data);
 
+			$answer = $Answer->where("id=".I('param.id'))->find();
+			$answeruid = $answer['u_id'];
+			$answerqid = $answer['q_id'];
+			$AgreeMessage = M('AgreeMessage');
+			$agreeData['a_id'] = I('param.id');
+			$agreeData['u_id'] = $answeruid;
+			$agreeData['q_id'] = $answerqid;
+			$agreeData['from_id'] = $userId;
+			$AgreeMessage->add($agreeData);
+
+			$User = M('User');
+			$userData['id'] = $answeruid;
+			$userData['agree_count'] = array('exp','agree_count+1');
+			$User->save($userData);
+
 			$this->ajaxReturn('', '', 1);
 		}
 		else{
@@ -50,6 +65,18 @@ class AnswerAction extends Action {
 			$data['id'] = I('param.id');
 			$data['support_count'] = array('exp','support_count-1');
 			$Answer->save($data);
+
+			$answer = $Answer->where("id=".I('param.id'))->find();
+			$answeruid = $answer['u_id'];
+
+			$AgreeMessage = M('AgreeMessage');
+			$AgreeMessage->where('a_id='.I('param.id'))->delete();
+
+			$User = M('User');
+			$userData['id'] = $answeruid;
+			$userData['agree_count'] = array('exp','agree_count-1');
+			$User->save($userData);
+
 			$this->ajaxReturn('', '', 1);
 		}
 		else{
@@ -80,6 +107,21 @@ class AnswerAction extends Action {
 			$data['id'] = I('param.id');
 			$data['support_count'] = array('exp','support_count-1');
 			$Answer->save($data);
+
+			$AgreeMessage = M('AgreeMessage');
+			$result = $AgreeMessage->where('a_id='.I('param.id'))->find();
+			if($result){
+				$answer = $Answer->where("id=".I('param.id'))->find();
+				$answeruid = $answer['u_id'];
+
+				$AgreeMessage = M('AgreeMessage');
+				$AgreeMessage->where('a_id='.I('param.id'))->delete();
+
+				$User = M('User');
+				$userData['id'] = $answeruid;
+				$userData['agree_count'] = array('exp','agree_count-1');
+				$User->save($userData);
+			}
 
 			$this->ajaxReturn('', '', 1);
 		}
