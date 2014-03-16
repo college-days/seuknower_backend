@@ -227,7 +227,12 @@ class EventAction extends Action {
 		$Model = M();	
 
 		if($tag != "全部"){
-			$sql = "event.category = '".$tag."' AND";
+			
+			if($time != "全部"){
+				$sql = "event.category = '".$tag."' AND";
+			}else{
+				$sql = "event.category = '".$tag."'";
+			}
 		}else{
 			$sql = "";
 		}
@@ -289,13 +294,13 @@ class EventAction extends Action {
 				$events[$i]["poster"] = "notexists";
 			}
 		}
-		//dump($events);
 		if($events){
 			$this->ajaxReturn($events,"",1);
 		}
 		else{
 			$this->ajaxReturn("","",0);
 		}
+		// $this->ajaxReturn($sql, "", 1);
 	}
 
     public function detail(){
@@ -597,5 +602,125 @@ class EventAction extends Action {
 		}
 	}
 
+	public function search(){
+		$content = I('content');
+		/*$content = session('search_event_content');
+		if(isset($content) && ($content == I('content'))){
+			$count = session('search_event_count');
+		}
+		else{
+			$content = I('content');
+			session('search_event_content',$content);
+			$count = count(search('seu_event',$content,20,0));
+			session('search_event_count',$count);
+		}*/
+		$Model = M();	
+		$hots = $Model->table('seu_event event')->field('event.id,event.poster,event.title')->order('join_count desc')->limit(5)->select();
+		$this->assign("hots", $hots);
+		
+		$userId = session('userId');
+    	$User = M('User');
+    	$userInfo = $User->find($userId);
+		
+		$map['u_id'] = $userId;
+    	$Event = M('Event');
+		$EventInterest = M('InterestEvent');
+    	$interestEventIds = $EventInterest->field('e_id')->where($map)->select();
+    	$interestEvents = array();
+    	for($i=0; $i<count($interestEventIds); $i++){
+    		$interestEvent = $Event->where('id='.$interestEventIds[$i]['e_id'])->find();
+    		if(!empty($interestEvent)){
+    			array_push($interestEvents, $interestEvent);
+    		}
+    	}
+
+    	$EventJoin = M('JoinEvent');
+    	$joinEventIds = $EventJoin->field('e_id')->where($map)->select();
+    	$joinEvents = array();
+    	for($i=0; $i<count($joinEventIds); $i++){
+    		$joinEvent = $Event->where('id='.$joinEventIds[$i]['e_id'])->find();
+    		if(!empty($joinEvent)){
+    			array_push($joinEvents, $joinEvent);
+    		}
+    	}
+
+		$this->assign('interestCount', count($interestEvents));
+		$this->assign('joinCount', count($joinEvents));
+		
+
+    	$util = new CommonUtil();
+		$userInfo["sex"] = $util->filter_sex($userInfo["sex"]);
+
+    	$this->assign('currentUser', $userInfo);
+		
+		//获得要显示的活动
+		$events = search('seu_event',$content,20,0);
+
+		
+		for($i=0; $i<count($events); $i++){
+			$startTime = explode(" ",date("Y年m月d日 H:i:s",$events[$i]['start_time']));	
+			$endTime = explode(" ",date("Y年m月d日 H:i:s",$events[$i]['end_time']));
+			unset($events[$i]['start_time']);
+			unset($events[$i]['end_time']);
+			if($startTime[0] == $endTime[0]){
+				$events[$i]['time'] = substr($startTime[0],7)." ".substr($startTime[1],0,5)."-".substr($endTime[1],0,5);
+			}
+			else{
+				$events[$i]['time'] = substr($startTime[0],7)."~".substr($endTime[0],7);
+			}
+		}
+		
+		$util = new CommonUtil();
+
+		for($i=0; $i<count($events); $i++){
+			if(!$util->exists_file($events[$i]["poster"])){
+				$events[$i]["poster"] = "notexists";
+			}
+		}
+		
+
+		//dump($events);
+		$this->assign('events', $events);
+		$this->assign('eventscount', count($events));
+
+		
+		/*switch (count($events)) {
+			case 6:
+				$this->assign('leftevents', array($events[0], $events[1]));
+				$this->assign('middleevents', array($events[2], $events[3]));
+				$this->assign('rightevents', array($events[4], $events[5]));
+				break;
+			case 5:
+				$this->assign('leftevents', array($events[0], $events[1]));
+				$this->assign('middleevents', array($events[2], $events[3]));
+				$this->assign('rightevents', array($events[4]));
+				break;
+			case 4:
+				$this->assign('leftevents', array($events[0], $events[1]));
+				$this->assign('middleevents', array($events[2], $events[3]));
+				$this->assign('rightevents', array());
+				break;
+			case 3:
+				$this->assign('leftevents', array($events[0], $events[1]));
+				$this->assign('middleevents', array($events[2]));
+				$this->assign('rightevents', array());
+				break;
+			case 2:
+				$this->assign('leftevents', array($events[0], $events[1]));
+				$this->assign('middleevents', array());
+				$this->assign('rightevents', array());
+				break;
+			case 1:
+				$this->assign('leftevents', array($events[0]));
+				$this->assign('middleevents', array());
+				$this->assign('rightevents', array());
+				break;
+			default:
+				# code...
+				break;
+		}*/
+		$this->assign('content',$content);
+		$this -> display();
+	}
 }
 ?>

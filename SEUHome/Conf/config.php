@@ -8,6 +8,7 @@ return array(
 	//正则的$一定要加上，不然貌似会出问题，第一个路由的$就一定要加上
 	'URL_ROUTE_RULES'=>array(
 		'manage$' => 'Manage/event',
+		'question/search/:content/:page$' => 'Question/search',
 		'question/change_content$' => 'Question/changeContent',
 		'question/more_search$' => 'Question/moreSearch',
 		'question/domin/:domin$' => 'Question/index',
@@ -61,6 +62,7 @@ return array(
 		'account/check_message$' => 'Account/checkMessage',
 		'account/check_register$' => 'Account/checkRegister',
 		'account/active_user/:id\d/:code$' => 'Account/activeUser',
+		'event/search/:content$' => 'Event/search',
 		'event/page/:id\d$' => 'Event/index',
 		'event/:tag/:time$'	=> 'Event/index',
 		'event/:tag/:time/page/:id\d$' => 'Event/index',
@@ -74,6 +76,7 @@ return array(
 		'event/add_interest' => 'Event/addInterest',
 		'event/cancel_interest' => 'Event/cancelInterest',
 		'event/add_comment' => 'Event/addComment',
+		'market/search/:content/:page$' => 'Market/search',
 		'market/modify_commodity/:id\d$' => 'Market/modifyCommodity',
 		'market/save_commodity$' => 'Market/saveCommodity',
 		'market/delete_commodity$' => 'Market/deleteCommodity',

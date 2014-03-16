@@ -41,6 +41,7 @@ $(function(){
 	});
 
 	$('#nextstep').click(function(){
+		alert(window.editor.html());
 		if($("#commoditytitle").val().replace(/[ ]/g,"") && $("#commodityprice").val().replace(/[ ]/g,"") && $("#commoditycontact").val().replace(/[ ]/g,"") && window.editor.html().replace(/[ ]/g,"") && isprice && isphone && isstatus){
 			if(iconWidth && iconHeight){
 				iconX = iconX*width/imageWidth;
@@ -56,12 +57,12 @@ $(function(){
 				}, function(data){
 					$('#rawpath').val(data.data.rawpath.replace(".",""));
 					$('#thumbpath').val(data.data.thumbpath.replace(".",""));
-					$("#commodityintro").val(window.editor.html());
+					$("#commodityintro").val(window.editor.html().replace(/\s\w[^<\/>]*/g,""));
 					$("#commodity").submit();
 				}, 'json');
 			}else{
 				if(!uploading){
-					$("#commodityintro").val(window.editor.html());
+					$("#commodityintro").val(window.editor.html().replace(/\s\w[^<\/>]*/g,""));
 					$("#commodity").submit();				
 				}
 				else{

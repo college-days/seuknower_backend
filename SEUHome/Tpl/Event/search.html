@@ -1,0 +1,70 @@
+<include file="Public:header" title="活动"/>
+<link href="__CSS__/acts.css?t=1394724207" rel="stylesheet" type="text/css" />
+<div class="search-question">
+	<div class="search-meau">
+		<div class="container">
+			<span class="search-title">"{$content}" 搜索结果</span>
+			<ul>
+				<li><a href="/question/search/{$content}/1">问题</a></li>
+				<li class="active"><a href="/event/search/{$content}">活动</a></li>
+				<li><a href="/market/search/{$content}/1">商品</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div id="wrap" class="wrap">
+	
+	<div class="introduce" id="left">
+		<div class="user_box">
+			<div class="user">
+				<div class="tit">用户</div>
+				<notempty name="Think.session.userName">
+					<div class="infos">
+						<div class="pic">
+							<img src="{$currentUser.icon}"/>
+						</div>
+						<div class="rt">
+							<div class="name" style="margin-top:6px;">
+								<eq name="currentUser.sex" value="male">
+	                                <span class="male"></span>
+	                            </eq>
+	                            <eq name="currentUser.sex" value="female">
+	                                <span class="female"></span>
+	                            </eq>
+	                            <!--<eq name="currentUser.sex" value="none">
+	                                不详
+	                            </eq>-->
+								<a href="/user/{$currentUser.id}" target="_blank">{$currentUser.name}</a>
+							</div>
+							<div class="tag">
+								<eq name="currentUser.id" value="1">
+									<span> 官方帐号 </span>
+								<else/>
+									<span> {$currentUser.intro} </span>
+								</eq>
+							</div>
+						</div>
+						<div class="pa">
+							<span>感兴趣 &nbsp;</span><span>{$interestCount}</span><span class="sp">|</span><span>参加 &nbsp;</span><span>{$joinCount}</span>
+						</div>
+					</div>
+				<else/>
+					<p class="notlg">你还没有登陆</p>
+				</notempty>
+			</div>
+			<dl class="recom">
+				<dt>推荐活动</dt>
+				<volist name="hots" id="hot" key="iter">
+					<dd><a href="/event/{$hot.id}" target="_blank">{$hot.title}</a></dd>
+				</volist>
+			</dl>
+		</div>
+		
+	</div>
+
+</div>
+
+	<!--<div class="load"><img src="__IMAGE__/event/load.gif"/></div>-->
+	<div id="goTop" class="go_top"></div>
+	<script src="__JS__/event/water.js?t=1394724207"></script>
+<include file="Public:newquestion" />

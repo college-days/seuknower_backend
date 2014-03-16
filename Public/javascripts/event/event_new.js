@@ -76,7 +76,7 @@ $(function(){
 				}, function(data){
 					$('#rawpath').val(data.data.rawpath.replace(".",""));
 					$('#thumbpath').val(data.data.thumbpath.replace(".",""));
-					$("#intro").val(window.editor.html());
+					$("#intro").val(window.editor.html().replace(/\s\w[^<\/>]*/g,""));
 					$('#event').submit();
 				},'json');
 			}else{

@@ -1,6 +1,6 @@
- var atUserId = 0;
+var atUserId = 0;
 
- $(function(){
+$(function(){
     $(".reply").click(function(){
         var href = $(this).attr("href");
         var pos = $(href).offset().top;
@@ -74,6 +74,7 @@ $(function(){
 		$("div.alert").hide();
 		var content = window.editor.html();
 		content = content.replace(/<strong>@.*?<\/strong>/, "");
+		content = content.replace(/\s\w[^<\/>]*/g,"");
 		if (content.replace(/[ ]/g, "")){
 			// showVerify();
 			submitComment();
@@ -104,6 +105,7 @@ function submitComment(){
 	$("div.alert").hide();
 	var content = window.editor.html();
 	var at = content.match(/<strong>@.*?<\/strong>/);
+	content = content.replace(/\s\w[^<\/>]*/g,"");
 
 	if(at){
 		content = content.replace(/<strong>@.*?<\/strong>/, "");

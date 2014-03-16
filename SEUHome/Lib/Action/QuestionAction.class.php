@@ -321,14 +321,15 @@ class QuestionAction extends Action {
 		$content = I('param.content');
 		$count = I('param.count');
 
-		$model = new Model();
+		/*$model = new Model();
 		$sql = "select title,id,create_time,answer_count from seu_question where title like '%".$content."%' order by create_time desc limit ".$count;
 
 		$questionMessageResult = $model->query($sql);
 
 		for($i=0; $i<count($questionMessageResult); $i++){
 			$questionMessageResult[$i]['title'] = str_replace($content, "<span style=\"color:red\">".$content."</span>", $questionMessageResult[$i]['title']);
-		}
+		}*/
+		$questionMessageResult = search('seu_question',$content,$count,1);
 		
 		if(count($questionMessageResult) == $count){
 			$this->ajaxReturn($questionMessageResult, 'more', 1);
@@ -353,5 +354,36 @@ class QuestionAction extends Action {
 		}
 	}
 
+	public function search(){
+		$content = session('search_question_content');
+		if(isset($content) && ($content == I('content'))){
+			$count = session('search_question_count');
+		}
+		else{
+			$content = I('content');
+			session('search_question_content',$content);
+			$count = count(search('seu_question',$content,20,0));
+			session('search_question_count',$count);
+		}
+		
+		$page = I('page');
+		$eachPageShowCount = 20;
+		$pageCount = ceil($count/$eachPageShowCount);
+		$questions = search('seu_question',$content,$eachPageShowCount,$page);
+		
+		//$questions = search('seu_question',"大一",$count,1);
+		$Question = M('Question');
+		$hotQuestions = $Question->order('click_count desc')->limit(10)->select();
+		$this->assign('hots',$hotQuestions);
+		$this->assign('lsquestions', $this->getLatestSolvedQuestion());
+		$this->assign('questions',$questions);
+		$this->assign('questionscount', count($questions));
+		$this->assign('count',$count);
+		//$this->assign('type', $type);
+		$this->assign('curr_page',$page);
+		$this->assign('page_count',$pageCount);
+		$this->assign('content',$content);
+		$this -> display();
+	}
 }
 ?>

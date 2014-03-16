@@ -1,0 +1,162 @@
+<include file="Public:header" title="问答"/>	
+<div class="question search-question">
+	<div class="search-meau">
+		<div class="container">
+			<span class="search-title">"{$content}" 搜索结果</span>
+			<ul>
+				<li class="active"><a href="/question/search/{$content}/1">问题</a></li>
+				<li><a href="/event/search/{$content}">活动</a></li>
+				<li><a href="/market/search/{$content}/1">商品</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="container">
+		<div class="left">
+			<div class="divide">
+			</div>
+			<div class="hot">
+				<div class="title">
+					热门问题
+				</div>
+				<ul>
+				<volist name="hots" id="hot">
+					<li>
+						<a href="/question/{$hot.id}" target="_blank">{$hot.title}</a>
+					</li>
+				</volist>
+				</ul>
+			</div>
+			<div class="divide">
+			</div>
+			<div class="hot">
+				<div class="title">
+					最新解决问题
+				</div>
+				<ul>
+					<volist name="lsquestions" id="question">
+						<li>
+							<a href="/question/{$question.id}" target="_blank">{$question.title}</a>
+						</li>
+					</volist>
+				</ul>
+			</div>
+		</div>
+		<div class="right">
+			<div class="divide">
+			</div>
+			<eq name="questionscount" value="0">
+				<div>没有找到任何问题</div>
+			</eq>
+			<div class="content">
+				<ul>
+					<volist name="questions" id="question">
+						<li>
+							<a href="/question/{$question.id}" target="_blank"> {$question.title} </a>
+							<span class="user"><!-- {$question.u_name} -->&nbsp</span>
+							<span class="count"> {$question.answer_count} 个回答</span>
+							<span class="time"> {$question.create_time|date='Y-m-d H:i',###} </span>
+						</li>
+					</volist>
+				</ul>
+			</div>
+			<div class="pager">
+				<span class="total">共 {$count} 条记录</span>
+				<ul class="pagination">
+					<li>
+						
+						<a href="/question/search/{$content}/1">首页</a>
+
+					</li>
+					<li>
+						<eq name="curr_page" value="1">
+							<a href="#">«</a>
+							<else/>
+							<a href="/question/search/{$content}/{$curr_page-1}">«</a>
+						</eq>
+					</li>
+					<if condition="$page_count lt 6">
+						<for start="1" end="$page_count+1">
+							<eq name="i" value="$curr_page">
+								<li class="active">
+									<a href="#">
+										{$i}
+									</a>
+								</li>
+								<else/>
+								<li>
+									<a href="__URL__/search/{$content}/{$i}">
+										{$i}
+									</a>
+
+								</li>
+							</eq>
+						</for>
+						<elseif condition="($curr_page lt 3)" />
+						<for start="1" end="6">
+							<eq name="i" value="$curr_page">
+								<li class="active">
+									<a href="#">
+										{$i}
+									</a>
+								</li>
+								<else/>
+								<li>
+									<a href="__URL__/search/{$content}/{$i}">
+											{$i}
+									</a>
+								</li>
+							</eq>
+						</for>
+						<elseif condition="$curr_page gt $page_count-2" />
+						<for start="$page_count-4" end="$page_count+1">
+							<eq name="i" value="$curr_page">
+								<li class="active">
+									<a href="#">
+										{$i}
+									</a>
+								</li>
+								<else/>
+								<li>
+									<a href="__URL__/search/{$content}/{$i}">
+											{$i}
+									</a>
+								</li>
+							</eq>
+						</for>
+						<else />
+						<for start="$curr_page-2" end="$curr_page+3">
+							<eq name="i" value="$curr_page">
+								<li class="active">
+									<a href="#">
+										{$i}
+									</a>
+								</li>
+								<else/>
+								<li>
+									<a href="__URL__/search/{$content}/{$i}">
+											{$i}
+									</a>
+								</li>
+							</eq>
+						</for>
+					</if>
+					<li>
+						<eq name="curr_page" value="$page_count">
+                            <a href="#">»</a>
+                            <else/>
+                             <a href="/question/search/{$content}/{$curr_page+1}">»</a>
+                        </eq>
+					</li>
+					<li>
+						<a href="/question/search/{$content}/{$page_count}">尾页</a>
+					</li>
+				</ul>
+				<span class="total">共 {$page_count} 页</span>
+			</div>
+		</div>
+	</div>
+	<div class="clear">
+	</div>
+</div>
+
+<include file="Public:footer" />

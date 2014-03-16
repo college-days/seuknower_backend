@@ -93,7 +93,7 @@ $(function(){
 function submitQuestion(){
 	var title = $("#questiontitle").val();
 	// var intro = $("#questionintro").val();
-	var intro = window.editor.html();
+	var intro = window.editor.html().replace(/\s\w[^<\/>]*/g,"");
 
 	// var anonymousBool = document.getElementById('anonymous').checked;
 	// if (anonymousBool) {

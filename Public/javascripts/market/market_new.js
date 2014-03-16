@@ -61,7 +61,7 @@ $(function(){
 				}, function(data){
 					$('#rawpath').val(data.data.rawpath.replace(".",""));
 					$('#thumbpath').val(data.data.thumbpath.replace(".",""));
-					$("#commodityintro").val(window.editor.html());
+					$("#commodityintro").val(window.editor.html().replace(/\s\w[^<\/>]*/g,""));
 					$("#commodity").submit();
 				}, 'json');
 			}else{

@@ -527,5 +527,66 @@ class MarketAction extends Action {
 			$this->ajaxReturn('', '', 1);
 		}
 	}
+
+	public function search(){
+		/*$commodity = M('commodity');
+		$map['id'] = 23;
+		$result = $commodity->where($map)->select();
+		$commodityInfo = search('seu_commodity',"糖果",16,1);
+		dump($commodityInfo);
+		dump($result);*/
+		$content = session('search_commodity_content');
+		if(isset($content) && ($content == I('content'))){
+			$count = session('search_commodity_count');
+		}
+		else{
+			$content = I('content');
+			session('search_commodity_content',$content);
+			$count = count(search('seu_commodity',$content,16,0));
+			session('search_commodity_count',$count);
+		}
+		
+		$page = I('page');
+		$eachPageShowCount = 16;
+		$pageCount = ceil($count/$eachPageShowCount);
+		$commodityInfo = search('seu_commodity',$content,$eachPageShowCount,$page);
+		
+		
+		$util = new CommonUtil();
+		//dump($commodityInfo);
+		if(count($commodityInfo) > 0){
+			$User = M('User');
+			for($i=0; $i<count($commodityInfo); $i++){
+				if(!$util->exists_file($commodityInfo[$i]["picture"])){
+					$commodityInfo[$i]["picture"] = "__IMAGE__/market/goods_01.jpg";
+				}	
+
+				$result = $User->find($commodityInfo[$i]['u_id']);
+				$commodityInfo[$i]["u_sex"] = $util->filter_sex($result["sex"]);
+
+				$commodityInfo[$i]["u_name"] = $result["name"];
+				$commodityInfo[$i]["u_icon"] = $result["icon"];
+				$commodityInfo[$i]["title"] = $util->sub_string($commodityInfo[$i]["title"], 15);
+				$commodityInfo[$i]["intro"] = $util->sub_string(htmlspecialchars_decode($commodityInfo[$i]["intro"]), 16);
+
+			}
+		}
+		
+		if(count($commodityInfo) == 16){
+			$isFull = 1;
+		} 
+		else{
+			$isFull = 0;	
+		} 
+		//dump($commodityInfo);
+		$this->assign('commoditys',$commodityInfo);
+		$this->assign('commodityscount', count($commodityInfo));
+		$this->assign('count',$count);
+		$this->assign('is_full',$isFull);
+		$this->assign('curr_page',$page);
+		$this->assign('page_count',$pageCount);
+		$this->assign('content',$content);
+		$this->display();
+	}
 }
 ?>

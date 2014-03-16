@@ -1,0 +1,158 @@
+<include file="Public:header" title="跳蚤市场"/>
+	
+	<div class="back-color">
+		<div class="market search-question search-market">
+			<div class="search-meau">
+				<div class="container">
+				<span class="search-title">"{$content}" 搜索结果</span>
+				<ul>
+					<li><a href="/question/search/{$content}/1">问题</a></li>
+					<li><a href="/event/search/{$content}">活动</a></li>
+					<li class="active"><a href="/market/search/{$content}/1">商品</a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="container">
+				
+				<empty name="commoditys">
+					<div class="content"> 暂无结果 </div>
+				<else/>
+					<div class="content">
+						<ul>
+							<volist name="commoditys" id="commodity">
+								<li>
+									<a href="/market/commodity/{$commodity.id}" target="_blank">
+										<img class="picture" src="{$commodity.picture}" class="img-responsive" style="width:192px;height:146px;"/>
+									</a>
+									<div class="info">
+										<span class="money"> ￥{$commodity.cost} </span>
+										<div class="num">
+											<span class="click">{$commodity.click_count}</span>
+											<span class="comment">{$commodity.comment_count}</span>
+											<span class="love">{$commodity.like_count}</span>
+										</div>
+									</div>
+									<div class="title">
+										<a href="/market/commodity/{$commodity.id}" target="_blank"> {$commodity.title} </a>
+									</div>
+									<div class="intro">
+										<span> {$commodity.intro} </span>
+									</div>
+									<div class="divide"></div>
+									<div class="seller">
+										<a href="/user/{$commodity.u_id}" target="_blank">
+											<img src="{$commodity.u_icon}" class="img-responsive" style="width:21px;height:21px;"/>
+										</a>
+										<a href="/user/{$commodity.u_id}" class="name" target="_blank"> {$commodity.u_name} </a>
+										<eq name="commodity.u_sex" value="male">
+											<span class="male"></span>
+										</eq>
+										<eq name="commodity.u_sex" value="female">
+											<span class="female"></span>
+										</eq>
+										<!--<eq name="commodity.u_sex" value="none">
+											不详
+										</eq>-->
+									</div>
+								</li>
+							</volist>
+						</ul>
+					</div>
+					<div class="pager">
+						<span class="total">共 {$count} 条记录</span>
+						<ul class="pagination">
+							<li>
+								<a href="/market/search/{$content}/1">首页</a>
+							</li>
+							<li>
+								<eq name="curr_page" value="1">
+									<a href="#">«</a>
+									<else/>
+									<a href="/market/search/{$content}/{$curr_page-1}">«</a>
+								</eq>
+							</li>
+							<if condition="$page_count lt 6">
+								<for start="1" end="$page_count+1">
+									<eq name="i" value="$curr_page">
+										<li class="active">
+											<a href="#">
+												{$i}
+											</a>
+										</li>
+										<else/>
+										<li>
+											<a href="__URL__/search/{$content}/{$i}">
+												{$i}
+											</a>
+										</li>
+									</eq>
+								</for>
+								<elseif condition="($curr_page lt 3)" />
+								<for start="1" end="6">
+									<eq name="i" value="$curr_page">
+										<li class="active">
+											<a href="#">
+												{$i}
+											</a>
+										</li>
+										<else/>
+										<li>
+											<a href="__URL__/search/{$content}/{$i}">
+												{$i}
+											</a>
+										</li>
+									</eq>
+								</for>
+								<elseif condition="$curr_page gt $page_count-2" />
+								<for start="$page_count-4" end="$page_count+1">
+									<eq name="i" value="$curr_page">
+										<li class="active">
+											<a href="#">
+												{$i}
+											</a>
+										</li>
+										<else/>
+										<li>
+											<a href="__URL__/search/{$content}/{$i}">
+												{$i}
+											</a>
+										</li>
+									</eq>
+								</for>
+								<else />
+								<for start="$curr_page-2" end="$curr_page+3">
+									<eq name="i" value="$curr_page">
+										<li class="active">
+											<a href="#">
+												{$i}
+											</a>
+										</li>
+										<else/>
+										<li>
+											<a href="__URL__/search/{$content}/{$i}">
+												{$i}
+											</a>
+										</li>
+									</eq>
+								</for>
+							</if>
+							<li>
+								<eq name="curr_page" value="$page_count">
+		                            <a href="#">»</a>
+		                            <else/>
+		                            <a href="/market/search/{$content}/{$curr_page+1}">»</a>
+		                        </eq>
+							</li>
+							<li>
+								<a href="/market/search/{$content}/{$page_count}">尾页</a>
+							</li>
+						</ul>
+						<span class="total">共 {$page_count} 页</span>
+					</div>
+				</empty>
+			</div>
+			<div class="clear">
+			</div>
+		</div>
+
+<include file="Public:footer" />

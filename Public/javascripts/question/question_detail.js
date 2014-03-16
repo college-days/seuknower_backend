@@ -102,6 +102,7 @@ $(function(){
 	
 	$("#applychange").click(function(){
 		var content = window.editor.html();
+		content = content.replace(/\s\w[^<\/>]*/g,"");
 		// var pwd = $("#changepwd").val();
 		var aid = $("#changeanswerid").text();
 		/*if(pwd.replace(/[ ]/g, "")){
@@ -144,6 +145,7 @@ $(function(){
 		var content = window.editor.html();
 		var qid = $("#changequesid").text();
 		$("#changequespwdalert").text("");
+		content = content.replace(/\s\w[^<\/>]*/g,"");
 		$.post('/question/change_content', {
 			'q_id': qid,
 			'content': content 
@@ -367,6 +369,7 @@ $(function(){
 		var content = window.editor.html();
 		var invited = parseInt($("#question").attr("invited"));
 		content = content.replace(/<strong>@.*?<\/strong>/, "");
+		content = content.replace(/\s\w[^<\/>]*/g,"");
 		if(content.replace(/[ ]/g, "")){
 			// showVerify(false);
 			if(invited){
@@ -388,6 +391,7 @@ $(function(){
 		var content = window.editor.html();
 		var invited = parseInt($("#question").attr("invited"));
 		content = content.replace(/<strong>@.*?<\/strong>/, "");
+		content = content.replace(/\s\w[^<\/>]*/g,"");
 		if(content.replace(/[ ]/g, "")){
 			// showVerify(true);
 			if(invited){
@@ -466,6 +470,7 @@ function submitComment(){
 	$("div.alert").hide();
 	var content = window.editor.html();
 	var at = content.match(/<strong>@.*?<\/strong>/);
+	content = content.replace(/\s\w[^<\/>]*/g,"");
 
 	if(at){
 		content = content.replace(/<strong>@.*?<\/strong>/, "");
@@ -506,6 +511,7 @@ function submitComment(){
 function submitCommentAnonymous(){
 	$("div.alert").hide();
 	var content = window.editor.html();
+	content = content.replace(/\s\w[^<\/>]*/g,"");
 	var at = content.match(/<strong>@.*?<\/strong>/);
 	if(at){
 		content = content.replace(/<strong>@.*?<\/strong>/, "");

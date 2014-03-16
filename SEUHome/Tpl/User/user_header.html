@@ -6,15 +6,23 @@
 			</div>
 			<div class="info">
 				<div class="name-tag">
-					<a href="/user/{$user.id}"><div class="name">
-						<span> {$user.name} </span>
-					</div></a>
-					<div class="tag">
-						<eq name="user.id" value="1">
-							<span> 官方帐号 </span>
-						<else/>
-							<span> {$user.intro} </span>
-						</eq>
+					<div  class="con">
+						<a href="/user/{$user.id}"><div class="name">
+							<span> {$user.name} </span>
+						</div></a>
+						<div class="tag">
+							<eq name="user.id" value="1">
+								<span> 官方帐号 </span>
+							<else/>
+								<span> {$user.intro} </span>
+							</eq>
+						</div>
+						<div class="my_get">
+							获得
+							<span class="approval">
+								<span class="agree"></span><em>{$user.agree_count}</em>赞同
+							</span>
+						</div>
 					</div>
 				</div>
 				<div class="ques-mark">
@@ -27,7 +35,7 @@
 							<div><span> {$answercount} </span></div>
 							<div><a href="/user/answer/{$user.id}" target="_blank">回答问题</a></div>
 						</li>
-						<li>
+						<li class="nt">
 							<div><span> {$sellcommoditycount} </span></div>
 							<div><a href="/user/sellon/{$user.id}" target="_blank">出售商品</a></div>
 						</li>

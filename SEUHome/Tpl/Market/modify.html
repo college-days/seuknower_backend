@@ -1,4 +1,4 @@
-<include file="Public:header" title="新商品"/>
+<include file="Public:header" title="编辑商品"/>
 <div class="back-color">
     <div class="activity-new">
 		<div class="container">
@@ -52,9 +52,9 @@
 				</div>
 				<div class="row">
 					<eq name="commodity.status" value="0">
-						<span class="key">成色<span class="not-must">(可选)</span></span><input type="text" class="value short" id="commoditystatus" name="status"/><span style="margin-left:15px">(请填写数字1-9即可)</span>
+						<span class="key">成色<span class="not-must">(选填)</span></span><input type="text" class="value short" id="commoditystatus" name="status"/><span style="margin-left:15px">(请填写数字1-9即可)</span>
 					<else/>
-						<span class="key">成色<span class="not-must">(可选)</span></span><input type="text" class="value short" id="commoditystatus" name="status" value="{$commodity.status}"/><span style="margin-left:15px">(请填写数字1-9即可)</span>
+						<span class="key">成色<span class="not-must">(选填)</span></span><input type="text" class="value short" id="commoditystatus" name="status" value="{$commodity.status}"/><span style="margin-left:15px">(请填写数字1-9即可)</span>
 					</eq>
 				</div>
 				<div class="row">
@@ -69,9 +69,9 @@
 				</div>
 				<div class="row">
 					<eq name="commodity.getittime" value="0">
-						<span class="key">入手时间<span class="not-must">(可选)</span></span><input type="text" class="value short" id="gettime" name="gettime"/>
+						<span class="key">入手时间<span class="not-must">(选填)</span></span><input type="text" class="value short" id="gettime" name="gettime"/>
 					<else/>
-						<span class="key">入手时间<span class="not-must">(可选)</span></span><input type="text" class="value short" id="gettime" name="gettime" value="{$commodity.getittime|date='Y-m-d',###}"/>
+						<span class="key">入手时间<span class="not-must">(选填)</span></span><input type="text" class="value short" id="gettime" name="gettime" value="{$commodity.getittime|date='Y-m-d',###}"/>
 					</eq>
 				</div>
 				<div class="row">

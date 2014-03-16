@@ -231,7 +231,7 @@
 		return $result;
 	}
 
-	function searchQuestion($content,$count,$len="null",$pos=0,$index=0){
+	/*function searchQuestion($content,$count,$len="null",$pos=0,$index=0){
 		if(!$len) return null;
 		
 		preg_match_all("/[\x{4E00}-\x{9FFF}]/u",$content,$ch,PREG_OFFSET_CAPTURE);      //获取所有的汉字
@@ -350,9 +350,10 @@
 		$data['sql'] = $sql;
 		
 		return $data;
-	}
+	}*/
 
-	function simpleSearchQuestion($content,$count,$page){
+	//page为0时 获取所有满足条件的总数
+	function search($table,$content,$count,$page){
 	
 		preg_match_all("/[\x{4E00}-\x{9FFF}]/u",$content,$ch,PREG_OFFSET_CAPTURE);      //获取所有的汉字
 		preg_match_all("/[a-zA-Z]+/u",$content,$en,PREG_OFFSET_CAPTURE);				//获取连着的英文
@@ -392,7 +393,15 @@
 				
 				if($j>0) $sql = $sql." AND title NOT LIKE '%".$key[$j-1].$like[$i][$j]."%'";
 				if($j+$i<$keyCount - 1) $sql = $sql." AND title NOT LIKE '%".$like[$i][$j].$key[$j+$i+1]."%'";
-				$sql = "SELECT title,id,create_time,answer_count FROM seu_question WHERE".$sql." ORDER BY create_time DESC "; 
+				if($table == "seu_question"){
+					$sql = "SELECT title,id,create_time,answer_count FROM seu_question WHERE".$sql." ORDER BY create_time DESC "; 
+				}
+				else if($table == "seu_event"){
+					$sql = "SELECT * FROM seu_event WHERE ".$sql." ORDER BY create_time DESC "; 
+				}
+				else if($table == "seu_commodity"){
+					$sql = "SELECT * FROM seu_commodity WHERE onsale = 1 and ".$sql." ORDER BY create_time DESC "; 
+				}
 				$result = $Model->query($sql);
 				
 				
@@ -421,10 +430,24 @@
 					$search = array_sort($search,'value','desc');
 				}
 				//dump($search);
-				if(count($search) > $count*$page) break;
+				if($page > 0 && count($search) > $count*$page) break;
 			}
-			if(count($search) > $count*$page) break;
+			if($page > 0 && count($search) > $count*$page) break;
 		}
-		return array_slice($search,$count*($page-1)-1,$count);
+		if($table == "seu_question"){
+			for($i=0; $i<count($search); $i++ ){
+				for($j=0; $j<count($key); $j++){
+					$search[$i]['title'] = str_replace($key[$j],"!_!".$key[$j]."^_^",$search[$i]['title']);			
+				}
+				$search[$i]['title'] = str_replace("!_!","<span style=\"color:red\">",$search[$i]['title']);
+				$search[$i]['title'] = str_replace("^_^","</span>",$search[$i]['title']);
+			}
+		}
+		if($page == 0){
+			return $search;
+		}
+		else{
+			return array_slice($search,$count*($page-1),$count);
+		}
 	}
 ?>
