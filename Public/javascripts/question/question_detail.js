@@ -228,7 +228,7 @@ $(function(){
 		var object = $(this).next();
 		if(agree.attr("class") == "addagree"){
 			$.post('/answer/add_agree', {'id': $(this).parents("li").attr("aid")}, function(data){
-				if(data.status) {
+				if(data.status == 1) {
 					agree.text(parseInt(agree.text())+1);
 					agree.attr("class", "cancelagree");
 					agree.attr("title", "取消赞同");
@@ -236,16 +236,20 @@ $(function(){
 						object.attr("class", "addobject");
 						object.attr("title", "反对");
 					}
+				}else if(data.status == -1){
+					console.log('error');
 				}else{
 					window.location.href="/login";
 				}
 			}, "json");
 		}else{
 			$.post('/answer/cancel_agree', {'id': $(this).parents("li").attr("aid")}, function(data){
-				if(data.status){
+				if(data.status == 1){
 					agree.text(parseInt(agree.text())-1);
 					agree.attr("class", "addagree");
 					agree.attr("title", "赞同");
+				}else if(data.status == -1){
+					console.log('error');
 				}else{
 					window.location.href="/login";
 				}
@@ -258,17 +262,19 @@ $(function(){
 		var object = $(this).next();
 		if(agree.attr("class") == "cancelagree"){
 			$.post('/answer/cancel_agree', {'id': $(this).parents("li").attr("aid")}, function(data){
-				if(data.status){
+				if(data.status == 1){
 					agree.text(parseInt(agree.text())-1);
 					agree.attr("class", "addagree");
 					agree.attr("title", "赞同");
+				}else if(data.status == -1){
+					console.log('error');
 				}else{
 					window.location.href="/login";
 				}
 		}, "json");
 		}else{
 			$.post('/answer/add_agree', {'id': $(this).parents("li").attr("aid")}, function(data){
-				if(data.status) {
+				if(data.status == 1) {
 					agree.text(parseInt(agree.text())+1);
 					agree.attr("class", "cancelagree");
 					agree.attr("title", "取消赞同");
@@ -276,6 +282,8 @@ $(function(){
 						object.attr("class", "addobject");
 						object.attr("title", "反对");
 					}
+				}else if(data.status == -1){
+					console.log("error");
 				}else{
 					window.location.href="/login";
 				}
@@ -288,7 +296,7 @@ $(function(){
 		var agree = $(this).prev();
 		if(object.attr("class") == "addobject"){
 			$.post('/answer/add_object', {'id': $(this).parents("li").attr("aid")}, function(data){
-				if(data.status) {
+				if(data.status == 1) {
 					// object.text(parseInt(object.text())+1);
 					object.attr("class", "cancelobject");
 					object.attr("title", "取消反对");
@@ -297,16 +305,20 @@ $(function(){
 						agree.attr("title", "赞同");
 						agree.text(parseInt(agree.text())-1);
 					}
+				}else if(data.status == -1){
+					console.log("error");
 				}else{
 					window.location.href="/login";
 				}
 			}, "json");
 		}else{
 			$.post('/answer/cancel_object', {'id': $(this).parents("li").attr("aid")}, function(data){
-				if(data.status) {
+				if(data.status == 1) {
 					// object.text(parseInt(object.text())-1);
 					object.attr("class", "addobject");
 					object.attr("title", "反对");
+				}else if(data.status == -1){
+					console.log("error");
 				}else{
 					window.location.href="/login";
 				}
@@ -320,17 +332,19 @@ $(function(){
 		var agree = $(this).prev();
 		if(object.attr("class") == "cancelobject"){
 			$.post('/answer/cancel_object', {'id': $(this).parents("li").attr("aid")}, function(data){
-				if(data.status) {
+				if(data.status == 1) {
 					// object.text(parseInt(object.text())-1);
 					object.attr("class", "addobject");
 					object.attr("title", "反对");
+				}else if(data.status == -1){
+					console.log("error");
 				}else{
 					window.location.href="/login";
 				}
 			}, "json");
 		}else{
 			$.post('/answer/add_object', {'id': $(this).parents("li").attr("aid")}, function(data){
-				if(data.status) {
+				if(data.status == 1) {
 					// object.text(parseInt(object.text())+1);
 					object.attr("class", "cancelobject");
 					object.attr("title", "取消反对");
@@ -339,6 +353,8 @@ $(function(){
 						agree.attr("title", "赞同");
 						agree.text(parseInt(agree.text())-1);
 					}
+				}else if(data.status == -1){
+					console.log("error");
 				}else{
 					window.location.href="/login";
 				}

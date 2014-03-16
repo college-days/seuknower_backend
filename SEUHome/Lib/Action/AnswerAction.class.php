@@ -9,43 +9,51 @@ class AnswerAction extends Action {
 	public function addAgree(){
 		$userId = session('userId');
 		if(isset($userId)){
-			$agreedata['u_id'] = $userId;
-			$agreedata['a_id'] = I('param.id');
-			$agreedata['create_time'] = time();
 			$SupportAnswer = M('SupportAnswer');
-			$SupportAnswer->add($agreedata);
+			$findData['a_id'] = I('param.id');
+			$findData['u_id'] = $userId;
+			$findResult = $SupportAnswer->where($findData)->find();
+			if(!$findResult){
+				$agreedata['u_id'] = $userId;
+				$agreedata['a_id'] = I('param.id');
+				$agreedata['create_time'] = time();
+				$SupportAnswer->add($agreedata);
+				
+				$Answer = M('Answer');
+				$add['id'] = I('param.id');
+				$add['support_count'] = array('exp','support_count+1');
+				$Answer->save($add);
+
+				$objectdata['u_id'] = $userId;
+				$objectdata['a_id'] = I('param.id');
+				$NonsupportAnswer = M('NonsupportAnswer');
+				$NonsupportAnswer->where($objectdata)->delete();
+
+				$Answer = M('Answer');
+				$data['id'] = I('param.id');
+				$data['nonsupport_count'] = array('exp','nonsupport_count-1');
+				$Answer->save($data);
+
+				$answer = $Answer->where("id=".I('param.id'))->find();
+				$answeruid = $answer['u_id'];
+				$answerqid = $answer['q_id'];
+				$AgreeMessage = M('AgreeMessage');
+				$agreeData['a_id'] = I('param.id');
+				$agreeData['u_id'] = $answeruid;
+				$agreeData['q_id'] = $answerqid;
+				$agreeData['from_id'] = $userId;
+				$AgreeMessage->add($agreeData);
+
+				$User = M('User');
+				$userData['id'] = $answeruid;
+				$userData['agree_count'] = array('exp','agree_count+1');
+				$User->save($userData);
+
+				$this->ajaxReturn('', '', 1);
+			}else{
+				$this->ajaxReturn('', '', -1);
+			}
 			
-			$Answer = M('Answer');
-			$add['id'] = I('param.id');
-			$add['support_count'] = array('exp','support_count+1');
-			$Answer->save($add);
-
-			$objectdata['u_id'] = $userId;
-			$objectdata['a_id'] = I('param.id');
-			$NonsupportAnswer = M('NonsupportAnswer');
-			$NonsupportAnswer->where($objectdata)->delete();
-
-			$Answer = M('Answer');
-			$data['id'] = I('param.id');
-			$data['nonsupport_count'] = array('exp','nonsupport_count-1');
-			$Answer->save($data);
-
-			$answer = $Answer->where("id=".I('param.id'))->find();
-			$answeruid = $answer['u_id'];
-			$answerqid = $answer['q_id'];
-			$AgreeMessage = M('AgreeMessage');
-			$agreeData['a_id'] = I('param.id');
-			$agreeData['u_id'] = $answeruid;
-			$agreeData['q_id'] = $answerqid;
-			$agreeData['from_id'] = $userId;
-			$AgreeMessage->add($agreeData);
-
-			$User = M('User');
-			$userData['id'] = $answeruid;
-			$userData['agree_count'] = array('exp','agree_count+1');
-			$User->save($userData);
-
-			$this->ajaxReturn('', '', 1);
 		}
 		else{
 			//should login first should comeout a view
@@ -56,28 +64,35 @@ class AnswerAction extends Action {
 	public function cancelAgree(){
 		$userId=session('userId');
 		if(isset($userId)){
-			$map['u_id'] = $userId;
-			$map['a_id'] = I('param.id');
-			
 			$SupportAnswer = M('SupportAnswer');
-			$SupportAnswer->where($map)->delete();
-			$Answer = M('Answer');
-			$data['id'] = I('param.id');
-			$data['support_count'] = array('exp','support_count-1');
-			$Answer->save($data);
+			$findData['a_id'] = I('param.id');
+			$findData['u_id'] = $userId;
+			$findResult = $SupportAnswer->where($findData)->find();
+			if($findResult){
+				$map['u_id'] = $userId;
+				$map['a_id'] = I('param.id');
+				$SupportAnswer->where($map)->delete();
+				$Answer = M('Answer');
+				$data['id'] = I('param.id');
+				$data['support_count'] = array('exp','support_count-1');
+				$Answer->save($data);
 
-			$answer = $Answer->where("id=".I('param.id'))->find();
-			$answeruid = $answer['u_id'];
+				$answer = $Answer->where("id=".I('param.id'))->find();
+				$answeruid = $answer['u_id'];
 
-			$AgreeMessage = M('AgreeMessage');
-			$AgreeMessage->where('a_id='.I('param.id'))->delete();
+				$AgreeMessage = M('AgreeMessage');
+				$AgreeMessage->where('a_id='.I('param.id'))->delete();
 
-			$User = M('User');
-			$userData['id'] = $answeruid;
-			$userData['agree_count'] = array('exp','agree_count-1');
-			$User->save($userData);
+				$User = M('User');
+				$userData['id'] = $answeruid;
+				$userData['agree_count'] = array('exp','agree_count-1');
+				$User->save($userData);
 
-			$this->ajaxReturn('', '', 1);
+				$this->ajaxReturn('', '', 1);
+			}else{
+				$this->ajaxReturn('', '', -1);
+			}
+			
 		}
 		else{
 			$this->ajaxReturn('', '', 0);
@@ -98,31 +113,37 @@ class AnswerAction extends Action {
 			$add['nonsupport_count'] = array('exp','nonsupport_count+1');
 			$Answer->save($add);
 
-			$agreedata['u_id'] = $userId;
-			$agreedata['a_id'] = I('param.id');
 			$SupportAnswer = M('SupportAnswer');
-			$SupportAnswer->where($agreedata)->delete();
+			$findData['a_id'] = I('param.id');
+			$findData['u_id'] = $userId;
+			$findResult = $SupportAnswer->where($findData)->find();
+			if($findResult){
+				$agreedata['u_id'] = $userId;
+				$agreedata['a_id'] = I('param.id');
+				$SupportAnswer->where($agreedata)->delete();
 
-			$Answer = M('Answer');
-			$data['id'] = I('param.id');
-			$data['support_count'] = array('exp','support_count-1');
-			$Answer->save($data);
-
-			$AgreeMessage = M('AgreeMessage');
-			$result = $AgreeMessage->where('a_id='.I('param.id'))->find();
-			if($result){
-				$answer = $Answer->where("id=".I('param.id'))->find();
-				$answeruid = $answer['u_id'];
+				$Answer = M('Answer');
+				$data['id'] = I('param.id');
+				$data['support_count'] = array('exp','support_count-1');
+				$Answer->save($data);
 
 				$AgreeMessage = M('AgreeMessage');
-				$AgreeMessage->where('a_id='.I('param.id'))->delete();
+				$result = $AgreeMessage->where('a_id='.I('param.id'))->find();
+				if($result){
+					$answer = $Answer->where("id=".I('param.id'))->find();
+					$answeruid = $answer['u_id'];
 
-				$User = M('User');
-				$userData['id'] = $answeruid;
-				$userData['agree_count'] = array('exp','agree_count-1');
-				$User->save($userData);
+					$AgreeMessage = M('AgreeMessage');
+					$AgreeMessage->where('a_id='.I('param.id'))->delete();
+
+					$User = M('User');
+					$userData['id'] = $answeruid;
+					$userData['agree_count'] = array('exp','agree_count-1');
+					$User->save($userData);
+				}
+
 			}
-
+			
 			$this->ajaxReturn('', '', 1);
 		}
 		else{
