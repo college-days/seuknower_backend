@@ -357,14 +357,24 @@ class QuestionAction extends Action {
 	public function changeContent(){
 		$qid = I('param.q_id');
 		$content = I('param.content');
+		$title = I('param.title');
+		$type = I('param.type');
 		$Question = M('Question');
-		
+			
+		$question = $Question->where("id=".$qid)->find();
+
 		$questionSaveData['intro'] = $content;
+		$questionSaveData['title'] = $title;
+		$questionSaveData['type'] = $type;
 		$result = $Question->where('id='.$qid)->save($questionSaveData);
 		if($result){
 			$this->ajaxReturn('', '', 1);
 		}else{
-			$this->ajaxReturn('', '', 0);
+			if($title == $question['title'] || $content == $question['intro'] || $type == $question['type']){
+				$this->ajaxReturn('', '', 1);
+			}else{
+				$this->ajaxReturn('', '', 0);
+			}
 		}
 	}
 

@@ -76,6 +76,8 @@ $(function(){
 	});
 
 	$("a.modifyques").click(function(){
+		var questiontitle = $(this).parents("div.left").find("span.questiontitle").text();
+		var questiontype = $(this).parents("div.left").find("a.tag").text();
 		var questionContent = $(this).parents("div.left").find("div.intro").html();
 		var questionId = $("#question").attr("qid");
 		$(".mask").show();
@@ -83,6 +85,18 @@ $(function(){
         window.editor.focus();
         window.editor.appendHtml(questionContent);
         $("#changequesid").text(questionId);
+        $("#changequestitle").val(questiontitle);
+        if(questiontype == "生活娱乐"){
+			$("#changequestype").find("option[value='0']").attr("selected", true);
+		}else if(questiontype == "学习考试"){
+			$("#changequestype").find("option[value='1']").attr("selected", true);
+		}else if(questiontype == "规章制度"){
+			$("#changequestype").find("option[value='2']").attr("selected", true);
+		}else if(questiontype == "技术专业"){
+			$("#changequestype").find("option[value='3']").attr("selected", true);
+		}else{
+			$("#changequestype").find("option[value='4']").attr("selected", true);
+		}
 	});
 	
 	$("#closechange").click(function(){
@@ -98,6 +112,10 @@ $(function(){
 	$(".mask").click(function(){
 		$(".win").css("display","none");
 		$(".mask").css("display","none");
+	});
+
+	$("#changequestitle").blur(function(){
+		checkChangeQuesTitle();
 	});
 	
 	$("#applychange").click(function(){
@@ -143,11 +161,15 @@ $(function(){
 
 	$("#applychangeques").click(function(){
 		var content = window.editor.html();
+		var title = $("#changequestitle").val().replace(/[ ]/g,"");
+		var type = $("#changequestype").find("option:selected").text().replace(/[ ]/g,"")
 		var qid = $("#changequesid").text();
 		$("#changequespwdalert").text("");
 		content = content.replace(/\s\w[^<\/>]*/g,"");
 		$.post('/question/change_content', {
 			'q_id': qid,
+			'title': title,
+			'type': type,
 			'content': content 
 		}, function(data){
 			if(data.status == 1){
@@ -221,6 +243,15 @@ $(function(){
     	}
     });
 });
+
+function checkChangeQuesTitle(){
+	var title = $("#changequestitle").text().replace(/[ ]/g,"");
+	if(title){
+		$("#changequestitlealert").text("");
+	}else{
+		$("#changequestitlealert").text("问题标题不能为空");
+	}
+}
 
 $(function(){
 	//虽然动态改变了agree的class，但是貌似因为jquery的初始化问题，仍然需要作判断才可以

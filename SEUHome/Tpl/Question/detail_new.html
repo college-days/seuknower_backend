@@ -5,8 +5,8 @@
 			<div class="left">
 				<div id="question" qid="{$question.id}" aid="{$aid}" uid="{$Think.session.userId}" invited="{$invited}" style="display:none;"></div>
 				<div class="title">
-					<span> {$question.title} </span>
-					<a href="/question/{$question.type}" class="tag" target="_blank"> {$question.type} </a>
+					<span class="questiontitle">{$question.title}</span>
+					<a href="/question/{$question.type}" class="tag" target="_blank">{$question.type}</a>
 				</div>
 				<div class="count">
 					<span>浏览：{$question.click_count}</span>
@@ -290,7 +290,7 @@
 		</div>
 	</div>
 
-	<div class="win" id="changequesdialog" style="display:none;">
+	<!--<div class="win" id="changequesdialog" style="display:none;">
 		<div style="display:none;" id="changequesid"></div>
 		<div class="title-bar">
 			<span>修改问题</span>
@@ -301,12 +301,41 @@
 		<div class="content">
 			<div class="question-new" style="display:block;">
 				<div id="changequespwdalert" style="display:block;color:red;"></div>
-				<!-- <input type="password" class="value" id="changepwd" placeholder="请输入密码"/> -->
+				<div>
+					<input type="button" id="applychangeques" value="确认修改" class="btn"/>
+				</div>
+			</div>
+		</div>
+	</div>-->
+
+	<div class="win" id="changequesdialog" style="display:none;">
+		<div style="display:none;" id="changequesid"></div>
+		<div class="title-bar">
+			<span>修改问题</span>
+			<div class="close" id="closequeschange"></div>
+		</div>
+		<div class="content">
+			<div class="question-new">
+				<p>问题标题</p>
+				<div id="changequestitlealert" style="color:red;display:block;"></div>
+				<input type="text" class="value" id="changequestitle"/>
+				<p>问题描述</p>
+				<div id="changequespwdalert" style="display:block;color:red;"></div>
+				<textarea id="changequesarea" style="width:100%;height:300px"></textarea>
+				<p>问题类型</p>
+				<select id="changequestype">
+					<option value="0">生活娱乐</option>
+					<option value="1">学习考试</option>
+					<option value="2">规章制度</option>
+					<option value="3">技术专业</option>
+					<option value="4">其他</option>
+				</select>
 				<div>
 					<input type="button" id="applychangeques" value="确认修改" class="btn"/>
 				</div>
 			</div>
 		</div>
 	</div>
+
 <script src="__JS__/question/question_detail.js?t=1394964656"></script>
 <include file="Public:footer" />

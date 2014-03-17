@@ -333,7 +333,11 @@ class AnswerAction extends Action {
 		if($result){
 			$this->ajaxReturn('', '', 1);
 		}else{
-			$this->ajaxReturn('', '', 0);
+			if($answer['content'] == $content){
+				$this->ajaxReturn('', '', 1);
+			}else{
+				$this->ajaxReturn('', '', 0);
+			}
 		}
 
 		/*if(md5($pwd) != $user['pwd']){
