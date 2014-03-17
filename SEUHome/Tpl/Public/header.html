@@ -45,7 +45,17 @@
 			directionNav: false, 
 		});
 		$('.searchbtn').click(function(){
-			window.location.href = "__APP__/question/search/" + $('#search_content').val().replace(/[ ]/g,"") + "/1";
+			var current = $("#current").attr("curr");
+			if(current == "question"){
+				window.location.href = "__APP__/question/search/" + $('#search_content').val().replace(/[ ]/g,"") + "/1";
+			}else if(current == "event"){
+				window.location.href = "__APP__/event/search/" + $('#search_content').val().replace(/[ ]/g,"");
+			}else if(current == "market"){
+				window.location.href = "__APP__/market/search/" + $('#search_content').val().replace(/[ ]/g,"") + "/1";
+			}else{
+				window.location.href = "__APP__/question/search/" + $('#search_content').val().replace(/[ ]/g,"") + "/1";
+			}
+			
 		});
 		$("#search_content").keypress(function(event){
 			if(event.keyCode == 13) window.location.href = "__APP__/question/search/" + $('#search_content').val().replace(/[ ]/g,"") + "/1";
@@ -57,6 +67,7 @@
 <body>
 	<div class="navbar" id="nav">
 		<div class="container">
+			<div id="current" curr="{$current}" style="display:none;"></div>
 			<div class="logo"> <a href="__APP__/index"><img src="__IMAGE__/header/logo.png"/></a></div>
 			<div class="line"> <img src="__IMAGE__/header/line.png"/></div>
 			<div class="meau">
