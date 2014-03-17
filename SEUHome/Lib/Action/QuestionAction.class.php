@@ -14,6 +14,20 @@ class QuestionAction extends Action {
 		return $lsQuestions;
 	}
 
+	public function adjustAnswerCount(){
+		$Question = M('Question');
+		$Answer = M('Answer');
+		$questions = $Question->select();
+		for($i=0; $i<count($questions); $i++){
+			$answers = $Answer->where("q_id=".$questions[$i]['id'])->select();
+			$answercount = count($answers);
+			$adjustData['id'] = $questions[$i]['id'];
+			$adjustData['answer_count'] = $answercount;
+			$Question->save($adjustData);
+		}
+		echo 'done';
+	}
+
     public function index(){
     	$type = I("param.type");
     	$domin = I("param.domin");

@@ -425,10 +425,12 @@
 					"weibo": $('#userweibo').val().replace(/[ ]/g,""),
 					"nickname": $("#usernickname").val().replace(/[ ]/g,"")
 				}, function(data){
-					if(data.status){
+					if(data.status == 1){
+						alert("修改资料成功");
 						window.location.href = '/user/profile/'+userid+'/0';
 					}else{
-						alert('修改资料失败');
+						alert("请修改信息中的内容");
+						window.location.href = '/user/profile/'+userid+'/0';
 					} 
 				}, "json");
 			}

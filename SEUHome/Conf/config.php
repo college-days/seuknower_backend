@@ -9,6 +9,7 @@ return array(
 	'URL_ROUTE_RULES'=>array(
 		'manage$' => 'Manage/event',
 		'question/search/:content/:page$' => 'Question/search',
+		'question/adjust_answer_count' => 'Question/adjustAnswerCount',
 		'question/change_content$' => 'Question/changeContent',
 		'question/more_search$' => 'Question/moreSearch',
 		'question/domin/:domin$' => 'Question/index',

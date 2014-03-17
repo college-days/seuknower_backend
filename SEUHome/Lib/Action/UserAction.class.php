@@ -471,6 +471,9 @@ class UserAction extends Action {
             $data['dept'] = $dept;
             $data['grade'] = $grade;
             $data['campus'] = $campus;
+            if(empty($nickname)){
+                $data['name'] = $userInfo['name'];
+            }
             if(empty($intro)){
                 $data['intro'] = $userInfo['intro'];
             }else{
@@ -502,7 +505,11 @@ class UserAction extends Action {
             // }
 
             $result = $User->where('id='.$u_id)->save($data);
-            $this->ajaxReturn('333', '', $result);
+            if(!$result){
+                $this->ajaxReturn('', '', 0);
+            }else{
+                $this->ajaxReturn('', '', 1);
+            }
 
         }else{
             $this->ajaxReturn($u_id, '', 0);
