@@ -134,7 +134,7 @@ class MarketAction extends Action {
 			$result['currentUserLike'] = 0;
 		}
 
-		$relateCommodities = $Commodity->where("u_id=".$result['u_id']." and id!=".$id)->select();
+		$relateCommodities = $Commodity->where("u_id=".$result['u_id']." and id!=".$id.' and onsale=1')->select();
 
 		$this->assign('relatecommodities', $relateCommodities);
 		$this->assign('relatecommoditycount', count($relateCommodities));
