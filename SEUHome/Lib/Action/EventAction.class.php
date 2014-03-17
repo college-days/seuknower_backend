@@ -322,7 +322,7 @@ class EventAction extends Action {
 
 		$currentEvent = $Event->find($id);
 		$user = $User->find($currentEvent['u_id']);
-		$currentEvent['organizer'] = $user['name'];
+		//$currentEvent['organizer'] = $user['name'];
 
 		$startTime = explode(" ",date("Y年m月d日 H:i:s",$currentEvent['start_time']));	
 		$endTime = explode(" ",date("Y年m月d日 H:i:s",$currentEvent['end_time']));
@@ -579,6 +579,7 @@ class EventAction extends Action {
 		$data['intro'] = I('param.intro');
 		$data['u_id'] = session('userId');
 		$data['category'] = I('param.tag_cate');
+		$data['organizer'] = I('param.organizer');
 		if(I('param.rawpath') && I('param.thumbpath')){
 			$data['raw_poster'] = I('param.rawpath');
 			$data['poster'] = I('param.thumbpath');
