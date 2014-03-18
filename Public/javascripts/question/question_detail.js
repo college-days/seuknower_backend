@@ -571,6 +571,9 @@ function submitCommentAnonymous(){
 			if(data.status == 0){
 				$("#failmsg").show();
 			}
+			if(data.status == 3){
+				$("#limitmsg").show();
+			}
 			if(data.status == -1){
 				window.location.href = "/login";
 			}

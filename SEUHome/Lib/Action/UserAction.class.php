@@ -218,6 +218,8 @@ class UserAction extends Action {
     		$this->assign('me', '0');
     	}
 
+        $this->footPrint($u_id);
+
     	$this->assign('asks', $askQuestions);
     	$this->assign('askcount', count($askQuestions));
     	$this->assign('answercount', $_SESSION['answercount']);
@@ -242,6 +244,8 @@ class UserAction extends Action {
     		$this->assign('me', '0');
     	}
 
+        $this->footPrint($u_id);
+
     	$this->assign('answers', $answerQuestions);
     	$this->assign('answercount', count($answerQuestions));
     	$this->assign('askcount', $_SESSION['askcount']);
@@ -265,6 +269,8 @@ class UserAction extends Action {
     	}else{
     		$this->assign('me', '0');
     	}
+
+        $this->footPrint($u_id);
 
     	$this->assign('answercount', $_SESSION['answercount']);
     	$this->assign('askcount', $_SESSION['askcount']);
@@ -291,6 +297,8 @@ class UserAction extends Action {
     	}else{
     		$this->assign('me', '0');
     	}
+
+        $this->footPrint($u_id);
 
     	$this->assign('answercount', $_SESSION['answercount']);
     	$this->assign('askcount', $_SESSION['askcount']);
@@ -319,6 +327,8 @@ class UserAction extends Action {
     		$this->assign('me', '0');
     	}
 
+        $this->footPrint($u_id);
+
     	$this->assign('answercount', $_SESSION['answercount']);
     	$this->assign('askcount', $_SESSION['askcount']);
     	$this->assign('sellcommoditycount', $_SESSION['sellcommoditycount']);
@@ -346,6 +356,8 @@ class UserAction extends Action {
     		$this->assign('me', '0');
     	}
 
+        $this->footPrint($u_id);
+
     	$this->assign('answercount', $_SESSION['answercount']);
     	$this->assign('askcount', $_SESSION['askcount']);
     	$this->assign('sellcommoditycount', $_SESSION['sellcommoditycount']);
@@ -370,6 +382,8 @@ class UserAction extends Action {
     		$this->assign('me', '0');
     	}
 
+        $this->footPrint($u_id);
+        
     	$this->assign('answercount', $_SESSION['answercount']);
     	$this->assign('askcount', $_SESSION['askcount']);
     	$this->assign('sellcommoditycount', $_SESSION['sellcommoditycount']);

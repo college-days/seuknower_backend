@@ -230,47 +230,54 @@ class AnswerAction extends Action {
 			}
 			//匿名回答
 			if($anonymous == 1){
-				$data['q_id'] = I('param.q_id');
-				$data['content'] = I('param.content');
-				$data['anonymous'] = 1;
-				$data['u_id'] = session('userId');
-				$data['create_time'] = time();
-				$Answer = M('Answer');
-				$result = $Answer->add($data);
-				if($result < 1){
-					$this->ajaxReturn('', '', 0);
-				}
-				//$result['content'] = htmlspecialchars_decode($data['content']);
-
-				$Question = M('Question');
-				$questiondata['id'] = I('param.q_id');
-				//回答数加1
-				$questiondata['answer_count'] = array('exp','answer_count+1');
-				$questiondata['has_answer'] = 1;
-				$Question->save($questiondata);
-
-				//回答的消息提示
 				$model = new Model();
-				$result = $model->query('select u_id, title from seu_question where id='.$qid);
-				$uidforqid = $result[0]['u_id'];
-				$titleforqid = $result[0]['title'];
-				$messageResult = $model->query('select * from seu_question_message where u_id='.$uidforqid.' and q_id='.$qid);
-				if($messageResult == null){
-					$messageData['q_id'] = $qid;
-					$messageData['u_id'] = $uidforqid;
-					$messageData['from_id'] = -3;
-					$messageData['title'] = $titleforqid;
-					$messageData['answer_count'] = array('exp','answer_count+1');
-					$messageModel = M('Question_message');
-					$addResult = $messageModel->add($messageData);
-				}else{
-					//需要主键才可以= =
-					$messageData['answer_count'] = array('exp','answer_count+1');
-					$messageModel = M('Question_message');
-					$saveResult = $messageModel->where('q_id='.$qid.' and u_id='.$uidforqid)->save($messageData);
-				}
+				$result = $model->query('select * from seu_answer where q_id='.$qid.' and u_id='.$uid);
+				if($result == null){
+					$data['q_id'] = I('param.q_id');
+					$data['content'] = I('param.content');
+					$data['anonymous'] = 1;
+					$data['u_id'] = session('userId');
+					$data['create_time'] = time();
+					$Answer = M('Answer');
+					$result = $Answer->add($data);
+					if($result < 1){
+						$this->ajaxReturn('', '', 0);
+					}
+					//$result['content'] = htmlspecialchars_decode($data['content']);
 
-				$this->ajaxReturn('', '', 1);
+					$Question = M('Question');
+					$questiondata['id'] = I('param.q_id');
+					//回答数加1
+					$questiondata['answer_count'] = array('exp','answer_count+1');
+					$questiondata['has_answer'] = 1;
+					$Question->save($questiondata);
+
+					//回答的消息提示
+					$model = new Model();
+					$result = $model->query('select u_id, title from seu_question where id='.$qid);
+					$uidforqid = $result[0]['u_id'];
+					$titleforqid = $result[0]['title'];
+					$messageResult = $model->query('select * from seu_question_message where u_id='.$uidforqid.' and q_id='.$qid);
+					if($messageResult == null){
+						$messageData['q_id'] = $qid;
+						$messageData['u_id'] = $uidforqid;
+						$messageData['from_id'] = -3;
+						$messageData['title'] = $titleforqid;
+						$messageData['answer_count'] = array('exp','answer_count+1');
+						$messageModel = M('Question_message');
+						$addResult = $messageModel->add($messageData);
+					}else{
+						//需要主键才可以= =
+						$messageData['answer_count'] = array('exp','answer_count+1');
+						$messageModel = M('Question_message');
+						$saveResult = $messageModel->where('q_id='.$qid.' and u_id='.$uidforqid)->save($messageData);
+					}
+
+					$this->ajaxReturn('', '', 1);
+				}else{
+					//回答次数限制
+					$this->ajaxReturn('', '', 3);
+				}
 			}
 
 		}
