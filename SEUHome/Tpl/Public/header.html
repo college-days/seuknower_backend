@@ -58,7 +58,18 @@
 			
 		});
 		$("#search_content").keypress(function(event){
-			if(event.keyCode == 13) window.location.href = "__APP__/question/search/" + $('#search_content').val().replace(/[ ]/g,"") + "/1";
+			if(event.keyCode == 13) {
+				var current = $("#current").attr("curr");
+				if(current == "question"){
+					window.location.href = "__APP__/question/search/" + $('#search_content').val().replace(/[ ]/g,"") + "/1";
+				}else if(current == "event"){
+					window.location.href = "__APP__/event/search/" + $('#search_content').val().replace(/[ ]/g,"");
+				}else if(current == "market"){
+					window.location.href = "__APP__/market/search/" + $('#search_content').val().replace(/[ ]/g,"") + "/1";
+				}else{
+					window.location.href = "__APP__/question/search/" + $('#search_content').val().replace(/[ ]/g,"") + "/1";
+				}
+			}
 		});
     });
 	</script>
