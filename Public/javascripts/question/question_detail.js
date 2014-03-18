@@ -53,7 +53,9 @@ $(function(){
 
 	//作用顺序的关系，绑定.mask的函数必须要在.mask的dom对象创建完之后才能有，不然就跪了，相当于给空对象加回调
 	$(".mask").click(function(){
-		window.editor.html("");
+		if(window.editor){
+			window.editor.html("");
+		}
 		window.editor = answerEditor;
 		window.editor.html("");
 	});
@@ -68,6 +70,7 @@ $(function(){
 	$("a.modify").click(function(){
 		var answerContent = $(this).parents("div.words").find("div.answercontent").html();
 		var answerId = $(this).parents("li").attr("aid");
+		window.editor = changeEditor;
 		$(".mask").show();
 		$("#changedialog").show();
         window.editor.focus();
@@ -82,6 +85,7 @@ $(function(){
 		var questionId = $("#question").attr("qid");
 		$(".mask").show();
 		$("#changequesdialog").show();
+		window.editor = changeQuesEditor;
         window.editor.focus();
         window.editor.appendHtml(questionContent);
         $("#changequesid").text(questionId);
@@ -245,7 +249,7 @@ $(function(){
 });
 
 function checkChangeQuesTitle(){
-	var title = $("#changequestitle").text().replace(/[ ]/g,"");
+	var title = $("#changequestitle").val().replace(/[ ]/g,"");
 	if(title){
 		$("#changequestitlealert").text("");
 	}else{
