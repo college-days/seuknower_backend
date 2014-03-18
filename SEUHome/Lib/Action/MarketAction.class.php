@@ -508,7 +508,7 @@ class MarketAction extends Action {
 		$Commodity->save($data);
 		if(I('param.rawpath')){
 			$Picture = M('CommodityPicture');
-			$pdata['c_id'] = $cId;
+			$pdata['c_id'] = $id;
 			$pdata['create_time'] = time();
 			$pdata['picture'] = I('param.rawpath');
 			$Picture->add($pdata);
