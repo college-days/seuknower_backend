@@ -82,13 +82,13 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 
 /*问答*/
 .index-question {margin-top:18px;width:944px;}
-.index-question .left{margin-top:20px;width:266px;float:left;}
+.index-question .left{margin-top:20px;width:366px;float:left;}
 .index-question .slogan{font-size:18px;margin-bottom:25px;color:#2ead91;}
 .index-question .left .title{font-size:12px;color:black;}
 .index-question .left .answer-count{float:right;color:#80827f;}
 .index-question .left li{margin-top:13px;}
 .index-question .left .go{float:right;margin-top:40px;margin-bottom:22px;}
-.index-question .right{background:url(images/rain.png) no-repeat;width:501px;height:218px;float:left;margin-left:147px;margin-top:60px;}
+.index-question .right{background:url(images/rain.png) no-repeat;width:501px;height:218px;float:left;margin-left:47px;margin-top:60px;}
 .index-question .divide{width:100%;border-bottom: solid 1px #d0d4d4;clear:both;}
 .index-question .right {line-height:15px;}
 
@@ -98,20 +98,20 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .index-question .right a{color:#7a6c59;}
 .index-question .right img{border-radius:50%;}
 
-.index-question .right .icon1 div{margin-top:86px;float:right;margin-right:480px;border-bottom-right-radius:0px;}
+.index-question .right .icon1 div{/*margin-top:86px;*/float:right;margin-right:480px;border-bottom-right-radius:0px;}
 .index-question .right .icon1 img{margin-top:20px;margin-left:5px;width:33px;height:33px;}
 
-.index-question .right .icon2 div{margin-top:-162px;float:right;margin-right:402px;border-bottom-right-radius:0px;}
-.index-question .right .icon2 img{margin-top:-125px;margin-left:111px;width:54px;height:54px;}
+.index-question .right .icon2 div{margin-top:27px;float:right;margin-right:402px;border-bottom-right-radius:0px;}
+.index-question .right .icon2 img{margin-top:-13px;margin-left:111px;width:54px;height:54px;}
 
-.index-question .right .icon3 div{margin-top:-187px;float:right;margin-right:222px;border-bottom-right-radius:0px;}
-.index-question .right .icon3 img{margin-top:-113px;margin-left:247px;width:39px;height:39px;}
+.index-question .right .icon3 div{margin-top:-116px;float:right;margin-right:222px;border-bottom-right-radius:0px;}
+.index-question .right .icon3 img{margin-top:-42px;margin-left:247px;width:39px;height:39px;}
 
-.index-question .right .icon4 div{margin-top:-229px;float:left;margin-left:358px;border-bottom-left-radius:0px;}
-.index-question .right .icon4 img{margin-top:-158px;margin-left:328px;width:54px;height:54px;}
+.index-question .right .icon4 div{margin-top:-158px;float:left;margin-left:358px;border-bottom-left-radius:0px;}
+.index-question .right .icon4 img{margin-top:-87px;margin-left:328px;width:54px;height:54px;}
 
-.index-question .right .icon5 div{margin-top:-150px;float:left;margin-left:436px;border-bottom-left-radius:0px;}
-.index-question .right .icon5 img{margin-top:-80px;margin-left:406px;width:54px;height:54px;}
+.index-question .right .icon5 div{margin-top:-79px;float:left;margin-left:436px;border-bottom-left-radius:0px;}
+.index-question .right .icon5 img{margin-top:-9px;margin-left:406px;width:54px;height:54px;}
 
 /*跳蚤市场*/
 .index-market{margin-top:38px;}
@@ -648,12 +648,12 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .profile-note ul li:first-child img{border-left:1px solid #e5e5e5;}
 
 
-.person-profile .info{width:335px;background:white;border:1px solid #e5e5e5;padding:30px 0px 18px 30px;float:left;}
+.person-profile .info{width:606px;background:white;border:1px solid #e5e5e5;padding:30px 0px 18px 30px;float:left;}
 .person-profile .info .title{font-size:16px;color:#7a6c59;overflow:hidden;}
 /*.person-profile .info .title .divide{border-top:1px solid #e5e5e5;width:170px;margin-bottom:6px;margin-left:5px;margin-right:5px;display:inline-block;}
 .person-profile .info .title a{font-size:12px;color:#7c7c7c;background:#f1f5f5;padding:5px 5px;border-radius:3px;}*/
 .person-profile .info .title .text{float:left;line-height:25px;}
-.person-profile .info .title .line{float:left;margin-top:12px;margin-left:10px;border-top:1px solid #e5e5e5;width:170px;}
+.person-profile .info .title .line{float:left;margin-top:12px;margin-left:10px;border-top:1px solid #e5e5e5;width:441px;}
 .person-profile .info .title .button{float:right;font-size:12px;color:#FFF;background:#7c7c7c;margin-right:20px;padding:5px 5px;border-radius:3px;cursor:pointer;}
 .person-profile .info .title .button:hover{float:right;font-size:12px;color:#000;background:#80c269;margin-right:20px;padding:5px 5px;border-radius:3px;cursor:pointer;}
 
@@ -665,7 +665,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .person-profile .info .detail {margin-top:42px;float:left;overflow:hidden;}
 .person-profile .info .detail li{margin-bottom:20px;overflow:hidden;}
 .person-profile .info .detail li .key{float:left;width:65px;text-align:right;color:#727171;font-size:14px;}
-.person-profile .info .detail li .value{float:left;margin-left:36px;max-width:230px;font-size:14px;}
+.person-profile .info .detail li .value{float:left;margin-left:36px;max-width:501px;font-size:14px;}
 
 .person-profile .info .modify {margin-top:42px;float:left;overflow:hidden;}
 .person-profile .info .modify  .intro{overflow:hidden;margin-bottom:21px;}

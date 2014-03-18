@@ -6,6 +6,10 @@ class AnswerAction extends Action {
 		$util->autologin();
 	}
 
+	public function _empty(){
+		$this->display("Public:404");
+	}
+
 	public function addAgree(){
 		$userId = session('userId');
 		if(isset($userId)){

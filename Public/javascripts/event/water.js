@@ -1,18 +1,15 @@
 	$(function(){
-		var load = 1;
 		$("body").css("minHeight", $(document).height());
 		$("#wrap").css("minHeight", $(".introduce").height());
 		$("#cate_type a").hover(function(){
-			var tag = $(this).text().replace(/[ ]/g,"");
-			var time = $("#cate_time .active").text().replace(/[ ]/g,"");						
-			var link_to = "/event/" + tag + "/" + time;
+			var nowCur = $(this).text().replace(/[ ]/g,"");						
+			var link_to = "/event/" + nowCur + "/" + cateTime;
 			$(this).attr("href", link_to);
 		});
 
 		$("#cate_time a").hover(function(){
-			var tag = $("#cate_type .active").text().replace(/[ ]/g,"");
-			var time = $(this).text().replace(/[ ]/g,"");
-			var link_to = "/event/" + tag + "/" + time;
+			var nowCur = $(this).text().replace(/[ ]/g,"");
+			var link_to = "/event/" + cateTag + "/" + nowCur;
 			$(this).attr("href", link_to);
 		});
 
@@ -21,7 +18,9 @@
 		})
 	});
 
-	var id = 0;
+	var id = 0,
+		cateTag = $("#cate_type .active").text().replace(/[ ]/g,""),
+		cateTime = $("#cate_time .active").text().replace(/[ ]/g,"");
 	var waterFull = function (options) {
 		var id = options.id,
 			notice = options.notice,
@@ -32,6 +31,7 @@
 			noticeHeight = $("."+notice)[0].offsetHeight,
 			// 用于记录当前插入的格子数量
 			nowNum = 0,
+			eleLocateHigh = [noticeHeight + columnMarginRight ,0 ,0 ,0],
 			postersArr = []; // 用于记录每个单独层对象
 
 		// 获取列数
@@ -44,10 +44,9 @@
 		// 插入数据
 		function insert(data) {
 			var fragElement = document.createDocumentFragment(),
-				datas = data.data,
-				len = datas.length;
+				len = data.length;
 			if (len > 0) {
-				$.each(datas, function(i,item){
+				$.each(data, function(i,item){
 					// var html = '<div class="title"><a href="/event/' + item.id + '">'+ item.title +'</a></div><div class="intro">时间：'+ item.time + '<br />地点：' + item.location +'</div><div class="pa">'+ item.join_count +'人参加<span class="sp">|</span>'+ item.interest_count +'人感兴趣</div>';
 					var html = '<div class="title"><a href="/event/' + item.id + '">'+ item.title +'</a></div><div class="intro">时间：'+ item.time + '<br />地点：' + item.location +'</div><div class="pa">'+ item.interest_count +'人感兴趣</div>';
 
@@ -72,59 +71,33 @@
 
 		//排序
 		function sort(){
-			var num = getColumnNum(), left, top, column, lastEndhigh = [];
+			var num = getColumnNum(), left, top, column;
+			eleLocateHigh.length = num;
 			//nowNum的作用是不让已经加载的数据重新计算定位排列
 			for (var j = nowNum, k = postersArr.length; j < k; j++, nowNum++) {
-				num = j < 9 ? 3 : 4;
-				// 初始化top的值
-				top = 0;
-				// 获取当前为第几列
-				column = j < num ? j : j % num;
-
-				// 计算可以得到当前列的LEFT值
-				if(num === 3){
-					left = (column+1) * (cellClientWidth + columnMarginRight);
-				}else if(num == 4){
-					left = (column) * (cellClientWidth + columnMarginRight);
-				}
-				postersArr[j].style.left = left + 'px';
-				if (j < num) {
-					// 第一列top值为0
-					postersArr[j].style.top = '0px';
-				} else {
-					if(j == 9){
-						postersArr[j].style.left = "0";
-						postersArr[j].style.top = noticeHeight + columnMarginRight + 'px';
-						continue;
+				var minPos = minVal(eleLocateHigh);
+				$.each(eleLocateHigh, function(i,v){
+					if(minPos == v){
+						postersArr[j].style.top = v + "px";
+						postersArr[j].style.left = i * (cellClientWidth + columnMarginRight) + "px";
+						eleLocateHigh[i] = postersArr[j].offsetTop + postersArr[j].offsetHeight + columnMarginRight;
+						return false;
 					}
-					var m = j;
-					if(j<13){
-						m = m - 3;
-					}else if(j == 13){
-						m = m - 7;
-					}else{
-						m = m - 4;
-					}
-					top = postersArr[m].offsetTop + postersArr[m].offsetHeight + columnMarginRight;
-					postersArr[j].style.top = top + 'px';
-					if(j>k-5){
-						lastEndhigh.push(top + postersArr[j].offsetHeight);
-					}
-				}
+				})
 			}
-			owrap.style.height = Math.max.apply(Math, lastEndhigh) + 'px';
+			owrap.style.height = maxVal(eleLocateHigh)-columnMarginRight + 'px';
 		}
 
-		// resize 重新排列
-		function resort() {
-			// 设置nowNum=0即可重排
-			nowNum = 0;
-			// 重排
-			sort();
+		function minVal(arr){
+			return Math.min.apply(Math, arr);
 		}
+
+		function maxVal(arr){
+			return Math.max.apply(Math, arr);
+		}
+
 		return {
-			insert:insert,
-			resort:resort
+			insert:insert
 		}
 
 	};
@@ -151,19 +124,19 @@
 		},
 		getData: function(){
 			id = id+1;
-			var tag = $("#cate_type .active").text().replace(/[ ]/g,"");
-			var time = $("#cate_time .active").text().replace(/[ ]/g,"");
-			$.post('/event/load',{'tag':tag,'time':time,'id':id},function(data){
+			$.post('/event/load',{'tag':cateTag,'time':cateTime,'id':id},function(data){
 				var data = $.parseJSON(data);
 				if(data.status){
-					myWater.insert(data);
+					myWater.insert(data.data);
+					if(data.data.length<6){
+						$(".load").hide();
+					}
 				}else{
 					$(".load").hide();
  				}
 			})
 		},
-		timer:null,
-		timer2:null
+		timer:null
 	};
 	var myWater = waterFull({id:'wrap', notice: 'introduce'});
 	// 初始化的数据
@@ -174,16 +147,10 @@
 			var height = tool.getPageHeight();
 			var scrollTop = tool.getScrollTop();
 			var clientHeight = tool.getClientHeigth();
-			var loadVisibility = $(".load").css("display") === "block";
+			var loading = $(".load").css("display")=="block";
 			// 加载
-			if (loadVisibility && scrollTop + clientHeight > height - 50){
+			if (loading && scrollTop + clientHeight > height - 50){
 				tool.getData();
 			}
 		}, 500);
 	});
-	tool.on(window, 'resize', function () {
-		clearTimeout(tool.timer2);
-		tool.timer2 = setTimeout(function () {
-			myWater.resort();
-		}, 500)
-	})

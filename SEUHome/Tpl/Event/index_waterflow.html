@@ -112,78 +112,12 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- <notempty name="leftevents"> -->
-	<div class="column" id="left_event" style="display:none;">
-		<volist name="leftevents" id="event">
-			<div class="content">
-				<eq name="event.poster" value="notexists">
-				<else/>
-					<img src="{$event.poster}"/>
-				</eq>
-				<div class="info">
-					<dl>
-						<dt align="center"><a href="/event/{$event.id}" target="_blank">{$event.title}</a></dt>
-						<dd>时间：{$event.time}</dd>
-						<dd>地点：{$event.location}</dd>
-						<!--<dd>费用：{$event.cost}</dd>
-						<dd>发起人：{$event.organizer}</dd>-->
-						<dd class="interest"><!--{$event.join_count}人参加<span>|--></span>{$event.interest_count}人感兴趣</dd>
-					</dl>
-				</div>
-			</div>
-		</volist>
-	</div>
-	<!-- </notempty> -->
-	<!-- <notempty name="middleevents"> -->
-	<div class="column" id="middle_event" style="display:none;">
-		<volist name="middleevents" id="event">
-			<div class="content">
-				<eq name="event.poster" value="notexists">
-				<else/>
-					<img src="{$event.poster}"/>
-				</eq>
-				<div class="info">
-					<dl>
-						<dt align="center"><a href="/event/{$event.id}" target="_blank">{$event.title}</a></dt>
-						<dd>时间：{$event.time}</dd>
-						<dd>地点：{$event.location}</dd>
-						<!--<dd>费用：{$event.cost}</dd>
-						<dd>发起人：{$event.organizer}</dd>-->
-						<dd class="interest">{$event.join_count}人参加<span>|</span>{$event.interest_count}人感兴趣</dd>
-					</dl>
-				</div>
-			</div>
-		</volist>
-	</div>
-	<!-- </notempty> -->
-	<!-- <notempty name="rightevents"> -->
-	<div class="column" id="right_event" style="display:none;">
-		<volist name="rightevents" id="event">
-			<div class="content">
-				<eq name="event.poster" value="notexists">
-				<else/>
-					<img src="{$event.poster}"/>
-				</eq>
-				<div class="info">
-					<dl>
-						<dt align="center"><a href="/event/{$event.id}" target="_blank">{$event.title}</a></dt>
-						<dd>时间：{$event.time}</dd>
-						<dd>地点：{$event.location}</dd>
-						<!--<dd>费用：{$event.cost}</dd>
-						<dd>发起人：{$event.organizer}</dd>-->
-						<dd class="interest">{$event.join_count}人参加<span>|</span>{$event.interest_count}人感兴趣</dd>
-					</dl>
-				</div>
-			</div>
-		</volist>
-	</div>
-	<!-- </notempty> -->
-	<!-- </div> -->
-	
 </div>
 
 	<div class="load"><img src="__IMAGE__/event/load.gif"/></div>
 	<div id="goTop" class="go_top"></div>
+
 	<script src="__JS__/event/water.js?t=1395138513"></script>
 <include file="Public:newquestion" />
+
+

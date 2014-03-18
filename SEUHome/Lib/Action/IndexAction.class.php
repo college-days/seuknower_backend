@@ -20,9 +20,9 @@ class IndexAction extends Action {
     		$hotQuestions = array_merge($recommendQuestions, $questions);
     	}
 		
-		for($i=0; $i<count($hotQuestions); $i++){
-			$hotQuestions[$i]['title'] = $util->sub_string($hotQuestions[$i]['title'], 15);
-		}
+		// for($i=0; $i<count($hotQuestions); $i++){
+		// 	$hotQuestions[$i]['title'] = $util->sub_string($hotQuestions[$i]['title'], 15);
+		// }
 
     	$Model = M();
     	$User = M('User');
