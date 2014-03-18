@@ -1,5 +1,5 @@
 body{background:#f3f7fa;}
-.wrap{margin:15px auto;width:943px;position:relative;overflow:hidden;min-height:1000px;}
+.wrap{margin:15px auto;width:943px;position:relative;overflow:hidden;}
 .introduce{width:220px;float:left;position:absolute;}
 .user_box{border:1px solid #e5e5e5;background:#fff;}
 .introduce .tit{font-size:16px;color:#7a6c59;border-left:2px solid #7a6c59;margin:21px 0 0 -1px;padding-left:22px;line-height:18px;}

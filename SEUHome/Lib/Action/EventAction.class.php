@@ -680,48 +680,28 @@ class EventAction extends Action {
 		}
 		
 
-		//dump($events);
-		$this->assign('events', $events);
-		$this->assign('eventscount', count($events));
+		$leftEvents[0] = $events[0];
+		$middleEvents[0] = $events[1];
+		$rightEvents[0] = $events[2];
+		for($i=3; $i<count($events); $i++){
+			$temp[0] = $events[$i];
+			if($i%3 == 0){
+				
+				$leftEvents = array_merge($leftEvents,$temp);
+			}
+			else if($i%3 == 1){
+				$middleEvents = array_merge($middleEvents,$temp);
+			}
+			else{
+				$rightEvents = array_merge($rightEvents,$temp);
+			}
+		}
 
-		
-		/*switch (count($events)) {
-			case 6:
-				$this->assign('leftevents', array($events[0], $events[1]));
-				$this->assign('middleevents', array($events[2], $events[3]));
-				$this->assign('rightevents', array($events[4], $events[5]));
-				break;
-			case 5:
-				$this->assign('leftevents', array($events[0], $events[1]));
-				$this->assign('middleevents', array($events[2], $events[3]));
-				$this->assign('rightevents', array($events[4]));
-				break;
-			case 4:
-				$this->assign('leftevents', array($events[0], $events[1]));
-				$this->assign('middleevents', array($events[2], $events[3]));
-				$this->assign('rightevents', array());
-				break;
-			case 3:
-				$this->assign('leftevents', array($events[0], $events[1]));
-				$this->assign('middleevents', array($events[2]));
-				$this->assign('rightevents', array());
-				break;
-			case 2:
-				$this->assign('leftevents', array($events[0], $events[1]));
-				$this->assign('middleevents', array());
-				$this->assign('rightevents', array());
-				break;
-			case 1:
-				$this->assign('leftevents', array($events[0]));
-				$this->assign('middleevents', array());
-				$this->assign('rightevents', array());
-				break;
-			default:
-				# code...
-				break;
-		}*/
+		$this->assign('leftevents',$leftEvents);
+		$this->assign('middleevents',$middleEvents);
+		$this->assign('rightevents',$rightEvents);
 		$this->assign('content',$content);
-		$this -> display();
+		$this->display();
 	}
 }
 ?>

@@ -1,5 +1,7 @@
 	$(function(){
 		var load = 1;
+		$("body").css("minHeight", $(document).height());
+		$("#wrap").css("minHeight", $(".introduce").height());
 		$("#cate_type a").hover(function(){
 			var tag = $(this).text().replace(/[ ]/g,"");
 			var time = $("#cate_time .active").text().replace(/[ ]/g,"");						
@@ -70,7 +72,7 @@
 
 		//排序
 		function sort(){
-			var num = getColumnNum(), left, top, column;
+			var num = getColumnNum(), left, top, column, lastEndhigh = [];
 			//nowNum的作用是不让已经加载的数据重新计算定位排列
 			for (var j = nowNum, k = postersArr.length; j < k; j++, nowNum++) {
 				num = j < 9 ? 3 : 4;
@@ -105,9 +107,12 @@
 					}
 					top = postersArr[m].offsetTop + postersArr[m].offsetHeight + columnMarginRight;
 					postersArr[j].style.top = top + 'px';
+					if(j>k-5){
+						lastEndhigh.push(top + postersArr[j].offsetHeight);
+					}
 				}
 			}
-			owrap.style.height = top + 97 + 'px';
+			owrap.style.height = Math.max.apply(Math, lastEndhigh) + 'px';
 		}
 
 		// resize 重新排列
@@ -152,7 +157,9 @@
 				var data = $.parseJSON(data);
 				if(data.status){
 					myWater.insert(data);
-				}
+				}else{
+					$(".load").hide();
+ 				}
 			})
 		},
 		timer:null,
@@ -167,8 +174,9 @@
 			var height = tool.getPageHeight();
 			var scrollTop = tool.getScrollTop();
 			var clientHeight = tool.getClientHeigth();
+			var loadVisibility = $(".load").css("display") === "block";
 			// 加载
-			if (scrollTop + clientHeight > height - 50){
+			if (loadVisibility && scrollTop + clientHeight > height - 50){
 				tool.getData();
 			}
 		}, 500);
