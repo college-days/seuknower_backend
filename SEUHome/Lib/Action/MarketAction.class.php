@@ -7,6 +7,10 @@ class MarketAction extends Action {
 		$this->assign('current', 'market');
 	}
 
+	public function _empty(){
+		$this->display("Public:404");
+	}
+
     public function index(){
     	$category = I('param.category');
 

@@ -6,6 +6,10 @@ class IndexAction extends Action {
 		$util->autologin();
 	}
 
+    public function _empty(){
+        $this->display("Public:404");
+    }
+
     public function index(){
     	$util = new CommonUtil();
     	$Question = M('Question');

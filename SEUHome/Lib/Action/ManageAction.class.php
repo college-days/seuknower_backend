@@ -7,6 +7,10 @@ class ManageAction extends Action {
 		}
 	}
 
+	public function _empty(){
+		$this->display("Public:404");
+	}
+
 	public function event(){
 		$Event = M('Event');
 		$events = $Event->order("create_time desc")->select();

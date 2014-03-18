@@ -6,6 +6,10 @@ class AccountAction extends Action{
 		$util->autologin();
 	}
 
+	public function _empty(){
+		$this->display("Public:404");
+	}
+
 	public function login() {
 		$this->display('login');
 	}

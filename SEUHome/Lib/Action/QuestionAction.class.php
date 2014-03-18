@@ -6,6 +6,10 @@ class QuestionAction extends Action {
 		$util->autologin();
 		$this->assign('current', 'question');
 	}
+
+	public function _empty(){
+		$this->display("Public:404");
+	}
 					
 	//获得最新解决的问题
 	public function getLatestSolvedQuestion(){

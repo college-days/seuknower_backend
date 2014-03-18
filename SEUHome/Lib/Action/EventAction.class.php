@@ -7,6 +7,10 @@ class EventAction extends Action {
 		$this->assign('current', 'event');
 	}
 	
+	public function _empty(){
+		$this->display("Public:404");
+	}
+	
     public function index(){
     	$tag = I("param.tag");
 		$time = I("param.time");

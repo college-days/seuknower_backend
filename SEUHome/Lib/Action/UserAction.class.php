@@ -7,6 +7,10 @@ class UserAction extends Action {
         $util->autologin();
 	}
 
+    public function _empty(){
+        $this->display("Public:404");
+    }
+
 	public function get_ask_question($u_id, $type){
 		$Question = M('Question');
         if($type){
@@ -383,7 +387,7 @@ class UserAction extends Action {
     	}
 
         $this->footPrint($u_id);
-        
+
     	$this->assign('answercount', $_SESSION['answercount']);
     	$this->assign('askcount', $_SESSION['askcount']);
     	$this->assign('sellcommoditycount', $_SESSION['sellcommoditycount']);
