@@ -473,6 +473,13 @@ class UserAction extends Action {
             $data['campus'] = $campus;
             if(empty($nickname)){
                 $data['name'] = $userInfo['name'];
+            }else{
+                $findUser = $User->where("name='".$nickname."'")->find();
+                if($findUser){
+                    if((int)$findUser['id'] != (int)$_SESSION['userId']){
+                        $this->ajaxReturn('', '', 3);
+                    }
+                }
             }
             if(empty($intro)){
                 $data['intro'] = $userInfo['intro'];
@@ -506,7 +513,7 @@ class UserAction extends Action {
 
             $result = $User->where('id='.$u_id)->save($data);
             if(!$result){
-                $this->ajaxReturn('', '', 0);
+                $this->ajaxReturn('', '', 1);
             }else{
                 $this->ajaxReturn('', '', 1);
             }

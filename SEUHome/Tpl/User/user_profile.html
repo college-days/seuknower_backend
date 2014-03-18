@@ -411,28 +411,34 @@
 
 			function postProfileData(){
 				var userid = $("#userid").text().replace(/[ ]/g,"");
-				$.post("/user/update_profile", {
-					"rawpath": $("#rawpath").val(),
-					"thumbpath": $("#thumbpath").val(),
-					"id": $("#userid").text().replace(/[ ]/g,""),
-					"sex": $('#usersex').find("option:selected").text().replace(/[ ]/g,""), 
-					"dept": $('#userdept').find("option:selected").text().replace(/[ ]/g,""),
-					"grade": $('#usergrade').find("option:selected").text().replace(/[ ]/g,""),
-					"campus": $('#usercampus').find("option:selected").text().replace(/[ ]/g,""),
-					"intro": $('#userintro').val(),
-					"qq": $('#userqq').val().replace(/[ ]/g,""),
-					"email": $('#useremail').val().replace(/[ ]/g,""),
-					"weibo": $('#userweibo').val().replace(/[ ]/g,""),
-					"nickname": $("#usernickname").val().replace(/[ ]/g,"")
-				}, function(data){
-					if(data.status == 1){
-						alert("修改资料成功");
-						window.location.href = '/user/profile/'+userid+'/0';
-					}else{
-						alert("请修改信息中的内容");
-						window.location.href = '/user/profile/'+userid+'/0';
-					} 
-				}, "json");
+				if($("#nickname").text().replace(/[ ]/g,"")){
+					$.post("/user/update_profile", {
+						"rawpath": $("#rawpath").val(),
+						"thumbpath": $("#thumbpath").val(),
+						"id": $("#userid").text().replace(/[ ]/g,""),
+						"sex": $('#usersex').find("option:selected").text().replace(/[ ]/g,""), 
+						"dept": $('#userdept').find("option:selected").text().replace(/[ ]/g,""),
+						"grade": $('#usergrade').find("option:selected").text().replace(/[ ]/g,""),
+						"campus": $('#usercampus').find("option:selected").text().replace(/[ ]/g,""),
+						"intro": $('#userintro').val(),
+						"qq": $('#userqq').val().replace(/[ ]/g,""),
+						"email": $('#useremail').val().replace(/[ ]/g,""),
+						"weibo": $('#userweibo').val().replace(/[ ]/g,""),
+						"nickname": $("#usernickname").val().replace(/[ ]/g,"")
+					}, function(data){
+						if(data.status == 1){
+							alert("修改资料成功");
+							window.location.href = '/user/profile/'+userid+'/0';
+						}else if(data.status == 3){
+							alert("该昵称已经被别人用掉啦，想一个其他的吧");
+						}else{
+							alert("请修改信息中的内容");
+							window.location.href = '/user/profile/'+userid+'/0';
+						} 
+					}, "json");
+				}else{
+					alert("请填写你的昵称");
+				}
 			}
 
 			$('#icon').change(function(){		
