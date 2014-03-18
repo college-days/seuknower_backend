@@ -24,16 +24,16 @@ class AccountAction extends Action{
         $map['account'] = $account;
 		$result = $User->where($map)->find();
 		if($result === false){
-			$this ->ajaxReturn('', '查询数据库出错!', 0);
+			$this->ajaxReturn('', '查询数据库出错!', 0);
 		}
 		elseif($result === null){
-			$this ->ajaxReturn('', '帐号错误!', 0);
+			$this->ajaxReturn('', '帐号错误!', 0);
 		}
 		elseif($result['status'] == 0){
-			$this ->ajaxReturn('', '帐号未激活!', 0);
+			$this->ajaxReturn('', '帐号未激活!', 0);
 		}
 		elseif($result['pwd'] != md5($password)){
-			$this ->ajaxReturn('', '密码错误!', 0);
+			$this->ajaxReturn('', '密码错误!', 0);
 		}
 		else{
 			//将用户ID存入session
@@ -68,7 +68,7 @@ class AccountAction extends Action{
 			else{
 				session('isGroup',0);
 			}
-			$this ->ajaxReturn('', '', 1);
+			$this->ajaxReturn('', '', 1);
 		}
 	}
 
