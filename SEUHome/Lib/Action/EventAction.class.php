@@ -10,7 +10,7 @@ class EventAction extends Action {
 	public function _empty(){
 		$this->display("Public:404");
 	}
-	
+
     public function index(){
     	$tag = I("param.tag");
 		$time = I("param.time");
@@ -537,7 +537,7 @@ class EventAction extends Action {
 		import('@.ORG.UploadFile');
 
 		$upload = new UploadFile();								 	// 实例化上传类
-		$upload->maxSize  = 3145728 ;							 	// 设置附件上传大小
+		$upload->maxSize  = 10485760;							 	// 设置附件上传大小
 		$upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg');	// 设置附件上传类型
 		$upload->savePath =  './Uploads/Images/Event/Poster/Raw/';	// 设置附件上传目录	
 		$upload->saveRule= "uniqid";								//文件保存规则

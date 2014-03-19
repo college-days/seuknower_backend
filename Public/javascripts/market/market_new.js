@@ -157,7 +157,7 @@ function ajaxFileUpload(){
 				});					
 			},
 			error: function (data, status, e){
-				alert('图片不能大于3M,请压缩后上传');
+				alert('图片不能大于10M,请压缩后上传');
 			}
 	    }
     );
