@@ -25,6 +25,7 @@ class WeixinAction extends Action {
                 $fromUsername = $postObj->FromUserName;
                 $toUsername = $postObj->ToUserName;
                 $keyword = trim($postObj->Content);
+                $msgType = $postObj->MsgType;
                 $time = time();
                 $textTpl = "<xml>
 							<ToUserName><![CDATA[%s]]></ToUserName>
@@ -33,17 +34,24 @@ class WeixinAction extends Action {
 							<MsgType><![CDATA[%s]]></MsgType>
 							<Content><![CDATA[%s]]></Content>
 							<FuncFlag>0</FuncFlag>
-							</xml>";             
-				if(!empty( $keyword ))
-                {
-              		$msgType = "text";
-                	$contentStr = "Welcome to wechat world!";
-                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-                	echo $resultStr;
-                }else{
-                	echo "Input something...";
-                }
+							</xml>";
 
+				if($msgType == "event"){
+					$msgType = "text";
+	                	$contentStr = "欢迎关注东大通";
+	                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+	                	echo $resultStr;
+				}else{
+					if(!empty( $keyword ))
+	                {
+	              		$msgType = "text";
+	                	$contentStr = "东大通竭诚为您服务";
+	                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+	                	echo $resultStr;
+	                }else{
+	                	echo "请输入内容";
+	                }
+				}
         }else {
         	echo "";
         	exit;
