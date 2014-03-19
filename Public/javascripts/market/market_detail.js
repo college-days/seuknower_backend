@@ -115,8 +115,6 @@ $(function(){
 
 	$(".thumbnail").hover(function(){
 		$(".big img").attr("src", $(this).attr("src"));
-	}, function(){
-		$(".big img").attr("src", $("#commodity_id").attr("picture"));
 	});
 
 	$(".share").click(function(){
