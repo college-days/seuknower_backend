@@ -20,7 +20,8 @@
 
 	var id = 0,
 		cateTag = $("#cate_type .active").text().replace(/[ ]/g,""),
-		cateTime = $("#cate_time .active").text().replace(/[ ]/g,"");
+		cateTime = $("#cate_time .active").text().replace(/[ ]/g,""),
+		loadMore = $(".load");
 	var waterFull = function (options) {
 		var id = options.id,
 			notice = options.notice,
@@ -47,25 +48,32 @@
 				len = data.length;
 			if (len > 0) {
 				$.each(data, function(i,item){
+					var node = $('<div class="poster_grid"></div>');
 					// var html = '<div class="title"><a href="/event/' + item.id + '">'+ item.title +'</a></div><div class="intro">时间：'+ item.time + '<br />地点：' + item.location +'</div><div class="pa">'+ item.join_count +'人参加<span class="sp">|</span>'+ item.interest_count +'人感兴趣</div>';
 					var html = '<div class="title"><a href="/event/' + item.id + '">'+ item.title +'</a></div><div class="intro">时间：'+ item.time + '<br />地点：' + item.location +'</div><div class="pa">'+ item.interest_count +'人感兴趣</div>';
-
-					if(item.poster.length>0){
+					if(item.poster !== "notexists"){
 						var pic = '<div class="pic"><a href="/event/' + item.id + '"><img src="'+ item.poster +'" /></a></div>';
 						html = pic + html;
 					}
-					var node = $('<div class="poster_grid"></div>').html(html);
-					fragElement.appendChild($(node)[0]);
-					$(".pic img",$(node)).load(function(){
-						postersArr.push($(node)[0]);
-						len--;
-						if(len == 0){
-							owrap.appendChild(fragElement);
-							// 插入后再排序
-							sort();
-						}
-					});
+					node.html(html);
+					if(item.poster !== "notexists"){
+						$(".pic img",$(node)).load(function(){
+							addNode($(node)[0]);
+						});
+					}else{
+						addNode($(node)[0]);
+					}
 				})
+				function addNode(node){
+					fragElement.appendChild(node);
+					postersArr.push(node);
+					len--;
+					if(len == 0){
+						owrap.appendChild(fragElement);
+						// 插入后再排序
+						sort();
+					}
+				}
 			}
 		}
 
@@ -129,11 +137,13 @@
 				if(data.status){
 					myWater.insert(data.data);
 					if(data.data.length<6){
-						$(".load").hide();
+						loadMore.addClass("end");
 					}
 				}else{
-					$(".load").hide();
+					loadMore.addClass("end");
  				}
+			}).done(function(){
+				loadMore.hide();
 			})
 		},
 		timer:null
@@ -147,9 +157,14 @@
 			var height = tool.getPageHeight();
 			var scrollTop = tool.getScrollTop();
 			var clientHeight = tool.getClientHeigth();
-			var loading = $(".load").css("display")=="block";
+			if(loadMore.hasClass("end")){
+				loadMore.hide();
+				$(window).unbind();
+				return;
+			}
+			loadMore.show();
 			// 加载
-			if (loading && scrollTop + clientHeight > height - 50){
+			if (scrollTop + clientHeight > height - 50){
 				tool.getData();
 			}
 		}, 500);
