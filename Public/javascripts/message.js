@@ -37,7 +37,7 @@ function checkMessage(){
 		}
 		if(data.status == 0){
 			$("#redPoint").hide();
-			document.getElementById("messagelist").innerHTML = '<li><a href="#">暂时没有消息</a></li>';
+			// document.getElementById("messagelist").innerHTML = '<li><a href="#">暂时没有消息</a></li>';
 		}
 	}, 'json');
 }
