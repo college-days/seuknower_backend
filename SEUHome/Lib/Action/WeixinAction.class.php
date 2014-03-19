@@ -14,6 +14,28 @@ class WeixinAction extends Action {
 		
 	}
 
+	public function responseTextMsg(){
+		$toUsername = I('param.ToUserName');
+		$fromUsername = I('param.FromUserName');
+		$createTime = I('param.CreateTime');
+		$msgType = I('param.MsgType');
+		$content = I('param.Content');
+		$msgId = I('param.MsgId');
+		$time = time();
+	 	$textTpl = "<xml>
+					<ToUserName><![CDATA[%s]]></ToUserName>
+					<FromUserName><![CDATA[%s]]></FromUserName>
+					<CreateTime>%s</CreateTime>
+					<MsgType><![CDATA[%s]]></MsgType>
+					<Content><![CDATA[%s]]></Content>
+					<FuncFlag>0</FuncFlag>
+					</xml>";     
+		$msgType = "text";
+    	$contentStr = $content;
+    	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+    	echo $resultStr;   
+	}
+
 	public function responseMsg()
     {
 		//get post data, May be due to the different environments
