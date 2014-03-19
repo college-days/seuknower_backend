@@ -38,7 +38,7 @@ class WeixinAction extends Action {
 
 				if($msgType == "event"){
 					$msgType = "text";
-	                	$contentStr = "欢迎关注东大通";
+	                	$contentStr = "欢迎关注“东大通”官方微信账号。东大通团队全部都是咱们东大的在校大学生，如果感觉东大通哪用得不爽欢迎直接拍砖，自己人不要客气，如果您有什么建议或者意见也欢迎直接回复我们，这是对我们最大的鼓励和支持，感谢亲爱的同学们！东大通，东大人自己的校园通！";
 	                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
 	                	echo $resultStr;
 				}else{
