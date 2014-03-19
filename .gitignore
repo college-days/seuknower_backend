@@ -1,5 +1,6 @@
 /old
 /SEUHome/Runtime
 /ThinkPHP/Runtime
+/Uploads
 *.swp
 .*.swp
