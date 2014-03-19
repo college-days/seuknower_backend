@@ -8,6 +8,7 @@ return array(
 	//正则的$一定要加上，不然貌似会出问题，第一个路由的$就一定要加上
 	'URL_ROUTE_RULES'=>array(
 		'manage$' => 'Manage/event',
+		'weixin$' => 'Weixin/index',
 		'question/search/:content/:page$' => 'Question/search',
 		'question/adjust_answer_count' => 'Question/adjustAnswerCount',
 		'question/change_content$' => 'Question/changeContent',
