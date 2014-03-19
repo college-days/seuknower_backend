@@ -119,6 +119,15 @@
 				element['on' + type] = func;
 			}
 		},
+		unbind:function (element, type, func) {
+			if (element.removeEventListener) {
+				element.removeEventListener(type, func, false); //false
+			} else if (element.dettachEvent) {
+				element.dettachEvent('on' + type, func);
+			} else {
+				element['on' + type] = func;
+			}
+		},
 		getPageHeight:function () {
 			return document.documentElement.scrollHeight || document.body.scrollHeight;
 		},
@@ -159,7 +168,7 @@
 			var clientHeight = tool.getClientHeigth();
 			if(loadMore.hasClass("end")){
 				loadMore.hide();
-				$(window).unbind();
+				tool.unbind(window, 'scroll');
 				return;
 			}
 			loadMore.show();
