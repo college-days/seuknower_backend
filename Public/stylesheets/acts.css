@@ -1,5 +1,5 @@
 body{background:#f3f7fa;}
-.wrap{margin:15px auto;width:943px;position:relative;overflow:hidden;}
+.wrap{margin:15px auto 34px;width:943px;position:relative;overflow:hidden;}
 .introduce{width:220px;float:left;position:absolute;}
 .user_box{border:1px solid #e5e5e5;background:#fff;}
 .introduce .tit{font-size:16px;color:#7a6c59;border-left:2px solid #7a6c59;margin:21px 0 0 -1px;padding-left:22px;line-height:18px;}
@@ -33,4 +33,4 @@ body{background:#f3f7fa;}
 .poster_grid .pic{margin:-1px -1px -5px;}
 .poster_grid .pic img{width:100%;}
 .go_top{background:#cfd2d5 url(images/top.png) no-repeat center center;cursor:pointer;border-radius:5px;width:46px;height:46px;position:fixed;bottom:40px;right:20px;}
-.load{margin:15px auto;width:943px;text-align:center;}
+.load{margin:-33px auto 0;position:absolute;width:100%;text-align:center;}
