@@ -18,10 +18,45 @@ class EventAction extends Action {
 		if(!$time) $time = "全部";
 		$type = $tag;
 		
-		$Model = M();	
-		$hots = $Model->table('seu_event event')->field('event.id,event.poster,event.title')->order('join_count desc')->limit(5)->select();
+		$util = new CommonUtil();
 
-		$this->assign("hots", $hots);
+		$Model = M();
+    	$User = M('User');
+    	$Event = M('Event');
+    	$recommendEvents = $Event->where("recommended=1")->select();
+    	if(!$recommendEvents){
+    		$hotEvents = $Model->table('seu_event event')->order('click_count desc')->limit(4)->select();  		
+    	}elseif(count($recommendEvents) == 4){
+    		$hotEvents = $recommendEvents;
+    	}else{
+    		$rest = 4-count($recommendEvents);
+    		$events = $Model->table('seu_event event')->order('click_count desc')->limit($rest)->select();
+    		$hotEvents = array_merge($recommendEvents, $events);
+    	}
+    	
+    	for($i=0; $i<count($hotEvents); $i++){
+			$startTime = explode(" ",date("Y年m月d日 H:i:s",$hotEvents[$i]['start_time']));	
+			$endTime = explode(" ",date("Y年m月d日 H:i:s",$hotEvents[$i]['end_time']));
+			unset($hotEvents[$i]['start_time']);
+			unset($hotEvents[$i]['end_time']);
+			if($startTime[0] == $endTime[0]){
+				$hotEvents[$i]['time'] = substr($startTime[0],7)." ".substr($startTime[1],0,5)."-".substr($endTime[1],0,5);
+			}
+			else{
+				$hotEvents[$i]['time'] = substr($startTime[0],7)."~".substr($endTime[0],7);
+			}
+
+			$organizer = $User->where('id='.$hotEvents[$i]['u_id'])->find();
+			$hotEvents[$i]['organizer'] = $organizer['name'];
+		}
+		
+		for($i=0; $i<count($hotEvents); $i++){
+			if(!$util->exists_file($hotEvents[$i]["poster"])){
+				$hotEvents[$i]["poster"] = "__IMAGE__/event/act5.jpg";
+			}
+		}
+
+		$this->assign("hots", $hotEvents);
 
 		if($tag != "全部"){
 			//$sql .= " AND event.tag LIKE '%".$tag."%' ";
