@@ -50,3 +50,27 @@ extension=php_exif.dll
 ## common bugs
 
 * 假如部署之后发现页面上多出一块空白，很可能是出现了二次编辑时在文本编辑器中增加的bom头，只要直接用URL访问运行```clearBOM.php```或者```delbom.php```即可
+
+## 路径依赖
+
+* 所有上传的图片都会保存在```SEUHome/```路径的同级路径```Uploads/```中，由于部署之后每天会产生大量的新增图片，并且有将所有上传图片放入oss进行管理，并进行cdn加速的计划，所以不将此路径放入版本控制
+
+### Uploads路径结构
+
+* Uploads
+	* Images
+		* Answer
+			* image(_存放的是带有日期时间戳的通过kindeditor插件上传的图片，由于涉及原因，非回答但是kindeditor上传的也会在这里_)
+		* Event
+			* Poster
+				* Raw(_原图_)
+				* Thumb(_缩略图_)
+		* Group(_现有代码中这个路径应该是废弃了_)
+		* Market
+			* Picture
+				* Raw(_原图_)
+				* Thumb(_缩略图_)
+		* Topic(_现有代码中这个路径应该也是废弃了_)
+		* User
+			* Icon(_缩略图在Raw路径的同级路径上_)
+				* Raw(_原图_)
