@@ -4,3 +4,5 @@
 /Uploads
 *.swp
 .*.swp
+*.db
+.DS_Store
