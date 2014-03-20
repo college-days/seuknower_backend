@@ -5,7 +5,7 @@
     <ul class="list-group"> 
         <volist name="users" id="user">
             <li class="list-group-item" style="cursor:pointer;background:white;">
-                <div class="content user" picked="0" uid="{$user.id}">{$user.name}&nbsp{$user.dept}&nbsp{$user.major}&nbsp{$user.degree}</div>
+                <div class="content user" picked="0" uid="{$user.id}">{$user.name}&nbsp{$user.dept}&nbsp{$user.major}&nbsp入学时间:{$user.degree}&nbsp注册时间:{$user.reg_time|date='Y-m-d H:i',###}</div>
             </li>
         </volist>
     </ul>
