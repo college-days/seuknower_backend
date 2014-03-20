@@ -55,7 +55,7 @@ extension=php_exif.dll
 
 * 所有上传的图片都会保存在```SEUHome/```路径的同级路径```Uploads/```中，由于部署之后每天会产生大量的新增图片，并且有将所有上传图片放入oss进行管理，并进行cdn加速的计划，所以不将此路径放入版本控制
 
-### Uploads路径结构
+##### Uploads路径结构
 
 * Uploads
 	* Images
