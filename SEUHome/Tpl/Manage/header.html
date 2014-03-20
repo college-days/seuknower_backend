@@ -147,6 +147,11 @@ ga('send', 'pageview');
                     <else/>
                         <li><a href="/manage/recommendquestion">问题推荐</a></li>
                     </eq>
+                    <eq name="current" value="user">
+                        <li class="active"><a href="/manage/user">用户管理</a></li>
+                    <else/>
+                        <li><a href="/manage/user">用户管理</a></li>
+                    </eq>
                 </ul>
             </nav>
         </div>

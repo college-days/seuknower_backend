@@ -314,5 +314,25 @@ class ManageAction extends Action {
 		}
 		$this->ajaxReturn('', '', 1);
 	}
+
+	public function user(){
+		$User = M('User');
+		$users = $User->order("id desc")->select();
+		$this->assign("users", $users);
+		$this->assign('current', 'user');
+		$this->display("user");
+	}
+
+	public function deleteUser(){
+		$uids = I('param.uids');
+		$User = M('User');
+		for($i=0; $i<count($uids); $i++){
+			$result = $User->where('id='.$uids[$i])->delete();
+			if(!$result){
+				$this->ajaxReturn('', '', 0);
+			}
+		}
+		$this->ajaxReturn('', '', 1);
+	}
 }
 ?>

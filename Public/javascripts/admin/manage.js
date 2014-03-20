@@ -10,6 +10,7 @@ var add_recommendevents = [];
 var delete_recommendevents = [];
 var add_recommendquestions = [];
 var delete_recommendquestions = [];
+var delete_users = [];
 
 $(function(){
 	$(".event").click(function(){
@@ -489,6 +490,44 @@ $(function(){
         }else{
             $.post("/manage/deleteRecommendQuestion", {
                 'qids': delete_recommendevents
+            }, function(data){
+                if(data.status == 1){
+                    window.location.reload();
+                }else{
+                    alert("操作失败");
+                }
+            }, "json");
+        }
+    });
+
+    $(".user").click(function(){
+        if(parseInt($(this).attr("picked")) == 0){
+            var uid = $(this).attr("uid");
+            $(this).attr("picked", 1);
+            $(this).parents("li").css("background-color", "red");
+            if($.inArray(parseInt(uid), delete_users) == -1){
+                delete_users.push(parseInt(uid));
+            }
+            console.log(delete_users);
+        }else{
+            var uid = $(this).attr("uid");
+            $(this).attr("picked", 0);
+            $(this).parents("li").css("background-color", "white");
+            if($.inArray(parseInt(uid), delete_users) != -1){
+                delete_users = $.grep(delete_users, function(value){
+                    return value != parseInt(uid);
+                });
+            }
+            console.log(delete_users);
+        }
+    });
+
+    $(".deleteuser").click(function(){
+        if(delete_users.length == 0){
+            alert("还没有选择要删除的用户");
+        }else{
+            $.post("/manage/deleteUser", {
+                'uids': delete_users
             }, function(data){
                 if(data.status == 1){
                     window.location.reload();

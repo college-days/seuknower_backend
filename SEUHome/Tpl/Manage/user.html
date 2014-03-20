@@ -1,0 +1,13 @@
+<include file="Manage:header" title="用户管理"/>
+<div class="jumbotron">
+    <input type="button" class="deleteuser" value="选中要删除的用户然后点这里删除">
+    <div style="margin-top:33px;"></div>
+    <ul class="list-group"> 
+        <volist name="users" id="user">
+            <li class="list-group-item" style="cursor:pointer;background:white;">
+                <div class="content user" picked="0" uid="{$user.id}">{$user.name}&nbsp{$user.dept}&nbsp{$user.major}&nbsp{$user.degree}</div>
+            </li>
+        </volist>
+    </ul>
+</div>
+<include file="Manage:footer" />
