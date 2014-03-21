@@ -74,3 +74,7 @@ extension=php_exif.dll
 		* User
 			* Icon(_缩略图在Raw路径的同级路径上_)
 				* Raw(_原图_)
+
+## doge game
+
+* 依赖于```Public/images/doge/```和```Public/stylesheets/img/```两个路径下的图片
