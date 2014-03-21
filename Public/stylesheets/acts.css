@@ -30,7 +30,7 @@ body{background:#f3f7fa;}
 .poster_grid .intro{color:#808280;line-height:18px;text-align:center;margin:10px 10px 0;}
 .poster_grid .pa{text-align:center;line-height:18px;margin:18px 10px;}
 .poster_grid .pa .sp{margin:0 12px;}
-.poster_grid .pic{margin:-1px -1px -5px;}
+.poster_grid .pic{margin:-1px -1px -5px;min-height:64px;background:url(images/r_loading.gif) no-repeat center 1px;}
 .poster_grid .pic img{width:100%;}
 .go_top{background:#cfd2d5 url(images/top.png) no-repeat center center;cursor:pointer;border-radius:5px;width:46px;height:46px;position:fixed;bottom:40px;right:20px;}
 .load{margin:-5px auto 15px;width:943px;text-align:center;}

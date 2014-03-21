@@ -380,10 +380,10 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .market .content li .click{background:url(images/icon.gif) no-repeat 0 -30px;padding-left:19px;}
 .market .content li .comment{background:url(images/icon.gif) no-repeat 0 -48px;padding-left:15px;margin-left:12px;}
 .market .content li .love{background:url(images/icon.gif) no-repeat 0 -67px;padding-left:15px;margin-left:12px;}
-.market .content li .title{font-size:14px;margin-left:10px;margin-top:14px;}
+.market .content li .title{font-size:14px;overflow:hidden;margin-left:10px;margin-top:12px;line-height:20px;height:20px;}
 .market .content li .title a:hover{color:#f9a020;}
-.market .content li .intro{margin-left:10px;margin-top:8px;color:#80827f;}
-.market .content .divide{border-bottom:1px solid #eeeeee;margin:9px;}
+.market .content li .intro{margin-left:10px;margin-top:5px;overflow:hidden;line-height:18px;height:18px;color:#80827f;}
+.market .content .divide{border-bottom:1px solid #eeeeee;margin:9px 9px 7px;}
 .market .content .seller{margin-left:10px;}
 .market .content .seller img{width:24px;height:24px;border-radius:50%;float:left;}
 .market .content .seller .name{float:left;line-height:12px;display:inline-block;margin-top:6px;margin-left:10px;color:#7a6c59;}
