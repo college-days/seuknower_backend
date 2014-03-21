@@ -317,7 +317,7 @@ class ManageAction extends Action {
 
 	public function user(){
 		$User = M('User');
-		$users = $User->order("id desc")->select();
+		$users = $User->where('status=1')->order("id desc")->select();
 		$this->assign("users", $users);
 		$this->assign('current', 'user');
 		$this->display("user");
