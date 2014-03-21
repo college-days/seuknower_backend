@@ -790,7 +790,7 @@ function initInviteCode(){
 	newWin.id = 'invitewin';
 	newWin.className = "invitewin";
 	newWin.style.left = (parseInt(document.body.scrollWidth) - 544)/2 + "px";
-	var html = '<div class="title-bar"><span>请输入邀请码</span><div class="inviteclose"></div></div><div class="content"><div><a style="color:green;" href="http://www.seuknower.com/question/257" target="_blank">为什么需要邀请码</a></div><div class="invitecodealert" style="color:red;"></div><input type="text" class="invitecode"><input type="button" value="确认" class="invitesubmit"></div>';
+	var html = '<div class="title-bar"><span>请输入邀请码</span><div class="inviteclose"></div></div><div class="content"><div><a style="color:green;" href="http://www.seuknower.com/question/257" target="_blank">为什么需要邀请码？</a></div><div class="invitecodealert" style="color:red;"></div><input type="text" class="invitecode"><input type="button" value="确认" class="invitesubmit"></div>';
 	newWin.innerHTML = html;
 
 	document.body.appendChild(newMask);
