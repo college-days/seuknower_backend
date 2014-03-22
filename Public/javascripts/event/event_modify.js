@@ -78,12 +78,12 @@ $(function(){
 				}, function(data){
 					$('#rawpath').val(data.data.rawpath.replace(".",""));
 					$('#thumbpath').val(data.data.thumbpath.replace(".",""));
-					$("#intro").val(window.editor.html().replace(/\s(style|class).[^<\s]*"\B/g,""));
+					$("#intro").val(window.editor.html().replace(/\s(style|class).[^<=]*"\B/g,""));
 					$('#event').submit();
 				},'json');
 			}else{
 				if(!uploading){
-					$("#intro").val(window.editor.html().replace(/\s(style|class).[^<\s]*"\B/g,""));
+					$("#intro").val(window.editor.html().replace(/\s(style|class).[^<=]*"\B/g,""));
 					$("#event").submit();	
 				}
 				else{
