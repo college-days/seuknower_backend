@@ -1,0 +1,145 @@
+<include file="Public:header" title="编辑活动"/>
+<div class="back-color">
+    <div class="activity-new">
+		<div class="container">
+			<div class="left">
+			<div class="title">编辑活动</div>
+			<form id="event" name="event" action="/event/save_event" method="post">
+				<div class="row">
+					<div id="titlealert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">活动名称</span>
+					<input class="value long" type="text" id="title" name="title" value="{$eventinfo.title}"/>
+				</div>
+				<div class="row">
+					<span class="key">活动类型</span>
+					<select class="short" name="tag_cate" id="category">
+						<option value="讲座">讲座</option>
+						<option value="比赛">比赛</option>
+						<option value="招聘">招聘</option>
+						<option value="娱乐交友">娱乐交友</option>
+						<option value="公益">公益</option>
+						<option value="其他">其他</option>
+					</select>
+				</div>
+				<div class="row">
+					<div id="starttimealert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">开始时间</span>
+					<input class="value short" type="text" name="startdate" id="startdate" value="{$eventinfo.start_time|date='Y-m-d',###}"/>
+					<div id="previousstartlasttime" style="display:none;">{$eventinfo.start_time|date='H:i',###}</div>
+					<select class="time" id="startlasttime" name="starttime">
+					</select>
+				</div>
+				<div class="row">
+					<div id="endtimealert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">结束时间</span>
+					<input class="value short" type="text" name="enddate" id="enddate" value="{$eventinfo.end_time|date='Y-m-d',###}"/>
+					<div id="previousendlasttime" style="display:none;">{$eventinfo.end_time|date='H:i',###}</div>
+					<select class="time" id="endlasttime" name="endtime">
+					</select>
+				</div>
+				<div class="row">
+					<div id="locationalert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">活动地点</span>
+					<input class="value long" type="text" name="location" id="location" value="{$eventinfo.location}"/>
+				</div>
+				<div class="row">
+					<div id="introalert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">活动详情</span>
+					<textarea id="intro" name="intro">{$eventinfo.intro}</textarea>
+				</div>
+				<div class="row">
+					<div id="costalert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">费用</span>
+					<input type="radio" class="cost" name="iscost" id="no_cost" value="no"/><label>免费</label>
+					<input type="radio" class="cost" name="iscost" id="yes_cost" value="yes"/><label>收费</label>
+				</div>
+				<div class="row" id="div_cost">
+					<span class="key"></span>
+					<input type="text" class="value short" id="cost" name="cost" style="margin-left:120px;" value="{$eventinfo.cost}"/> 元
+				</div>
+				<div class="row">
+					<div id="organizeralert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">承办单位</span>
+					<input class="value short" type="text" id="organizer" name="organizer" value="{$eventinfo.organizer}"/>
+				</div>
+				<div class="row">
+					<div id="posteralert" style="color:red;margin-left:71px;"></div>
+				</div>
+				<div class="row">
+					<span class="key">活动海报</span>
+					<input type="file" id="poster" name="poster"/>
+				</div>
+				<div class="row">
+					<div id="picturealert" style="color:red;margin-left:71px;"></div>
+				</div>
+
+				<div class="row" id="div_image">
+					<table style="margin-left:118px;">
+						<td><img src="{$eventinfo.poster}" id="target"/></td>
+						<td>
+							<div style="width:150px;height:130px;overflow:hidden;margin-left:5px;">
+								<img id="preview"/>
+							</div>
+						</td>
+					</table>
+				</div>
+
+				<div class="row" style="display:none">
+					<input id="rawpath" name="rawpath" type="text"/>
+					<input id="thumbpath" name="thumbpath" type="text"/>
+					<input id="id" name="id" value="{$eventinfo.id}" type="text"/>
+					<input id="previousCategory" value="{$eventinfo.category}" type="text"/>
+				</div>
+
+				<div class="row">
+					<span class="key"></span><input id="nextstep" class="btn" type="button" value="完成" style="margin-left:120px;"/>
+				</div>
+			</form>
+			</div>
+			<div class="right">
+				<p class="title">创建活动须知：</p>
+				<p class="word">1、东大通活动是东大学生间的活动召集平台，我们非常欢迎大家在此召集老乡会等活动；</p>
+				<p class="word">2、发布活动标题简单明了，时间地点准确，活动内容和特点介绍详细；</p>
+				<p class="word">3、记得上传一张活动海报，分辨率最好大于220x190哦。如没有海报，可以上传相关的照片、图片；</p>
+				<p class="word">4、欢迎加入qq群191606784，遇到任何问题在群内留言获得帮助。</p>
+			</div>
+		</div>
+	</div>
+	<link rel="stylesheet" href="__EDITOR__/themes/default/default.css?t=1395387463" />
+	<script charset="utf-8" src="__EDITOR__/kindeditor-all-min.js?t=1395387463"></script>
+	<script charset="utf-8" src="__EDITOR__/lang/zh_CN.js?t=1395387463"></script>
+	<script>
+	    KindEditor.ready(function(K) {
+	        window.editor = K.create('#intro', {
+				minWidth: "466",
+				resizeType: 0,
+				items: ["bold", "italic", "underline", "preview", "code", "image", "link", "quickformat", "removeformat", "insertorderedlist", "insertunorderedlist"]
+			});
+			window.editor.html($("#intro").text());
+	    });
+
+	    $(function(){
+        	var previousCategory = $("#previousCategory").val();
+        	$("#category").find("option[value='"+previousCategory+"']").attr("selected", true);
+        });
+	</script>
+	<link href="__CSS__/jquery.Jcrop.css?t=1395387463" rel="stylesheet" type="text/css"/>
+	<script src="__JS__/jquery.Jcrop.js?t=1395387463"></script>
+	<script src="__JS__/jquery.color.js?t=1395387463"></script>
+	<script src="__JS__/ajaxfileupload.js?t=1395387463"></script>
+	<script src="__JS__/event/event_modify.js?t=1395387463"></script>
+<include file="Public:footer" />

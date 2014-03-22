@@ -378,6 +378,12 @@ class EventAction extends Action {
 		//prevent xss
 		$currentEvent['intro'] = htmlspecialchars_decode($currentEvent['intro']);
 
+	 	if($_SESSION['userId'] == $currentEvent['u_id']){
+    		$this->assign('me', '1');
+    	}else{
+    		$this->assign('me', '0');
+    	}
+
 		$Model = M();
 		$count = $Model->table('seu_event_comment')->where("e_id = ".$id)->count();
 		//表联结
@@ -741,6 +747,61 @@ class EventAction extends Action {
 		$this->assign('rightevents',$rightEvents);
 		$this->assign('content',$content);
 		$this->display();
+	}
+
+	public function modifyEvent(){
+		$id = I('param.id');
+		$Event = M("Event");
+		$eventInfo = $Event->find($id);
+		if($eventInfo['u_id'] == session('userId')){
+			$this->assign('eventinfo', $eventInfo);
+			$this->display('modify');
+		}
+		else{
+			$this->error("您无操作权限");
+		}
+		
+	}
+
+	public function saveEvent(){
+		$id = I('param.id');
+		$data['id'] = I('param.id');
+		$startTime = I('param.startdate')." ".I('param.starttime').":00";
+		$endTime = I('param.enddate')." ".I('param.endtime').":00";
+		$data['title'] = I('param.title');
+		$data['create_time'] = time();
+		$data['start_time'] = strtotime($startTime);
+		$data['end_time'] = strtotime($endTime);
+		$data['location'] = I('param.location');
+		$data['intro'] = I('param.intro');
+		$data['u_id'] = session('userId');
+		$data['category'] = I('param.tag_cate');
+		$data['organizer'] = I('param.organizer');
+		if(I('param.rawpath') && I('param.thumbpath')){
+			$data['raw_poster'] = I('param.rawpath');
+			$data['poster'] = I('param.thumbpath');
+		}
+		
+		if(I('param.iscost')=="yes"){
+			$data['cost'] = I('param.cost');
+		}else{
+			$data['cost'] = "免费";
+		}
+		
+		$Event = M('Event');
+		$Event->save($data);
+		$this->redirect("/event/$id");
+	}
+
+	public function deleteEvent(){
+		$eid = I('param.eid');
+		$Event = M('Event');
+		$result = $Event->where("id=".$eid)->delete();
+		if(!$result){
+			$this->ajaxReturn('', '', 0);
+		}else{
+			$this->ajaxReturn('', '', 1);
+		}
 	}
 }
 ?>

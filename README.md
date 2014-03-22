@@ -78,3 +78,7 @@ extension=php_exif.dll
 ## doge game
 
 * 依赖于```Public/images/doge/```和```Public/stylesheets/img/```两个路径下的图片
+
+## sns share
+
+* 直接嵌入的bshare的js，所以离线情况下肯定没法出现分享按钮的

@@ -5,7 +5,7 @@
 			<div class="left">
 				<div class="info">
 				<div class="intro">
-					<div style="display:none;" id="event_id">{$event.id}</div>
+					<div style="display:none;" id="event_id" picture="{$event.poster}">{$event.id}</div>
 					<img src="{$event.poster}" class="img-responsive" style="width:171px;height:252px;"/>
 					<dl>
 						<dt>{$event.title}</dt>
@@ -40,6 +40,28 @@
 				<div class="click-time">
 					<span class="click">已阅读：{$event.click_count}</span><span class="time">发布时间：{$event.create_time|date='Y-m-d',###}</span>
 				</div>
+				<div class="count">
+					<div class="count-left">
+						<!-- <div class="count-left">
+							<eq name="commodity.currentUserLike" value="0">
+								<span class="addlike">喜欢</span>
+							<else/>
+								<span class="cancellike">喜欢</span>
+							</eq>
+						</div> -->
+					</div>
+					<div class="count-right">
+						<eq name="me" value="1">
+							<span class="edit">编辑</span>
+							<span class="delete">删除</span>
+							<span class="share" style="margin-left:413px;">分享</span>
+						<else/>
+							<span class="share" style="margin-left:413px;float:right">分享</span>
+						</eq>
+						
+					</div>
+				</div>
+				<div class="bshare-custom" style="display:none;float:right;"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><a class="bshareDiv" onclick="javascript:return false;"></a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
 				</div>
 
 				<div class="comment">
