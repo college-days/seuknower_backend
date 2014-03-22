@@ -4,10 +4,3 @@
    RewriteCond %{REQUEST_FILENAME} !-f
    RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
 </IfModule>
-
-<Directory />
-	Options FollowSymLinks
-    AllowOverride None
-</Directory>
-
-
