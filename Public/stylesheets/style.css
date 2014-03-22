@@ -505,7 +505,8 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 
 .commodity .left .info .intro{margin-top:40px;}
 .commodity .left .info .intro .lab{font-size:16px;color:#333;font-weight: 700}
-.commodity .left .info .intro p{font-size:14px;margin-top:8px;line-height:18px;color:#666666;}
+.commodity .left .info .intro p{font-size:14px;margin-top:8px;line-height:24px;color:#666666;}
+.commodity .left .info .intro .pa{font-size:14px;margin-top:8px;line-height:24px;color:#666666;}
 .commodity .left .info .count{margin-top:40px;color:#80827f;overflow:hidden;}
 .commodity .left .info .count  .count-left{float:left;}
 .commodity .left .info .count  .count-right{float:right;}

@@ -124,7 +124,7 @@ $(function(){
 	
 	$("#applychange").click(function(){
 		var content = window.editor.html();
-		content = content.replace(/\s(style|class).[^<\s]*"\B/g,"");
+		content = content.replace(/\s(style|class).[^<=]*"\B/g,"");
 		// var pwd = $("#changepwd").val();
 		var aid = $("#changeanswerid").text();
 		/*if(pwd.replace(/[ ]/g, "")){
@@ -169,7 +169,7 @@ $(function(){
 		var type = $("#changequestype").find("option:selected").text().replace(/[ ]/g,"")
 		var qid = $("#changequesid").text();
 		$("#changequespwdalert").text("");
-		content = content.replace(/\s(style|class).[^<\s]*"\B/g,"");
+		content = content.replace(/\s(style|class).[^<=]*"\B/g,"");
 		$.post('/question/change_content', {
 			'q_id': qid,
 			'title': title,
@@ -404,7 +404,7 @@ $(function(){
 		var content = window.editor.html();
 		var invited = parseInt($("#question").attr("invited"));
 		content = content.replace(/<strong>@.*?<\/strong>/, "");
-		content = content.replace(/\s(style|class).[^<\s]*"\B/g,"");
+		content = content.replace(/\s(style|class).[^<=]*"\B/g,"");
 		if(content.replace(/[ ]/g, "")){
 			// showVerify(false);
 			if(invited){
@@ -426,7 +426,7 @@ $(function(){
 		var content = window.editor.html();
 		var invited = parseInt($("#question").attr("invited"));
 		content = content.replace(/<strong>@.*?<\/strong>/, "");
-		content = content.replace(/\s(style|class).[^<\s]*"\B/g,"");
+		content = content.replace(/\s(style|class).[^<=]*"\B/g,"");
 		if(content.replace(/[ ]/g, "")){
 			// showVerify(true);
 			if(invited){
@@ -505,7 +505,7 @@ function submitComment(){
 	$("div.alert").hide();
 	var content = window.editor.html();
 	var at = content.match(/<strong>@.*?<\/strong>/);
-	content = content.replace(/\s(style|class).[^<\s]*"\B/g,"");
+	content = content.replace(/\s(style|class).[^<=]*"\B/g,"");
 
 	if(at){
 		content = content.replace(/<strong>@.*?<\/strong>/, "");
@@ -546,7 +546,7 @@ function submitComment(){
 function submitCommentAnonymous(){
 	$("div.alert").hide();
 	var content = window.editor.html();
-	content = content.replace(/\s(style|class).[^<\s]*"\B/g,"");
+	content = content.replace(/\s(style|class).[^<=]*"\B/g,"");
 	var at = content.match(/<strong>@.*?<\/strong>/);
 	if(at){
 		content = content.replace(/<strong>@.*?<\/strong>/, "");

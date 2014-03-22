@@ -1,5 +1,5 @@
 	$(function(){
-		$("body").css("minHeight", $(document).height());
+		$("body").css("minHeight", $(document).height()+2);
 		$("#wrap").css("minHeight", $(".introduce").height());
 		$("#cate_type a").hover(function(){
 			var nowCur = $(this).text().replace(/[ ]/g,"");						
