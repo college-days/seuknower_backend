@@ -64,8 +64,11 @@
 						<ul>
 							<volist name="commoditys" id="commodity">
 								<li>
+									<eq name="commodity.onsale" value="1">
+										<span class="sold_out"></span>
+									</eq>
 									<a href="/market/commodity/{$commodity.id}" target="_blank">
-										<img class="picture" src="{$commodity.picture}" class="img-responsive" style="width:192px;height:146px;"/>
+										<img class="picture" src="{$commodity.picture}" class="img-responsive" />
 									</a>
 									<div class="info">
 										<span class="money"> ￥{$commodity.cost} </span>
