@@ -502,6 +502,10 @@ class AccountAction extends Action{
 				if(md5($password) != $user['pwd']){
 					$this->ajaxReturn('', '密码修改失败', 0);
 				}else{
+					session('userId', $id);
+					session('account', $account);
+					session('userName', $user['name']);
+					session('icon', $user['icon']);
 					$this->ajaxReturn('', '', 1);
 				}
 			}else{

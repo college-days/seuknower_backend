@@ -4,8 +4,13 @@ var ispr = false;
 var isv = false;
 //get from jwc via a spider
 var name;
+verifyURL = "/account/verifycode";
 
 $(function(){
+	$("#refreshVerify").click(function(){
+		$("#verifykey").attr("src", verifyURL+'/'+Math.random());
+	});
+
 	$("#username").blur(function(){
 		checkUsername();
 	});
