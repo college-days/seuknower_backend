@@ -36,8 +36,8 @@ class MarketAction extends Action {
 		}
 		$start = ($page-1)*16;
 		
-		// $commodityInfo = $Commodity->where($map)->order('create_time desc')->limit($start.',16')->select();
-		$commodityInfo = $Commodity->order('create_time desc')->limit($start.',16')->select();
+		$commodityInfo = $Commodity->where($map)->order('create_time desc')->limit($start.',16')->select();
+		// $commodityInfo = $Commodity->order('create_time desc')->limit($start.',16')->select();
 
 		$util = new CommonUtil();
 
