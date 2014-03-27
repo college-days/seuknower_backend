@@ -7,7 +7,7 @@ body{background:#f3f7fa;}
 .introduce .nl{margin-left:1px;border:none;}
 .user .infos{margin:12px 24px 0;background:url(images/line.gif) no-repeat 0 bottom;padding-bottom:21px;font-size:14px;}
 .user .infos .pic{float:left;padding:6px 13px 0 9px;}
-.user .infos .pic img{border-radius:40px;display:block;}
+.user .infos .pic img{border-radius:40px;width:40px;display:block;}
 .user .infos .rt{overflow:hidden;line-height:24px;height:48px;}
 .user .infos .rt span{display:block;color:#2ead91;}
 .user .infos .rt span img{margin-right:8px;vertical-align:middle;}

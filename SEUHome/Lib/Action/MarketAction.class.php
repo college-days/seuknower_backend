@@ -440,8 +440,13 @@ class MarketAction extends Action {
 		$Commodity = M('Commodity');
 
 		$result = $Commodity->find($id);
-		$sameCateCommodities = $Commodity->where('id!='.$id." and category='".$result['category']."' and onsale=1")->field('id,picture,title')->order('create_time desc')->limit(5)->select();
-
+		$map['id'] = array('neq',$id);
+		$map['category'] = array('eq',$result['category']);
+		$map['onsale'] = array('eq',1);
+		
+		//$sameCateCommodities = $Commodity->where('id!='.$id." and category='".$result['category']."' and onsale=1")->field('id,picture,title')->order('create_time desc')->limit(5)->select();
+		
+		$sameCateCommodities = $Commodity->where($map)->field('id,picture,title')->order('create_time desc')->limit(5)->select();
 		$util = new CommonUtil();
 
 		for($i=0; $i<count($sameCateCommodities); $i++){

@@ -34,7 +34,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .navbar .user .submit{margin-left:28px;}
 .navbar .user .logout{margin-left:9px;}
 .nav-bottom{height:53px;}
-.slide{height:360px;}
+.slide{min-width:965px;height:360px;}
 
 .markettitle:hover{color:#2ead91;}
 
@@ -46,7 +46,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .index-title{font-size:18px;color:#7a6c59;}
 
 /*注册*/
-.register{background:url(images/hall.png) no-repeat;background-size:100% auto;width:100%;height:723px;}
+.register{background:url(images/hall.png) no-repeat;background-size:cover;width:100%;height:723px;}
 .register .blank{padding-top:130px;}
 .register .white{background:url(images/tran_register.png) no-repeat;width:612px;height:396px;margin-left:auto;margin-right:auto;padding-top:45px;}
 .register .white .title{font-size:30px;color:#7a6c59;margin-left:38px;padding:0px;padding-left:15px;border-left:5px solid #7a6c59;line-height:30px;}
@@ -302,6 +302,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .comment li{margin-top:10px;border-bottom:1px solid #e7e9eb;padding-bottom:10px;}
 .comment .n-t{height:24px;}
 .comment .icon{float:left;width:40px;margin-right:15px;}/*两个div 一个float 另一个占据剩余的部分 如果两个都float则可能占据不满*/
+.comment .icon img{width:40px;}
 .comment .words{line-height:18px;overflow:hidden;}/**/
 .comment .name{font-size:14px;color:#4e9f74;float:left;}
 .comment .time{float:right;color:#80827f;}
@@ -364,6 +365,18 @@ padding:6px 12px;margin-left:-1px;line-height:1.428571429;text-decoration:none;b
 cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .pagination li a:hover,.pagination li span:hover,.pagination li a:focus, .pagination li span:focus{background-color:#eeeeee;}
 
+/*求购*/
+.want_buy .category{background:url(images/green_cate.gif) no-repeat;padding-top:60px;}
+.want_buy .left .category span{margin-left: 22px;}
+.want_buy .left .category .active{border-left-color:#a0d202;}
+.want_buy .left .category .active span{color:#a0d202;}
+.want_buy .left .category .ico{margin:0;float:left;background:url(images/want_cate.png) no-repeat; width:27px;height:17px;}
+.want_buy .left .category .ct2{background-position:0 -31px;margin-top:-3px;}
+.want_buy .left .category .ct3{background-position:0 -66px;height:14px;}
+.want_buy .left .category .ct4{background-position:0 -100px;}
+.want_buy .left .category .ct5{background-position:0 -135px;height:13px;}
+.want_buy .left .category .ct6{background:none;}
+
 /*跳蚤市场*/
 .market{padding-top:30px;}
 .market .category{width:100%;height:30px;background:white;border:1px solid #e5e5e5;}
@@ -377,6 +390,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .market .new .total{font-size:16px;color:#f9a020;}
 .market .new div{background:url(images/new_market.png);width:77px;height:21px;float:right;text-align:center;}
 .market .new div>a{line-height:21px;color:white;}
+.mywant_btn{background:url(images/my_want.png);width:77px;height:21px;line-height:21px;text-align:center;float:right;margin-left:10px;color:white;}
 
 .market .content ul{margin-left:-29px;}
 .market .content li{float:left;width:217px;height:284px;border:1px solid #e5e5e5;border-radius:5px;margin-left:29.5px;margin-top:20px;margin-bottom:16px;background:white;}
@@ -393,7 +407,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .market .content li .intro{margin-left:10px;margin-top:5px;overflow:hidden;line-height:18px;height:18px;color:#80827f;}
 .market .content .divide{border-bottom:1px solid #eeeeee;margin:9px 9px 7px;}
 .market .content .seller{margin-left:10px;}
-.market .content .seller img{width:24px;height:24px;border-radius:50%;float:left;}
+.market .content .seller img{width:21px;height:21px;border-radius:50%;float:left;}
 .market .content .seller .name{float:left;line-height:12px;display:inline-block;margin-top:6px;margin-left:10px;color:#7a6c59;}
 .market .content .seller .male{display:inline-block;background:url(images/icon.gif) no-repeat 0 -88px;width:11px;height:11px;margin-left:5px;margin-top:6px;}
 .market .content .seller .female{display:inline-block;background:url(images/icon.gif) no-repeat 0 -107px;width:9px;height:12px;margin:6px 0 0 5px;}
@@ -466,8 +480,8 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 
 /*2-20更新*/
 .commodity{padding-top:30px;}
-.commodity .left{width:683px;float:left;}
-.commodity .left .info{width:629px;border:1px solid #e5e5e5;background:white;padding:18px 27px 18px 27px;}
+.commodity .left{width:708px;float:left;}
+.commodity .left .info{width:652px;border:1px solid #e5e5e5;background:white;padding:18px 27px 18px 27px;}
 .commodity .left .info .title{font-size:24px;color:#333;}
 .commodity .left .info .title span{float:left;}
 .commodity .left .info .title .tag{display:inline-block;color:#f49f21;font-size:12px;line-height:24px;background:#fef8ed;padding:0px 10px;margin-left:15px;}
@@ -508,6 +522,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .commodity .left .info .intro .lab{font-size:16px;color:#333;font-weight: 700}
 .commodity .left .info .intro p{font-size:14px;margin-top:8px;line-height:24px;color:#666666;}
 .commodity .left .info .intro .pa{font-size:14px;margin-top:8px;line-height:24px;color:#666666;}
+.commodity .left .info .intro .pa img{max-width:100%;}
 .commodity .left .info .count{margin-top:40px;color:#80827f;overflow:hidden;}
 .commodity .left .info .count  .count-left{float:left;}
 .commodity .left .info .count  .count-right{float:right;}
@@ -623,7 +638,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 /*2-18更新结束*/
 
 /*个性化背景*/
-.person-image{background:url(images/person_bg.png) no-repeat;width:100%;height:220px;}
+.person-image{background:url(images/person_bg.png) no-repeat center 0;background-size:cover;width:100%;height:220px;}
 .person-image .brief{margin-left:auto;margin-right:auto;width:846px;height:170px;background:url(images/tran_white.png) no-repeat;background-position:90px;padding-top:50px;}
 .person-image .brief .icon {width:120px;height:120px;float:left;margin-right:38px;}
 .person-image .brief .info{height:100px;padding-top:10px;}/*两个div都float z-index 不生效*/
@@ -689,6 +704,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .person-profile .info .modify  .icon .target img{max-width:250px;max-height:250px;float:left;}
 .person-profile .info .modify  .icon .preview img{width:48px;height:48px;overflow:hidden;margin-left:5px;float:right;margin-right:30px;}
 
+.person-profile .head_img .preview{width:120px;height:120px;overflow:hidden;margin-left:30px;}
 .person-profile .tag{width:240px;height:352px;background:white;border:1px solid #e5e5e5;border-left:0px;padding:30px 0px 18px 30px;float:left;}
 .person-profile .tag .title{font-size:16px;color:#7a6c59;}
 .person-profile .tag .title .divide{border-top:1px solid #e5e5e5;width:102px;margin-bottom:6px;margin-left:5px;margin-right:5px;display:inline-block;}
@@ -827,6 +843,8 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .newwin .content .question-new span{line-height:24px;}
 .newwin .content .question-new .check{vertical-align:middle;}
 .newwin .content .question-new .btn{width:100%;height:24px;}
+
+.greenwin .title-bar{background:#a0d202;}
 
 /*验证码弹出框*/
 .verifymask{position:absolute;z-index:100;top:0px;left:0px;background:black;opacity:0.30;}

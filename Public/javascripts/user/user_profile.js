@@ -156,7 +156,7 @@ function jcorp(){
 		aspectRatio: 1
 	},function(){
 		api = this;
-		api.setSelect([imageWidth/2-50,imageHeight/2-50,imageWidth/2+50,imageHeight/2+50]);
+		api.setSelect([imageWidth/2-60,imageHeight/2-60,imageWidth/2+60,imageHeight/2+60]);
 		api.setOptions({ bgFade: true });
 		api.ui.selection.addClass('jcrop-selection');
 		$("#icon").click(function(){
@@ -166,8 +166,8 @@ function jcorp(){
 }
 
 function showPreview(coords){
-	var rx = 48 / coords.w;//preview的宽
-	var ry = 48 / coords.h;//preview的高
+	var rx = 120 / coords.w;//preview的宽
+	var ry = 120 / coords.h;//preview的高
 	iconX=coords.x;
 	iconY=coords.y;
 	iconWidth=coords.w;
@@ -213,8 +213,8 @@ function ajaxFileUpload(){
 				$('#preview').attr('src', path);
 
 				$('#target').load(function(){
-					$('#target').css('width', 222);
-					$('#target').css('height', 222);
+					$('#target').css('width', imageWidth);
+					$('#target').css('height', imageHeight);
 					jcorp();
 				});					
 			},

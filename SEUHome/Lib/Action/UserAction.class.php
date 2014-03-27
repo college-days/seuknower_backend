@@ -457,7 +457,7 @@ class UserAction extends Action {
         
         import('ORG.Util.Image');
         $thumbPath='./Uploads/Images/User/Icon/t'.time().'.jpg';
-        image::thumb($rawPath, $thumbPath, 'jpg', 48, 48);
+        image::thumb($rawPath, $thumbPath, 'jpg', 120, 120);
         $result = unlink($rawPath);
         $data['rawpath'] = $srcPath;
         $data['thumbpath'] = $thumbPath;

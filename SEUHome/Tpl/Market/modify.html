@@ -14,14 +14,8 @@
 				</div>
 				<div class="row">
 					<span class="key">分类</span>
-					<select class="short" id="commoditytype" name="tag_cate">
-						<option value="衣物鞋帽">衣物鞋帽</option>
-						<option value="数码电子">数码电子</option>
-						<option value="生活日用">生活日用</option>
-						<option value="书籍杂志">书籍杂志</option>
-						<option value="0元转让">0元转让</option>
-						<option value="其他">其他</option>
-					</select>
+					<select class="short" id="commoditytype" name="tag_cate"></select>
+					<select class="short" id="secondtype" style="margin-left:10px;display:none;"></select>
 				</div>
 				<div class="row">
 					<span class="key">校区</span>
@@ -130,10 +124,6 @@
 
 	        $(function(){
 	        	window.editor.html($("#commodityintro").text());
-	        	var previousLocation = $("#previousLocation").val();
-	        	var previousCategory = $("#previousCategory").val();
-	        	$("#commoditytype").find("option[value='"+previousCategory+"']").attr("selected", true);
-	        	$("#commoditylocation").find("option[value='"+previousLocation+"']").attr("selected", true);
 	        });
 	    });
 	</script>
