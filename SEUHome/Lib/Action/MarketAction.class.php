@@ -613,7 +613,32 @@ class MarketAction extends Action {
 	}
 
 	public function newCommodityWant(){
-		echo 'cleantha';
+		$userId=session('userId');
+		if(isset($userId)){
+			$data['title'] = I('param.title');
+			$data['intro'] = I('param.intro');
+			$data['type'] = I('param.type');
+			$data['secondtype'] = I('param.secondtype');
+
+			$data['u_id'] = session('userId');
+			$data['create_time'] = time();
+
+			$CommodityWant = M('CommodityWant');
+			$id = $CommodityWant->add($data);
+			if($id < 1){
+				$this->ajaxReturn('', '', 0);
+			}else{
+				$result['id'] = $id;
+				$this->ajaxReturn($result, '', 1);
+			}
+		}else{
+			$this->ajaxReturn('', '', -1);
+		}
+	}
+
+	public function wantDetail(){
+		$id = I('param.id');
+		$this->display('want_detail');
 	}
 }
 ?>

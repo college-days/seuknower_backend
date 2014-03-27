@@ -321,7 +321,7 @@ class QuestionAction extends Action {
 			$data['create_time'] = time();
 
 			$Question = M('Question');
-			$id = $Question -> add($data);
+			$id = $Question->add($data);
 			if($id < 1){
 				$this->ajaxReturn('', '', 0);
 			}else{

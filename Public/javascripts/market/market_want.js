@@ -39,7 +39,7 @@ $(function(){
 	});
 
 	$("#commoditywanttitle").blur(function(){
-		var title = $("#questiontitle").val();
+		var title = $("#commoditywanttitle").val();
 		if(title.replace(/[ ]/g, "")){
 			$("#commoditywanttitlealert").hide();
 		}else{
@@ -80,12 +80,14 @@ function submitCommodityWant(){
 		$.post('/market/new_commodity_want', {
 			'title': title,
 			'intro': intro,
+			'type': '未定',
+			'secondtype': '未定'
 		}, function(data){
 			if(data.status == 1){
-				window.location.href = "/question/" + parseInt(data.data['id']);
+				window.location.href = "/market/want/" + parseInt(data.data['id']);
 			}
 			if(data.status == 0){
-				alert('问题创建失败');
+				alert('求购创建失败');
 			}
 			if(data.status == -1){
 				window.location.href = "/login";

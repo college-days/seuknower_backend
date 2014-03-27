@@ -83,6 +83,7 @@ return array(
 		'event/cancel_interest' => 'Event/cancelInterest',
 		'event/add_comment' => 'Event/addComment',
 		'market/want_buy$' => 'Market/wantBuy',
+		'market/want/:id\d$' => 'Market/wantDetail',
 		'market/new_commodity_want' => 'Market/newCommodityWant',
 		'market/domin/:domin$' => 'Market/wantBuy',
 		'market/domin/:domin/page/:id\d$' => 'Market/wantBuy',
