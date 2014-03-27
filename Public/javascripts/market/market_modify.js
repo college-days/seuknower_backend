@@ -189,17 +189,19 @@ $(function(){
 	$.each(goods_type, function(k, v){
 		var goodOption = "<option value="+ v.type_id +">"+ v.type_name +"</option>";
 		commoditytype.append(goodOption);
-	})
+	});
 	
 	var previousLocation = $("#previousLocation").val();
 	var previousCategory = $("#previousCategory").val();
+	var previousSecondTyep = $("#previousSecondtype").val();
 	$("#commoditytype").find("option[value='"+previousCategory+"']").attr("selected", true);
 	$("#commoditylocation").find("option[value='"+previousLocation+"']").attr("selected", true);
+	$("#secondtype").find("option[value='"+previousSecondTyep+"']").attr("selected", true);
 	
 	setCommoditytype(commoditytype.val());
 	commoditytype.change(function(){
 		setCommoditytype($(this).val());
-	})
+	});
 });
 
 function jcorp(){

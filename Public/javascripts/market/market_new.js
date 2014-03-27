@@ -194,11 +194,13 @@ $(function(){
 	$.each(goods_type, function(k, v){
 		var goodOption = "<option value="+ v.type_id +">"+ v.type_name +"</option>";
 		commoditytype.append(goodOption);
-	})
+	});
+
 	setCommoditytype(commoditytype.val());
 	commoditytype.change(function(){
 		setCommoditytype($(this).val());
-	})
+	});
+
 });
 
 function jcorp(){

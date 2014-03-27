@@ -329,6 +329,12 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .question .meau .newquestiontologin{float:right;background:url(images/new.png);width:77px;height:21px;font-size:12px;line-height:21px;text-align:center;margin-top:40px;}
 .question .meau .newquestiontologin a{color:white;}
 
+/*求购页*/
+.question .meau .newcommoditywant{float:right;background:url(images/new.png);width:77px;height:21px;font-size:12px;line-height:21px;text-align:center;margin-top:40px;}
+.question .meau .newcommoditywant a{color:white;}
+.question .meau .newcommoditywanttologin{float:right;background:url(images/new.png);width:77px;height:21px;font-size:12px;line-height:21px;text-align:center;margin-top:40px;}
+.question .meau .newcommoditywanttologin a{color:white;}
+
 .question .left {float:left;margin-top:33px;width:165px;}
 .question .left .title{font-size:16px;color:#7a6c59;margin-top:15px;}
 .question .left .category a{display:block;width:141px;height:14px;padding-left:16px;padding-top:10px;padding-bottom:11px;border:1px solid #dcdcdc;border-top:0px;}

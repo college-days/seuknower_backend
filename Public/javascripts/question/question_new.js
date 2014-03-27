@@ -52,7 +52,7 @@ $(function(){
 	$(".newquestion a").click(function(){
 		window.editor = newEditor;
 		$(".newmask").css("display","block");
-		$(".newwin").css("display","block");
+		$("#newquesdialog").css("display","block");
 	});
 
 	$("#questiontitle").bind('input propertychange', function(){

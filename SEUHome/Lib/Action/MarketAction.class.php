@@ -339,6 +339,7 @@ class MarketAction extends Action {
 		$data['u_id'] = session('userId');
 		$data['phone'] = I('param.phone');
 		$data['status'] = I('param.status');
+		$data['tag'] = I('param.secondtype');
 		$getittime = I('param.gettime');
 		if(!$getittime){
 			$data['getittime'] = "0";
@@ -359,10 +360,10 @@ class MarketAction extends Action {
 		}
 		if(I('param.tag_cate')){
 			$data['category'] = I('param.tag_cate');
-			$data['tag'] = I('param.tag_cate');
+			$data['tag'] = I('param.secondtype');
 		}
 		if(I('param.catalog')){
-			$data['tag'] = I('param.catalog');
+			$data['tag'] = I('param.secondtype');
 		}
 		$cId = $Commodity->add($data);
 		
@@ -493,6 +494,7 @@ class MarketAction extends Action {
 		$data['phone'] = I('param.phone');
 		$data['u_id'] = session('userId');
 		$data['status'] = I('param.status');
+		$data['tag'] = I('param.secondtype');
 		$getittime = I('param.gettime');
 		if(!$getittime){
 			$data['getittime'] = "0";
@@ -597,6 +599,21 @@ class MarketAction extends Action {
 		$this->assign('page_count',$pageCount);
 		$this->assign('content',$content);
 		$this->display();
+	}
+
+	public function wantBuy(){
+		$domin = I("param.domin");
+
+		if($domin == "myself"){
+			$this->assign("domin", "myself");
+		}else{
+			$this->assign("domin", "all");
+		}
+		$this->display("want_buy");
+	}
+
+	public function newCommodityWant(){
+		echo 'cleantha';
 	}
 }
 ?>
