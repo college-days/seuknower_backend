@@ -601,15 +601,91 @@ class MarketAction extends Action {
 		$this->display();
 	}
 
-	public function wantBuy(){
-		$domin = I("param.domin");
+	//获得最新解决的求购
+	public function getLatestSolvedWant(){
+		$CommodityWant = M('CommodityWant');
+		$lsWants = $CommodityWant->order('create_time desc')->where('answer_count > 0')->limit(5)->select();
+		return $lsQuestions;
+	}
 
-		if($domin == "myself"){
-			$this->assign("domin", "myself");
-		}else{
-			$this->assign("domin", "all");
-		}
-		$this->display("want_buy");
+	public function wantBuy(){
+	  	$type = I("param.type");
+    	$domin = I("param.domin");
+
+    	if(!$type){
+    		$type = "全部";
+    	}
+
+    	if($type != "全部"){
+    		$sql = "question.type = '".$type."'";
+    	}else{
+    		$sql = "";
+    	}
+    		
+    	if($domin == "myself"){
+    		$userId = session('userId');
+    		$Model = M();
+    		$map['u_id'] = $userId;
+			$count = $Model->table('seu_commodity_want as commodityWant')->where($map)->count();
+			if($count){
+				$eachPageShowCount = 25;
+				$pageCount = ceil($count/$eachPageShowCount);
+				if(I('param.id')){
+					$page = I('param.id');
+					if($page > $pageCount) $page = $pageCount;
+				}
+				else{
+					$page = 1;
+				}
+				$start = ($page-1)*$eachPageShowCount;
+				
+				$wants = $Model->table('seu_commodity_want as commodityWant')->order('create_time desc')->limit($start.','.$eachPageShowCount)->where($map)->select();
+
+				for($i=0; $i<count($wants); $i++){
+					$User = M('User');
+					$result = $User->find($wants[$i]['u_id']);
+					$wants[$i]['u_name'] = $result['name'];
+				}			
+			}
+			$this->assign('domin', 'myself');
+    	}else{
+    		$Model = M();
+			$count = $Model->table('seu_commodity_want as commodityWant')->where($sql)->count();
+			if($count){
+				$eachPageShowCount = 25;
+				$pageCount = ceil($count/$eachPageShowCount);
+				if(I('param.id')){
+					$page = I('param.id');
+					if($page > $pageCount) $page = $pageCount;
+				}
+				else{
+					$page = 1;
+				}
+				$start = ($page-1)*$eachPageShowCount;
+				
+				$wants = $Model->table('seu_commodity_want as commodityWant')->order('create_time desc')->limit($start.','.$eachPageShowCount)->where($sql)->select();
+
+				for($i=0; $i<count($wants); $i++){
+					$User = M('User');
+					$result = $User->find($wants[$i]['u_id']);
+					$wants[$i]['u_name'] = $result['name'];
+				}			
+			}
+			$this->assign('domin', 'all');
+    	}
+    	
+		$CommodityWant = M('CommodityWant');
+		$hotWants = $CommodityWant->order('click_count desc')->limit(10)->select();
+		$this->assign('hots',$hotWants);
+		$this->assign('wants',$wants);
+		$this->assign('wantscount', count($wants));
+		$this->assign('count',$count);
+		$this->assign('type', $type);
+		$this->assign('curr_page',$page);
+		$this->assign('page_count',$pageCount);
+		$this->assign('lsquestions', $this->getLatestSolvedWant());
+
+		$this->display('want_buy');
 	}
 
 	public function newCommodityWant(){

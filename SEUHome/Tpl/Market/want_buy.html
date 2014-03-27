@@ -4,11 +4,11 @@
 		<div class="container">
 			<ul>
 				<eq name="domin" value="all">
-					<li class="active"><a href="/market/domin/all">最新求购</a></li>
-					<li><a href="/market/domin/myself">我的求购</a></li>
+					<li class="active"><a href="/market/want/domin/all">最新求购</a></li>
+					<li><a href="/market/want/domin/myself">我的求购</a></li>
 				<else/>
-					<li><a href="/market/domin/all">最新求购</a></li>
-					<li class="active"><a href="/market/domin/myself">我的求购</a></li>
+					<li><a href="/market/want/domin/all">最新求购</a></li>
+					<li class="active"><a href="/market/want/domin/myself">我的求购</a></li>
 				</eq>
 			</ul>
 			<notempty name="Think.session.userName">
@@ -25,37 +25,89 @@
 	<div class="container">
 		<div class="left">
 			<div class="category">
-				<!-- <img src="http://www.seuknower.com/Public/images/question/question_cate.png"/> -->
-				<a href="/question/全部" class="active">
-					<span class="ico ct1"></span>
-					<span>衣物鞋帽</span>
-				</a>
-				<a href="/question/数码电子" >
-					<span class="ico ct2"></span>
-					<span>数码电子</span>
-				</a>
-				<a href="/question/生活日用">
-					<span class="ico ct3"></span>
-					<span>生活日用</span>
-				</a>
-				<a href="/question/书籍杂志">
-					<span class="ico ct4"></span>
-					<span>书籍杂志</span>
-				</a>
-				<a href="/question/0元转让">
-					<span class="ico ct5"></span>
-					<span>0元转让</span>
-				</a>
-				<a href="/question/其他">
-					<span class="ico ct6"></span>
-					<span>其他</span>
-				</a>
+				<eq name="type" value="全部">
+					<a href="/market/want/全部" class="active">
+						<!-- <span class="ico ct1"></span> -->
+						<span>所有求购</span>
+					</a>
+				<else/>
+					<a href="/market/want/全部">
+						<!-- <span class="ico ct1"></span> -->
+						<span>所有求购</span>
+					</a>
+				</eq>
+				<eq name="type" value="衣物鞋帽">
+					<a href="/market/want/衣物鞋帽" class="active">
+						<span class="ico ct1"></span>
+						<span>衣物鞋帽</span>
+					</a>
+				<else/>
+					<a href="/market/want/衣物鞋帽">
+						<span class="ico ct1"></span>
+						<span>衣物鞋帽</span>
+					</a>
+				</eq>
+				<eq name="type" value="数码电子">
+					<a href="/market/want/数码电子" class="active">
+						<span class="ico ct2"></span>
+						<span>数码电子</span>
+					</a>
+				<else/>
+					<a href="/market/want/数码电子">
+						<span class="ico ct2"></span>
+						<span>数码电子</span>
+					</a>
+				</eq>
+				<eq name="type" value="生活日用">
+					<a href="/market/want/生活日用" class="active">
+						<span class="ico ct3"></span>
+						<span>生活日用</span>
+					</a>
+				<else/>
+					<a href="/market/want/生活日用">
+						<span class="ico ct3"></span>
+						<span>生活日用</span>
+					</a>
+				</eq>
+				<eq name="type" value="书籍杂志">
+					<a href="/market/want/书籍杂志" class="active">
+						<span class="ico ct4"></span>
+						<span>书籍杂志</span>
+					</a>
+				<else/>
+					<a href="/market/want/书籍杂志">
+						<span class="ico ct4"></span>
+						<span>书籍杂志</span>
+					</a>
+				</eq>
+				<eq name="type" value="0元转让">
+					<a href="/market/want/0元转让" class="active">
+						<span class="ico ct5"></span>
+						<span>0元转让</span>
+					</a>
+				<else/>
+					<a href="/market/want/0元转让">
+						<span class="ico ct5"></span>
+						<span>0元转让</span>
+					</a>
+				</eq>
+				<eq name="type" value="其他">
+					<a href="/market/want/其他" class="active">
+						<span class="ico ct6"></span>
+						<span>其他</span>
+					</a>
+				<else/>
+					<a href="/market/want/其他">
+						<span class="ico ct6"></span>
+						<span>其他</span>
+					</a>
+				</eq>
 			</div>
 			<div class="divide">
 			</div>
 			<div class="hot">
 				<div class="title">
-					热门问题
+					热门求购
 				</div>
 				<ul>
 				<li>
@@ -84,7 +136,7 @@
 			</div>
 			<div class="hot">
 				<div class="title">
-					最新解决问题
+					最新解决的求购
 				</div>
 				<ul>
 					<li>
