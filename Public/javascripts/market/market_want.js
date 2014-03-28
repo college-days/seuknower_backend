@@ -80,8 +80,8 @@ function submitCommodityWant(){
 		$.post('/market/new_commodity_want', {
 			'title': title,
 			'intro': intro,
-			'type': '未定',
-			'secondtype': '未定'
+			'type': '衣物鞋帽',
+			'secondtype': '衣服'
 		}, function(data){
 			if(data.status == 1){
 				window.location.href = "/market/want/" + parseInt(data.data['id']);

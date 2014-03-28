@@ -683,7 +683,7 @@ class MarketAction extends Action {
 		$this->assign('type', $type);
 		$this->assign('curr_page',$page);
 		$this->assign('page_count',$pageCount);
-		$this->assign('lsquestions', $this->getLatestSolvedWant());
+		$this->assign('lswants', $this->getLatestSolvedWant());
 
 		$this->display('want_buy');
 	}
@@ -714,7 +714,109 @@ class MarketAction extends Action {
 
 	public function wantDetail(){
 		$id = I('param.id');
+		$userId = session('userId');
+
+		//about notify message
+		// $deleteModel = new Model();
+		// $deleteResult = $deleteModel->execute('delete from seu_question_message where q_id='.$id.' and u_id='.$userId);
+		// $AnswerMessage = M('AnswerMessage');
+		// $AnswerMessage->where("q_id=".$id.' and u_id='.session('userId'))->delete();
+		// $AnswerAt = M('AnswerAt');
+		// $AnswerAt->where('q_id='.$id.' and u_id='.session('userId'))->delete();
+		// $AnswerAt->where('q_id='.$id.' and u_id=0')->delete();
+		// $AgreeMessage = M('AgreeMessage');
+		// $AgreeMessage->where("q_id=".$id.' and u_id='.session('userId'))->delete();
+	
+		//获取问题编号，然后更新问题的浏览数，浏览数+1
+		$CommodityWant = M('CommodityWant');
+		$add['id'] = $id;
+		$add['click_count'] = array('exp','click_count+1');
+		$CommodityWant->save($add);
+		
+		//获取问题编号之后获取问题信息，再获取问题的提问者编号
+		$wantInfo = $CommodityWant->find($id);
+		$wantInfo['intro'] = htmlspecialchars_decode($wantInfo['intro']);
+ 
+		$User = M('User');
+		$result = $User->find($wantInfo['u_id']);
+		$wantInfo['u_name'] = $result['name'];
+		$wantInfo['icon'] = $result['icon'];
+		$wantInfo['u_intro'] = $result['intro'];
+
+		$currentUser = $User->where('id='.$userId)->find();
+
+		$util = new CommonUtil();
+		$wantInfo["u_sex"] = $util->filter_sex($result["sex"]);
+
+		$this->assign('want', $wantInfo);
+
+		$Model = M();
+		//多表查询
+		$AnswerInfo = $Model->table('seu_commoditywant_answer answer, seu_user user')->field('answer.*,user.name as u_name, user.icon as icon, user.sex as u_sex')->where("answer.q_id = $id AND answer.u_id = user.id")->order('answer.create_time desc')->select();
+
+		for($i=0; $i<count($AnswerInfo); $i++){
+			$AnswerInfo[$i]['content'] = htmlspecialchars_decode($AnswerInfo[$i]['content']);
+		}
+
+		$this->assign('answers', $AnswerInfo);
+
+		$hotWants = $CommodityWant->order('click_count desc')->limit(10)->select();
+		$this->assign('hots', $hotWants);
+		$this->assign('lswants', $this->getLatestSolvedWant());
+
 		$this->display('want_detail');
+	}
+
+	public function addAnswer(){
+		if(isset($_SESSION['userId'])){
+			$qid = I('param.q_id');
+			$content = I('param.content');
+			$uid = session('userId');
+
+			$data['q_id'] = I('param.q_id');
+			$data['content'] = I('param.content');
+			$data['u_id'] = session('userId');
+			$data['create_time'] = time();
+			$CommoditywantAnswer = M('CommoditywantAnswer');
+			$result = $CommoditywantAnswer->add($data);
+			if($result < 1){
+				$this->ajaxReturn('', '', 0);
+			}
+
+			$CommodityWant = M('CommodityWant');
+			$wantdata['id'] = I('param.q_id');
+			//回答数加1
+			$wantdata['answer_count'] = array('exp','answer_count+1');
+			$wantdata['has_answer'] = 1;
+			$CommodityWant->save($wantdata);
+
+			//回答的消息提示
+			// $model = new Model();
+			// $newresult = $model->query('select u_id, title from seu_question where id='.$qid);
+			// $uidforqid = $newresult[0]['u_id'];
+			// $titleforqid = $newresult[0]['title'];
+			// $messageResult = $model->query('select * from seu_question_message where u_id='.$uidforqid.' and q_id='.$qid.' and from_id='.session('userId'));
+			// if($messageResult == null){
+			// 	$messageData['q_id'] = $qid;
+			// 	$messageData['u_id'] = $uidforqid;
+			// 	$messageData['from_id'] = session("userId");
+			// 	$messageData['title'] = $titleforqid;
+			// 	$messageData['answer_count'] = array('exp','answer_count+1');
+			// 	$messageModel = M('Question_message');
+			// 	$addResult = $messageModel->add($messageData);
+			// }else{
+			// 	//需要主键才可以= =
+			// 	$messageData['answer_count'] = array('exp','answer_count+1');
+			// 	$messageModel = M('Question_message');
+			// 	$saveResult = $messageModel->where('q_id='.$qid.' and u_id='.$uidforqid.' and from_id='.session('userId'))->save($messageData);
+			// }
+
+			$this->ajaxReturn('', '', 1);
+		}
+		//未登陆
+		else{
+			$this->ajaxReturn('', '', -1);
+		}
 	}
 }
 ?>
