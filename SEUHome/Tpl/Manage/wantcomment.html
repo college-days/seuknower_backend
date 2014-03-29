@@ -1,0 +1,13 @@
+<include file="Manage:header" title="求购评论"/>
+<div class="jumbotron">
+    <input type="button" class="deletewantreply" value="选中要删除的回复然后点这里删除">
+    <div style="margin-top:33px;"></div>
+    <ul class="list-group"> 
+        <volist name="answers" id="answer">
+            <li class="list-group-item" style="cursor:pointer;background:white;">
+                <div class="content wantreply" picked="0" wrid="{$answer.id}">{$answer.content}</div>
+            </li>
+        </volist>
+    </ul>
+</div>
+<include file="Manage:footer" />

@@ -334,5 +334,50 @@ class ManageAction extends Action {
 		}
 		$this->ajaxReturn('', '', 1);
 	}
+
+	public function want(){
+		$CommodityWant = M('CommodityWant');
+		$wants = $CommodityWant->order("create_time desc")->select();
+		$this->assign("wants", $wants);
+		$this->assign('current', 'want');
+		$this->display('want');
+	}
+
+	public function deleteWant(){
+		$wids = I('param.wids');
+		$CommodityWant = M('CommodityWant');
+		for($i=0; $i<count($wids); $i++){
+			$result = $CommodityWant->where('id='.$wids[$i])->delete();
+			if(!$result){
+				$this->ajaxReturn('', '', 0);
+			}
+		}
+		$this->ajaxReturn('', '', 1);
+	}
+
+	public function wantComment(){
+		$CommoditywantAnswer  = M('CommoditywantAnswer');
+		$answers = $CommoditywantAnswer->order("create_time desc")->select();
+		$this->assign('answers', $answers);
+		$this->assign('current', 'wantcomment');
+		$this->display('wantcomment');
+	}
+
+	public function deleteWantComment(){
+		$wrids = I('param.wrids');
+		$CommoditywantAnswer = M('CommoditywantAnswer');
+		$CommodityWant = M('CommodityWant');
+		for($i=0; $i<count($wrids); $i++){
+			$answer = $CommoditywantAnswer->where('id='.$wrids[$i])->find();
+			$delete['id'] = $answer['q_id'];
+			$delete['answer_count'] = array('exp', 'answer_count-1');
+			$CommodityWant->save($delete);
+			$result = $CommoditywantAnswer->where('id='.$wrids[$i])->delete();
+			if(!$result){
+				$this->ajaxReturn('', '', 0);
+			}
+		}
+		$this->ajaxReturn('', '', 1);
+	}
 }
 ?>

@@ -1,0 +1,13 @@
+<include file="Manage:header" title="求购管理"/>
+<div class="jumbotron">
+    <input type="button" class="deletewant" value="选中要删除的求购然后点这里删除">
+    <div style="margin-top:33px;"></div>
+    <ul class="list-group"> 
+        <volist name="wants" id="want">
+            <li class="list-group-item" style="cursor:pointer;background:white;">
+                <div class="content want" picked="0" wid="{$want.id}">{$want.title}</div>
+            </li>
+        </volist>
+    </ul>
+</div>
+<include file="Manage:footer" />

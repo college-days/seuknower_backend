@@ -152,6 +152,16 @@ ga('send', 'pageview');
                     <else/>
                         <li><a href="/manage/user">用户管理</a></li>
                     </eq>
+                    <eq name="current" value="want">
+                        <li class="active"><a href="/manage/want">求购管理</a></li>
+                    <else/>
+                        <li><a href="/manage/want">求购管理</a></li>
+                    </eq>
+                    <eq name="current" value="wantcomment">
+                        <li class="active"><a href="/manage/wantcomment">求购评论</a></li>
+                    <else/>
+                        <li><a href="/manage/wantcomment">求购评论</a></li>
+                    </eq>
                 </ul>
             </nav>
         </div>

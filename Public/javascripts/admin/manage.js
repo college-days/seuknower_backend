@@ -11,6 +11,8 @@ var delete_recommendevents = [];
 var add_recommendquestions = [];
 var delete_recommendquestions = [];
 var delete_users = [];
+var delete_wants = [];
+var delete_wantcomments = [];
 
 $(function(){
 	$(".event").click(function(){
@@ -528,6 +530,82 @@ $(function(){
         }else{
             $.post("/manage/deleteUser", {
                 'uids': delete_users
+            }, function(data){
+                if(data.status == 1){
+                    window.location.reload();
+                }else{
+                    alert("操作失败");
+                }
+            }, "json");
+        }
+    });
+
+    $(".want").click(function(){
+        if(parseInt($(this).attr("picked")) == 0){
+            var wid = $(this).attr("wid");
+            $(this).attr("picked", 1);
+            $(this).parents("li").css("background-color", "red");
+            if($.inArray(parseInt(wid), delete_wants) == -1){
+                delete_wants.push(parseInt(wid));
+            }
+            console.log(delete_wants);
+        }else{
+            var wid = $(this).attr("wid");
+            $(this).attr("picked", 0);
+            $(this).parents("li").css("background-color", "white");
+            if($.inArray(parseInt(wid), delete_wants) != -1){
+                delete_wants = $.grep(delete_wants, function(value){
+                    return value != parseInt(wid);
+                });
+            }
+            console.log(delete_wants);
+        }
+    });
+
+    $(".deletewant").click(function(){
+        if(delete_wants.length == 0){
+            alert("还没有选择要删除的求购");
+        }else{
+            $.post("/manage/deleteWant", {
+                'wids': delete_wants
+            }, function(data){
+                if(data.status == 1){
+                    window.location.reload();
+                }else{
+                    alert("操作失败");
+                }
+            }, "json");
+        }
+    });
+
+    $(".wantreply").click(function(){
+        if(parseInt($(this).attr("picked")) == 0){
+            var wrid = $(this).attr("wrid");
+            $(this).attr("picked", 1);
+            $(this).parents("li").css("background-color", "red");
+            if($.inArray(parseInt(wrid), delete_wantcomments) == -1){
+                delete_wantcomments.push(parseInt(wrid));
+            }
+            console.log(delete_wantcomments);
+        }else{
+            var wrid = $(this).attr("wrid");
+            $(this).attr("picked", 0);
+            $(this).parents("li").css("background-color", "white");
+            if($.inArray(parseInt(wrid), delete_wantcomments) != -1){
+                delete_wantcomments = $.grep(delete_wantcomments, function(value){
+                    return value != parseInt(wrid);
+                });
+            }
+            console.log(delete_wantcomments);
+        }
+    });
+
+    $(".deletewantreply").click(function(){
+        if(delete_wantcomments.length == 0){
+            alert("还没有选择要删除的求购回复");
+        }else{
+            $.post("/manage/deleteWantComment", {
+                'wrids': delete_wantcomments
             }, function(data){
                 if(data.status == 1){
                     window.location.reload();
