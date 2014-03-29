@@ -30,6 +30,10 @@ function checkMessage(){
 					var newItem = '<li><a style="width:180px;" href="/question/'+data.data[i]['q_id']+'/answer/'+data.data[i]['a_id']+'">'+data.data[i]['title']+'</a></li>';
 					html = html+newItem;
 				}
+				if(data.data[i]['type'] == 'want'){
+					var newItem = '<li><a style="width:180px;" href="/market/want/'+data.data[i]['q_id']+'">'+data.data[i]['title']+'</a></li>';
+					html = html+newItem;
+				}
 			}
 			document.getElementById("messagelist").innerHTML = html;	
 			$("#redPoint").show();	

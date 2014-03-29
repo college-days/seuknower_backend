@@ -716,16 +716,11 @@ class MarketAction extends Action {
 		$id = I('param.id');
 		$userId = session('userId');
 
-		//about notify message
-		// $deleteModel = new Model();
-		// $deleteResult = $deleteModel->execute('delete from seu_question_message where q_id='.$id.' and u_id='.$userId);
-		// $AnswerMessage = M('AnswerMessage');
-		// $AnswerMessage->where("q_id=".$id.' and u_id='.session('userId'))->delete();
-		// $AnswerAt = M('AnswerAt');
-		// $AnswerAt->where('q_id='.$id.' and u_id='.session('userId'))->delete();
-		// $AnswerAt->where('q_id='.$id.' and u_id=0')->delete();
-		// $AgreeMessage = M('AgreeMessage');
-		// $AgreeMessage->where("q_id=".$id.' and u_id='.session('userId'))->delete();
+		// about notify message
+		$CommoditywantMessage = M('CommoditywantMessage');
+		$CommoditywantMessage->where('q_id='.$id.' and u_id='.session('userId'))->delete();
+		$CommoditywantAt = M('CommoditywantAt');
+		$CommoditywantAt->where('q_id='.$id.' and u_id='.session('userId'))->delete();
 	
 		//获取问题编号，然后更新问题的浏览数，浏览数+1
 		$CommodityWant = M('CommodityWant');
@@ -770,6 +765,7 @@ class MarketAction extends Action {
 	public function addAnswer(){
 		if(isset($_SESSION['userId'])){
 			$qid = I('param.q_id');
+			$atid = I('param.at_id');
 			$content = I('param.content');
 			$uid = session('userId');
 
@@ -787,30 +783,39 @@ class MarketAction extends Action {
 			$wantdata['id'] = I('param.q_id');
 			//回答数加1
 			$wantdata['answer_count'] = array('exp','answer_count+1');
-			$wantdata['has_answer'] = 1;
+			// $wantdata['has_answer'] = 1;
 			$CommodityWant->save($wantdata);
 
-			//回答的消息提示
-			// $model = new Model();
-			// $newresult = $model->query('select u_id, title from seu_question where id='.$qid);
-			// $uidforqid = $newresult[0]['u_id'];
-			// $titleforqid = $newresult[0]['title'];
-			// $messageResult = $model->query('select * from seu_question_message where u_id='.$uidforqid.' and q_id='.$qid.' and from_id='.session('userId'));
-			// if($messageResult == null){
-			// 	$messageData['q_id'] = $qid;
-			// 	$messageData['u_id'] = $uidforqid;
-			// 	$messageData['from_id'] = session("userId");
-			// 	$messageData['title'] = $titleforqid;
-			// 	$messageData['answer_count'] = array('exp','answer_count+1');
-			// 	$messageModel = M('Question_message');
-			// 	$addResult = $messageModel->add($messageData);
-			// }else{
-			// 	//需要主键才可以= =
-			// 	$messageData['answer_count'] = array('exp','answer_count+1');
-			// 	$messageModel = M('Question_message');
-			// 	$saveResult = $messageModel->where('q_id='.$qid.' and u_id='.$uidforqid.' and from_id='.session('userId'))->save($messageData);
-			// }
+			$currentWant = $CommodityWant->where('id='.$qid)->find();
+			$wantuid = $currentWant['u_id'];
+			$wantTitle = $currentWant['title'];
 
+			$CommoditywantMessage = new Model('CommoditywantMessage');
+			$messageResult = $CommoditywantMessage->where('q_id='.I('param.q_id').' and from_id='.session('userId'))->select();
+
+			if($messageResult == null){
+				$messageData['q_id'] = I('param.q_id');
+				$messageData['u_id'] = $wantuid;
+				$messageData['from_id'] = session("userId");
+				$messageData['title'] = $wantTitle;
+				$messageData['comment_count'] = array('exp', 'comment_count+1');
+				$CommoditywantMessage->add($messageData);
+			}else{
+				$messageData['comment_count'] = array('exp', 'comment_count+1');
+				$CommoditywantMessage->where('q_id='.I('param.q_id').' and u_id='.$wantuid.' and from_id='.session('userId'))->save($messageData);
+			}
+
+			if($atid != 0){
+				$CommoditywantAt = M('CommoditywantAt');
+				$atMessageResult = $CommoditywantAt->where('q_id='.I('param.q_id').' and u_id='.I('param.at_id').' and from_id='.session('userId'))->select();
+				if($atMessageResult == null){
+					$atMessageData['q_id'] = I('param.q_id');
+					$atMessageData['u_id'] = I('param.at_id');
+					$atMessageData['from_id'] = session("userId");
+					$CommoditywantAt->add($atMessageData);
+				}
+			}
+			
 			$this->ajaxReturn('', '', 1);
 		}
 		//未登陆

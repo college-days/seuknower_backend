@@ -70,6 +70,7 @@ function submitComment(){
 		var atUserId = $("li[uname='"+atUserName+"']").attr("uid");
 		var finalContent = "<a href='/user/"+atUserId+"' target='_blank'>"+at+"</a>" + content;
 	}else{
+		var atUserId = 0;
 		var finalContent = content;
 	}
 
@@ -77,6 +78,7 @@ function submitComment(){
 	if(content.replace(/[ ]/g, "")){
 		$.post('/market/want/add_answer',{
 			q_id: qid,
+			at_id: atUserId,
 			content: finalContent,
 		}, function(data){
 			if(data.status == 1){

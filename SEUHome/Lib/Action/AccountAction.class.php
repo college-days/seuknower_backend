@@ -290,6 +290,8 @@ class AccountAction extends Action{
 		$AnswerMessage = M('AnswerMessage');
 		$AnswerAt = M('AnswerAt');
 		$AgreeMessage = M('AgreeMessage');
+		$CommoditywantMessage = M('CommoditywantMessage');
+		$CommoditywantAt = M('CommoditywantAt');
 
 		$messageMap['u_id'] = $currentUserId;
 		$questionResult = $QuestionMessage->where($messageMap)->select();
@@ -300,6 +302,8 @@ class AccountAction extends Action{
 		$answerResult = $AnswerMessage->where($messageMap)->select();
 		$answerAtResult = $AnswerAt->where($messageMap)->select();
 		$agreeResult = $AgreeMessage->where($messageMap)->select();
+		$commodityWantResult = $CommoditywantMessage->where($messageMap)->select();
+		$commodityWantAtResult = $CommoditywantAt->where($messageMap)->select();
 
 		for($i=0; $i<count($questionResult); $i++){
 			$questionResult[$i]['type'] = 'question';
@@ -369,6 +373,22 @@ class AccountAction extends Action{
 			$agreeResult[$i]['title'] = $from_name."赞同了你的回答";
 		}
 
+		for($i=0; $i<count($commodityWantResult); $i++){
+			$commodityWantResult[$i]['type'] = 'want';
+			$from_id = $commodityWantResult[$i]['from_id'];
+			$from_user = $User->where('id='.$from_id)->find();
+			$from_name = $from_user['name'];
+			$commodityWantResult[$i]['title'] = $from_name."回复了你的求购";
+		}
+
+		for($i=0; $i<count($commodityWantAtResult); $i++){
+			$commodityWantAtResult[$i]['type'] = 'want';
+			$from_id = $commodityWantAtResult[$i]['from_id'];
+			$from_user = $User->where('id='.$from_id)->find();
+			$from_name = $from_user['name'];
+			$commodityWantAtResult[$i]['title'] = $from_name."@了你";
+		}
+
 		if(!$questionResult){
 			$questionResult = array();
 		}
@@ -401,7 +421,15 @@ class AccountAction extends Action{
 			$agreeResult = array();
 		}
 
-		$finalResult = array_merge($questionResult, $eventResult, $commodityResult, $eventAtResult, $commodityAtResult, $answerResult, $answerAtResult, $agreeResult);
+		if(!$commodityWantResult){
+			$commodityWantResult = array();
+		}
+
+		if(!$commodityWantAtResult){
+			$commodityWantAtResult = array();
+		}
+
+		$finalResult = array_merge($questionResult, $eventResult, $commodityResult, $eventAtResult, $commodityAtResult, $answerResult, $answerAtResult, $agreeResult, $commodityWantResult, $commodityWantAtResult);
 
 		session('messagecount', count($finalResult));
 		session('messages', $finalResult);
