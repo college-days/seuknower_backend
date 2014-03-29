@@ -85,6 +85,10 @@
 								<eq name="me" value="1">
 									<span class="edit">编辑</span>
 									<span class="delete">下架</span>
+								<else/>
+									<eq name="Think.session.userId" value="7">
+										<span class="edit">编辑</span>
+									</eq>
 								</eq>
 								<span class="share">分享</span>
 							</div>
