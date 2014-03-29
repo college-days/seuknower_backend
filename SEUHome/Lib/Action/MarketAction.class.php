@@ -605,7 +605,7 @@ class MarketAction extends Action {
 	public function getLatestSolvedWant(){
 		$CommodityWant = M('CommodityWant');
 		$lsWants = $CommodityWant->order('create_time desc')->where('answer_count > 0')->limit(5)->select();
-		return $lsQuestions;
+		return $lsWants;
 	}
 
 	public function wantBuy(){
@@ -617,7 +617,7 @@ class MarketAction extends Action {
     	}
 
     	if($type != "全部"){
-    		$sql = "question.type = '".$type."'";
+    		$sql = "commodityWant.type = '".$type."'";
     	}else{
     		$sql = "";
     	}
