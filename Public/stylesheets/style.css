@@ -349,7 +349,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .question .left .hot li>a{font-size:14px;color:#666666;}
 .question .right {float:left;margin-top:33px;margin-left:54px;width:746px;}
 .question .right .content li{font-size:14px;line-height:18px;padding-top:8px;padding-bottom:8px;border-bottom:1px solid #ededed;overflow:hidden;}
-.question .right .content li a{float:left;width:422px;overflow:hidden;}
+.question .right .content li a{float:left;width:422px;overflow:hidden;color:#31302F;}
 /*.question .right .content li span{float:left;margin-left:20px;color:#a5a7a5;}*/
 .question .right .content li .count{width:70px;overflow:hidden;float:left;margin-left:20px;color:#a5a7a5;}
 .question .right .content li .user{width:80px;overflow:hidden;float:left;margin-left:20px;color:#a5a7a5;}
@@ -600,7 +600,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .question-detail .left .answer .delete{background:url(images/delete_grey.png) no-repeat;float:right;padding-left:20px;color:#80827f;background-position:0px 2px;}
 .question-detail .left .answer .delete:hover{background:url(images/delete_red.png) no-repeat;color:#cd3b3c;}
 
-.question-detail .left .answer .words .answercontent{font-size:14px;line-height:24px;}
+.question-detail .left .answer .words .answercontent{font-size:14px;line-height:24px;color:#222}
 .question-detail .left .answer .words p{}
 .question-detail .left .answer li{margin-bottom:10px;}
 .question-detail .left .answer li .content{}
