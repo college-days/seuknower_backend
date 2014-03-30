@@ -19,7 +19,7 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .navbar .search{width:216px;height:22px;border:1px solid #bfcbcb;border-right:none;border-radius:12px 0 0 12px;float:left;margin-top:14px;margin-left:30px;cursor:pointer;}
 .navbar .search input{margin-left:10px;width:206px;border:0;height:22px;border:0;outline:none;}
 .searchbtn{width:31px;height:24px;background:url(images/search_submit.png) no-repeat;float:left;margin-top:14px;margin-left:0px;cursor:pointer;}
-.navbar .user{float:left;margin-left:55px;margin-top:20px;}
+.navbar .user{float:left;margin-top:20px;}
 .navbar .user .message{float:left;cursor:pointer;}
 .navbar .user .message img{float:left;}
 .navbar .user .message .dot{display:none;}
