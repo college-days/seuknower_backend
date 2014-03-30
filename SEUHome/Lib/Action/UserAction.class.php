@@ -178,6 +178,7 @@ class UserAction extends Action {
         $interestEvents = $this->get_interest_event($u_id, 0);
 
 		$sellCommodities = $this->get_sell_commodity_on($u_id, 0);
+        $sellDones = $this->get_sell_commodity_done($u_id, 0);
 
     	if($_SESSION['userId'] == $u_id){
     		$this->assign('me', '1');
@@ -193,6 +194,7 @@ class UserAction extends Action {
 
         $this->footPrint($u_id);
 
+        $this->assign('selldonecount', count($sellDones));
     	$this->assign('asks', $askQuestions);
     	$this->assign('askcount', count($askQuestions));
     	$this->assign('answers', $answerQuestions);
