@@ -189,6 +189,7 @@ $(function(){
 function submitCommodityWant(){
 	var title = $("#commoditywanttitle").val();
 	var intro = window.editor.html().replace(/\s(style|class).[^<=]*"\B/g,"");
+	var type = $("#commoditytype").val();
 
 	var titleLock = false;
 	var introLock = false;
@@ -209,8 +210,7 @@ function submitCommodityWant(){
 		$.post('/market/new_commodity_want', {
 			'title': title,
 			'intro': intro,
-			'type': '衣物鞋帽',
-			'secondtype': '衣服'
+			'type': type
 		}, function(data){
 			if(data.status == 1){
 				window.location.href = "/market/want/" + parseInt(data.data['id']);
