@@ -16,9 +16,9 @@ body{background:#FFFFFF;/*-webkit-text-size-adjust:none;*/}
 .navbar .line{float:left;margin-left:24px;}
 .navbar .meau{float:left;font-size:14px;width:433px;height:50px;border-right:solid 1px #e5e5e5;}
 .navbar .meau li{float:left;margin-left:74px;margin-top:20px;}
-.navbar .search{width:141px;height:22px;background:url(images/search_back.png) no-repeat;float:left;margin-top:15px;margin-left:60px;cursor:pointer;}
-.navbar .search input{margin-left:10px;margin-top:1px;height:19px;border:0;outline:none;}
-.searchbtn{width:31px;height:22px;background:url(images/search_submit.png) no-repeat;float:left;margin-top:15px;margin-left:0px;cursor:pointer;}
+.navbar .search{width:216px;height:22px;border:1px solid #bfcbcb;border-right:none;border-radius:12px 0 0 12px;float:left;margin-top:14px;margin-left:30px;cursor:pointer;}
+.navbar .search input{margin-left:10px;width:206px;border:0;height:22px;border:0;outline:none;}
+.searchbtn{width:31px;height:24px;background:url(images/search_submit.png) no-repeat;float:left;margin-top:14px;margin-left:0px;cursor:pointer;}
 .navbar .user{float:left;margin-left:55px;margin-top:20px;}
 .navbar .user .message{float:left;cursor:pointer;}
 .navbar .user .message img{float:left;}
@@ -397,6 +397,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .market .new div{background:url(images/new_market.png);width:77px;height:21px;float:right;text-align:center;}
 .market .new div>a{line-height:21px;color:white;}
 .mywant_btn{background:url(images/my_want.png);width:77px;height:21px;line-height:21px;text-align:center;float:right;margin-left:10px;color:white;}
+a.mywant_btn{color:white;}
 
 .market .content ul{margin-left:-29px;}
 .market .content li{float:left;width:217px;height:284px;border:1px solid #e5e5e5;border-radius:5px;margin-left:29.5px;margin-top:20px;margin-bottom:16px;background:white;}
@@ -585,7 +586,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .question-detail .left .answer .addobject:hover,.question-detail .left .answer .cancelobject{background-image:url(images/object_white.png);background-color:#698EBF;color:white;}
 /*.question-detail .left .answer .cancelobject:hover{background-image:url(images/object_grey.png);background-color:#ebf4ed;color:gray;}*/
 .question-detail .left .answer .n-t{height:32px;line-height:32px;background:#f2f2f2;margin-bottom:5px;}
-.question-detail .left .answer .icon{float:left;/*width:40px;*/margin:4px 5px 0;}
+.question-detail .left .answer .icon{float:left;margin:4px 5px 0;}
 .question-detail .left .answer .words{line-height:18px;overflow:hidden;}/**/
 .question-detail .left .answer .name{font-size:14px;color:#4e9f74;float:left;}
 .question-detail .left .answer .time{float:right;color:#80827f;margin-right:10px;}
@@ -830,7 +831,7 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .newmask{position:absolute;z-index:100;top:0px;left:0px;background:black;opacity:0.30;}
 .newwin{position:absolute;z-index:9999;width:600px;top:50px;background:white;}
 .newwin .title-bar{height:36px;padding:0px 15px;padding-right:20px;font-size:18px;background:#2ead91;line-height:36px;color:white;}
-.newwin .title-bar div{background:url(images/delete_grey.png);width:13px;height:13px;float:right;margin-top:12px;cursor:pointer;/*float与vertical-align会有冲突，使用float后display被忽略*/}
+.newwin .title-bar div{background:url(images/delete_white.png);width:13px;height:13px;float:right;margin-top:12px;cursor:pointer;/*float与vertical-align会有冲突，使用float后display被忽略*/}
 .newwin .title-bar div:hover{background:url(images/delete_red.png);}
 
 .newwin .content{padding:20px 15px;}

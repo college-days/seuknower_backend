@@ -193,12 +193,13 @@ $(function(){
 	
 	var previousLocation = $("#previousLocation").val();
 	var previousCategory = $("#previousCategory").val();
-	var previousSecondType = $("#previousSecondtype").val();
 	$("#commoditytype").find("option[value='"+previousCategory+"']").attr("selected", true);
 	$("#commoditylocation").find("option[value='"+previousLocation+"']").attr("selected", true);
-	$("#secondtype").find("option[value='"+previousSecondType+"']").attr("selected", true);
 	
 	setCommoditytype(commoditytype.val());
+	var previousSecondType = $("#previousSecondtype").val();
+	$("#secondtype").find("option[value='"+previousSecondType+"']").attr("selected", true);
+	
 	commoditytype.change(function(){
 		setCommoditytype($(this).val());
 	});
