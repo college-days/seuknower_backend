@@ -747,7 +747,7 @@ class MarketAction extends Action {
 
 		$Model = M();
 		//多表查询
-		$AnswerInfo = $Model->table('seu_commoditywant_answer answer, seu_user user')->field('answer.*,user.name as u_name, user.icon as icon, user.sex as u_sex')->where("answer.q_id = $id AND answer.u_id = user.id")->order('answer.create_time desc')->select();
+		$AnswerInfo = $Model->table('seu_commoditywant_answer answer, seu_user user')->field('answer.*,user.name as u_name, user.icon as icon, user.sex as u_sex')->where("answer.q_id = $id AND answer.u_id = user.id")->select();
 
 		for($i=0; $i<count($AnswerInfo); $i++){
 			$AnswerInfo[$i]['content'] = htmlspecialchars_decode($AnswerInfo[$i]['content']);
