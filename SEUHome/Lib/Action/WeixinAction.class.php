@@ -92,6 +92,9 @@ class WeixinAction extends Action {
 	 	}';
 	 	$menuPostUrl = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$accessToken;
 	 	$menu = $this->dataPost($menuPostString, $menuPostUrl);
+	 	$file = fopen("weixinlog.txt","w");
+		echo fwrite($file, $menu);
+		fclose($file);
 	}
 
 	//获取access_token
