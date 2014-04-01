@@ -90,7 +90,7 @@ class WeixinAction extends Action {
 	 		}]	
 	 	}';
 	 	$menuPostUrl = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$accessToken;//POST的url
-	 	$menu = dataPost($menuPostString, $menuPostUrl);//将菜单结构体POST给微信服务器
+	 	$menu = $this->dataPost($menuPostString, $menuPostUrl);//将菜单结构体POST给微信服务器
 	}
 
 	private function getAccessToken() //获取access_token
@@ -98,7 +98,7 @@ class WeixinAction extends Action {
 	 	$AppId = 'wx358c79f5c4e52937';
 	 	$AppSecret = '006ad901b4022d656bd52da7991e4bae';
 		$url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$AppId."&secret=".$AppSecret;
-		$data = getCurl($url);//通过自定义函数getCurl得到https的内容
+		$data = $this->getCurl($url);//通过自定义函数getCurl得到https的内容
 		$resultArr = json_decode($data, true);//转为数组
 		return $resultArr["access_token"];//获取access_token
 	}
