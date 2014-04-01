@@ -116,7 +116,7 @@ class WeixinAction extends Action {
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		$result = curl_exec($ch);
 		curl_close($ch);
-		// return $result;
+		return $result;
 	}
 
 	//POST方式提交数据
@@ -124,7 +124,7 @@ class WeixinAction extends Action {
 		$context = array ('http' => array ('method' => "POST", 'header' => "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US) \r\n Accept: */*", 'content' => $post_string ) );
 		$stream_context = stream_context_create ( $context );
 		$data = file_get_contents ( $url, FALSE, $stream_context );
-		return $data;
+		// return $data;
 	}
 }
 ?>
