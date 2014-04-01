@@ -85,7 +85,7 @@ class WeixinAction extends Action {
 		$accessToken = $this->getAccessToken();
 		$menuPostString = '{
 	 		"button":[{
-	 			"type":"click",
+	 			"type":"view",
 	 			"name":"刮刮乐",
 	 			"url":"http://www.seuknower.com/lottery"
 	 		}]	
