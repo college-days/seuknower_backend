@@ -78,10 +78,11 @@ class WeixinAction extends Action {
 		}
 	}
 
-
-	public function creatMenu()//创建菜单
-	{
-		$accessToken = $this->getAccessToken();//获取access_token
+	//创建菜单
+	//获取access_token
+	//将菜单结构体POST给微信服务器
+	public function creatMenu(){
+		$accessToken = $this->getAccessToken();
 		$menuPostString = '{
 	 		"button":[{
 	 			"type":"click",
@@ -89,32 +90,37 @@ class WeixinAction extends Action {
 	 			"url":"http://www.seuknower.com/lottery"
 	 		}]	
 	 	}';
-	 	$menuPostUrl = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$accessToken;//POST的url
-	 	$menu = $this->dataPost($menuPostString, $menuPostUrl);//将菜单结构体POST给微信服务器
+	 	$menuPostUrl = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$accessToken;
+	 	$menu = $this->dataPost($menuPostString, $menuPostUrl);
 	}
 
-	private function getAccessToken() //获取access_token
-	{
+	//获取access_token
+	//通过自定义函数getCurl得到https的内容
+	//转为数组
+	//获取access_token
+	private function getAccessToken(){
 	 	$AppId = 'wx358c79f5c4e52937';
 	 	$AppSecret = '006ad901b4022d656bd52da7991e4bae';
 		$url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$AppId."&secret=".$AppSecret;
-		$data = $this->getCurl($url);//通过自定义函数getCurl得到https的内容
-		$resultArr = json_decode($data, true);//转为数组
-		return $resultArr["access_token"];//获取access_token
+		$data = $this->getCurl($url);
+		$resultArr = json_decode($data, true);
+		return $resultArr["access_token"];
 	}
 
-	private function getCurl($url){//get https的内容
+	//get https的内容
+	private function getCurl($url){
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//不输出内容
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		$result = curl_exec($ch);
 		curl_close($ch);
 		return $result;
-	 }
- 
-	private function dataPost($post_string, $url) {//POST方式提交数据
+	}
+
+	//POST方式提交数据
+	private function dataPost($post_string, $url){
 		$context = array ('http' => array ('method' => "POST", 'header' => "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US) \r\n Accept: */*", 'content' => $post_string ) );
 		$stream_context = stream_context_create ( $context );
 		$data = file_get_contents ( $url, FALSE, $stream_context );
