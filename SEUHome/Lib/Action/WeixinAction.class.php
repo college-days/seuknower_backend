@@ -9,7 +9,7 @@ class WeixinAction extends Action {
 	        }
 		}
 		if($this->isPost()){
-			$this->creatMenu();
+			//$this->creatMenu();
 			$this->responseMsg();
 		}
 	}
