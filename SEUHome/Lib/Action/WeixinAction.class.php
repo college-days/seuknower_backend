@@ -116,7 +116,7 @@ class WeixinAction extends Action {
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		$result = curl_exec($ch);
 		curl_close($ch);
-		return $result;
+		// return $result;
 	}
 
 	//POST方式提交数据
