@@ -13,6 +13,7 @@ class MarketAction extends Action {
 
     public function index(){
     	$category = I('param.category');
+    	$order = I('param.order');
 
 		if(!$category){
 			$category = "全部";
@@ -36,7 +37,14 @@ class MarketAction extends Action {
 		}
 		$start = ($page-1)*16;
 		
-		$commodityInfo = $Commodity->where($map)->order('create_time desc')->limit($start.',16')->select();
+		if($order == "new"){
+			$commodityInfo = $Commodity->where($map)->order('create_time desc')->limit($start.',16')->select();
+		}else if($order == "hot"){
+			$commodityInfo = $Commodity->where($map)->order('click_count desc')->limit($start.',16')->select();
+		}else{
+			$commodityInfo = $Commodity->where($map)->order('create_time desc')->limit($start.',16')->select();
+		}
+		
 		// $commodityInfo = $Commodity->order('create_time desc')->limit($start.',16')->select();
 
 		$util = new CommonUtil();
@@ -69,6 +77,7 @@ class MarketAction extends Action {
 		$selledmap['onsale'] = 0;
 		$selledcount = $Commodity->where($selledmap)->count();
 
+		$this->assign('order', $order);
 		$this->assign('selledcount', $selledcount);
 		$this->assign('commoditys',$commodityInfo);
 		$this->assign('commodityscount', count($commodityInfo));

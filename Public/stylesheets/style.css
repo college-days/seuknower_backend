@@ -392,7 +392,11 @@ cursor:default;background-color:#4a9e72;border-color:#4a9e72;}
 .market .category .active a, .market .category li>a:hover{background:#F9A020;padding:3px 5px;border-radius:3px;color:white;}
 .market .category .my{float:right;font-size:12px;line-height:30px;margin-right:12px;}
 .market .category .my span{margin-left:5px;margin-right:5px;}
-.market .new{margin-top:18px;margin-left:10px;}
+.market .new{margin-top:18px;margin-left:10px;min-height: 31px;line-height:26px;}
+.market .new .sort_good{ float:left;line-height:19px;padding-right:16px;}
+.market .sort_good .desc{ background:url(images/sort_row.png) no-repeat 35px center;cursor:pointer; margin-right:-1px;border:1px solid #e5e5e5;padding:3px 20px 3px 5px;float:left;}
+.market .sort_good .desc:hover,.market .sort_good .on{ background-image:url(images/sort_rowon.png);color:#f60;}
+
 .market .new .total{font-size:16px;color:#f9a020;}
 .market .new div{background:url(images/new_market.png);width:77px;height:21px;float:right;text-align:center;}
 .market .new div>a{line-height:21px;color:white;}
