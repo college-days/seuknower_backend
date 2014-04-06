@@ -5,7 +5,15 @@ class GameAction extends Action {
 	}
 
 	public function lottery(){
-		echo '欢迎抽奖';
+		$this->display('lottery');
+	}
+	
+	public function login(){
+		$this->display("login");
+	}
+
+	public function register(){
+		$this->display("register");
 	}
 }
 ?>

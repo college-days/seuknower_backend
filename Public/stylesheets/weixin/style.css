@@ -1,0 +1,35 @@
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px arial,Microsoft Yahei,\5b8b\4f53,sans-serif;}h1,h2,h3,h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp{font-family:courier new,courier,monospace;}small{font-size:12px;}ul,ol{list-style:none;}a{text-decoration:none;}/*a:hover{text-decoration:underline;}*/sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}.col-main{float:left;width:100%;min-height:1px;}.hidden{display:none;}.invisible{visibility:hidden;}
+.clear:after{content:'\20';display:block;height:0;clear:both;}.clear{*zoom:1;font-size:0;line-height:0;clear:both;height:0;}
+a:link,a:visited{color:#000;text-decoration:none;}
+/*a:hover{color:#c00;text-decoration:underline;}*/
+img{border:0;-ms-interpolation-mode:bicubic;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+* html>body .clearfix{display:inline-block;width:100%;}
+* html .clearfix{/* Hides from IE-mac \*/ height:1%;/* End hide from IE-mac */ }
+*+html .clearfix{min-height:1%;}
+
+
+/*注册*/
+.register{background:url(images/hall.png) no-repeat;background-size:100% auto;width:100%;height:100%;}
+.register .blank{padding-top:15%}
+.register .white{background:url(images/tran_register.png) no-repeat;width:80%;height:80%;padding-top:5%;}
+.register .white .title{font-size:30px;color:#7a6c59;margin-left:5%;border-left:5px solid #7a6c59;}
+.register .white .info .text{font-size:16px;color:#7a6c59;margin-left:3%;}
+
+/*更新 2-17*/
+.register .white .check{vertical-align:middle;margin-left:20%;}
+.register .white .forget{margin-left:3%;color:blue;}
+.register .white .tip{margin-left:3%;color:red;}
+
+
+
+
+
+/*2-26更新*/
+.error{padding-top:60px;margin-bottom:300px;}
+.error img{margin-left:auto;margin-right:auto;display:block;}
+.error .link{margin-left:auto;margin-right:auto;width:288px;margin-top:20px;}
+.error .link li{float:left;list-style-image:url(images/dot_grey.png);font-size:14px;}
+.error .link .distance{margin-left:40px;}
+.error .link li a{color:#2ead91;}
+/*2-26更新结束*/

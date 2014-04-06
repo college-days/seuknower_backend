@@ -11,6 +11,8 @@ return array(
 		'game$' => 'Game/doge',
 		'manage$' => 'Manage/event',
 		'weixin$' => 'Weixin/index',
+		'game/login$' => 'Game/login',
+		'game/register$' => 'Game/register',
 		'question/search/:content/:page$' => 'Question/search',
 		'question/adjust_answer_count' => 'Question/adjustAnswerCount',
 		'question/change_content$' => 'Question/changeContent',
