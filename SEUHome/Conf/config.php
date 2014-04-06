@@ -83,7 +83,7 @@ return array(
 		'event/add_interest' => 'Event/addInterest',
 		'event/cancel_interest' => 'Event/cancelInterest',
 		'event/add_comment' => 'Event/addComment',
-		'market/order/:order$' => 'Market/index',
+		'market/store_order$' => 'Market/storeOrder',
 		'market/want_buy$' => 'Market/wantBuy',
 		'market/want/add_answer$' => 'Market/addAnswer',
 		'market/want/:id\d$' => 'Market/wantDetail',

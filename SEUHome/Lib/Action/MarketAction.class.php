@@ -13,7 +13,11 @@ class MarketAction extends Action {
 
     public function index(){
     	$category = I('param.category');
-    	$order = I('param.order');
+    	$order = session("marketorder");
+
+    	if(!$order){
+    		$order = "new";
+    	}
 
 		if(!$category){
 			$category = "全部";
@@ -88,6 +92,12 @@ class MarketAction extends Action {
 		$this->assign('category',$category);
 		
     	$this->display('index');
+    }
+
+    public function storeOrder(){
+    	$order = I('param.order');
+    	session('marketorder', $order);
+    	$this->ajaxReturn('', '', 1);
     }
 
     public function detail(){

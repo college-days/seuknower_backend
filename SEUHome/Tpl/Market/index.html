@@ -48,12 +48,12 @@
 				</div>
 				<div class="new">
 					<p class="sort_good">
-						<eq name="order" value="hot">
-							<span class="desc on"><a href="/market/order/hot">人气</a></span>
-							<span class="desc"><a href="/market/order/new">最新</a></span>
+						<eq name="Think.session.marketorder" value="hot">
+							<span class="desc on" id="orderhot">人气</span>
+							<span class="desc" id="ordernew">最新</span>
 						<else/>
-							<span class="desc"><a href="/market/order/hot">人气</a></span>
-							<span class="desc on"><a href="/market/order/new">最新</a></span>
+							<span class="desc" id="orderhot">人气</span>
+							<span class="desc on" id="ordernew">最新</span>
 						</eq>
 					</p>
 					<span>东大通已经帮助</span><span class="total">{$selledcount}</span><span>件物品找到新主人</span>
@@ -208,5 +208,5 @@
 			<div class="clear">
 			</div>
 		</div>
-		
+		<script src="__JS__/market/market_index.js?t=1396187473"></script>
 <include file="Public:footer" />

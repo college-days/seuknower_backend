@@ -11,6 +11,8 @@ class IndexAction extends Action {
     }
 
     public function index(){
+        session('marketorder', null);
+
     	$util = new CommonUtil();
     	$Question = M('Question');
     	$recommendQuestions = $Question->where("recommended=1")->select();
