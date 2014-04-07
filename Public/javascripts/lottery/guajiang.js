@@ -29,7 +29,7 @@ $(function() {
 	//loadingObj.hide();
 	//$(".loading-mask").remove();
 
-	/*$("#sharelottery").click(function(){
+	$("#sharelottery").click(function(){
 		var flag = $(this).text().replace(/[ ]/g, "");
 		if(flag == "分享"){
 			$.post('/game/addLottery', {
@@ -40,14 +40,16 @@ $(function() {
 				}
 			}, 'json');
 			// $(".bshare-custom").slideDown();
-			$("#renrenshare").slideDown();
+			$("#sharelist").slideDown();
 			$(this).text("收起分享");
 		}else{
 			// $(".bshare-custom").slideUp();
-			$("#renrenshare").slideUp();
+			$("#sharelist").slideUp();
 			$(this).text("分享");
 		}
-	});*/
+	});
+
+	/*
 	$("#sharelottery").click(function(){
 		$.post('/game/addLottery', {
 			'haha': 'haha'
@@ -56,7 +58,7 @@ $(function() {
 				alert("恭喜你又获得了两次抽奖机会");
 			}
 		}, 'json');
-	});
+	});*/
 
 });
 
