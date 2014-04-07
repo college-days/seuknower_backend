@@ -89,6 +89,20 @@
 			<span id="sharelottery" style="cursor:pointer;">分享</span>
 			<div class="bshare-custom" style="display:none;align:center;"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><a class="bshareDiv" onclick="javascript:return false;"></a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
 			<div class="content">
+			<script type="text/javascript" src="http://widget.renren.com/js/rrshare.js"></script>
+			<a name="xn_share" onclick="shareClick()" type="icon" href="javascript:;"></a>
+			<script type="text/javascript">
+				function shareClick() {
+					var rrShareParam = {
+						resourceUrl : '',	//分享的资源Url
+						srcUrl : '',	//分享的资源来源Url,默认为header中的Referer,如果分享失败可以调整此值为resourceUrl试试
+						pic : '',		//分享的主题图片Url
+						title : '',		//分享的标题
+						description : ''	//分享的详细描述
+					};
+					rrShareOnclick(rrShareParam);
+				}
+			</script>
 				<div id="zjl" style="display:none" class="boxcontent boxwhite">
 					<div class="box">
 						<div class="title-red">
