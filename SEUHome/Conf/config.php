@@ -12,6 +12,7 @@ return array(
 		'game/check_login' => 'Game/checkLogin',
 		'manage$' => 'Manage/event',
 		'weixin$' => 'Weixin/index',
+		'weixin/post_menu' => 'Weixin/postMenu',
 		'game/login$' => 'Game/login',
 		'game/register$' => 'Game/register',
 		'question/search/:content/:page$' => 'Question/search',
