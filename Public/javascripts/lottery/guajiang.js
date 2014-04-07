@@ -29,7 +29,7 @@ $(function() {
 	//loadingObj.hide();
 	//$(".loading-mask").remove();
 
-	$("#sharelottery").click(function(){
+	/*$("#sharelottery").click(function(){
 		var flag = $(this).text().replace(/[ ]/g, "");
 		if(flag == "分享"){
 			$.post('/game/addLottery', {
@@ -47,6 +47,17 @@ $(function() {
 			$("#renrenshare").slideUp();
 			$(this).text("分享");
 		}
+	});*/
+	$("#sharelottery").click(function(){
+		alert("cleantha");
+		$.post('/game/addLottery', {
+			'haha': 'haha'
+		}, function(data){
+			if(data.status == 1){
+				alert("恭喜你又获得了两次抽奖机会");
+			}
+		}, 'json');
 	});
+
 });
 
