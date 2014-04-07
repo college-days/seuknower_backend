@@ -18,6 +18,11 @@ class WeixinAction extends Action {
 		echo 'cleantha';
 	}
 
+	public function wxacess(){
+		$accessToken = $this->getAccessToken();
+		echo $accessToken;
+	}
+
 	public function responseMsg()
     {
 		//get post data, May be due to the different environments
