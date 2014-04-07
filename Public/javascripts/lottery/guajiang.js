@@ -49,7 +49,6 @@ $(function() {
 		}
 	});*/
 	$("#sharelottery").click(function(){
-		alert("cleantha");
 		$.post('/game/addLottery', {
 			'haha': 'haha'
 		}, function(data){
