@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--<base href="http://www.apiwx.com/" />-->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<title>东大通</title>
+		<script src="http://www.apiwx.com/index/js/jquery.js" type="text/javascript"></script>
+		<script src="http://www.apiwx.com/index/js/wScratchPad.js" type="text/javascript"></script>
+		<script src="http://www.apiwx.com/index/js/alert.js" type="text/javascript"></script>
+		<link href="http://www.apiwx.com/index/css/activity-style.css" rel="stylesheet" type="text/css">
+		<script src="__JS__/lottery/guajiang.js?t=1396784982"></script>
+	</head>
+	<script type="text/javascript">
+		function loading(canvas, options) {
+			this.canvas = canvas;
+			if (options) {
+				this.radius = options.radius || 12;
+				this.circleLineWidth = options.circleLineWidth || 4;
+				this.circleColor = options.circleColor || 'lightgray';
+				this.moveArcColor = options.moveArcColor || 'gray';
+			} else {
+				this.radius = 12;
+				this.circelLineWidth = 4;
+				this.circleColor = 'lightgray';
+				this.moveArcColor = 'gray';
+			}
+		}
+		loading.prototype = {
+			show: function() {
+				var canvas = this.canvas;
+				if (!canvas.getContext) return;
+				if (canvas.__loading) return;
+				canvas.__loading = this;
+				var ctx = canvas.getContext('2d');
+				var radius = this.radius;
+				var me = this;
+				var rotatorAngle = Math.PI * 1.5;
+				var step = Math.PI / 6;
+				canvas.loadingInterval = setInterval(function() {
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+					var lineWidth = me.circleLineWidth;
+					var center = {
+						x: canvas.width / 2,
+						y: canvas.height / 2
+					};
+
+					ctx.beginPath();
+					ctx.lineWidth = lineWidth;
+					ctx.strokeStyle = me.circleColor;
+					ctx.arc(center.x, center.y + 20, radius, 0, Math.PI * 2);
+					ctx.closePath();
+					ctx.stroke();
+					//在圆圈上面画小圆   
+					ctx.beginPath();
+					ctx.strokeStyle = me.moveArcColor;
+					ctx.arc(center.x, center.y + 20, radius, rotatorAngle, rotatorAngle + Math.PI * .45);
+					ctx.stroke();
+					rotatorAngle += step;
+
+				},
+				100);
+			},
+			hide: function() {
+				var canvas = this.canvas;
+				canvas.__loading = false;
+				if (canvas.loadingInterval) {
+					window.clearInterval(canvas.loadingInterval);
+				}
+				var ctx = canvas.getContext('2d');
+				if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+			}
+		};
+	</script>
+	</head>
+	<body data-role="page" class="activity-scratch-card-winning">
+		<div style="display:none;" id="result" content="{$Think.session.lotteryresult}"></div>
+		<div class="main">
+			<div class="cover">
+				<img src="http://www.apiwx.com/index/images/activity/activity-scratch-card-bannerbg.png">
+				<div id="prize">
+				</div>
+				<div id="scratchpad">
+				</div>
+			</div>
+			<span id="sharelottery" style="cursor:pointer;">分享</span>
+			<div class="bshare-custom" style="display:none;align:center;"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><a class="bshareDiv" onclick="javascript:return false;"></a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+			<div class="content">
+				<div id="zjl" style="display:none" class="boxcontent boxwhite">
+					<div class="box">
+						<div class="title-red">
+							<span>
+								恭喜你中奖了
+							</span>
+						</div>
+						<div class="Detail">
+							<p>
+								你中了：
+								<span class="red">
+									谢谢参与
+								</span>
+							</p>
+							<p>
+								兑奖SN码：
+								<span class="red" id="sncode">
+									null
+								</span>
+							</p>
+							<p class="red"></p>
+							<p>
+								<input name="" class="px" id="tel" value="" type="text" placeholder="用户请输入您的手机号">
+							</p>
+							<p>
+								<p>
+									<input class="pxbtn" name="提 交" id="save-btn" type="button" value="用户提交">
+								</p>
+								<p>
+									<input name="" class="px" id="parssword" type="password" value="" placeholder="商家输入兑奖密码">
+								</p>
+								<p>
+									<input class="pxbtn" name="提 交" id="save-btnn" type="button" value="商家提交">
+								</p>
+						</div>
+					</div>
+				</div>
+				<div class="boxcontent boxwhite">
+					<div class="box">
+						<div class="title-brown">
+							<span>
+								奖项设置：
+							</span>
+						</div>
+						<div class="Detail">
+							<p>
+								一等奖： 移动电源、熊;
+							</p>
+							<p>
+								二等奖： 小盆栽、抱枕、马克杯、玻璃杯、游戏点卡;
+							</p>
+							<p>
+								三等奖： 笔、睡眠眼罩、手机防尘塞;
+							</p>
+							<p>
+								四等奖：卡套、糖（阿尔卑斯、秀豆、黑糖话梅）、旺旺仙贝/雪饼；
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="boxcontent boxwhite">
+					<div class="box">
+						<div class="title-brown">
+							活动说明：
+						</div>
+						<div class="Detail">
+							<p class="red">
+								今天总共可以刮1次,你已经刮了0次,机会如果没用完重新进入本页面可以再刮!分享到人人或者朋友圈可以在获得一次抽奖机会哦！
+							</p>
+							<p>
+								1.凡已注册东大通的同学或者现场注册的同学都可以每天抽奖一次；
+							</p>
+							<p>	
+								2.将抽奖信息分享到朋友圈、人人或者qq空间之后可以额外获得一次抽奖机会；
+							</p>
+							<p>	
+								3.中奖后请于11日晚和12日白天到大活广场找学生会跳蚤市场工作人员领奖，过期作废哦；
+							</p>
+							<p>	
+								4.本抽奖活动最终解释权归火星蚁工作室所有。
+							</p>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="clear:both;">
+			</div>
+		</div>
+	</body>
+</html>

@@ -9,9 +9,13 @@ class WeixinAction extends Action {
 	        }
 		}
 		if($this->isPost()){
-			//$this->creatMenu();
 			$this->responseMsg();
 		}
+	}
+
+	public function postMenu(){
+		$this->creatMenu();
+		echo 'cleantha';
 	}
 
 	public function responseMsg()
@@ -87,7 +91,7 @@ class WeixinAction extends Action {
 	 		"button":[{
 	 			"type":"view",
 	 			"name":"刮刮乐",
-	 			"url":"http://www.seuknower.com/lottery"
+	 			"url":"http://www.seuknower.com/game/login"
 	 		}]	
 	 	}';
 	 	$menuPostUrl = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$accessToken;

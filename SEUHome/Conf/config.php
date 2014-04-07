@@ -9,6 +9,7 @@ return array(
 	'URL_ROUTE_RULES'=>array(
 		'lottery$' => 'Game/lottery',
 		'game$' => 'Game/doge',
+		'game/check_login' => 'Game/checkLogin',
 		'manage$' => 'Manage/event',
 		'weixin$' => 'Weixin/index',
 		'game/login$' => 'Game/login',
