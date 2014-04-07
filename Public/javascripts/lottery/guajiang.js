@@ -39,10 +39,12 @@ $(function() {
 					alert("恭喜你又获得了两次抽奖机会");
 				}
 			}, 'json');
-			$(".bshare-custom").slideDown();
+			// $(".bshare-custom").slideDown();
+			$("#renrenshare").slideDown();
 			$(this).text("收起分享");
 		}else{
-			$(".bshare-custom").slideUp();
+			// $(".bshare-custom").slideUp();
+			$("#renrenshare").slideUp();
 			$(this).text("分享");
 		}
 	});
