@@ -1,5 +1,11 @@
 <?php
+import("@.Action.CommonUtil");
 class GameAction extends Action {
+	public function _initialize(){
+		$util = new CommonUtil();
+		$util->autologin();
+	}
+
 	public function doge(){
 		$this->display('doge');
 	}
@@ -9,7 +15,23 @@ class GameAction extends Action {
 	}
 	
 	public function login(){
-		$this->display("login");
+		if(session('userId')){
+			$User = M('User');
+			$result = $User->where('id='.session('userId'))->find();
+			if($result['lottery_count'] > 0){
+				$delete['id'] = $result['id'];
+				$delete['lottery_count'] = array('exp','lottery_count-1');
+				$User->save($delete);
+				$this->generateGuajiang();
+				$this->display("guajiang");
+			}else{
+				//已经没有抽奖机会了
+				echo "你已经没有抽奖机会了";
+			}
+		}else{
+			$this->display("login");
+		}
+		// $this->display("login");
 	}
 
 	// 登录检测
@@ -38,17 +60,8 @@ class GameAction extends Action {
 		}
 		else{
 			//将用户ID存入session
-
-			if($rememberme){
-				if(!$result['is_group']){
-					cookie('account',$result['account'],864000);
-					cookie('password',$result['pwd'],864000);
-				}
-				else{
-					cookie('group_account',$result['account'],864000);
-					cookie('group_password',$result['pwd'],864000);
-				}
-			}
+			cookie('account',$result['account'],864000);
+			cookie('password',$result['pwd'],864000);
 
 			session('rememberme', $rememberme);
 			session('userId',$result['id']);
@@ -86,15 +99,30 @@ class GameAction extends Action {
 		$this->display("register");
 	}
 
-	public function guajiang(){
+	private function generateGuajiang(){
 		$result = rand(0, 10);
 		if($result > 5){
 			session('lotteryresult', '恭喜中奖');
 		}else{
 			session('lotteryresult', '谢谢参与');
 		}
-		
-		$this->display("guajiang");
+	}
+
+	public function guajiang(){
+		if(session('userId')){
+			$this->generateGuajiang();
+			$User = M('User');
+			$result = $User->where('id='.session('userId'))->find();
+			if($result['lottery_count'] > 0){
+				$delete['id'] = $result['id'];
+				$delete['lottery_count'] = array('exp','lottery_count-1');
+				$User->save($delete);
+				$this->generateGuajiang();
+				$this->display("guajiang");
+			}
+		}else{
+			$this->display("login");
+		}
 	}
 
 	public function addLottery(){
@@ -112,8 +140,9 @@ class GameAction extends Action {
 		}
 	}
 
-	public function verify(){
-		$this->display('verify');
+	public function verifycode(){
+		import('ORG.Util.Image');
+		Image::buildImageVerify();
 	}
 
 }
