@@ -99,12 +99,30 @@ class GameAction extends Action {
 		$this->display("register");
 	}
 
-	private function generateGuajiang(){
-		$result = rand(0, 10);
-		if($result > 5){
-			session('lotteryresult', '恭喜中奖');
+	public function generateGuajiang(){
+		$lotteryresult = rand(0, 100);
+		$User = M('User');
+		$result = $User->where('id='.session('userId'))->find();
+		if($lotteryresult >= 99){
+			session('lotteryresult', '一等奖');
+			$update['id'] = $result['id'];
+			$update['lottery_price'] = 1;
+			$User->save($update);
+		}else if($lotteryresult >= 95){
+			session('lotteryresult', '二等奖');
+			$update['id'] = $result['id'];
+			$update['lottery_price'] = 2;
+			$User->save($update);
+		}else if($lotteryresult >= 80){
+			session('lotteryresult', '三等奖');
+			$update['id'] = $result['id'];
+			$update['lottery_price'] = 3;
+			$User->save($update);
 		}else{
-			session('lotteryresult', '谢谢参与');
+			session('lotteryresult', '谢谢参与奖');
+			$update['id'] = $result['id'];
+			$update['lottery_price'] = 0;
+			$User->save($update);
 		}
 	}
 
@@ -119,6 +137,8 @@ class GameAction extends Action {
 				$User->save($delete);
 				$this->generateGuajiang();
 				$this->display("guajiang");
+			}else{
+				$this->display("deprecate");
 			}
 		}else{
 			$this->display("login");
