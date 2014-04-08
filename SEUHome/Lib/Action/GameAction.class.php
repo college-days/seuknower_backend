@@ -148,6 +148,13 @@ class GameAction extends Action {
 	public function verifyForRegister(){
 		$username = I('param.username');
 		$password = I('param.password');
+
+		$User = M('User');
+		$result = $User->where("account=".$username+"@seu.edu.cn")->find();
+		if($result){
+			$this->ajaxReturn('', '你已经注册过了', 0);
+		}
+
 		$verify = I('param.verify');
 		if(session('verify') != md5($verify)) {
 			$this->ajaxReturn('', '验证码错误！', 0);
