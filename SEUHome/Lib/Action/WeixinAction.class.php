@@ -48,7 +48,7 @@ class WeixinAction extends Action {
 
 				if($msgType == "event"){
 					$msgType = "text";
-	                	$contentStr = "欢迎关注“东大通”官方微信账号。东大通团队全部都是咱们东大的在校大学生，如果感觉东大通哪用得不爽欢迎直接拍砖，自己人不要客气，如果您有什么建议或者意见也欢迎直接回复我们，这是对我们最大的鼓励和支持，感谢亲爱的同学们！东大通，东大人自己的校园通！";
+	                	$contentStr = "欢迎关注东大通！东大通（seuknower.com）是东大专属的校园生活服务网站，活动召集、校园问答、二手市场，一网打尽。我们存在的意义就是创造让你尖叫的功能，4月14日凌晨00:01,就在这里--东大通微信公共账号将会上线第一个让你尖叫的功能，小伙伴们猜猜看将会是什么功能，直接回复本账号说出你的猜想，猜中的将有可能获得我们的精美礼物哦！";
 	                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
 	                	echo $resultStr;
 				}else{

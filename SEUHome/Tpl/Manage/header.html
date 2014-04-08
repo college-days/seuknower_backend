@@ -97,7 +97,45 @@ ga('send', 'pageview');
             <nav class="collapse navbar-collapse" role="navigation" id="navbar">
                 <ul class="nav navbar-nav">
                     <li><a href="/">返回首页</a></li>
-                    <eq name="current" value="event">
+                    <li class="">
+                    <a href="http://www.bootstrapzero.com/bootstrap-template/facebook#" class="dropdown-toggle" data-toggle="dropdown">活动<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/manage/event">活动</a></li>
+                            <li><a href="/manage/eventcomment">活动评论</a></li>
+                            <li><a href="/manage/recommendevent">活动推荐</a></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                    <a href="http://www.bootstrapzero.com/bootstrap-template/facebook#" class="dropdown-toggle" data-toggle="dropdown">跳蚤市场<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/manage/commodity">商品</a></li>
+                            <li><a href="/manage/commoditycomment">商品评论</a></li>
+                            <li><a href="/manage/want">求购管理</a></li>
+                            <li><a href="/manage/wantcomment">求购评论</a></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                    <a href="http://www.bootstrapzero.com/bootstrap-template/facebook#" class="dropdown-toggle" data-toggle="dropdown">问答<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/manage/question">问题</a></li>
+                            <li><a href="/manage/answer">回答</a></li>
+                            <li><a href="/manage/answerreply">回答回复</a></li>
+                            <li><a href="/manage/recommendquestion">问题推荐</a></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                    <a href="http://www.bootstrapzero.com/bootstrap-template/facebook#" class="dropdown-toggle" data-toggle="dropdown">用户<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/manage/user">用户管理</a></li>
+                            <li><a href="/manage/lottery">刮奖管理</a></li>
+                        </ul>
+                    </li>
+                    <eq name="current" value="invite">
+                        <li class="active"><a href="/manage/invite">邀请码</a></li>
+                    <else/> 
+                        <li><a href="/manage/invite">邀请码</a></li>
+                    </eq>
+                    <!-- <eq name="current" value="event">
                         <li class="active"><a href="/manage/event">活动</a></li>
                     <else/>
                         <li><a href="/manage/event">活动</a></li>
@@ -132,11 +170,6 @@ ga('send', 'pageview');
                     <else/>
                         <li><a href="/manage/answerreply">回答回复</a></li>
                     </eq>
-                    <eq name="current" value="invite">
-                        <li class="active"><a href="/manage/invite">邀请码</a></li>
-                    <else/> 
-                        <li><a href="/manage/invite">邀请码</a></li>
-                    </eq>
                     <eq name="current" value="recommendevent">
                         <li class="active"><a href="/manage/recommendevent">活动推荐</a></li>
                     <else/>
@@ -162,6 +195,11 @@ ga('send', 'pageview');
                     <else/>
                         <li><a href="/manage/wantcomment">求购评论</a></li>
                     </eq>
+                    <eq name="current" value="lottery">
+                        <li class="active"><a href="/manage/lottery">刮奖管理</a></li>
+                    <else/>
+                        <li><a href="/manage/lottery">刮奖管理</a></li>
+                    </eq> -->
                 </ul>
             </nav>
         </div>

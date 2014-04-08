@@ -13,6 +13,7 @@ var delete_recommendquestions = [];
 var delete_users = [];
 var delete_wants = [];
 var delete_wantcomments = [];
+var delete_lottery = [];
 
 $(function(){
 	$(".event").click(function(){
@@ -606,6 +607,44 @@ $(function(){
         }else{
             $.post("/manage/deleteWantComment", {
                 'wrids': delete_wantcomments
+            }, function(data){
+                if(data.status == 1){
+                    window.location.reload();
+                }else{
+                    alert("操作失败");
+                }
+            }, "json");
+        }
+    });
+
+    $(".lottery").click(function(){
+        if(parseInt($(this).attr("picked")) == 0){
+            var uid = $(this).attr("uid");
+            $(this).attr("picked", 1);
+            $(this).parents("li").css("background-color", "red");
+            if($.inArray(parseInt(uid), delete_lottery) == -1){
+                delete_lottery.push(parseInt(uid));
+            }
+            console.log(delete_lottery);
+        }else{
+            var uid = $(this).attr("uid");
+            $(this).attr("picked", 0);
+            $(this).parents("li").css("background-color", "white");
+            if($.inArray(parseInt(uid), delete_lottery) != -1){
+                delete_lottery = $.grep(delete_lottery, function(value){
+                    return value != parseInt(uid);
+                });
+            }
+            console.log(delete_lottery);
+        }
+    });
+
+    $(".deletelottery").click(function(){
+        if(delete_lottery.length == 0){
+            alert("还没有选择要领取奖品的用户");
+        }else{
+            $.post("/manage/getPrice", {
+                'uids': delete_lottery
             }, function(data){
                 if(data.status == 1){
                     window.location.reload();

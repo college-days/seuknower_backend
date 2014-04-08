@@ -1,0 +1,13 @@
+<include file="Manage:header" title="刮奖管理"/>
+<div class="jumbotron">
+    <input type="button" class="deletelottery" value="选中要领取奖品的用户然后点这里设置为已经领取">
+    <div style="margin-top:33px;"></div>
+    <ul class="list-group"> 
+        <volist name="users" id="user">
+            <li class="list-group-item" style="cursor:pointer;background:white;">
+                <div class="content lottery" picked="0" uid="{$user.id}">{$user.name}&nbsp{$user.dept}&nbsp{$user.major}&nbsp{$user.lottery_price}等奖</div>
+            </li>
+        </volist>
+    </ul>
+</div>
+<include file="Manage:footer" />
