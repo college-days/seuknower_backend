@@ -10,6 +10,7 @@ return array(
 		'lottery$' => 'Game/lottery',
 		'game$' => 'Game/doge',
 		'game/check_login' => 'Game/checkLogin',
+		'game/verify_register' => 'Game/verifyForRegister',
 		'manage$' => 'Manage/event',
 		'weixin$' => 'Weixin/index',
 		'weixin/post_menu' => 'Weixin/postMenu',

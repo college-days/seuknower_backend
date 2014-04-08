@@ -42,13 +42,15 @@ $(function(){
 		    }, function(data) {
 		        if (data.status) {
 		            name = data.data['name'].replace(/[ ]/g, "");
+		            alert("你好:"+name+"!");
 					if(name) {
 						isa = true;
 						if(isv){
 							postRegisterInfo();
 						} 
 					}else {
-						$('#username').text("一卡通号不正确");
+						$('#usernamealert').text("一卡通号不正确");
+						$("#title").text("一卡通号不正确");
 					}
 		        }else{
 		        	// alert(data.info);	
@@ -58,7 +60,6 @@ $(function(){
 		}else{
 			checkUsername();
 			checkPassword();
-			checkPasswordRepeat();
 			checkVerify();
 		}
 	});
@@ -66,24 +67,23 @@ $(function(){
 
 function postRegisterInfo(){
 	if(isa && isp && isv ){
-		  $.post('/account/check_register', {
-            account: $("#username").val().replace(/[ ]/g, "")+"@seu.edu.cn",
+		  $.post('/game/verify_register', {
+            username: $("#username").val().replace(/[ ]/g, ""),
             password: $("#password").val().replace(/[ ]/g, ""),
             verify: $("#verify").val().replace(/[ ]/g, "")
         }, function(data) {
 			if(data.status){
-				alert('请去邮箱激活，激活邮件可能会被拦截，如果没收到，请查看拦截队列，给您带来不便，敬请谅解！');
-				window.location.href = "/account/start_active";
+				alert("身份验证成功，")
+				window.location.href = "/";
 			}
 			else{
-				// alert(data.info);
+				alert(data.info);
 				$("#title").text(data.info);
 			}
         }, 'json');
 	}else{
 		checkUsername();
 		checkPassword();
-		checkPasswordRepeat();
 		checkVerify();
 	}
 }
@@ -112,12 +112,7 @@ function checkPassword(){
         $('#passwordalert').text("请填写密码");
     } else {
         $('#passwordalert').text("");
-		if ($('#password').val() == $('#passwordrepeat').val()) {
-            isp = true;
-            $('#passwordalert').text("");
-        } else {
-            isp = false;
-        }
+        isp = true;
     }
 }
 

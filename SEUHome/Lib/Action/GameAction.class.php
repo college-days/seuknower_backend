@@ -146,11 +146,19 @@ class GameAction extends Action {
 	}
 
 	public function verifyForRegister(){
-		$username = 213101579;
-		$password = 88888;
+		$username = I('param.username');
+		$password = I('param.password');
+		$verify = I('param.verify');
+		if(session('verify') != md5($verify)) {
+			$this->ajaxReturn('', '验证码错误！', 0);
+		}
+
 		$ret = verifyFromMySeu($username, $password);
-		var_dump($ret);
-		$this->display("login");
+		if($ret == 1){
+			$this->ajaxReturn('', '', 1);
+		}else{
+			$this->ajaxReturn('', 'myseu密码不正确', 0);
+		}
 	}
 
 }
