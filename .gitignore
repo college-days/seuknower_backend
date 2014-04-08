@@ -1,8 +1,10 @@
 /old
 /SEUHome/Runtime
 /ThinkPHP/Runtime
+/SEUHome/Common/__pycache__
 /Uploads
 *.swp
 .*.swp
 *.db
 .DS_Store
+*.pyc

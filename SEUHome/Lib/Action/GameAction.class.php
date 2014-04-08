@@ -145,5 +145,13 @@ class GameAction extends Action {
 		Image::buildImageVerify();
 	}
 
+	public function verifyForRegister(){
+		$username = 213101579;
+		$password = 88888;
+		$ret = verifyFromMySeu($username, $password);
+		var_dump($ret);
+		$this->display("login");
+	}
+
 }
 ?>

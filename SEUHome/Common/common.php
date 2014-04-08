@@ -59,6 +59,15 @@
 		return $info;
 	}
 
+	function verifyFromMySeu($username, $password){
+		import('Common.php_python',APP_PATH,'.php');
+
+		//"ppython"是框架"php_python.php"提供的函数，用来调用Python端服务
+		//调用Python的testModule模块的add函数，并传递2个参数。
+		$ret = ppython("verifyfrommyseu::verify", $username, $password);
+		return $ret;
+	}
+
 	/**
 	* 系统邮件发送函数
 	* @param string $to    接收邮件者邮箱
