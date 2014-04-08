@@ -83,10 +83,10 @@ class GameAction extends Action {
 				session('isGroup',0);
 			}
 			if($result['lottery_count'] > 0){
-				$User = M('User');
-				$delete['id'] = $result['id'];
-				$delete['lottery_count'] = array('exp','lottery_count-1');
-				$User->save($delete);
+				// $User = M('User');
+				// $delete['id'] = $result['id'];
+				// $delete['lottery_count'] = array('exp','lottery_count-1');
+				// $User->save($delete);
 				$this->ajaxReturn('', '', 1);
 			}else{
 				//已经没有抽奖机会了
