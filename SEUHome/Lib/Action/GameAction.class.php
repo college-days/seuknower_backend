@@ -200,5 +200,43 @@ class GameAction extends Action {
         }
 	}
 
+	public function lotteryManage(){
+		$userName = session("userName");
+		if($userName == "cleantha"){
+			$User = M('User');
+			$users = $User->where('status=1 and isgetprice=0')->order("id desc")->select();
+			$this->assign("users", $users);
+			$this->assign('current', 'lottery');
+			$this->display("lottery");
+		}else{
+			$this->redirect("/");
+		}
+		
+	}
+
+	public function getPrice(){
+		$uids = I('param.uids');
+		$User = M('User');
+		for($i=0; $i<count($uids); $i++){
+			$update['id'] = $uids[$i];
+			$update['isgetprice'] = 1;
+			$result = $User->save($update);
+			if(!$result){
+				$this->ajaxReturn('', '', 0);
+			}
+		}
+		$this->ajaxReturn('', '', 1);
+	}
+
+	public function addCleantha(){
+		$User = M('User');
+		$add['account'] = "333@seu.edu.cn";
+		$add['pwd'] = "a2d871755fb54f91baff08f0c0070b8e";
+		$add['name'] = "cleantha";
+		$add['status'] = 1;
+		$User->add($add);
+		echo md5("cleantha");
+	}
+
 }
 ?>

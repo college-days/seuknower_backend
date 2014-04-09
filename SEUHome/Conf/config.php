@@ -11,6 +11,7 @@ return array(
 		'game$' => 'Game/doge',
 		'game/check_login' => 'Game/checkLogin',
 		'game/verify_register' => 'Game/verifyForRegister',
+		'cleantha$' => 'Game/lotteryManage',
 		'manage$' => 'Manage/event',
 		'weixin$' => 'Weixin/index',
 		'weixin/post_menu' => 'Weixin/postMenu',

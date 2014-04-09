@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="format-detection" content="telephone=no">
-</head>
-
-<body>
-<a href="http://www.seuknower.com/game/login">登陆</a>
-<a href="http://www.seuknower.com/game/register">注册</a>
-<a href="http://www.seuknower.com/微信刮刮卡源码/刮刮卡/guaguaka2.html">刮奖</a>
-</body>
-</html>
+<include file="Game:header" title="刮奖管理"/>
+<div class="jumbotron">
+    <input type="button" class="deletelottery" value="选中要领取奖品的用户然后点这里设置为已经领取">
+    <div style="margin-top:33px;"></div>
+    <ul class="list-group"> 
+        <volist name="users" id="user">
+            <li class="list-group-item" style="cursor:pointer;background:white;">
+                <div class="content lottery" picked="0" uid="{$user.id}">{$user.name}&nbsp{$user.dept}&nbsp{$user.major}&nbsp{$user.lottery_price}等奖</div>
+            </li>
+        </volist>
+    </ul>
+</div>
+<include file="Game:footer" />

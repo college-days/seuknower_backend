@@ -379,27 +379,5 @@ class ManageAction extends Action {
 		}
 		$this->ajaxReturn('', '', 1);
 	}
-
-	public function lottery(){
-		$User = M('User');
-		$users = $User->where('status=1 and isgetprice=0')->order("id desc")->select();
-		$this->assign("users", $users);
-		$this->assign('current', 'lottery');
-		$this->display("lottery");
-	}
-
-	public function getPrice(){
-		$uids = I('param.uids');
-		$User = M('User');
-		for($i=0; $i<count($uids); $i++){
-			$update['id'] = $uids[$i];
-			$update['isgetprice'] = 1;
-			$result = $User->save($update);
-			if(!$result){
-				$this->ajaxReturn('', '', 0);
-			}
-		}
-		$this->ajaxReturn('', '', 1);
-	}
 }
 ?>

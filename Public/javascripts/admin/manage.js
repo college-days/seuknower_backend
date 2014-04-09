@@ -643,7 +643,7 @@ $(function(){
         if(delete_lottery.length == 0){
             alert("还没有选择要领取奖品的用户");
         }else{
-            $.post("/manage/getPrice", {
+            $.post("/game/getPrice", {
                 'uids': delete_lottery
             }, function(data){
                 if(data.status == 1){

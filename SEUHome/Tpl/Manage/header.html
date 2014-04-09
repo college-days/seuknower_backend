@@ -41,31 +41,31 @@
 
 $(document).ready(function() {
 
-        $('.navbar').fadeIn(1200);
+    $('.navbar').fadeIn(1200);
 
-        /* highlight the top nav as scrolling occurs */
-        $('body').scrollspy({ target: '#navbar' });
+    /* highlight the top nav as scrolling occurs */
+    $('body').scrollspy({ target: '#navbar' });
 
-        $('#btnAbout').click(function(){
-            $('#aboutModal').modal('show');
-            return false;
-            })
+    $('#btnAbout').click(function(){
+        $('#aboutModal').modal('show');
+        return false;
+        })
 
-        /* sunburst effect */
-        $('#masthead').pow({
-rays: 30,
-originY:'50%',
-originEl:'#brand',
-bgColorStart: '#563d7c',
-rayColorStart: '#563d7c',
-bgColorEnd: '#563d7c',
-rayColorEnd: '#664e8d',
-sizingRatio: 100
-});
+    /* sunburst effect */
+    $('#masthead').pow({
+        rays: 30,
+        originY:'50%',
+        originEl:'#brand',
+        bgColorStart: '#563d7c',
+        rayColorStart: '#563d7c',
+        bgColorEnd: '#563d7c',
+        rayColorEnd: '#664e8d',
+        sizingRatio: 100
+    });
 
-$('[data-original]').lazyload({
+    $('[data-original]').lazyload({
 
-        });
+    });
 
 });
 </script>
