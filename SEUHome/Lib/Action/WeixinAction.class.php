@@ -60,7 +60,7 @@ class WeixinAction extends Action {
 	              				$currentHour = (int)date('H');
 	              				$currentMinite = (int)date('i');
 	              				if($currentHour < 6 || ($currentHour == 6 && $currentMinite < 25)){
-	              					$contentStr = "讨厌，人家正做着美梦呢就被你吵醒啦，这么早体育老师都没起床俺哪知道今天跑不跑操。哈哈，每天早上6:23定时更新跑操情况，到时候再点我，嗯，再睡会！"
+	              					$contentStr = "讨厌，人家正做着美梦呢就被你吵醒啦，这么早体育老师都没起床俺哪知道今天跑不跑操。哈哈，每天早上6:23定时更新跑操情况，到时候再点我，嗯，再睡会！";
 	              				}else{
 		              				$contentStr = getPaocaoMessage();
 	              				}
