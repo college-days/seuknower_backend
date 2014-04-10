@@ -5,6 +5,13 @@ var zjl = false;
 var num = 0;
 var goon = true;
 $(function() {
+	var isshared = $("#isshared").attr("content");
+	if(isshared == 1){
+		alert("你已经分享过啦");
+	}else{
+		alert("分享可以增加一次机会哦");
+	}
+
 	$("#scratchpad").wScratchPad({
 		width: 150,
 		height: 40,
@@ -36,7 +43,7 @@ $(function() {
 				'haha': 'haha'
 			}, function(data){
 				if(data.status == 1){
-					alert("恭喜你又获得了两次抽奖机会");
+					alert("恭喜你又获得了一次抽奖机会");
 				}
 			}, 'json');
 			// $(".bshare-custom").slideDown();

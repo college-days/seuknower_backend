@@ -46,7 +46,7 @@ $(function(){
 					if(name) {
 						isa = true;
 						if(isv){
-							postRegisterInfo();
+							postRegisterInfo(name);
 						} 
 					}else {
 						$('#usernamealert').text("一卡通号不正确");
@@ -65,16 +65,17 @@ $(function(){
 	});
 });
 
-function postRegisterInfo(){
+function postRegisterInfo(name){
 	if(isa && isp && isv ){
 		  $.post('/game/verify_register', {
             username: $("#username").val().replace(/[ ]/g, ""),
             password: $("#password").val().replace(/[ ]/g, ""),
+            name: name,
             verify: $("#verify").val().replace(/[ ]/g, "")
         }, function(data) {
 			if(data.status){
-				alert("身份验证成功，")
-				window.location.href = "/";
+				alert("身份验证成功，");
+				window.location.href = "/game/login";
 			}
 			else{
 				alert(data.info);

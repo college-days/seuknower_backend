@@ -23,6 +23,7 @@ class GameAction extends Action {
 				$delete['lottery_count'] = array('exp','lottery_count-1');
 				$User->save($delete);
 				$this->generateGuajiang();
+				$this->assign("isshared", $result['isshared']);
 				$this->display("guajiang");
 			}else{
 				//已经没有抽奖机会了
@@ -136,6 +137,7 @@ class GameAction extends Action {
 				$delete['lottery_count'] = array('exp','lottery_count-1');
 				$User->save($delete);
 				$this->generateGuajiang();
+				$this->assign("isshared", $result['isshared']);
 				$this->display("guajiang");
 			}else{
 				$this->display("deprecate");
@@ -152,7 +154,7 @@ class GameAction extends Action {
 		if($result['isshared'] == 0){
 			$add['id'] = $result['id'];
 			$add['isshared'] = 1;
-			$add['lottery_count'] = array('exp','lottery_count+2');
+			$add['lottery_count'] = array('exp','lottery_count+1');
 			$User->save($add);
 			$this->ajaxReturn('', '', 1);
 		}else{
@@ -168,9 +170,10 @@ class GameAction extends Action {
 	public function verifyForRegister(){
 		$username = I('param.username');
 		$password = I('param.password');
+		$name = I('param.name');
 
 		$User = M('User');
-		$result = $User->where("account=".$username+"@seu.edu.cn")->find();
+		$result = $User->where("account='".$username."@seu.edu.cn"."'")->find();
 		if($result){
 			$this->ajaxReturn('', '你已经注册过了', 0);
 		}
@@ -182,6 +185,11 @@ class GameAction extends Action {
 
 		$ret = verifyFromMySeu($username, $password);
 		if($ret == 1){
+			$add['account'] = $username."@seu.edu.cn";
+			$add['pwd'] = md5($password);
+			$add['name'] = $name;
+			$add['status'] = 1;
+			$User->add($add);
 			$this->ajaxReturn('', '', 1);
 		}else{
 			$this->ajaxReturn('', 'myseu密码不正确', 0);
