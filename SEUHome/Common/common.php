@@ -59,6 +59,13 @@
 		return $info;
 	}
 
+	function getPaocaoMessage(){
+		import('Common.simple_html_dom',APP_PATH,'.php');
+		$url = "http://112.124.68.27/tyxmessage";
+		$html = file_get_html($url);
+		return $html;
+	}
+
 	function verifyFromMySeu($username, $password){
 		import('Common.php_python',APP_PATH,'.php');
 

@@ -56,7 +56,11 @@ class WeixinAction extends Action {
 	                {
 	              		$msgType = "text";
 	              		if(preg_match("/跑操/i", $keyword, $matches)){
-						    $contentStr = "猜对啦，即将推出查看今早是否跑操功能，今早是否跑操，点一下就知道";
+	              			if($keyword == "是否跑操"){
+	              				$contentStr = getPaocaoMessage();
+	              			}else{
+							    $contentStr = "猜对啦，即将推出查看今早是否跑操功能，今早是否跑操，点一下就知道";
+	              			}
 						} else {
 						    $contentStr = "猜错啦，东大通竭诚为您服务";
 						}
