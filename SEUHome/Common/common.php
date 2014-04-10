@@ -61,9 +61,10 @@
 
 	function getPaocaoMessage(){
 		import('Common.simple_html_dom',APP_PATH,'.php');
-		$url = "http://112.124.68.27/tyxmessage";
-		$html = file_get_html($url);
-		return $html;
+		$url = "http://112.124.68.27/paocaoservice";
+		$json = file_get_html($url);
+		$resultArr = json_decode($json, true);
+		return $resultArr["message"];
 	}
 
 	function verifyFromMySeu($username, $password){
