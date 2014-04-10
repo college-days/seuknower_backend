@@ -17,9 +17,16 @@ $(function() {
 		height: 40,
 		color: "#a9a9a7",
 		scratchMove: function() {
-			num++;
+			num++;console.debug(num,777)
 			if (num == 2) {
-				document.getElementById('prize').innerHTML = $("#result").attr("content");
+				$('#prize').html($("#result").attr("content"));
+			}
+			if(num>100){
+				var notice = $("#notice").css("display") == "none";
+				if(notice){
+					$("#notice").slideToggle(50);
+					// alert("恭喜您中了<font color='blue'>四等奖</font>，请前往大活广场找学生会跳蚤市场工作人员领奖哦！（点击右上角分享可以再获得一次刮奖机会）")
+				}
 			}
 
 			if (zjl && num > 5 && goon) {

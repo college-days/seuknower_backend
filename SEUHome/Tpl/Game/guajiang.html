@@ -75,21 +75,35 @@
 			}
 		};
 	</script>
+<style type="text/css">
+.tips{position:absolute;width:252px;background:#fff;padding:7px 10px;right:28px;bottom:12px;border-radius:6px;  display:none;}
+.tips span{color:red;}
+.rt{float:right;position:absolute;right:10px;top:10px;}
+</style>
 	</head>
 	<body data-role="page" class="activity-scratch-card-winning">
 		<div style="display:none;" id="result" content="{$Think.session.lotteryresult}"></div>
 		<div class="main">
-			<div class="cover">
-				<img src="http://www.apiwx.com/index/images/activity/activity-scratch-card-bannerbg.png">
-				<div id="prize">
+			<eq name="lotterycount" value="0">
+				<div class="cover">
+					<div style="display:block;">对不起，你已经没有抽奖机会了</div>
 				</div>
-				<div id="scratchpad">
+			<else/>
+				<div class="cover">
+					<img src="http://www.apiwx.com/index/images/activity/activity-scratch-card-bannerbg.png">
+					<div id="prize">
+					</div>
+					<div id="scratchpad">
+					</div>
+					<div id="notice" class="tips">恭喜您中了<span>{$Think.session.lotteryresult}</span>，请前往大活广场找学生会跳蚤市场工作人员领奖哦！（点击右上角分享可以再获得一次刮奖机会）</div>
 				</div>
-			</div>
+				<div class="rt">
+					<span><a href="/game/logout">登出</a></span>
+					<span><a href="/game/guajiang">再来一次</a></span>
+					<span id="sharelottery" style="cursor:pointer;">分享</span>
+				</div>
+			</eq>
 			<div id="isshared" content="{$isshared}" style="display:none;"></div>
-			<li><a href="/game/logout">登出</a></li>
-			<li><a href="/game/guajiang">再来一次</a></li>
-			<span id="sharelottery" style="cursor:pointer;">分享</span>
 			<!--<div class="bshare-custom" style="display:none;align:center;"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><a class="bshareDiv" onclick="javascript:return false;"></a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
 			<div class="content">
 			<script type="text/javascript" src="http://widget.renren.com/js/rrshare.js"></script>
@@ -181,9 +195,9 @@
 							活动说明：
 						</div>
 						<div class="Detail">
-							<p class="red">
+							<!--<p class="red">
 								今天总共可以刮1次,你已经刮了0次,机会如果没用完重新进入本页面可以再刮!分享到人人或者朋友圈可以在获得一次抽奖机会哦！
-							</p>
+							</p>-->
 							<p>
 								1.凡已注册东大通的同学或者现场注册的同学都可以每天抽奖一次；
 							</p>

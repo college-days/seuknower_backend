@@ -24,10 +24,15 @@ class GameAction extends Action {
 				$User->save($delete);
 				$this->generateGuajiang();
 				$this->assign("isshared", $result['isshared']);
+				$this->assign("lotterycount", $result['lottery_count']);
+				$this->assign("lotteryprice", $result['lottery_price']);
 				$this->display("guajiang");
 			}else{
-				//已经没有抽奖机会了
-				echo "你已经没有抽奖机会了";
+				$this->generateGuajiang();
+				$this->assign("isshared", $result['isshared']);
+				$this->assign("lotterycount", $result['lottery_count']);
+				$this->assign("lotteryprice", $result['lottery_price']);
+				$this->display("guajiang");
 			}
 		}else{
 			$this->display("login");
@@ -138,9 +143,15 @@ class GameAction extends Action {
 				$User->save($delete);
 				$this->generateGuajiang();
 				$this->assign("isshared", $result['isshared']);
+				$this->assign("lotterycount", $result['lottery_count']);
+				$this->assign("lotteryprice", $result['lottery_price']);
 				$this->display("guajiang");
 			}else{
-				$this->display("deprecate");
+				$this->generateGuajiang();
+				$this->assign("isshared", $result['isshared']);
+				$this->assign("lotterycount", $result['lottery_count']);
+				$this->assign("lotteryprice", $result['lottery_price']);
+				$this->display("guajiang");
 			}
 		}else{
 			$this->display("login");
