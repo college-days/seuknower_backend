@@ -119,7 +119,7 @@ class GameAction extends Action {
 			$update['lottery_price'] = 3;
 			$User->save($update);
 		}else{
-			session('lotteryresult', '谢谢参与奖');
+			session('lotteryresult', '四等奖');
 			$update['id'] = $result['id'];
 			$update['lottery_price'] = 0;
 			$User->save($update);
