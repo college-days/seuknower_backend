@@ -79,6 +79,9 @@
 .tips{position:absolute;width:252px;background:#fff;padding:7px 10px;right:28px;bottom:12px;border-radius:6px;  display:none;}
 .tips span{color:red;}
 .rt{float:right;position:absolute;right:10px;top:10px;}
+.share_btn{cursor:pointer;background:#FFE668;border-radius:100%;color:#210900;cursor:pointer;display: block;font-size: 20px;height:86px;line-height:86px;margin:0 auto;text-align:center;width:86px;}
+.jiathis_style_32x32{overflow:hidden;margin:15px;}
+.no{color:#fff;margin:15px;text-align:center;}
 </style>
 	</head>
 	<body data-role="page" class="activity-scratch-card-winning">
@@ -86,7 +89,11 @@
 		<div class="main">
 			<eq name="lotterycount" value="0">
 				<div class="cover">
-					<div style="display:block;">对不起，你已经没有抽奖机会了</div>
+					<div style="display:block;"><p class="no"><br /><br />对不起，您今天的刮奖机会已经用完！如果您还未分享，可将刮奖信息分享到qq空间或者人人网来获得一次抽奖机会</p>
+					<span id="sharelottery"  class="share_btn">分享</span></div>
+					<div class="rt">
+					<span><a href="/game/logout">切换帐号</a></span>		
+				</div>
 				</div>
 			<else/>
 				<div class="cover">
@@ -95,12 +102,12 @@
 					</div>
 					<div id="scratchpad">
 					</div>
-					<div id="notice" class="tips">恭喜您中了<span>{$Think.session.lotteryresult}</span>，请前往大活广场找学生会跳蚤市场工作人员领奖哦！（点击右上角分享可以再获得一次刮奖机会）</div>
+					<div id="notice" class="tips">恭喜您中了<span>{$Think.session.lotteryresult}</span>，请前往大活广场找学生会跳蚤市场工作人员领奖哦！（第一次点击下方分享可以再获得一次刮奖机会）</div>
 				</div>
+				<span id="sharelottery"  class="share_btn">分享</span>
 				<div class="rt">
-					<span><a href="/game/logout">登出</a></span>
+					<span><a href="/game/logout">切换帐号</a></span>
 					<span><a href="/game/guajiang">再来一次</a></span>
-					<span id="sharelottery" style="cursor:pointer;">分享</span>
 				</div>
 			</eq>
 			<div id="isshared" content="{$isshared}" style="display:none;"></div>
@@ -147,8 +154,8 @@
 			<!-- JiaThis Button BEGIN -->
 			<div class="jiathis_style_32x32" style="display:none;" id="sharelist">
 				<a class="jiathis_button_qzone"></a>
-				<a class="jiathis_button_tsina"></a>
-				<a class="jiathis_button_tqq"></a>
+				<!--<a class="jiathis_button_tsina"></a>
+				<a class="jiathis_button_tqq"></a>-->
 				<a class="jiathis_button_weixin"></a>
 				<a class="jiathis_button_renren"></a>
 				<!-- <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a> -->
@@ -161,7 +168,7 @@
 					<div class="box">
 						<div class="title-red">
 							<span>
-								快来参加东大通的抽奖活动吧，微信上关注东大通公共账号就可以在手机上刮奖啦
+								快来参加东大通的抽奖活动吧，微信上关注"东大通"公共账号就可以在手机上刮奖啦
 							</span>
 						</div>
 					</div>
@@ -199,16 +206,19 @@
 								今天总共可以刮1次,你已经刮了0次,机会如果没用完重新进入本页面可以再刮!分享到人人或者朋友圈可以在获得一次抽奖机会哦！
 							</p>-->
 							<p>
-								1.凡已注册东大通的同学或者现场注册的同学都可以每天抽奖一次；
+								1.参与方法：关注“东大通”微信公共帐号后点击下方“刮刮乐”按钮即可刮奖；
+							</p>
+							<p>
+								2.参与条件：东大通的注册用户都可以每天刮奖一次；
 							</p>
 							<p>	
-								2.将抽奖信息分享到朋友圈、人人或者qq空间之后可以额外获得一次抽奖机会；
+								3.将刮奖信息分享到朋友圈、人人或者qq空间之后刷新页面可以额外刮奖一次；
 							</p>
 							<p>	
-								3.中奖后请于11日晚和12日白天到大活广场找学生会跳蚤市场工作人员领奖，过期作废哦；
+								4.中奖后请于11日晚和12日白天到大活广场找学生会跳蚤市场工作人员领奖，过期作废哦；
 							</p>
 							<p>	
-								4.本抽奖活动最终解释权归火星蚁工作室所有。
+								5.本抽奖活动最终解释权归火星蚁工作室所有。
 							</p>
 							
 						</div>

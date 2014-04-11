@@ -7,9 +7,9 @@ var goon = true;
 $(function() {
 	var isshared = $("#isshared").attr("content");
 	if(isshared == 1){
-		alert("你已经分享过啦");
+		alert("您已经分享过啦,今天没有刮奖机会了哦");
 	}else{
-		alert("分享可以增加一次机会哦");
+		alert("您还没有分享，点击分享可以增加一次刮奖机会哦");
 	}
 
 	$("#scratchpad").wScratchPad({

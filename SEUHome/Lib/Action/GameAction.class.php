@@ -223,7 +223,7 @@ class GameAction extends Action {
 		$userName = session("userName");
 		if($userName == "cleantha"){
 			$User = M('User');
-			$users = $User->where('status=1 and isgetprice=0')->order("id desc")->select();
+			$users = $User->where('status=1 and isgetprice=0 and lottery_price!=-1')->order("id desc")->select();
 			$this->assign("users", $users);
 			$this->assign('current', 'lottery');
 			$this->display("lottery");
