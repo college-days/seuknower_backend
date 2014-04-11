@@ -50,7 +50,7 @@ $(function() {
 				'haha': 'haha'
 			}, function(data){
 				if(data.status == 1){
-					alert("恭喜你又获得了一次抽奖机会");
+					// alert("恭喜你又获得了一次抽奖机会");
 				}
 			}, 'json');
 			// $(".bshare-custom").slideDown();

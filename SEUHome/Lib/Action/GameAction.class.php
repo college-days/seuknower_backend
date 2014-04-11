@@ -217,6 +217,10 @@ class GameAction extends Action {
 			$add['account'] = $username."@seu.edu.cn";
 			$add['pwd'] = md5($password);
 			$add['name'] = $name;
+			$add['dept'] = session('dept');
+			$add['major'] = session('major');
+			$add['stu_num'] = session('stuNum');
+			$add['stu_id'] = session('stuId');
 			$add['status'] = 1;
 			$User->add($add);
 			$this->ajaxReturn('', '', 1);
