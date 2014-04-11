@@ -28,7 +28,6 @@ class GameAction extends Action {
 				$this->assign("lotteryprice", $result['lottery_price']);
 				$this->display("guajiang");
 			}else{
-				$this->generateGuajiang();
 				$this->assign("isshared", $result['isshared']);
 				$this->assign("lotterycount", $result['lottery_count']);
 				$this->assign("lotteryprice", $result['lottery_price']);
@@ -147,7 +146,6 @@ class GameAction extends Action {
 				$this->assign("lotteryprice", $result['lottery_price']);
 				$this->display("guajiang");
 			}else{
-				$this->generateGuajiang();
 				$this->assign("isshared", $result['isshared']);
 				$this->assign("lotterycount", $result['lottery_count']);
 				$this->assign("lotteryprice", $result['lottery_price']);
