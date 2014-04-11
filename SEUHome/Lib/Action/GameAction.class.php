@@ -107,33 +107,53 @@ class GameAction extends Action {
 	public function generateGuajiang(){
 		$lotteryresult = rand(0, 100);
 		$User = M('User');
+		$Lottery = M('Lottery');
 		$result = $User->where('id='.session('userId'))->find();
 		if($lotteryresult >= 99){
 			session('lotteryresult', '一等奖');
-			$update['id'] = $result['id'];
+			// $update['id'] = $result['id'];
+			// $update['lottery_price'] = 1;
+			//$User->save($update);
+			$update['name'] = $result['name'];
+			$update['dept'] = $result['dept'];
+			$update['major'] = $result['major'];
 			$update['lottery_price'] = 1;
-			$User->save($update);
+			$Lottery->add($update);
 		}else if($lotteryresult >= 95){
 			session('lotteryresult', '二等奖');
-			$update['id'] = $result['id'];
+			// $update['id'] = $result['id'];
+			// $update['lottery_price'] = 2;
+			// $User->save($update);
+			$update['name'] = $result['name'];
+			$update['dept'] = $result['dept'];
+			$update['major'] = $result['major'];
 			$update['lottery_price'] = 2;
-			$User->save($update);
+			$Lottery->add($update);
 		}else if($lotteryresult >= 80){
 			session('lotteryresult', '三等奖');
-			$update['id'] = $result['id'];
+			// $update['id'] = $result['id'];
+			// $update['lottery_price'] = 3;
+			// $User->save($update);
+			$update['name'] = $result['name'];
+			$update['dept'] = $result['dept'];
+			$update['major'] = $result['major'];
 			$update['lottery_price'] = 3;
-			$User->save($update);
+			$Lottery->add($update);
 		}else{
 			session('lotteryresult', '四等奖');
-			$update['id'] = $result['id'];
-			$update['lottery_price'] = 0;
-			$User->save($update);
+			// $update['id'] = $result['id'];
+			// $update['lottery_price'] = 0;
+			// $User->save($update);
+			$update['name'] = $result['name'];
+			$update['dept'] = $result['dept'];
+			$update['major'] = $result['major'];
+			$update['lottery_price'] = 4;
+			$Lottery->add($update);
 		}
 	}
 
 	public function guajiang(){
 		if(session('userId')){
-			$this->generateGuajiang();
 			$User = M('User');
 			$result = $User->where('id='.session('userId'))->find();
 			if($result['lottery_count'] > 0){
@@ -220,8 +240,9 @@ class GameAction extends Action {
 	public function lotteryManage(){
 		$userName = session("userName");
 		if($userName == "cleantha"){
-			$User = M('User');
-			$users = $User->where('status=1 and isgetprice=0 and lottery_price!=-1')->order("id desc")->select();
+			// $User = M('User');
+			$Lottery = M('Lottery');
+			$users = $Lottery->order("id desc")->select();
 			$this->assign("users", $users);
 			$this->assign('current', 'lottery');
 			$this->display("lottery");
@@ -234,10 +255,12 @@ class GameAction extends Action {
 	public function getPrice(){
 		$uids = I('param.uids');
 		$User = M('User');
+		$Lottery = M("Lottery");
 		for($i=0; $i<count($uids); $i++){
-			$update['id'] = $uids[$i];
-			$update['isgetprice'] = 1;
-			$result = $User->save($update);
+			// $update['id'] = $uids[$i];
+			// $update['isgetprice'] = 1;
+			// $result = $User->save($update);
+			$result = $Lottery->where("id=".$uids[$i])->delete();
 			if(!$result){
 				$this->ajaxReturn('', '', 0);
 			}
