@@ -573,12 +573,12 @@ a.mywant_btn{color:white;}
 /*问答详细页面*/
 .question-detail{padding-top:38px;}
 .question-detail .left{float:left;width:712px;}
-.question-detail .left .title{color:#222222;font-size:18px;overflow:hidden;font-weight:bold;}
+.question-detail .left .title{color:#222222;font-size:20px;overflow:hidden;color:#333;}
 .question-detail .left .title span{float:left;}/*没有float对不齐*/
 .question-detail .left .title .tag{display:inline-block;color:#7ebe9f;font-size:12px;line-height:24px;background:#e3f4f1;padding:0px 10px;margin-left:15px;}
 .question-detail .left .count {font-size:14px;color:#80827f;margin-top:10px;}
 .question-detail .left .count span{margin-right:10px;}
-.question-detail .left .intro{font-size:13px;line-height:22px;margin-top:20px;}
+.question-detail .left .intro{font-size:13px;line-height:22px;margin-top:20px;color:#333;}
 .question-detail .left .adopt{margin-top:30px;font-size:16px;line-height:46px;border-top:solid 1px #b5b5b5;}
 .question-detail .left .adopt img{float:right;margin-right:20px;}
 .question-detail .left .answer .attitude{float:left;margin:-10px 0 0 -40px;}
@@ -605,7 +605,7 @@ a.mywant_btn{color:white;}
 .question-detail .left .answer .delete{background:url(images/delete_grey.png) no-repeat;float:right;padding-left:20px;color:#80827f;background-position:0px 2px;}
 .question-detail .left .answer .delete:hover{background:url(images/delete_red.png) no-repeat;color:#cd3b3c;}
 
-.question-detail .left .answer .words .answercontent{font-size:14px;line-height:24px;color:#222}
+.question-detail .left .answer .words .answercontent{font-size:14px;line-height:24px;color:#444;}
 .question-detail .left .answer .words p{}
 .question-detail .left .answer li{margin-bottom:10px;}
 .question-detail .left .answer li .content{}
