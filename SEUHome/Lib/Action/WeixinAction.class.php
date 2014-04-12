@@ -18,7 +18,7 @@ class WeixinAction extends Action {
 		echo 'cleantha';
 	}
 
-	public function wxacess(){
+	public function wxaccess(){
 		$accessToken = $this->getAccessToken();
 		echo $accessToken;
 	}
@@ -36,6 +36,8 @@ class WeixinAction extends Action {
                 $toUsername = $postObj->ToUserName;
                 $keyword = trim($postObj->Content);
                 $msgType = $postObj->MsgType;
+                $event = $postObj->Event;
+                $eventKey = $postObj->EventKey;
                 $time = time();
                 $textTpl = "<xml>
 							<ToUserName><![CDATA[%s]]></ToUserName>
@@ -47,10 +49,25 @@ class WeixinAction extends Action {
 							</xml>";
 
 				if($msgType == "event"){
-					$msgType = "text";
-	                	$contentStr = "欢迎关注东大通！东大通（seuknower.com）是东大专属的校园生活服务网站，活动召集、校园问答、二手市场，一网打尽。我们存在的意义就是创造让你尖叫的功能，4月14日凌晨00:01,就在这里--东大通微信公共账号将会上线第一个让你尖叫的功能，小伙伴们猜猜看将会是什么功能，直接回复本账号说出你的猜想，猜中的将有可能获得我们的精美礼物哦！";
-	                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-	                	echo $resultStr;
+					if($event == "subscribe"){
+						$msgType = "text";
+						$contentStr = "欢迎关注东大通！东大通（seuknower.com）是东大专属的校园生活服务网站，活动召集、校园问答、二手市场，一网打尽。我们存在的意义就是创造让你尖叫的功能，4月14日凌晨00:01,就在这里--东大通微信公共账号将会上线第一个让你尖叫的功能，小伙伴们猜猜看将会是什么功能，直接回复本账号说出你的猜想，猜中的将有可能获得我们的精美礼物哦！";
+						$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+						echo $resultStr;
+					}
+					if($event == "CLICK"){
+						if($eventKey == "paocao"){
+							$msgType = "text";
+							$currentHour = (int)date('H');
+              				$currentMinite = (int)date('i');
+              				if($currentHour < 6 || ($currentHour == 6 && $currentMinite < 25)){
+              					$contentStr = "讨厌，人家正做着美梦呢就被你吵醒啦，这么早体育老师都没起床俺哪知道今天跑不跑操。哈哈，每天早上6:23定时更新跑操情况，到时候再点我，嗯，再睡会！";
+              				}else{
+	              				$contentStr = getPaocaoMessage();
+              				}
+						}
+					}
+					
 				}else{
 					if(!empty( $keyword ))
 	                {
@@ -108,11 +125,17 @@ class WeixinAction extends Action {
 	public function creatMenu(){
 		$accessToken = $this->getAccessToken();
 		$menuPostString = '{
-	 		"button":[{
+	 		"button":[
+	 		{
 	 			"type":"view",
 	 			"name":"刮刮乐",
 	 			"url":"http://www.seuknower.com/game/login"
-	 		}]	
+	 		},
+	 		{
+				"type":"click",
+				"name":"是否跑操",
+				"key":"paocao"
+      		}]	
 	 	}';
 	 	$menuPostUrl = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$accessToken;
 	 	$menu = $this->dataPost($menuPostString, $menuPostUrl);
