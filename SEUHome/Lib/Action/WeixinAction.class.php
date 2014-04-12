@@ -65,6 +65,8 @@ class WeixinAction extends Action {
               				}else{
 	              				$contentStr = getPaocaoMessage();
               				}
+              				$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+	                		echo $resultStr;
 						}
 					}
 					
