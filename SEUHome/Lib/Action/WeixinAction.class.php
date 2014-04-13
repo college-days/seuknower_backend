@@ -62,7 +62,7 @@ class WeixinAction extends Action {
               				$currentMinite = (int)date('i');
               				$currentWeekday = date('D');
               				if($currentWeekday == "Sun" || $currentWeekday == "Sat"){
-              					$contentStr = "亲，今天是周末不跑操，继续睡吧。。。";
+              					$contentStr = "哈哈，实在等不明天早上，我提前出来了。亲，今天是周末不跑操，继续睡吧。。。";
               				}else{
               					if($currentHour < 6 || ($currentHour == 6 && $currentMinite < 25)){
 	              					$contentStr = "讨厌，人家正做着美梦呢就被你吵醒啦，这么早体育老师都没起床俺哪知道今天跑不跑操。哈哈，每天早上6:23定时更新跑操情况，到时候再点我，嗯，再睡会！";
@@ -85,7 +85,7 @@ class WeixinAction extends Action {
 	              				$currentMinite = (int)date('i');
 	              				$currentWeekday = date('D');
 	              				if($currentWeekday == "Sun" || $currentWeekday == "Sat"){
-	              					$contentStr = "亲，今天是周末不跑操，继续睡吧。。。";
+	              					$contentStr = "哈哈，实在等不明天早上，我提前出来了。亲，今天是周末不跑操，继续睡吧。。。";
 	              				}else{
 	              					if($currentHour < 6 || ($currentHour == 6 && $currentMinite < 25)){
 		              					$contentStr = "讨厌，人家正做着美梦呢就被你吵醒啦，这么早体育老师都没起床俺哪知道今天跑不跑操。哈哈，每天早上6:23定时更新跑操情况，到时候再点我，嗯，再睡会！";
