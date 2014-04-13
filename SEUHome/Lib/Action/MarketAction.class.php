@@ -598,7 +598,7 @@ class MarketAction extends Action {
 				$commodityInfo[$i]["u_name"] = $result["name"];
 				$commodityInfo[$i]["u_icon"] = $result["icon"];
 				$commodityInfo[$i]["title"] = $util->sub_string($commodityInfo[$i]["title"], 15);
-				$commodityInfo[$i]["intro"] = $util->sub_string(htmlspecialchars_decode($commodityInfo[$i]["intro"]), 16);
+				$commodityInfo[$i]["intro"] = $util->sub_string(strip_tags(htmlspecialchars_decode($commodityInfo[$i]["intro"])), 16);
 
 			}
 		}
