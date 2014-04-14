@@ -266,6 +266,14 @@ class QuestionAction extends Action {
 			$UltimateInfo = array_merge($AnswerInfo, $AnonymousInfo);
 		}
 
+		foreach ($UltimateInfo as $key => $value) {
+			$support_count[$key] = $value['support_count'];
+			$create_time[$key] = $value['create_time'];
+		}
+
+		array_multisort($support_count, $create_time, $UltimateInfo);
+		$UltimateInfo = array_reverse($UltimateInfo);
+
 		$this->assign('answers', $UltimateInfo);
 
 		//判断是否是当前用户关注的问题
