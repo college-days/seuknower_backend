@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://www.bootstrapzero.com/bootstrap-template/facebook -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<title>东大通后台</title>
+<meta name="description" content="quesbox">
+
+<meta property="og:image" content="https://pbs.twimg.com/profile_images/418009884429254656/lpxz9LHr.jpeg">
+<meta name="google-site-verification" content="3YZMYT6XcVJlav0ZKb7MQrzjnRGApJS8FOsrG4fPrXo">
+
+<link rel="canonical" href="http://bootstrapzero.com/">
+<link href="__CSS__/admin/bootstrap.min.css?t=1397113878" rel="stylesheet" type="text/css" />
+<link href="__CSS__/admin/font-awesome.min.css?t=1397113878" rel="stylesheet" type="text/css"/>
+<link href="__CSS__/admin/theme.css?t=1397113878" rel="stylesheet" type="text/css"/>
+<!--[if lt IE 9]>
+          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+          <![endif]-->
+
+<link rel="shortcut icon" href="http://www.bootstrapzero.com/images/bootstrapzero_ico.png">
+<style>#adzerk_by {display:none}
+
+/* horiz */
+.carbonad {display:block; background: #fdfdfd; background-image: -moz-linear-gradient(top, #f8f8f8, #fdfdfd); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f8f8f8),color-stop(1, #fdfdfd)); border: 1px solid #d5d5d5; font-family: Lucida Grande, Arial, Helvetica, sans-serif; font-size: 11px; height: 118px; line-height: 15px; overflow: hidden; width: 300px;}
+.carbonad-img {border: none; display: inline; float: left; height: 100px; margin: 9px; width: 130px;}
+.carbonad-text {display:inline; float:left; width:142px; padding-top:13px;}
+.carbonad-text a {color: #000000; font-weight: bold; text-decoration: none;}
+.carbonad-tag {float: left; margin-top: 9px; text-align: center; width: 142px; color: #999999;}
+.carbonad-tag a {color: #999999; text-decoration: none;}
+</style>
+
+<script src="__JS__/admin/jquery.js?t=1397113878"></script>
+<script src="__JS__/admin/bootstrap.min.js?t=1397113878"></script>
+<script src="__JS__/admin/pow.js?t=1397113878"></script>
+<script src="__JS__/admin/manage.js?t=1397113878"></script>
+<script src="__JS__/admin/lazyload.js?t=1397113878"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+    $('.navbar').fadeIn(1200);
+
+    /* highlight the top nav as scrolling occurs */
+    $('body').scrollspy({ target: '#navbar' });
+
+    $('#btnAbout').click(function(){
+        $('#aboutModal').modal('show');
+        return false;
+        })
+
+    /* sunburst effect */
+    $('#masthead').pow({
+        rays: 30,
+        originY:'50%',
+        originEl:'#brand',
+        bgColorStart: '#563d7c',
+        rayColorStart: '#563d7c',
+        bgColorEnd: '#563d7c',
+        rayColorEnd: '#664e8d',
+        sizingRatio: 100
+    });
+
+    $('[data-original]').lazyload({
+
+    });
+
+});
+</script>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-46791600-1', 'bootstrapzero.com');
+ga('send', 'pageview');
+</script>    
+
+</head>
+<body data-twttr-rendered="true">
+<div id="wrap">
+
+    <header class="navbar navbar-bright navbar-fixed-top" role="banner" style="">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" id="brand" href="/renren" title="Free templates and themes for Twitter Bootstrap">人人<span style="color:#f9f9f9;font-weight:200;">查询</span></a>
+            </div>
+            <nav class="collapse navbar-collapse" role="navigation" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/renren">返回</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+
+	<div class="jumbotron">
+	    <input type="button" class="deleteevent" value="选中要查询的城市然后点这里进入学校查询">
+	    <div style="margin-top:33px;"></div>
+	    <ul class="list-group"> 
+	        <volist name="provinces" id="province">
+	            <li class="list-group-item" style="cursor:pointer;background:white;">
+	                <div class="content province" picked="0" eid="{$province.PROID}">{$province.PRONAME}</div>
+	            </li>
+	        </volist>
+	    </ul>
+	</div>
+	</div>
+
+    <!--<footer id="footer">
+        </footer>-->
+    </body>
+</html>
