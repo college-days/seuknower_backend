@@ -37,6 +37,7 @@
 <script src="__JS__/admin/pow.js?t=1397113878"></script>
 <script src="__JS__/admin/manage.js?t=1397113878"></script>
 <script src="__JS__/admin/lazyload.js?t=1397113878"></script>
+<script src="__JS__/renren/renrenquery.js?t=1397113878"></script>
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -104,15 +105,25 @@ ga('send', 'pageview');
     <div class="container">
 
 	<div class="jumbotron">
-	    <input type="button" class="deleteevent" value="选中要查询的城市然后点这里进入学校查询">
+	    <!-- <input type="button" class="deleteevent" value="选中要查询的城市然后点这里进入学校查询"> -->
 	    <div style="margin-top:33px;"></div>
-	    <ul class="list-group"> 
+	    <!-- <ul class="list-group"> 
 	        <volist name="provinces" id="province">
 	            <li class="list-group-item" style="cursor:pointer;background:white;">
 	                <div class="content province" picked="0" eid="{$province.PROID}">{$province.PRONAME}</div>
 	            </li>
 	        </volist>
-	    </ul>
+	    </ul> -->
+	    <label>城市</label>
+	    <select class="short" id="provincename" name="tag_cate" onchange="selectProvince()"></select>
+	    <lable>大学</label>
+		<select class="short" id="collegename" name="secondtype" onchange="selectDepartment()" style="margin-left:10px;"></select>
+		<label>专业</label>
+		<select class="short" id="departmentname" name="secondtype" style="margin-left:10px;"></select>
+		<div style="margin-top:33px;"></div>
+		<input id="query" value="查询" type="button"/>
+		<div style="margin-top:33px;"></div>
+		总共有<span id="queryresult"></span>人
 	</div>
 	</div>
 

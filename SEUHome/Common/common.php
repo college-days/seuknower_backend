@@ -59,6 +59,17 @@
 		return $info;
 	}
 
+	function getRenrenQuery($college, $department, $collegeid){
+		import('Common.simple_html_dom',APP_PATH,'.php');
+		$url = "http://browse.renren.com/sAjax.do?ref_search=&q=&p=%5B%7B't'%3A'univ'%2C'name'%3A'".$college."'%2C'id'%3A'".$collegeid."'%2C'depart'%3A'".$department."'%7D%5D&s=0&u=249906293&act=search&offset=0&sort=0";
+		$html = file_get_html($url);
+		$result = 0;
+		foreach($html->find('input[id=resultNum]') as $element){
+			$result = $element->value;
+		}
+		return $result;
+	}
+
 	function getPaocaoMessage(){
 		import('Common.simple_html_dom',APP_PATH,'.php');
 		$url = "http://112.124.68.27/paocaoservice";
