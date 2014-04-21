@@ -457,19 +457,37 @@ function checkStatus(){
 }
 
 function checkContact(){
-	var contact = $("#commoditycontact").val();
-	if(contact){
-		if(!isNaN(contact) && contact.length == 11){
-			$("#contactalert").text("");
+	if(userid == 7){
+		var contact = $("#commoditycontact").val();
+		if(contact){
 			isphone = true;
-		}else{
-			$("#contactalert").text("手机号格式不正确");
+			/*if(!isNaN(contact) && contact.length == 11){
+				$("#contactalert").text("");
+				isphone = true;
+			}else{
+				$("#contactalert").text("手机号格式不正确");
+				isphone = false;
+			}*/
+		}
+		else{
+			$("#contactalert").text("手机号仅用于买家与您联系，不会用作他途，请放心");
 			isphone = false;
 		}
-	}
-	else{
-		$("#contactalert").text("手机号仅用于买家与您联系，不会用作他途，请放心");
-		isphone = false;
+	}else{
+		var contact = $("#commoditycontact").val();
+		if(contact){
+			if(!isNaN(contact) && contact.length == 11){
+				$("#contactalert").text("");
+				isphone = true;
+			}else{
+				$("#contactalert").text("手机号格式不正确");
+				isphone = false;
+			}
+		}
+		else{
+			$("#contactalert").text("手机号仅用于买家与您联系，不会用作他途，请放心");
+			isphone = false;
+		}
 	}
 }
 
