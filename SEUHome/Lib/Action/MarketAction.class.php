@@ -11,6 +11,10 @@ class MarketAction extends Action {
 		$this->display("Public:404");
 	}
 
+	public function intro(){
+		$this->display('index_new');
+	}
+
     public function index(){
     	$category = I('param.category');
     	$order = session("marketorder");
@@ -195,6 +199,7 @@ class MarketAction extends Action {
 			$comments[$i]['content'] = htmlspecialchars_decode($comments[$i]['content']);
 		}
 
+		$this->assign('userid', session('userId'));
 		$this->assign('comments',$comments);
 		$this->assign('comment_count',$count);
 
