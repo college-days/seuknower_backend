@@ -304,6 +304,7 @@ class MarketAction extends Action {
 
     public function newCommodity(){
 		if(isset($_SESSION['userId'])){
+			$this->assign('userid', session('userId'));
     		$this->display('new');
     	}else{
     		$this->redirect("/login");

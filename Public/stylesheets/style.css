@@ -423,6 +423,22 @@ a.mywant_btn{color:white;}
 .market .content .seller .male{display:inline-block;background:url(images/icon.gif) no-repeat 0 -88px;width:11px;height:11px;margin-left:5px;margin-top:6px;}
 .market .content .seller .female{display:inline-block;background:url(images/icon.gif) no-repeat 0 -107px;width:9px;height:12px;margin:6px 0 0 5px;}
 
+/*4月19日改版更新*/
+.market .banner{background:url(images/bg_02.png);width:100%;height:175px;}
+.market .content .bigtitle{ margin-bottom:7px; font-weight:bold;}
+.market .content .bigtitle a{font-size:18px;}
+.market .content .all{ width:623px; height:230px; float:left;}
+.market .content .askfor{ width:295px; height:230px; float:right;}
+.market .content .digital{ width:623px; height:403px; float:left;}
+.market .content .book{ width:295px; height:403px; float:right;}
+.market .content .life{ width:944px;height:230px;float:left;}
+.market .content .other{ width:944px; height:230px; float:left;}
+.market .content .serve{ width:623px; height:230px; float:left;}
+.market .content .transfer{ width:295px; height:230px; float:right;}
+.market .content .askfor ul{ margin-top:15px;}
+.market .content .askfor .line {font-size:14px;line-height:14px;width:295px;height:14px;overflow:hidden; margin:5px;}
+.market .content .askfor .line span{float:right;color:#a5a7a5;}
+
 /*商品页*/
 /*.commodity{padding-top:30px;}
 .commodity .left{width:683px;float:left;}
