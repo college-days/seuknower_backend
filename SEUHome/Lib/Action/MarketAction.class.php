@@ -199,7 +199,6 @@ class MarketAction extends Action {
 			$comments[$i]['content'] = htmlspecialchars_decode($comments[$i]['content']);
 		}
 
-		$this->assign('userid', session('userId'));
 		$this->assign('comments',$comments);
 		$this->assign('comment_count',$count);
 
@@ -500,6 +499,7 @@ class MarketAction extends Action {
 			else{
 				$this->assign('phone',$commodityInfo['phone']);
 			}
+			$this->assign('userid', session('userId'));
 			$this->display('modify');
 		}
 		else{
