@@ -1,10 +1,14 @@
 <include file="Public:header" title="跳蚤市场"/>
 	<div class="back-color">
 		<div class="navigation-market">
-		    <div class="banner">				
+		    <div class="banner">
 			   <div class="category">
 					<div class="my">
-						<a href="/user/sellon/{$Think.session.userId}" target="_blank">我的商品</a>
+						<notempty name="Think.session.userName">
+							<a href="/user/sellon/{$Think.session.userId}" target="_blank">我的商品</a>
+						<else/>
+							<a href="/login" target="_blank">我的商品</a>
+						</notempty>
 						<span>|</span>
 						<a href="/question/247" target="_blank">交易版规</a>
 					</div>
