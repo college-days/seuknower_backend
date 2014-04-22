@@ -12,7 +12,29 @@ class MarketAction extends Action {
 	}
 
 	public function intro(){
-		$this->display('index_new');
+		$CommodityWant = M('CommodityWant');
+		$Commodity = M('Commodity');
+		$allCommodities = $Commodity->order('create_time desc')->limit(4)->select();
+		$firstelecCommodities = $Commodity->where("category='数码电子'")->order('create_time desc')->limit('0, 4')->select();
+		$secondelecCommodities = $Commodity->where("category='数码电子'")->order('create_time desc')->limit('4, 4')->select();
+		$firstbookCommodities = $Commodity->where("category='书籍杂志'")->order('create_time desc')->limit('0, 2')->select();
+		$secondbookCommodities = $Commodity->where("category='书籍杂志'")->order('create_time desc')->limit('2, 2')->select();
+		$commonCommodities = $Commodity->where("category='生活日用'")->order('create_time desc')->limit(6)->select();
+		$otherCommodities = $Commodity->where("category='其他'")->order('create_time desc')->limit(6)->select();
+		$serviceCommodities = $Commodity->where("category='服务'")->order('create_time desc')->limit(4)->select();
+		$freeCommodities = $Commodity->where("category='0元转让'")->order('create_time desc')->limit(2)->select();
+		$latestWants = $CommodityWant->order('create_time desc')->limit(7)->select();
+		$this->assign('allcommodities', $allCommodities);
+		$this->assign('firsteleccommodities', $firstelecCommodities);
+		$this->assign('secondeleccommodities', $secondelecCommodities);
+		$this->assign('firstbookcommodities', $firstbookCommodities);
+		$this->assign('secondbookcommodities', $secondbookCommodities);
+		$this->assign('commoncommodities', $commonCommodities);
+		$this->assign('othercommodities', $otherCommodities);
+		$this->assign('servicecommodities', $serviceCommodities);
+		$this->assign('freecommodities', $freeCommodities);
+		$this->assign('latestwants',$latestWants);
+		$this->display('intro');
 	}
 
     public function index(){

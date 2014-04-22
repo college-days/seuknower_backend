@@ -1,0 +1,148 @@
+<include file="Public:header" title="跳蚤市场"/>
+	<div class="back-color">
+		<div class="navigation-market">
+		    <div class="banner">				
+			   <div class="category">
+					<div class="my">
+						<a href="/user/sellon/{$Think.session.userId}" target="_blank">我的商品</a>
+						<span>|</span>
+						<a href="/question/247" target="_blank">交易版规</a>
+					</div>
+				</div>
+				<div class="new">
+					<div><a href="/market/new" target="_blank"><img src="__IMAGE__/market/fabushangping_normal_03.png" /></a></div>
+					<div><a href="/market/want/全部" target="_blank"><img src="__IMAGE__/market/fabuqiugou_normal_03.png" /></a></div>
+				</div>
+			</div>
+			<div class="container">
+			    <div class="content">
+				 <div class="all">				
+				  <div class="bigtitle"><a href="/market" target="_blank">全部商品 > </a></div> <hr/>
+					<ul>
+						<volist name="allcommodities" id="commodity">
+							<li>
+								<a href="/market/commodity/{$commodity.id}" target="_blank"><img class="picture" src="{$commodity.picture}"/></a>
+								<div class="title">
+									<a href="/market/commodity/{$commodity.id}" target="_blank">{$commodity.title}</a>
+								</div>
+							</li>
+						</volist>
+					</ul>
+				 </div>
+				<div class="askfor">
+				 <div class="bigtitle1"><a href="/market/want/全部" target="_blank">最新求购 > </a></div><hr/>
+				  <ul>
+				  	<volist name="latestwants" id="want">
+				  		<li class="line">
+				  			<a href="/market/want/{$want.id}" target="_blank">{$want.title}</a><span>{$want.answer_count}个回答</span>
+				  		</li>
+				  	</volist>
+				  </ul>
+				</div>
+				<div class="digital">
+				<div class="bigtitle"><a href="/market/数码电子" target="_blank">数码电子 > </a></div><hr/>
+					<ul>
+						<volist name="firsteleccommodities" id="commodity">
+							<li>
+								<a href="/market/commodity/{$commodity.id}" target="_blank"><img class="right-picture" src="{$commodity.picture}"/></a>
+								<div class="title">
+									<a href="/market/commodity/{$commodity.id}" target="_blank">{$commodity.title}</a>
+								</div>
+						    </li>
+						</volist>
+					</ul>
+					<ul>
+						<volist name="secondeleccommodities" id="commodity">
+							<li>
+								<a href="/market/commodity/{$commodity.id}" target="_blank"><img class="right-picture" src="{$commodity.picture}"/></a>
+								<div class="title">
+									<a href="/market/commodity/{$commodity.id}" target="_blank">{$commodity.title}</a>
+								</div>
+						    </li>
+						</volist>
+					</ul>
+				</div>
+				<div class="book">
+				<div class="bigtitle"><a href="/market/书籍杂志" target="_blank">书籍杂志 > </a></div><hr/>
+					<ul>
+						<volist name="firstbookcommodities" id="commodity">
+							<li>
+								<a href="/market/commodity/{$commodity.id}" target="_blank"><img class="right-picture" src="{$commodity.picture}"/></a>
+								<div class="title">
+									<a href="/market/commodity/{$commodity.id}" target="_blank">{$commodity.title}</a>
+								</div>
+						    </li>
+						</volist>
+					</ul>
+					<ul>
+						<volist name="secondbookcommodities" id="commodity">
+							<li>
+								<a href="/market/commodity/{$commodity.id}" target="_blank"><img class="right-picture" src="{$commodity.picture}"/></a>
+								<div class="title">
+									<a href="/market/commodity/{$commodity.id}" target="_blank">{$commodity.title}</a>
+								</div>
+						    </li>
+						</volist>
+					</ul>
+				</div>
+				<div class="life">
+				<div class="bigtitle"><a href="/market/生活日用" target="_blank">生活日用 > </a></div><hr/>
+					<ul>
+						<volist name="commoncommodities" id="commodity">
+							<li>
+								<a href="/market/commodity/{$commodity.id}" target="_blank"><img class="right-picture" src="{$commodity.picture}"/></a>
+								<div class="title">
+									<a href="/market/commodity/{$commodity.id}" target="_blank">{$commodity.title}</a>
+								</div>
+						    </li>
+						</volist>
+					</ul>
+				</div>
+				<div class="other">
+				<div class="bigtitle"><a href="/market/其他" target="_blank">杂七杂八 > </a></div><hr/>
+					<ul>
+						<volist name="othercommodities" id="commodity">
+							<li>
+								<a href="/market/commodity/{$commodity.id}" target="_blank"><img class="right-picture" src="{$commodity.picture}"/></a>
+								<div class="title">
+									<a href="/market/commodity/{$commodity.id}" target="_blank">{$commodity.title}</a>
+								</div>
+						    </li>
+						</volist>
+					</ul>
+				</div>
+				<div class="serve">
+				<div class="bigtitle"><a href="/market/服务" target="_blank">服务 > </a></div><hr/>
+					<ul>
+						<volist name="servicecommodities" id="commodity">
+							<li>
+								<a href="/market/commodity/{$commodity.id}" target="_blank"><img class="right-picture" src="{$commodity.picture}"/></a>
+								<div class="title">
+									<a href="/market/commodity/{$commodity.id}" target="_blank">{$commodity.title}</a>
+								</div>
+						    </li>
+						</volist>
+					</ul>
+				</div>
+				<div class="transfer">
+				<div class="bigtitle"><a href="/market/0元转让" target="_blank">0元转让 > </a></div><hr/>
+					<ul>
+						<volist name="freecommodities" id="commodity">
+							<li>
+								<a href="/market/commodity/{$commodity.id}" target="_blank"><img class="right-picture" src="{$commodity.picture}"/></a>
+								<div class="title">
+									<a href="/market/commodity/{$commodity.id}" target="_blank">{$commodity.title}</a>
+								</div>
+						    </li>
+						</volist>
+					</ul>
+				</div>
+			 </div>
+
+			
+			<div class="clear">
+			</div>
+		 </div>
+		</div>
+	  </div>
+<include file="Public:footer" />
