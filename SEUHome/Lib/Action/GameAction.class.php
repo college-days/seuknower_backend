@@ -13,7 +13,7 @@ class GameAction extends Action {
 	public function lottery(){
 		$this->display('lottery');
 	}
-	
+
 	public function login(){
 		if(session('userId')){
 			$User = M('User');

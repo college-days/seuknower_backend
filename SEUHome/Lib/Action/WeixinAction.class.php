@@ -51,7 +51,7 @@ class WeixinAction extends Action {
 				if($msgType == "event"){
 					if($event == "subscribe"){
 						$msgType = "text";
-						$contentStr = "欢迎关注东大通！东大通（seuknower.com）是东大专属的校园生活服务网站，活动召集、校园问答、二手市场，一网打尽。我们存在的意义就是创造让你尖叫的功能，4月14日凌晨00:01,就在这里--东大通微信公共账号将会上线第一个让你尖叫的功能，小伙伴们猜猜看将会是什么功能，直接回复本账号说出你的猜想，猜中的将有可能获得我们的精美礼物哦！";
+						$contentStr = "欢迎关注东大通！东大通（seuknower.com）是东大专属的校园生活服务网站，活动召集、校园问答、二手市场，一网打尽。我们存在的意义就是创造让东大同学尖叫的功能，如果你有什么让人好的建议直接回复给我们，一旦被采纳将获得我们的小礼物。让咱们一起用互联网便捷东大人的生活吧";
 						$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
 						echo $resultStr;
 					}
@@ -62,10 +62,10 @@ class WeixinAction extends Action {
               				$currentMinite = (int)date('i');
               				$currentWeekday = date('D');
               				if($currentWeekday == "Sun" || $currentWeekday == "Sat"){
-              					$contentStr = "哈哈，实在等不明天早上，我提前出来了。亲，今天是周末不跑操，继续睡吧。。。";
+              					$contentStr = "这是我们送给各位通友的第一个福利，当别人早上艰难的刷人人找跑操信息的时候，你只要优雅的点击一下“是否跑操”立刻就能知道跑操与否，每天早上6：25定时更新当日信息。亲，今天是周末不跑操，继续睡吧。。。";
               				}else{
               					if($currentHour < 6 || ($currentHour == 6 && $currentMinite < 25)){
-	              					$contentStr = "讨厌，人家正做着美梦呢就被你吵醒啦，这么早体育老师都没起床俺哪知道今天跑不跑操。哈哈，每天早上6:23定时更新跑操情况，到时候再点我，嗯，再睡会！";
+	              					$contentStr = "这是我们送给各位通友的第一个福利，当别人早上艰难的刷人人找跑操信息的时候，你只要优雅的点击一下“是否跑操”立刻就能知道跑操与否，每天早上6：25定时更新当日信息。现在还没到时间，可以在睡一会哦";
 	              				}else{
 		              				$contentStr = getPaocaoMessage();
 	              				}
@@ -85,21 +85,27 @@ class WeixinAction extends Action {
 	              				$currentMinite = (int)date('i');
 	              				$currentWeekday = date('D');
 	              				if($currentWeekday == "Sun" || $currentWeekday == "Sat"){
-	              					$contentStr = "哈哈，实在等不明天早上，我提前出来了。亲，今天是周末不跑操，继续睡吧。。。";
+	              					$contentStr = "这是我们送给各位通友的第一个福利，当别人早上艰难的刷人人找跑操信息的时候，你只要优雅的点击一下“是否跑操”立刻就能知道跑操与否，每天早上6：25定时更新当日信息。亲，今天是周末不跑操，继续睡吧。。。";
 	              				}else{
 	              					if($currentHour < 6 || ($currentHour == 6 && $currentMinite < 25)){
-		              					$contentStr = "讨厌，人家正做着美梦呢就被你吵醒啦，这么早体育老师都没起床俺哪知道今天跑不跑操。哈哈，每天早上6:23定时更新跑操情况，到时候再点我，嗯，再睡会！";
+		              					$contentStr = "这是我们送给各位通友的第一个福利，当别人早上艰难的刷人人找跑操信息的时候，你只要优雅的点击一下“是否跑操”立刻就能得到知道跑操与否。每天早上6：25定时更新当日信息，现在还没到时间，可以在睡一会哦";
 		              				}else{
 			              				$contentStr = getPaocaoMessage();
 		              				}
 	              				}
 	              			}else{
-							    $contentStr = "猜对啦，即将推出查看今早是否跑操功能，今早是否跑操，点一下就知道";
+							    $contentStr = "每个人的建议都有可能是我们下次给通友的福利哦!告诉你怎么更容易猜对：仔细观察自己和身边的朋友的生活有哪些难题，想想如果推出哪个功能会让你尖叫，咱们要做的就是能解决你生活中难题的功能。";
 	              			}
 						} else {
-						    $contentStr = "猜错啦，东大通竭诚为您服务";
+						    $contentStr = "每个人的建议都有可能是我们下次给通友的福利哦!告诉你怎么更容易猜对：仔细观察自己和身边的朋友的生活有哪些难题，想想如果推出哪个功能会让你尖叫，咱们要做的就是能解决你生活中难题的功能。";
 						}
 	              		
+	              		$year = date('Y');
+						$month = date('m');
+						$day = date('d');
+						$dateStr = $year.'年'.$month.'月'.$day.'日';
+						$contentStr = $contentStr.' '.$dateStr;
+
 	                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
 	                	echo $resultStr;
 	                }else{
@@ -140,8 +146,8 @@ class WeixinAction extends Action {
 	 		"button":[
 	 		{
 	 			"type":"view",
-	 			"name":"刮刮乐",
-	 			"url":"http://www.seuknower.com/game/login"
+	 			"name":"跳蚤市场",
+	 			"url":"http://www.seuknower.com/market/intro"
 	 		},
 	 		{
 				"type":"click",
