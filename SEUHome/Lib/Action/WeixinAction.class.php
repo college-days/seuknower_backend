@@ -70,6 +70,13 @@ class WeixinAction extends Action {
 		              				$contentStr = getPaocaoMessage();
 	              				}
               				}
+
+							$year = date('Y');
+							$month = date('m');
+							$day = date('d');
+							$dateStr = $year.'年'.$month.'月'.$day.'日';
+							$contentStr = $contentStr.' '.$dateStr;
+
               				$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
 	                		echo $resultStr;
 						}
