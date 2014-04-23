@@ -425,47 +425,52 @@ a.mywant_btn{color:white;}
 
 /*4月19日改版更新*/
 .navigation-market{}
+.navigation-market .banner .container{width:965px;}
 .navigation-market .category{width:100%;height:30px; color:#FFFFFF;}
 .navigation-market .category a{color:#FFFFFF;}
 .navigation-market .category a:hover{color:#f9a020;}
 .navigation-market .category li{float:left;margin:0px 12px;}
 .navigation-market .category li>a{font-size:12px;line-height:30px;color:#a3bcc4;}
 .navigation-market .category .active a, .navigation-market .category li>a:hover{color:black;}
-.navigation-market .category .my{float:right;font-size:14px;line-height:30px;margin-right:200px; margin-top:25px;}
+.navigation-market .category .my{float:right;font-size:14px;line-height:30px;margin-right:2px; margin-top:25px;}
 .navigation-market .category .my span{margin-left:5px;margin-right:5px;}
-.navigation-market .new{margin-top:80px;margin-right:200px;}
+.navigation-market .new{margin-top:80px;}
 .navigation-market .new .total{font-size:16px;color:#f9a020;}
 .navigation-market .new div{width:130px;height:34px;float:right;margin-left:35px;}
 .navigation-market .new div>a{line-height:21px;color:white;}
 
-.navigation-market .content{ margin-top:18px;}
-.navigation-market .content a:hover{color:#f9a020;}
-.navigation-market .content li{float:left;width:130px;height:150px;margin-right:25px; margin-top:20px;}
+.navigation-market .content{margin-top:18px;}
+.navigation-market .container{width:945px;}
+.navigation-market ul{margin-right:-36px;width:112%;}
+.navigation-market .content hr{border-left:0;}
+.navigation-market .content a{color:#3c3c3c;}
+.navigation-market .content a:hover,.navigation-market .content li:hover a{color:#f9a020;}
+.navigation-market .content li{float:left;width:130px;height:150px;margin-right:33px; margin-top:20px;}
 .navigation-market .content .last{margin-right:0px;}
 .navigation-market .content li .picture{width:130px; height:130px;}
 .navigation-market .content li .right-picture{width:130px; height:130px;}
 .navigation-market .content li .comment{background:url(images/icon.gif) no-repeat 0 -48px;padding-left:15px;margin-left:12px;}
 .navigation-market .content li .love{background:url(images/icon.gif) no-repeat 0 -67px;padding-left:15px;margin-left:12px;}
-.navigation-market .content li .title{font-size:14px;margin-left:10px;margin-top:4px;}
+.navigation-market .content li .title{font-size:14px;height:16px;overflow:hidden;text-align:center;margin-top:4px;}
 .navigation-market .content li .title a:hover{ text-decoration:underline;}
 .navigation-market .content li .intro{margin-left:10px;margin-top:8px;color:#80827f;}
 .navigation-market .content .divide{border-bottom:1px solid #eeeeee;margin:9px;}
 
-.navigation-market .banner{background:url(images/bg_02.png);width:100%;height:175px;}
+.navigation-market .banner{background:url(images/bg_02.png) center center;width:100%;height:175px;}
 .navigation-market .content .bigtitle{ margin-bottom:7px; font-weight:bold;}
 .navigation-market .content .bigtitle1{ margin-bottom:6px; font-weight:bold;}
-.navigation-market .content .bigtitle a{font-size:18px;}
-.navigation-market .content .bigtitle1 a{font-size:18px;}
-.navigation-market .content .all{ width:623px; height:230px; float:left;}
-.navigation-market .content .askfor{ width:318px; height:228px; float:right; }
-.navigation-market .content .digital{ width:623px; height:403px; float:left;}
-.navigation-market .content .book{ width:318px; height:403px; float:right; }
-.navigation-market .content .life{ width:944px;height:230px;float:left;}
-.navigation-market .content .other{ width:944px; height:230px; float:left;}
-.navigation-market .content .serve{ width:620px; height:230px; float:left;}
-.navigation-market .content .transfer{ width:317px; height:230px; float:right;}
-.navigation-market .content .askfor ul{ margin-top:15px;}
-.navigation-market .content .askfor .line {font-size:14px;line-height:14px;width:295px;height:14px;overflow:hidden; margin:5px;}
+.navigation-market .content .bigtitle a{font-size:18px;color:#3c3c3c;}
+.navigation-market .content .bigtitle1 a{font-size:18px;color:#3c3c3c;}
+.navigation-market .content .all{width:619px; height:230px; float:left;}
+.navigation-market .content .askfor{ width:293px; height:228px; float:right; }
+.navigation-market .content .digital{ width:619px; height:403px; float:left;}
+.navigation-market .content .book{ width:293px; height:403px; float:right; }
+.navigation-market .content .life{ width:945px;height:230px;float:left;}
+.navigation-market .content .other{ width:945px; height:230px; float:left;}
+.navigation-market .content .serve{ width:619px; height:230px; float:left;}
+.navigation-market .content .transfer{ width:293px; height:230px; float:right;}
+.navigation-market .content .askfor ul{ margin-top:15px;margin-right:0;}
+.navigation-market .content .askfor .line {font-size:14px;line-height:14px;width:283px;height:14px;overflow:hidden; margin:5px;}
 .navigation-market .content .askfor .line span{float:right;color:#a5a7a5;}
 
 /*商品页*/
