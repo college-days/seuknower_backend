@@ -15,15 +15,21 @@ class MarketAction extends Action {
 		$CommodityWant = M('CommodityWant');
 		$Commodity = M('Commodity');
 		$allCommodities = $Commodity->order('create_time desc')->limit(4)->select();
-		$firstelecCommodities = $Commodity->where("category='数码电子' and onsale=1")->order('create_time desc')->limit('0, 4')->select();
-		$secondelecCommodities = $Commodity->where("category='数码电子' and onsale=1")->order('create_time desc')->limit('4, 4')->select();
-		$firstbookCommodities = $Commodity->where("category='书籍杂志' and onsale=1")->order('create_time desc')->limit('0, 2')->select();
-		$secondbookCommodities = $Commodity->where("category='书籍杂志' and onsale=1")->order('create_time desc')->limit('2, 2')->select();
+		$firstelecCommodities = $Commodity->where("category='数码电子' and onsale=1")->order('create_time desc')->limit('0, 6')->select();
+		//$secondelecCommodities = $Commodity->where("category='数码电子' and onsale=1")->order('create_time desc')->limit('4, 4')->select();
+		$firstbookCommodities = $Commodity->where("category='书籍杂志' and onsale=1")->order('create_time desc')->limit('0, 6')->select();
+		//$secondbookCommodities = $Commodity->where("category='书籍杂志' and onsale=1")->order('create_time desc')->limit('2, 2')->select();
 		$commonCommodities = $Commodity->where("category='生活日用' and onsale=1")->order('create_time desc')->limit(6)->select();
 		$otherCommodities = $Commodity->where("category='其他' and onsale=1")->order('create_time desc')->limit(6)->select();
-		$serviceCommodities = $Commodity->where("category='服务' and onsale=1")->order('create_time desc')->limit(4)->select();
+		$serviceCommodities = $Commodity->where("category='服务' and onsale=1")->order('create_time desc')->limit(6)->select();
 		$freeCommodities = $Commodity->where("category='0元转让' and onsale=1")->order('create_time desc')->limit(2)->select();
-		$latestWants = $CommodityWant->order('create_time desc')->limit(7)->select();
+		$recommendCommodities = $Commodity->where("onsale=1")->order('create_time desc')->limit(4)->select();
+		$latestWants = $CommodityWant->order('create_time desc')->limit(5)->select();
+
+		$selledmap['onsale'] = 0;
+		$selledcount = $Commodity->where($selledmap)->count();
+		$this->assign('selledcount', $selledcount);
+
 		$this->assign('allcommodities', $allCommodities);
 		$this->assign('firsteleccommodities', $firstelecCommodities);
 		$this->assign('secondeleccommodities', $secondelecCommodities);
@@ -34,7 +40,9 @@ class MarketAction extends Action {
 		$this->assign('servicecommodities', $serviceCommodities);
 		$this->assign('freecommodities', $freeCommodities);
 		$this->assign('latestwants',$latestWants);
-		$this->display('intro');
+		$this->assign('recommendcommodities', $recommendCommodities);
+		//$this->display('intro');
+		$this->display('intronew');
 	}
 
     public function index(){
