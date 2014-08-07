@@ -16,4 +16,14 @@ $(function(){
 		var src = $(this).attr("src");
 		$(this).attr("src",src.replace("hover","normal"));
 	});
+
+	var feedback = $("#feedback");
+	var feedwx = feedback.next();
+	feedback.click(function(){
+		if(feedwx.css("display") == "none"){
+			feedwx.show();
+		}else{
+			feedwx.hide();
+		}
+	})
 })

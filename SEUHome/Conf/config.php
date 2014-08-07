@@ -1,6 +1,5 @@
 <?php
 return array(
-	'SHOW_PAGE_TRACE' => true,
 	'URL_MODEL' => 2,                         //URL重写模式
 	'URL_CASE_INSENSITIVE' => true,					//大小写不敏感
 	'URL_ROUTER_ON' => true, 						//开启路由
@@ -137,7 +136,7 @@ return array(
 	'DB_HOST' => 'localhost',			   //服务器地址
 	'DB_NAME' => 'seu',                     //数据库名
 	'DB_USER' => 'root',                    //用户名
-	'DB_PWD'  => '',                 //密码
+	'DB_PWD'  => 'root',                 //密码
 	'DB_PORT' => 3306,					   //端口
 	'DB_PREFIX' => 'seu_',                    //数据库表前缀
 

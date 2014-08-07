@@ -437,7 +437,11 @@ a.mywant_btn{color:white;}
 .navigation-market .new{margin-top:80px;}
 .navigation-market .new .total{font-size:16px;color:#f9a020;}
 .navigation-market .new div{width:130px;height:34px;float:right;margin-left:35px;}
-.navigation-market .new div>a{line-height:21px;color:white;}
+.navigation-market .new div>a{line-height:21px;color:white;display:block;}
+.navigation-market .new .do1{background:url(images/fabushangping_normal_03.png);width:130px;height:34px;}
+.navigation-market .new .do1:hover{background:url(images/fabushangping_hover_03.png);}
+.navigation-market .new .do2{background:url(images/fabuqiugou_normal_03.png);width:130px;height:34px;}
+.navigation-market .new .do2:hover{background:url(images/fabuqiugou_hover_03.png);}
 
 .navigation-market .content{margin-top:18px;}
 .navigation-market .container{width:945px;}
@@ -460,7 +464,9 @@ a.mywant_btn{color:white;}
 .navigation-market .content .bigtitle{ margin-bottom:7px; font-weight:bold;}
 .navigation-market .content .bigtitle1{ margin-bottom:6px; font-weight:bold;}
 .navigation-market .content .bigtitle a{font-size:18px;color:#3c3c3c;}
+.navigation-market .content .bigtitle a:hover{color:#f9a020;}
 .navigation-market .content .bigtitle1 a{font-size:18px;color:#3c3c3c;}
+.navigation-market .content .bigtitle1 a:hover{color:#f9a020;}
 .navigation-market .content .all{width:619px; height:230px; float:left;}
 .navigation-market .content .askfor{ width:293px; height:228px; float:right; }
 .navigation-market .content .digital{ width:619px; height:403px; float:left;}
@@ -846,10 +852,13 @@ a.mywant_btn{color:white;}
 
 
 /*版权信息*/
-.footer{margin-top:42px;width:100%;height:100px;}
+.footer{margin-top:42px;width:100%;height:120px;}
 .footer .container{}
 .footer .divide{width:100%;border-bottom: solid 1px #b5b5b5;}
 .footer .contact{float:left;margin-top:20px;}
+.footer .contact .wx{position:absolute;margin-top:-96px;display:none;float:left;margin-left:118px;background:#fff;border:1px solid #ccc;padding:8px 8px 4px;}
+.footer .contact .wx .arrow{background:url(images/arrowl.gif) no-repeat;height:12px;left:-6px;position:absolute;top:80px;width:6px;}
+.footer .contact .wx p{color:#6C6C6C;font:12px/1.5 tahoma,arial,ËÎÌå;padding-top:2px;text-align:center;}
 .footer .contact a{color:#717171;}
 .footer .contact a:hover{text-decoration:underline;}
 .footer .contact span{margin:0px 2px;color:#717171;}
